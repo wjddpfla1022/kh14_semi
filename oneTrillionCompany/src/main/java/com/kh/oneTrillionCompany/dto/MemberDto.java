@@ -17,4 +17,5 @@ public class MemberDto {
 	private String memberAddress2;
 	private int memberHeight;
 	private int memberWeight;
+	
 }
