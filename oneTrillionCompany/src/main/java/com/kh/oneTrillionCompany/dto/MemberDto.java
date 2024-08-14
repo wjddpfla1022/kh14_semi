@@ -1,5 +1,6 @@
 package com.kh.oneTrillionCompany.dto;
 
+import java.util.Date;
 import lombok.Data;
 
 @Data
