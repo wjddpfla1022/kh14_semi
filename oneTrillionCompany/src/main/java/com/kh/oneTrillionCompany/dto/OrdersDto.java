@@ -6,10 +6,10 @@ import lombok.Data;
 
 @Data
 public class OrdersDto {
-	private int ordersNo;
-	private String ordersMemberId;
-	private int ordersCartNo;
-	private int ordersPrice;
-	private Date ordersDay;
-	private String ordersStatus;
+	private int orderNo;
+	private String orderMemberId;
+	private int orderCartNo;
+	private int orderPrice;
+	private Date orderDay;
+	private String orderStatus;
 }
