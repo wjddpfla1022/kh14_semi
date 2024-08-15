@@ -3,7 +3,7 @@ package com.kh.oneTrillionCompany.dto;
 import lombok.Data;
 
 @Data
-public class categoryDto {
+public class CategoryDto {
 	//카테고리
 	private int cateNo; //카테고리번호
 	private int cateNo2; //카테고리번호 외래키
