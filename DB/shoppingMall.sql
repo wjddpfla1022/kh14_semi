@@ -101,7 +101,7 @@ CREATE TABLE orders (
 	order_member_id	varchar2(20)	references member(member_id) on delete cascade	NOT NULL,
 	order_cart_no	number	references CART(CART_NO) on delete cascade	NOT NULL,
 	order_price	number	DEFAULT 0	NOT NULL,
-	order_day	Date	DEFAULT sysdate	NOT NULL,
+	order_date	Date	DEFAULT sysdate	NOT NULL,
 	order_status	varchar2(12)		NOT NULL,
 	check(ORDER_price >= 0)
 );
