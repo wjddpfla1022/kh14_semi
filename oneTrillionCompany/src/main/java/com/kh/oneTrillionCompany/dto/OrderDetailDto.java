@@ -3,7 +3,7 @@ package com.kh.oneTrillionCompany.dto;
 import lombok.Data;
 
 @Data
-public class OrdersDetailDto {
+public class OrderDetailDto {
 	private int orderDetailNo;
 	private int orderDetailItemNo;
 	private int orderDetailOrderNo;

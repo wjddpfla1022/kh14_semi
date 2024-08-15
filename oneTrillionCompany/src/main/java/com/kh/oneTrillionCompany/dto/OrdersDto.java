@@ -10,6 +10,6 @@ public class OrdersDto {
 	private String orderMemberId;
 	private int orderCartNo;
 	private int orderPrice;
-	private Date orderDay;
+	private Date orderDate;
 	private String orderStatus;
 }

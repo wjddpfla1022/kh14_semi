@@ -13,7 +13,7 @@ public class MemberDto {
 	private int memberPoint;
 	private Date memberJoin;
 	private Date memberLogin;
-	private int memberPost;
+	private String memberPost;
 	private String memberAddress1;
 	private String memberAddress2;
 	private int memberHeight;
