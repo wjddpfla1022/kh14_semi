@@ -1,10 +1,11 @@
-package com.kh.oneTrillionCompany.dto;
+package com.kh.oneTrillionCompany.vo;
 
 import java.util.Date;
+
 import lombok.Data;
 
 @Data
-public class MemberDto {
+public class MemberBlockVO {
 	private String memberId;
 	private String memberPw;
 	private String memberName;
@@ -21,4 +22,9 @@ public class MemberDto {
 	private int memberHeight;
 	private int memberWeight;
 	
+	private int blockNo;
+	private String blockMemberId;
+	private String blockType;
+	private String blockMemo;
+	private Date blockTime;
 }
