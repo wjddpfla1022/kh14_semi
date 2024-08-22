@@ -43,7 +43,6 @@
     .top-menu {
         background-color: white;
         font-size: 12px;
-        
     }
 
     .top-menu :hover {
@@ -92,13 +91,13 @@
                     <a href="#">즐겨찾기</a>
                 </li>
                 <li>
-                    <a href="">바로가기</a>
+                    <a href="#">바로가기</a>
                 </li>
                 <li class="right-menu">
-                    <a href="/member/login">로그인</a>
+                    <a href="#">로그인</a>
                 </li>
                 <li>
-                    <a href="/member/join">회원가입</a>
+                    <a href="#">회원가입</a>
                 </li>
                 <li>
                     <a href="#">주문 / 배송조회</a>
@@ -144,17 +143,27 @@
 			-->
 
 
-            <!-- 구분선 -->
-            <label for="all-menu" class="sidebar-toggle">전체 목록</label>
-            <input  type="checkbox" id="all-menu" >
-            <div class="sidebar">
-            	<div class="row center">
-                <a class="link link-animation" href= "/member/logout">로그아웃</a>
-                </div>
-            </div>	
         <ul class="menu">
+            <!-- 구분선 -->
+            <li class="flex-core all-menu">
+                <i class="fa-solid fa-bars"></i>
+                전체메뉴
+                    <ul class="all-menu-ul ul-horizon">
+                            <li class="li-horizon"><a href="#">상의 상세항목1</a></li>
+                            <li class="li-horizon"><a href="#">상의 상세항목1</a></li>
+                            <li class="li-horizon"><a href="#">상의 상세항목1</a></li>
+                            <li class="li-horizon"><a href="#">상의 상세항목1</a></li>
+                    </ul>
+                        <ul class="all-menu-ul ul-horizon">
+                            <li class="li-horizon"><a href="#">상의 상세항목1</a></li>
+                            <li class="li-horizon"><a href="#">상의 상세항목1</a></li>
+                            <li class="li-horizon"><a href="#">상의 상세항목1</a></li>
+                            <li class="li-horizon"><a href="#">상의 상세항목1</a></li>
+                        </ul>
+
+            </li>
             <li>
-                <a href="#">상의</a>
+                <a href="/item/list">상의</a>
                 <ul>
                     <li>
                         <a href="#">항목1</a>
@@ -238,9 +247,6 @@
             </li>
             <!-- 구분선 -->
             <li class="right-menu">
-            	<a href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
-            </li>
-            <li>
                 <a href="#">문의</a>
                 <ul>
                     <li>

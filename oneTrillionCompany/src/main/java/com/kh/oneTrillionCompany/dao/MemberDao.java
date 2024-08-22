@@ -7,8 +7,10 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.oneTrillionCompany.dto.MemberDto;
-import com.kh.oneTrillionCompany.mapper.BlockMapper;
+import com.kh.oneTrillionCompany.mapper.MemberBlockMapper;
 import com.kh.oneTrillionCompany.mapper.MemberMapper;
+import com.kh.oneTrillionCompany.vo.MemberBlockVO;
+import com.kh.oneTrillionCompany.vo.PageVO;
 
 @Repository
 public class MemberDao {
@@ -20,7 +22,7 @@ public class MemberDao {
 	private MemberMapper memberMapper;
 	
 	@Autowired
-	private BlockMapper blockMapper;
+	private MemberBlockMapper memberBlockMapper;
 	
 	//회원 가입
 	public void insert(MemberDto memberDto) {
@@ -120,5 +122,46 @@ public class MemberDao {
 		Object[] data= {memberNickname};
 		List<MemberDto> list=jdbcTemplate.query(sql, memberMapper, data);
 		return !list.isEmpty();
+	}
+	public List<MemberBlockVO> selectListWithBlock(String column, String keyword) {
+		String sql = "select "
+							+ "M.*, B.block_no, B.block_time, B.block_memo, "
+							+ "B.block_member_id, nvl(B.block_type, '해제') block_type "
+						+ "from member M "
+							+ "left outer join block_latest B "
+							+ "on M.member_id=B.block_member_id "
+							+ "where instr(#1, ?) > 0 "
+							+ "order by #1 asc, M.member_id asc";
+		sql = sql.replace("#1", column);
+		Object[] data = {keyword};
+		return jdbcTemplate.query(sql, memberBlockMapper, data);
+	}
+	
+	//페이징 관련 메소드
+	public List<MemberBlockVO> selectListWithBlockByPaging(PageVO pageVO) {
+		String sql = "select * from ("
+							+ "select rownum rn, TMP.* from ("
+									+ "select "
+										+ "M.*, B.block_no, B.block_time, B.block_memo, "
+										+ "B.block_member_id, nvl(B.block_type, '해제') block_type "
+									+ "from member M "
+										+ "left outer join block_latest B "
+										+ "on M.member_id=B.block_member_id "
+										+ "where instr(#1, ?) > 0 "
+										+ "order by #1 asc, M.member_id asc"
+							+ ")TMP"
+						+ ") where rn between ? and ?";
+		sql = sql.replace("#1", pageVO.getColumn());
+		Object[] data = {
+			pageVO.getKeyword(), pageVO.getBeginRow(),
+			pageVO.getEndRow()
+		};
+		return jdbcTemplate.query(sql, memberBlockMapper, data);
+	}
+	public int countByPaging(PageVO pageVO) {
+		String sql = "select count(*) from member where instr(#1, ?) > 0";
+		sql = sql.replace("#1", pageVO.getColumn());
+		Object[] data = {pageVO.getKeyword()};
+		return jdbcTemplate.queryForObject(sql, int.class, data);
 	}
 }
