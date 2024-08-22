@@ -68,7 +68,7 @@
                 var target2=$(".pwInput1").val();
                 $(this).removeClass("success fail");
                 status.memberPwCheck=target1===target2;
-                $(this).addClass(memberPwCheck?"success":"fail");
+                $(this).addClass(status.memberPwCheck?"success":"fail");
             });
             $("[name=nicknameInput]").blur(function(){
                 var target=$(this).val();
