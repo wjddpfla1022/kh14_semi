@@ -4,6 +4,26 @@
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
+<style>
+    /* 기본 버튼 스타일 */
+    .update-btn {
+        display: inline-block; /* 버튼처럼 보이게 하기 위해 블록 수준 요소로 변경 */
+        padding: 10px 10px; 
+        font-size: 15px; 
+        color: white; 
+        background-color: #0984e3; 
+        text-align: center; 
+        text-decoration: none; 
+        border-radius: 4px; 
+        cursor: pointer; 
+    }
+
+    / 버튼 호버 상태 */
+    .update-btn:hover {
+        background-color: #0056b3; 
+        border-color: #004085; 
+    }
+</style>
 
 <div class="container w-1200">
 	<div class="row center">
@@ -58,7 +78,7 @@
 								<td>${memberBlockVO.memberBlock}</td>
 								<td>${memberBlockVO.memberJoin}</td>
 								<td>
-									<a href="update?memberId=${memberBlockVO.memberId}">수정</a>
+									<a href="update?memberId=${memberBlockVO.memberId}" class="update-btn">수정</a>
 <%-- 									<c:choose> --%>
 <%-- 										<c:when test="${memberBlockVO.blockType=='차단'}"> --%>
 <%-- 											<a href="block?blockMemberId=${memberBlockVO.memberId}">해제</a> --%>
