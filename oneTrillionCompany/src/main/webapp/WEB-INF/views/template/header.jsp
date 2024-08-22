@@ -90,7 +90,7 @@
                     <a href="#">즐겨찾기</a>
                 </li>
                 <li>
-                    <a href="#">바로가기</a>
+                    <a href="">바로가기</a>
                 </li>
                 <li class="right-menu">
                     <a href="/member/login">로그인</a>
