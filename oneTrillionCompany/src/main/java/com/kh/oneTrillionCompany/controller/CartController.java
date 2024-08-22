@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.kh.oneTrillionCompany.dao.ItemDao;
 
 @Controller
-@RequestMapping("/cart")
+@RequestMapping("/")
 public class CartController {
 	
 	@Autowired
