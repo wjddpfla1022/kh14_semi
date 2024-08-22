@@ -14,7 +14,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.oneTrillionCompany.dao.MemberDao;
 import com.kh.oneTrillionCompany.dto.MemberDto;
-import com.kh.oneTrillionCompany.exception.TargetNotFoundException;
 
 @Controller
 @RequestMapping("/member")
@@ -38,6 +37,10 @@ public class MemberController {
 			
 		}
 	}
+	@GetMapping("/join")
+	public String join() {
+		return "/WEB-INF/views/member/join.jsp";
+	}
 	@Transactional
 	@PostMapping("/join")
 	public String join(@ModelAttribute MemberDto memberDto,
@@ -54,13 +57,9 @@ public class MemberController {
 		
 		return "redirect:joinFinish";
 	}
-	@GetMapping("/join")
-	public String join() {
-		return "/WEB-INF/views/member/join.jsp";
+	@RequestMapping("/joinFinish")
+	public String joinFinish() {
+		return "/WEB-INF/views/member/joinFinish.jsp";
 	}
-//	@PostMapping("/join")
-//	public String join(@RequestParam MemberDto memberDto) {
-//		return "redirect:joinFinished";
-//	}
 	
 }

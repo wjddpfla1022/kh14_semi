@@ -93,10 +93,10 @@
                     <a href="#">바로가기</a>
                 </li>
                 <li class="right-menu">
-                    <a href="#">로그인</a>
+                    <a href="/member/login">로그인</a>
                 </li>
                 <li>
-                    <a href="#">회원가입</a>
+                    <a href="/member/join">회원가입</a>
                 </li>
                 <li>
                     <a href="#">주문 / 배송조회</a>
