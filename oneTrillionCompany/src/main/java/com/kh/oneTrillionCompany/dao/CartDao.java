@@ -74,4 +74,3 @@ public class CartDao {
 		return jdbcTemplate.query(sql, cartMapper, data);			
 	}
 }
-
