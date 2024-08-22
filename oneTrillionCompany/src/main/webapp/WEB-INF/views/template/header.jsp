@@ -94,10 +94,10 @@
                     <a href="#">바로가기</a>
                 </li>
                 <li class="right-menu">
-                    <a href="#">로그인</a>
+                    <a href="/member/login">로그인</a>
                 </li>
                 <li>
-                    <a href="#">회원가입</a>
+                    <a href="/member/join">회원가입</a>
                 </li>
                 <li>
                     <a href="#">주문 / 배송조회</a>
@@ -276,6 +276,9 @@
             </li>
             <!-- 구분선 -->
         </ul>
+	<div class="row">
+		<p>로그인 아이디 : ${sessionScope.createdUser} </p>
+		<p>회원 등급 : ${sessionScope.createdLevel} </p>
+	</div>
     </div>
-
     <!-- 중단(Container) -->

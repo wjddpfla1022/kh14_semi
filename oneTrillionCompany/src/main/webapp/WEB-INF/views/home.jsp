@@ -10,16 +10,16 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <!-- 자바스크립트 작성 영역 -->
      <style>
-        .btn.btn-more{
-            background-color: rgb(196, 227, 255);
-            font-size: 16px;
-            padding: 1.5em;
-            padding-left: 3em;
-            padding-right: 3em;
-            padding-bottom: 2.5em;
-            margin-bottom: 3px;
-            border: none;
-        }
+/*         .btn.btn-more{ */
+/*             background-color: rgb(196, 227, 255); */
+/*             font-size: 16px; */
+/*             padding: 1.5em; */
+/*             padding-left: 3em; */
+/*             padding-right: 3em; */
+/*             padding-bottom: 2.5em; */
+/*             margin-bottom: 3px; */
+/*             border: none; */
+/*         } */
      </style>
     <script type="text/javascript">
         $(function () {

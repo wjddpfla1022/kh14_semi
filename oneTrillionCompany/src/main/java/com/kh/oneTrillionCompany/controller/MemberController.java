@@ -15,6 +15,9 @@ import org.springframework.web.multipart.MultipartFile;
 import com.kh.oneTrillionCompany.dao.MemberDao;
 import com.kh.oneTrillionCompany.dto.MemberDto;
 
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 @RequestMapping("/member")
 public class MemberController {
@@ -27,15 +30,23 @@ public class MemberController {
 	}
 	@PostMapping("/login")
 	public String login(@RequestParam String memberId,
-			@RequestParam String memberPw) {
+			@RequestParam String memberPw, 
+			@RequestParam(required = false) String remember, //아이디 저장하기
+			HttpSession session, HttpServletResponse response) {
+		MemberDto memberDto = memberDao.selectOne(memberId);
 		boolean isValid = memberDao.selectOne(memberId)!=null;
 		if(isValid) {
+			session.setAttribute("createdUser", memberId);
+			session.setAttribute("createdLevel", memberDto.getMemberRank());
+			memberDao.updateMemberLogin(memberId);
 			return "redirect:/";
 		}
 		else {
 			return "redirect:login?error";
 			
 		}
+		
+		
 	}
 	@GetMapping("/join")
 	public String join() {
