@@ -46,7 +46,7 @@ public class ManagerMemberController {
 	}
 	
 	//회원 정보 수정 
-	@GetMapping("/edit")
+	@GetMapping("/update")
 	public String edit(@RequestParam String memberId , Model model) {
 		MemberDto memberDto = memberDao.selectOne(memberId);
 		if(memberDto == null)
@@ -55,8 +55,8 @@ public class ManagerMemberController {
 		return "/WEB-INF/views/manager/member/edit.jsp";
 	}
 	
-	@PostMapping("/edit")
-	public String edit(@ModelAttribute MemberDto memberDto) {
+	@PostMapping("/update")
+	public String update(@ModelAttribute MemberDto memberDto) {
 		boolean result = memberDao.updateMemberByAdmin(memberDto);
 		if(result == false) 
 			throw new TargetNotFoundException("존재하지 않는 회원입니다.");
