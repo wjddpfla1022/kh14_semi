@@ -74,4 +74,19 @@ public class ItemDao {
 		Object[] data= {itemNo};
 		return jdbcTemplate.update(sql, data)>0;
 	}
+	
+	//상품 이미지 조회
+	public void connect(int itemNo, int attachNo) {
+		String sql = "insert into image(item, attach) values(?, ?)";
+		Object[] data = {itemNo, attachNo};
+		jdbcTemplate.update(sql, data);
+	}
+	
+	//상품 이미지 연결
+	public int findImage(int itemNo) {
+		String sql = "select attach from image where item=?";
+		Object[] data = {itemNo};
+		return jdbcTemplate.queryForObject(sql, int.class, data);
+	}
+	
 }
