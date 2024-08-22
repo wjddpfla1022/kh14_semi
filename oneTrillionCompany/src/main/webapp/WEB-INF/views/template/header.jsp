@@ -41,6 +41,7 @@
     .top-menu {
         background-color: white;
         font-size: 12px;
+        
     }
 
     .top-menu :hover {
@@ -70,7 +71,10 @@
         }  */
 </style>
     <link rel="stylesheet" type="text/css" href="/css/checkbox.js">
+	<!-- jquery cdn -->
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js">
 
+     </script>
 <body> <!-- 문서의 출력 내용을 담는 태그 -->
     <!-- 		<h1>내가 만든 홈페이지</h1> -->
     <!-- 		<a href=""></a> -->
@@ -86,7 +90,7 @@
                     <a href="#">즐겨찾기</a>
                 </li>
                 <li>
-                    <a href="#">바로가기</a>
+                    <a href="">바로가기</a>
                 </li>
                 <li class="right-menu">
                     <a href="/member/login">로그인</a>
@@ -138,25 +142,15 @@
 			-->
 
 
-        <ul class="menu">
             <!-- 구분선 -->
-            <li class="flex-core all-menu">
-                <i class="fa-solid fa-bars"></i>
-                전체메뉴
-                    <ul class="all-menu-ul ul-horizon">
-                            <li class="li-horizon"><a href="#">상의 상세항목1</a></li>
-                            <li class="li-horizon"><a href="#">상의 상세항목1</a></li>
-                            <li class="li-horizon"><a href="#">상의 상세항목1</a></li>
-                            <li class="li-horizon"><a href="#">상의 상세항목1</a></li>
-                    </ul>
-                        <ul class="all-menu-ul ul-horizon">
-                            <li class="li-horizon"><a href="#">상의 상세항목1</a></li>
-                            <li class="li-horizon"><a href="#">상의 상세항목1</a></li>
-                            <li class="li-horizon"><a href="#">상의 상세항목1</a></li>
-                            <li class="li-horizon"><a href="#">상의 상세항목1</a></li>
-                        </ul>
-
-            </li>
+            <label for="all-menu" class="sidebar-toggle">전체 목록</label>
+            <input  type="checkbox" id="all-menu" >
+            <div class="sidebar">
+            	<div class="row center">
+                <a class="link link-animation" href= "/member/logout">로그아웃</a>
+                </div>
+            </div>	
+        <ul class="menu">
             <li>
                 <a href="#">상의</a>
                 <ul>
@@ -242,6 +236,9 @@
             </li>
             <!-- 구분선 -->
             <li class="right-menu">
+            	<a href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
+            </li>
+            <li>
                 <a href="#">문의</a>
                 <ul>
                     <li>
