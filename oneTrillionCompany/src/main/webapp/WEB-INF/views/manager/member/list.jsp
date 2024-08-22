@@ -78,7 +78,11 @@
 								<td>${memberBlockVO.memberBlock}</td>
 								<td>${memberBlockVO.memberJoin}</td>
 								<td>
+<<<<<<< HEAD
+									<a href="update?memberId=${memberBlockVO.memberId}">수정</a>
+=======
 									<a href="update?memberId=${memberBlockVO.memberId}" class="update-btn">수정</a>
+>>>>>>> refs/remotes/origin/master
 <%-- 									<c:choose> --%>
 <%-- 										<c:when test="${memberBlockVO.blockType=='차단'}"> --%>
 <%-- 											<a href="block?blockMemberId=${memberBlockVO.memberId}">해제</a> --%>
