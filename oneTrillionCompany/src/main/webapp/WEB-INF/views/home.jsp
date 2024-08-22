@@ -37,11 +37,11 @@
                 },
                 
                 // If we need pagination
-                pagination: {
-                    el: '.swiper-pagination', // 적용대상
-                    clickable:true, //클릭하여 이동 가능
-                    type:'progressbar',
-                },
+//                 pagination: {
+//                     el: '.swiper-pagination', // 적용대상
+//                     clickable:true, //클릭하여 이동 가능
+//                     type:'progressbar',
+//                 },
 
                 // Navigation arrows
                 navigation: {
@@ -142,3 +142,5 @@
         </div>
     </div>
 </body>
+
+<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
