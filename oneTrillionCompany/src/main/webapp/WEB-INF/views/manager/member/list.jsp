@@ -54,14 +54,14 @@
 								<td>${memberBlockVO.memberJoin}</td>
 								<td>
 									<a href="update?memberId=${memberBlockVO.memberId}">수정</a>
-									<c:choose>
-										<c:when test="${memberBlockVO.blockType=='차단'}">
-											<a href="block?blockMemberId=${memberBlockVO.memberId}">해제</a>
-										</c:when>
-										<c:otherwise>
-											<a href="block?blockMemberId=${memberBlockVO.memberId}">차단</a>
-										</c:otherwise>
-									</c:choose>
+<%-- 									<c:choose> --%>
+<%-- 										<c:when test="${memberBlockVO.blockType=='차단'}"> --%>
+<%-- 											<a href="block?blockMemberId=${memberBlockVO.memberId}">해제</a> --%>
+<%-- 										</c:when> --%>
+<%-- 										<c:otherwise> --%>
+<%-- 											<a href="block?blockMemberId=${memberBlockVO.memberId}">차단</a> --%>
+<%-- 										</c:otherwise> --%>
+<%-- 									</c:choose> --%>
 								</td>
 							</tr>
 						</c:forEach>

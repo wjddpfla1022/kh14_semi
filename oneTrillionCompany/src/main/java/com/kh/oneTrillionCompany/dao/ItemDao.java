@@ -18,6 +18,8 @@ public class ItemDao {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	//기본 CRUD
+	
+	//상품 추가
 	public void insert(ItemDto itemDto) {
 		String sql="insert into item( "
 				+ "item_no, cate_no, item_name,"
@@ -29,21 +31,34 @@ public class ItemDao {
 						itemDto.getItemDate(),itemDto.getItemCnt(),
 						itemDto.getItemSize()};
 		jdbcTemplate.update(sql, data);
-		
 	}
-	public ItemDto selectOne(int itemNo) {
+	
+	//상품 상세
+	public ItemDto selectOne(String itemNo) {
 		String sql="select * from item where item_no=?";
 		Object[] data= {itemNo};
 		List<ItemDto> list =jdbcTemplate.query(sql, itemMapper,data);
 		return list.isEmpty()?null:list.get(0);
 	}
+	
+	//상품 검색
 	public List<ItemDto> selectList(String column, String keyword){
 		String sql="select * from item where instr(#!,?)>0 "
-				+ "order by item_no desc";
+				+ "order by #1 asc, item_no desc";
 		sql = sql.replace("#!", column);
 		Object[] data= {keyword};
 		return jdbcTemplate.query(sql, itemMapper, data);
 	}
+	
+	//상품 조회
+	public List<ItemDto> selectList(){
+		String sql = "select * from item order by item_no asc";
+		return jdbcTemplate.query(sql, itemMapper);
+	}
+	
+	
+	
+	//상품 수정
 	public boolean update(ItemDto itemDto) {
 		String sql="update item set cate_no=?, item_name=?, item_price=?,"
 				+ "item_sale_price=?, item_date=?, item_cnt=?, item_size=? "
@@ -53,6 +68,7 @@ public class ItemDao {
 						itemDto.getItemSize(),itemDto.getCateNo()};
 		return jdbcTemplate.update(sql, data)>0;
 	}
+	//상품삭제
 	public boolean delete(int itemNo) {
 		String sql="delete item where item_no=?";
 		Object[] data= {itemNo};

@@ -144,10 +144,10 @@
                 <i class="fa-solid fa-bars"></i>
                 전체메뉴
                     <ul class="all-menu-ul ul-horizon">
-                            <li class="li-horizon"><a href="#">상의 상세항목1</a></li>
-                            <li class="li-horizon"><a href="#">상의 상세항목1</a></li>
-                            <li class="li-horizon"><a href="#">상의 상세항목1</a></li>
-                            <li class="li-horizon"><a href="#">상의 상세항목1</a></li>
+                            <li class="li-horizon"><a href="/item/list">상의 상세항목1</a></li>
+                            <li class="li-horizon"><a href="/item/list">상의 상세항목1</a></li>
+                            <li class="li-horizon"><a href="/item/list">상의 상세항목1</a></li>
+                            <li class="li-horizon"><a href="/item/list">상의 상세항목1</a></li>
                     </ul>
                         <ul class="all-menu-ul ul-horizon">
                             <li class="li-horizon"><a href="#">상의 상세항목1</a></li>
@@ -158,7 +158,7 @@
 
             </li>
             <li>
-                <a href="#">상의</a>
+                <a href="/item/list">상의</a>
                 <ul>
                     <li>
                         <a href="#">항목1</a>
