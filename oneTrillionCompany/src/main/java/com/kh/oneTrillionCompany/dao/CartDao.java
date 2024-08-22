@@ -26,16 +26,16 @@ public class CartDao {
 					+ " values(cart_no_seq.nextval, cart_item_no_seq.nextval, ?, ?, ?)";
 		Object[] data = {
 				cartDto.getCartNo(), cartDto.getCartItemNo(), 
-				cartDto.getCartCnt(),cartDto.getItemAttachNo(), 
+				cartDto.getCartCnt(), cartDto.getItemAttachNo(), 
 				cartDto.getCartTotalPrice()
 		};
 		jdbcTemplate.update(sql, data);
 	}
 	
 	//장바구니 삭제
-	public boolean delete(String cartNo) {
+	public boolean delete(int itemNo) {
 		String sql = "delete cart where cart_no = ?";
-		Object[] data = {cartNo};
+		Object[] data = {itemNo};
 		return jdbcTemplate.update(sql, data) > 0;
 	}
 	
