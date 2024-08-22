@@ -1,7 +1,5 @@
 package com.kh.oneTrillionCompany.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.kh.oneTrillionCompany.dao.MemberDao;
 import com.kh.oneTrillionCompany.dto.MemberDto;
 import com.kh.oneTrillionCompany.exception.TargetNotFoundException;
+import com.kh.oneTrillionCompany.vo.PageVO;
 
 @Controller
 @RequestMapping("/manager/member")
@@ -24,15 +23,26 @@ public class ManagerMemberController {
 	
 	//회원 검색+목록
 	@RequestMapping("/list")
-	public String list(Model model, 
-							@RequestParam(required = false) String column,
-							@RequestParam(required = false) String keyword) {
-		boolean isSearch = column != null & keyword != null;
-		List<MemberDto> list = isSearch? memberDao.selectListByOption(column, keyword) : memberDao.selectList();	
-		model.addAttribute("column" , column);
-		model.addAttribute("keyword" , keyword);
-		model.addAttribute("list", list);
+	public String list(
+			@ModelAttribute("pageVO") PageVO pageVO, Model model) {
+		if(pageVO.isSearch() && checkSearch(pageVO)) {
+			model.addAttribute("list", memberDao.selectListWithBlockByPaging(pageVO));	
+			int count = memberDao.countByPaging(pageVO);
+			pageVO.setCount(count);
+		}
 		return "/WEB-INF/views/manager/member/list.jsp";
+	}
+	private boolean checkSearch(PageVO pageVO) {
+		if(pageVO.getColumn() == null) return false;
+		if(pageVO.getKeyword() == null) return false;
+		switch(pageVO.getColumn()) {
+		case "member_id":
+		case "member_email":
+		case "member_nickname":
+		case "member_level":
+			return true;
+		}
+		return false;
 	}
 	
 	//회원 상세
@@ -52,7 +62,7 @@ public class ManagerMemberController {
 		if(memberDto == null)
 			throw new TargetNotFoundException("존재하지 않는 회원입니다.");
 		model.addAttribute("memberDto", memberDto);
-		return "/WEB-INF/views/manager/member/edit.jsp";
+		return "/WEB-INF/views/manager/member/update.jsp";
 	}
 	
 	@PostMapping("/update")
@@ -63,6 +73,7 @@ public class ManagerMemberController {
 			return "redirect:detail?memberId="+memberDto.getMemberId();
 		}
 	}	
+
 	
 	//회원 차단
 //	@GetMapping("/block")
