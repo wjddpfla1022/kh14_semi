@@ -98,9 +98,6 @@
                     <a href="#">주문 / 배송조회</a>
                 </li>
                 <li>
-                    <a href="#">출석체크</a>
-                </li>
-                <li>
                     <a href="#">1:1문의</a>
                 </li>
                 <li>
@@ -110,6 +107,9 @@
                             <a href="#">항목1</a>
                         </li>
                     </ul>
+                </li>
+                <li>
+                    <a href="#"><i class="fa-solid fa-cart-shopping"></i></a> <!-- 장바구니 -->
                 </li>
             </ul>
 
@@ -274,4 +274,3 @@
     </div>
 
     <!-- 중단(Container) -->
-    <div>
