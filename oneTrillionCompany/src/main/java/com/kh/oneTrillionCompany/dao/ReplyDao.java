@@ -19,7 +19,7 @@ public class ReplyDao {
 	
 	//댓글 번호 생성
 	public int sequence() {
-		String sql = "selcet reply_seq.nextval from dual";
+		String sql = "select reply_seq.nextval from dual";
 		return jdbcTemplate.queryForObject(sql, int.class);
 	}
 	
