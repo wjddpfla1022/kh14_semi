@@ -47,7 +47,7 @@
                     <a href="#" class="link link-animation">SSG<i class="fa-solid fa-arrow-up-right-from-square"></i></a>
                 </div>
                 <div class="row center">
-                    <a href="#" class="link link-animation">정현가드<i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                    <a href="#" class="link link-animation">정현가드먼트<i class="fa-solid fa-arrow-up-right-from-square"></i></a>
                 </div>
             </div>
         </div>
