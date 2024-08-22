@@ -4,10 +4,6 @@
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
-<style>
-
-</style>
-
 <div class="container w-1200">
 	<div class="row center">
 		<h1>회원 검색</h1>
