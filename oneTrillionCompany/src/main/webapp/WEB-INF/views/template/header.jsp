@@ -7,7 +7,9 @@
 <title>oneTrillion</title>
     
     <meta charset="UTF-8">
-
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightpick@1.6.2/css/lightpick.min.css">
+<script src="https://cdn.jsdelivr.net/npm/moment@2.30.1/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lightpick@1.6.2/lightpick.min.js"></script>
     <!-- 내가 만든 스타일 시트를 불러오는 코드 -->
     <link rel="stylesheet" type="text/css" href="/css/commons.css">
     <link rel="stylesheet" type="text/css" href="/css/test.css">
@@ -70,10 +72,10 @@
             margin-right: 20px;
         }  */
 </style>
-    <link rel="stylesheet" type="text/css" href="/css/checkbox.js">
+    <link rel="stylesheet" type="text/css" href="/js/checkbox.js">
 	<!-- jquery cdn -->
      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js">
-
+	
      </script>
 <body> <!-- 문서의 출력 내용을 담는 태그 -->
     <!-- 		<h1>내가 만든 홈페이지</h1> -->
