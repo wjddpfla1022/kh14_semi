@@ -1,9 +1,9 @@
-
 CREATE TABLE member (
 	member_id	varchar2(20)		 primary key,
 	member_pw	varchar2(16)		not null,
 	member_name	varchar2(21)		NOT NULL,
 	member_nickname	varchar2(30)	NOT NULL unique,
+	member_email varchar2(60) not null, 
 	member_block	char(1)		NULL,
 	member_rank	varchar2(12)	DEFAULT '일반회원'	NOT NULL,
 	member_point	number	DEFAULT 0	NULL,
@@ -106,8 +106,8 @@ CREATE TABLE orders (
 	check(ORDER_price >= 0)
 );
 CREATE sequence order_seq;
-SELECT * FROM orders
-
+SELECT * FROM orders;
+drop table orders;
 
 CREATE TABLE refund (
 	refund_order_no	number	references ORDERS(ORDER_NO) on delete cascade	NOT NULL,
@@ -188,3 +188,6 @@ CREATE TABLE review_image (
 	attach_no	number		NOT NULL
 );
 SELECT * FROM review_image;
+
+
+commit;
