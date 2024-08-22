@@ -117,6 +117,12 @@ public class MemberDao {
 		};
 		return jdbcTemplate.update(sql, data) > 0;
 	}
+	public boolean canIUseThisMemberNickname(String memberNickname) {
+		String sql="select * from member where memberNickname=?";
+		Object[] data= {memberNickname};
+		List<MemberDto> list=jdbcTemplate.query(sql, memberMapper, data);
+		return !list.isEmpty();
+	}
 	public List<MemberBlockVO> selectListWithBlock(String column, String keyword) {
 		String sql = "select "
 							+ "M.*, B.block_no, B.block_time, B.block_memo, "
