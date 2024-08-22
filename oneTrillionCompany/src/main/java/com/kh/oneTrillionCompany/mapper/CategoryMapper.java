@@ -15,7 +15,6 @@ public class CategoryMapper implements RowMapper<CategoryDto> {
 	public CategoryDto mapRow(ResultSet rs, int rowNum) throws SQLException {
 		CategoryDto categoryDto = new CategoryDto();
 		categoryDto.setCateNo(rs.getInt("cate_no"));
-		categoryDto.setCateNo2(rs.getInt("cate_no2"));
 		categoryDto.setCateName(rs.getString("cate_name"));
 		
 		return categoryDto;
