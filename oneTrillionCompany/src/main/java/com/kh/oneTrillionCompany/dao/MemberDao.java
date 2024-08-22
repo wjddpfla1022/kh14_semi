@@ -88,7 +88,7 @@ public class MemberDao {
 		return jdbcTemplate.update(sql, data) > 0;
 	}
 	
-//관리자 전용
+				/* ★★★★★★★★관리자 전용★★★★★★★★ */
 	
 	//회원 목록
 	public List<MemberDto> selectList(){
@@ -103,12 +103,11 @@ public class MemberDao {
 		Object[] data = {keyword};
 		return jdbcTemplate.query(sql, memberMapper, data);
 	}
-	
+
 	//회원 수정
 	public boolean updateMemberByAdmin(MemberDto memberDto) {
 		String sql = "update member set "
-				+ "member_nickname = ?, member_rank = ?, "
-				+ "member_point = ?"
+				+ "member_nickname = ?, member_rank = ?,member_point = ? "
 				+ "where member_id = ?";
 		Object[] data = {
 				memberDto.getMemberNickname(), memberDto.getMemberRank(), 
