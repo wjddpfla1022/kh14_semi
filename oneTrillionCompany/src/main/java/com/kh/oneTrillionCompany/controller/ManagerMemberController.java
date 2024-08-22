@@ -16,7 +16,7 @@ import com.kh.oneTrillionCompany.dto.MemberDto;
 import com.kh.oneTrillionCompany.exception.TargetNotFoundException;
 
 @Controller
-@RequestMapping("/manager")
+@RequestMapping("/manager/member")
 public class ManagerMemberController {
 	
 	@Autowired
