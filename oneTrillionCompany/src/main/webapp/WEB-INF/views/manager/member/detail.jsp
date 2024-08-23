@@ -60,6 +60,21 @@
 			</tr>
 		</table>
 	</div>
+	<div class="row">
+		<h2>주문내역</h2>
+		<c:choose>
+		
+		</c:choose>
+	</div>
+	<div class="row">
+		<h2>리뷰</h2>
+		
+	</div>
+	<div class="row">
+		<h2>문의</h2>
+		
+	</div>
+	
 	<div class="float-box">
 		<a href="list" class="btn btn-positive">회원 검색</a>
 		<a href="update?memberId=${memberDto.memberId}" class="btn btn-positive">회원정보 수정</a>
