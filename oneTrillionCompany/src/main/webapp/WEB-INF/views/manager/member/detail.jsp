@@ -75,7 +75,7 @@
 				<c:otherwise>
 					<c:forEach var="reviewDto" items="${reviewWriteList}">
 						<div class="row">
-							<span>별점: ${reviewDto.reviewScore}점</span>
+							<span>별점:${reviewDto.reviewScore}점</span>
 							<span>${reviewDto.reviewContent}</span>
 						</div>
 					</c:forEach>
