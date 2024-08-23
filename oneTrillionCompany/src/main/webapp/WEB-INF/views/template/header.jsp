@@ -106,7 +106,7 @@
 	<!-- 		<a href=""></a> -->
 	<!-- 상단(Header) -->
 	<div class="container w-1200">
-		<c:if test="${sessionScope.createdLevel == 'null'}">
+		<c:if test="${sessionScope.createdLevel == null}">
 			<div class="row">
 				<ul class="menu top-menu">
 					<!-- 구분선 -->
@@ -126,7 +126,25 @@
 
 				<!-- 구분선 -->
 
-			<c:if test="${sessionScope.createdLevel != '관리자'}">
+			<c:if test="${sessionScope.createdLevel == '일반회원'}">
+				<div class="row">
+					<ul class="menu top-menu">
+						<!-- 구분선 -->
+						<li><a href="#">고객센터</a></li>
+						<li><a href="localhost:8080" id="favorite">즐겨찾기</a></li>
+						<li class="right-menu"><a href="/member/logout">로그아웃</a></li>
+						<li><a href="#">주문 / 배송조회</a></li>
+						<li><a href="#">1:1문의</a></li>
+						<li><a href="#">커뮤니티</a>
+							<ul>
+								<li><a href="#">항목1</a></li>
+							</ul></li>
+						<li><a href="/cart/list"><i class="fa-solid fa-cart-shopping"></i></a>
+							<!-- 장바구니 --></li>
+					</ul>
+				</div>
+			</c:if>
+			<c:if test="${sessionScope.createdLevel == '우수회원'}">
 				<div class="row">
 					<ul class="menu top-menu">
 						<!-- 구분선 -->
@@ -154,13 +172,13 @@
 						<li><a href="#">고객센터</a></li>
 						<li><a href="localhost:8080" id="favorite">즐겨찾기</a></li>
 						<li><a href="#">바로가기</a></li>
-						<li class="right-menu"><a href="#">주문 / 배송조회</a></li></li>
+						<li class="right-menu"><a href="/member/logout">로그아웃</a></li>
+						<li><a href="#">주문 / 배송조회</a></li>
 						<li><a href="/manager/item/list">상품 조회</a></li>
 						<li><a href="#">1:1문의</a></li>
 						<li><a href="/manager/member/list">회원</a>
 							</li>
-						<li><a href="#"><i class="fa-solid fa-cart-shopping"></i></a>
-							<!-- 장바구니 --></li>
+						
 					</ul>
 
 
