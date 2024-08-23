@@ -93,7 +93,7 @@
 	        	<h1>${param.memberId}에 대한 차단 해제 설정</h1>
 	        </div>
         	<div class="row center">
-	            <input type="text" id="idValue" name="blockMemberId" value="${param.memberId}">
+	            <input type="hidden" id="idValue" name="blockMemberId" value="${param.memberId}">
 	            <textarea name="blockMemo" placeholder="차단 사유를 입력하세요" rows="10" cols="60"></textarea>
 	            <div>
 	                <button type="button" class="member_block">차단</button>

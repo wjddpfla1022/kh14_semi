@@ -68,7 +68,7 @@
             var memberId;
 
             $(".member_block").click(function(){
-            	memberId = $(#).parents().children().val("memberId");   //클릭된 버튼의 memberId 값을 가져옴
+            	memberId = $('#idValue').val();   //클릭된 버튼의 memberId 값을 가져옴
                 $("#blockModal").show();
                 $("#modalMessage").text(memberId + "을(를) 차단 해제 하시겠습니까?"); //모달 메시지 설정
             });
@@ -86,16 +86,16 @@
 
 </head>
 <body>
-    <form action="block" method="post" id="blockForm">
+    <form action="clear" method="post" id="blockForm">
         <div class="container w-600 my-30">
 	        <div class="row center">
 	        	<h1>${param.memberId}에 대한 차단 해제 설정</h1>
 	        </div>
         	<div class="row center">
-	            <input type="hidden" name="blockMember" value="${param.memberId}">
+	            <input type="hidden" id="idValue" name="blockMemberId" value="${param.memberId}">
 	            <textarea name="blockMemo" placeholder="해제 사유를 입력하세요" rows="10" cols="60"></textarea>
 	            <div>
-	                <button type="button" class="member_block">차단해제</button>
+	                <button type="button"  class="member_block">차단해제</button>
 	            </div>
             </div>
         </div>
