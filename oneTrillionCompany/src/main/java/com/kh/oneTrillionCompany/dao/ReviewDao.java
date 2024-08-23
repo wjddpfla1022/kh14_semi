@@ -1,5 +1,7 @@
 package com.kh.oneTrillionCompany.dao;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -51,6 +53,16 @@ public class ReviewDao {
 								reviewDto.getReviewContent() , reviewDto.getReviewScore()};
 		jdbcTemplate.update(sql, data);
 	}
+	
+	//특정 회원의 리뷰 목록 조회
+	public List<ReviewDto> selectListByWriter(String reviewWriter){
+		String sql = "select * from review where review_writer = ? order by review_no desc";
+		Object[] data= {reviewWriter};
+		return jdbcTemplate.query(sql, reviewMapper, data);
+	}
+	
+	
+	
 	
 
 }
