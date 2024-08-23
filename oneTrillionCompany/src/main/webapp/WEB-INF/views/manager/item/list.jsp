@@ -14,17 +14,17 @@
 	<!-- 검색창 -->
 	<div class="row center" style=" margin-bottom:10px;">
 		<form action="list" method="get" autocomplete="off" class="field">
-    <select name="column" id="column-select" onchange="toggleInputField()">
-        <option value="item_no">상품 번호</option>
-        <option value="cate_no">카테고리</option>
-        <option value="item_name">상품명</option>
+    <select class="field" name="column" id="column-select" onchange="toggleInputField()">
+        <option value="item_no" <c:if test="${param.column=='item_no'}">selected</c:if>>상품 번호</option>
+        <option value="cate_no" <c:if test="${param.column=='cate_no'}">selected</c:if>>카테고리</option>
+        <option value="item_name" <c:if test="${param.column=='item_name'}">selected</c:if>>상품명</option>
     </select>
 
     <!-- 상품 번호와 상품명을 위한 텍스트 입력 필드 -->
     <input class="field" type="text" id="text-input" name="keyword" style="display: none;" value="${param.keyword}">
 
     <!-- 카테고리를 위한 셀렉트 박스 -->
-    <select name="keyword" id="category-select" style="display: none;">
+    <select class="field" name="keyword" id="category-select" style="display: none;">
         <option value="1">상의</option>
         <option value="2">하의</option>
         <option value="3">슈즈</option>
@@ -108,6 +108,11 @@ window.onload = toggleInputField;
 				</c:choose>
 			</tbody>
 		</table>
+		
+		
+	</div>
+	<div class="row right">
+		<a href="#" class="link link-animation"><h3 style="margin-right: 1em;">상품 추가</h3></a>
 	</div>
 </div>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
