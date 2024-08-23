@@ -12,7 +12,7 @@
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <!-- 자바스크립트 작성 영역 -->
-<style>
+
 <style>
         .btn.btn-more{
             background-color: rgb(196, 227, 255);
@@ -41,7 +41,7 @@
             margin: 0.3em;
         }
      </style>
-</style>
+
 <script type="text/javascript">
 	$(function() {
 		// var swiper = new Swiper(선택자, 옵션객체);
