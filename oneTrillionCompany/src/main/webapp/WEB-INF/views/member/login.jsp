@@ -24,6 +24,9 @@
 		<div class="row">
 			<button type="submit" class="btn btn-positive">로그인</button>
 		</div>
+		<div class="row">
+			<a href="/member/join" class="btn btn-neutral">회원가입</a>
+		</div>
 	</div>
 </form> 
 </body>
