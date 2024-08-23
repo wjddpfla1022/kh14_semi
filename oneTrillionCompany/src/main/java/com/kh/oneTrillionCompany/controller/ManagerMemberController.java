@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.kh.oneTrillionCompany.dao.BlockDao;
 import com.kh.oneTrillionCompany.dao.MemberDao;
+import com.kh.oneTrillionCompany.dto.BlockDto;
 import com.kh.oneTrillionCompany.dto.MemberDto;
 import com.kh.oneTrillionCompany.exception.TargetNotFoundException;
 import com.kh.oneTrillionCompany.vo.PageVO;
@@ -20,6 +22,9 @@ public class ManagerMemberController {
 	
 	@Autowired
 	private MemberDao memberDao;
+	
+	@Autowired
+	private BlockDao blockDao;
 	
 	//회원 검색+목록
 	@RequestMapping("/list")
@@ -39,7 +44,7 @@ public class ManagerMemberController {
 		case "member_id":
 		case "member_email":
 		case "member_nickname":
-		case "member_level":
+		case "member_rank":
 			return true;
 		}
 		return false;
@@ -72,14 +77,44 @@ public class ManagerMemberController {
 			throw new TargetNotFoundException("존재하지 않는 회원입니다.");
 			return "redirect:detail?memberId="+memberDto.getMemberId();
 		}
-	}	
-
 	
 	//회원 차단
-//	@GetMapping("/block")
-//	@PostMapping("/block")
+	@RequestMapping("/block")
+	public String block(@RequestParam String memberId) {
+		MemberDto memberDto = memberDao.selectOne(memberId);
+		if(memberDto == null) {
+			throw new TargetNotFoundException("존재하지 않는 회원입니다");
+			}
+			return "/WEB-INF/views/manager/member/block.jsp";
+		}
 	
-	//회원 차단 해제
-//	@GetMapping("/cancel")
-//	@PostMapping("/cancel")
+	@PostMapping("/block")
+	public String block(@ModelAttribute BlockDto blockDto) {
+		//마지막 이력 조회
+		BlockDto lastDto = blockDao.selectLastOne(blockDto.getBlockMemberId());
+		if(lastDto == null || lastDto.getBlockType().equals("해제")) {
+			blockDao.insertBlock(blockDto);//차단등록
+		}
+		return "redirect:list";//상대
+	}
+		
+		//회원 차단 해제
+	@GetMapping("/clear")
+	public String cancel() {
+//		MemberDto memberDto = memberDao.selectOne(blockTarget);
+//		if(memberDto == null) 
+//			throw new TargetNotFoundException("존재하지 않는 회원ID");
+		return "/WEB-INF/views/manager/member/clear.jsp";
+	}
+//	@PostMapping("/clear")
+//	public String clear(@ModelAttribute BlockDto blockDto) {
+//		BlockDto lastDto = blockDao.selectLastOne(blockDto.getBlockMemberId());
+//		if(lastDto != null && lastDto.getBlockType().equals("차단")) {
+//			blockDao.insertClear(blockDto);
+//		}
+//		return "redirect:list";
+//	}
+}	
+
+	
 
