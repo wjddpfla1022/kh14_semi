@@ -164,4 +164,5 @@ public class MemberDao {
 		Object[] data = {pageVO.getKeyword()};
 		return jdbcTemplate.queryForObject(sql, int.class, data);
 	}
+	//
 }
