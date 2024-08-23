@@ -56,7 +56,7 @@
 			</tr>
 			<tr>
 				<td>차단 여부</td>
-				<td>${memberBlockVO.memberBlock}</td>
+				<td>${memberBlockVO.blockType}</td>
 			</tr>
 		</table>
 	</div>

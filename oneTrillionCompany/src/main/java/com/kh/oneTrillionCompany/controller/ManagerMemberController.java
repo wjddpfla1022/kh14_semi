@@ -61,7 +61,7 @@ public class ManagerMemberController {
 		if(memberDto == null)
 			throw new TargetNotFoundException("존재하지 않는 회원입니다.");
 		model.addAttribute("memberDto", memberDto);
-		//model.addAttribute("reviewWriteList" , reviewDao.selectListByWriter(memberId));
+		model.addAttribute("reviewWriteList" , reviewDao.selectListByWriter(memberId));
 		return "/WEB-INF/views/manager/member/detail.jsp";
 	}
 	
