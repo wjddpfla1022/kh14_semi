@@ -1,13 +1,17 @@
 package com.kh.oneTrillionCompany.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.oneTrillionCompany.dao.CartDao;
 import com.kh.oneTrillionCompany.dao.ItemDao;
+import com.kh.oneTrillionCompany.service.AttachService;
 
 @Controller
 @RequestMapping("/cart")
@@ -15,16 +19,12 @@ public class CartController {
 	
 	@Autowired
 	private CartDao cartDao;
-	
 	@Autowired
 	private ItemDao itemDao;
 	
-	//장바구니 삭제
-	@RequestMapping("/delete")
-	public String delete(@RequestParam int itemNo) {
-		cartDao.delete(itemNo);
-		return "redirect:list";
-	}
+	@Autowired
+	private AttachService attachService;
+	
 	
 	//장바구니 목록
 	@RequestMapping("/list")
@@ -34,7 +34,45 @@ public class CartController {
 		return "/WEB-INF/views/cart/list.jsp"; 
 	}
 	
+	//장바구니 삭제
+	@RequestMapping("/delete")
+	public String delete(@RequestParam int cartNo) {
+		try {//파일을 지우기
+			int itemAttachmentNo = cartDao.findImage(cartNo);
+			attachService.delete(itemAttachmentNo);
+		}
+		catch(Exception e) {}//문제가 생겨도 지우기
+		finally {
+			cartDao.delete(cartNo);
+		}
+		return "redirect:list";
+	}
 	
+	//장바구니 여러개 삭제
+	@PostMapping("/deleteList")
+	public String deleteList(
+						@RequestParam(value = "cartNo") List<Integer> list) {//int니깐 여러개
+		for(int cartNo : list) {
+			try {//파일 지우기
+					int itemAttachmentNo = cartDao.findImage(cartNo);
+					attachService.delete(itemAttachmentNo);
+			}
+			catch(Exception e) {} 
+			finally {
+				cartDao.delete(cartNo);
+			}
+		}
+		return "redirect:list";
+	}
+	
+	//장바구니 전체 삭제
+	@PostMapping("/deleteAll")
+	public String deleteAll() {
+		try {
+			cartDao.deleteAll();
+		} catch (Exception e) {}
+		return "redirect:list";
+	}
 	//장바구니 목록+검색
 //	@RequestMapping("/list")
 //	public String list(Model model,
@@ -56,4 +94,4 @@ public class CartController {
 //		return "/WEB-INF/views/emp/list.jsp"; 
 //	}
 	
-}  
+	}  
