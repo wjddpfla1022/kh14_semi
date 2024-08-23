@@ -224,7 +224,7 @@
 						<li class="li-horizon"><a href="#">상의 상세항목1</a></li>
 						<li class="li-horizon"><a href="#">상의 상세항목1</a></li>
 					</ul></li>
-				<li><a href="/item/list">상의</a>
+				<li><a href="/item/list/cate?keyword=1">상의</a>
 					<ul>
 						<li><a href="#">항목1</a>
 							<ul>
@@ -244,7 +244,7 @@
 							</ul></li>
 					</ul></li>
 				<!-- 구분선 -->
-				<li><a href="#">하의</a>
+				<li><a href="/item/list/cate?keyword=2">하의</a>
 					<ul>
 						<li><a href="#">항목1</a>
 							<ul>

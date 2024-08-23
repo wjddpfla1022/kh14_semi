@@ -49,6 +49,13 @@ public class ItemDao {
 		return jdbcTemplate.query(sql, itemMapper, data);
 	}
 	
+	//상품 카테고리 리스트
+	public List<ItemDto> selectListByCate(String keyword){
+		String sql = "select * from item where cate_no = ?";
+		Object[] data = {keyword};
+		return jdbcTemplate.query(sql, itemMapper, data);
+	}
+	
 	//상품 조회
 	public List<ItemDto> selectList(){
 		String sql = "select * from item order by item_no asc";
