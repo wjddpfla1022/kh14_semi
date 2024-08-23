@@ -10,7 +10,6 @@ public class MemberDto {
 	private String memberName;
 	private String memberNickname;
 	private String memberEmail;
-	private String memberBlock;
 	private String memberRank;
 	private int memberPoint;
 	private Date memberJoin;

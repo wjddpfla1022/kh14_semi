@@ -20,7 +20,6 @@ public MemberDto mapRow(ResultSet rs, int rowNum) throws SQLException {
 	memberDto.setMemberName(rs.getString("member_name"));
 	memberDto.setMemberNickname(rs.getString("member_nickname"));
 	memberDto.setMemberEmail(rs.getString("member_email"));
-	memberDto.setMemberBlock(rs.getString("member_block"));
 	memberDto.setMemberRank(rs.getString("member_rank"));
 	memberDto.setMemberPoint(rs.getInt("member_point"));
 	memberDto.setMemberJoin(rs.getDate("member_join"));
