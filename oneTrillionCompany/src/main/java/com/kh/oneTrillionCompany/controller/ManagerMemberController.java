@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.oneTrillionCompany.dao.BlockDao;
 import com.kh.oneTrillionCompany.dao.MemberDao;
+import com.kh.oneTrillionCompany.dao.ReviewDao;
 import com.kh.oneTrillionCompany.dto.BlockDto;
 import com.kh.oneTrillionCompany.dto.MemberDto;
 import com.kh.oneTrillionCompany.exception.TargetNotFoundException;
@@ -25,6 +26,9 @@ public class ManagerMemberController {
 	
 	@Autowired
 	private BlockDao blockDao;
+	
+	@Autowired
+	private ReviewDao reviewDao;
 	
 	//회원 검색+목록
 	@RequestMapping("/list")
@@ -57,6 +61,7 @@ public class ManagerMemberController {
 		if(memberDto == null)
 			throw new TargetNotFoundException("존재하지 않는 회원입니다.");
 		model.addAttribute("memberDto", memberDto);
+		//model.addAttribute("reviewWriteList" , reviewDao.selectListByWriter(memberId));
 		return "/WEB-INF/views/manager/member/detail.jsp";
 	}
 	
@@ -100,20 +105,20 @@ public class ManagerMemberController {
 		
 		//회원 차단 해제
 	@GetMapping("/clear")
-	public String cancel() {
-//		MemberDto memberDto = memberDao.selectOne(blockTarget);
-//		if(memberDto == null) 
-//			throw new TargetNotFoundException("존재하지 않는 회원ID");
+	public String cancel(@RequestParam String memberId) {
+		MemberDto memberDto = memberDao.selectOne(memberId);
+		if(memberDto == null) 
+			throw new TargetNotFoundException("존재하지 않는 회원ID");
 		return "/WEB-INF/views/manager/member/clear.jsp";
 	}
-//	@PostMapping("/clear")
-//	public String clear(@ModelAttribute BlockDto blockDto) {
-//		BlockDto lastDto = blockDao.selectLastOne(blockDto.getBlockMemberId());
-//		if(lastDto != null && lastDto.getBlockType().equals("차단")) {
-//			blockDao.insertClear(blockDto);
-//		}
-//		return "redirect:list";
-//	}
+	@PostMapping("/clear")
+	public String clear(@ModelAttribute BlockDto blockDto) {
+		BlockDto lastDto = blockDao.selectLastOne(blockDto.getBlockMemberId());
+		if(lastDto != null && lastDto.getBlockType().equals("차단")) {
+			blockDao.insertClear(blockDto);
+		}
+		return "redirect:list";
+	}
 }	
 
 	
