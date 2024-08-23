@@ -7,7 +7,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.oneTrillionCompany.dto.CartDto;
-import com.kh.oneTrillionCompany.dto.QnaDto;
 import com.kh.oneTrillionCompany.mapper.CartMapper;
 
 @Repository
@@ -37,6 +36,12 @@ public class CartDao {
 		String sql = "delete cart where cart_no = ?";
 		Object[] data = {itemNo};
 		return jdbcTemplate.update(sql, data) > 0;
+	}
+	
+	//장바구니 전체삭제
+	public void deleteAll() {
+		String sql = "delete from cart";
+		jdbcTemplate.update(sql);
 	}
 	
 	//장바구니 수정(상품수량, 주문총가격)
@@ -73,4 +78,12 @@ public class CartDao {
 		Object[] data = {keyword};
 		return jdbcTemplate.query(sql, cartMapper, data);			
 	}
+
+	//이미지 번호 찾기
+	public Integer findImage(int cartNo) {
+		String sql = "select attach from cart where item_no=?";
+		Object[] data = {cartNo};
+		return jdbcTemplate.queryForObject(sql, Integer.class, data);
+	}
+
 }
