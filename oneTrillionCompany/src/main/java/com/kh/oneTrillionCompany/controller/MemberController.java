@@ -54,17 +54,10 @@ public class MemberController {
 	}
 	@Transactional
 	@PostMapping("/join")
-	public String join(@ModelAttribute MemberDto memberDto,
-			@RequestParam MultipartFile attach) throws IllegalStateException, IOException {
+	public String join(@ModelAttribute MemberDto memberDto) throws IllegalStateException, IOException {
 		//회원가입
 		memberDao.insert(memberDto);
 		
-		if(!attach.isEmpty()){
-			//첨부파일 등록
-//			int attachmentNo=attachmentService.save(attach);
-			//회원 이미지 연결정보 저장
-//			memberDao.connect(memberDto.getMemberId(),attachmentNo);
-		}
 		
 		return "redirect:joinFinish";
 	}
