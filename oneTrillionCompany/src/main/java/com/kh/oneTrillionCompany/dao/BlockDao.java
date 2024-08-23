@@ -20,37 +20,27 @@ public class BlockDao {
 	
 	//차단 등록
 	public void insertBlock(BlockDto blockDto) {
-		String sql = "insert into block("
-							+ "block_no, block_member_id, "
-							+ "block_type, block_memo, block_time"
-						+ ") "
+		String sql = "insert into block"
+					+ "(block_no, block_member_id, block_type, block_memo, block_time) "
 						+ "values(block_seq.nextval, ?, '차단', ?, ?)";
 		Object[] data = {
-				blockDto.getBlockMemberId(), blockDto.getBlockMemo(),
-				blockDto.getBlockTime()
-		};
+				blockDto.getBlockMemberId(), blockDto.getBlockMemo(),blockDto.getBlockTime()};
 		jdbcTemplate.update(sql, data);
 	}
 	
 	//해제 등록
-		public void insertCancel(BlockDto blockDto) {
-			String sql = "insert into block("
-								+ "block_no, block_member_id, "
-								+ "block_type, block_memo, block_time"
-								+ ") "
+		public void insertClear(BlockDto blockDto) {
+			String sql = "insert into block"
+						+ "(block_no, block_member_id,block_type, block_memo, block_time) "
 							+ "values(block_seq.nextval, ?, '해제', ?, ?)";
 			Object[] data = {
-					blockDto.getBlockMemberId(), blockDto.getBlockMemo(),
-					blockDto.getBlockTime()
-			};
+					blockDto.getBlockMemberId(), blockDto.getBlockMemo(),blockDto.getBlockTime()};
 			jdbcTemplate.update(sql, data);
 		}
 		
 		//마지막 상태 확인
 		public BlockDto selectLastOne(String blockMemberId) {
-			String sql = "select * from block where block_no = ("
-								+ "select max(block_no) from block where block_member_id = ?"
-							+ ")";
+			String sql = "select * from block where block_no = (	select max(block_no) from block where block_member_id = ?)";
 			Object[] data = {blockMemberId};
 			List<BlockDto> list = jdbcTemplate.query(sql, blockMapper, data);
 			return list.isEmpty() ? null : list.get(0);
