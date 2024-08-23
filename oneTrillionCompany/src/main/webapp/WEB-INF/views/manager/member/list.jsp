@@ -14,10 +14,10 @@
 	<!-- 검색창 -->
 	<div class="row center" style=" margin-bottom:10px;">
 		<form action="list" method="get" autocomplete="off" class="field">
-			<select name="column">
-				<option value="member_id"<c:if test="${column=='member_id'}">selected</c:if>>아이디</option>
-				<option value="member_nickname"<c:if test="${column=='member_nickname'}">selected</c:if>>닉네임</option>
-				<option value="member_rank"<c:if test="${column=='member_rank'}">selected</c:if>>등급</option>
+			<select name="column" class="field">
+				<option value="member_id" <c:if test="${param.column=='member_id'}">selected</c:if>>아이디</option>
+				<option value="member_nickname" <c:if test="${param.column=='member_nickname'}">selected</c:if>>닉네임</option>
+				<option value="member_rank" <c:if test="${param.column=='member_rank'}">selected</c:if>>등급</option>
 			</select>
 		<input class="field" type="text" name="keyword" value="${param.keyword}" >	
 		<button class="btn btn-neutral" type="submit">검색</button>
