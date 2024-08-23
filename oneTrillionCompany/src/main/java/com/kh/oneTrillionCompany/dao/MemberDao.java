@@ -33,15 +33,14 @@ public class MemberDao {
 	public void insert(MemberDto memberDto) {
 		String sql = "insert into member("
 				+ "member_id, member_pw, member_name, member_nickname, member_email, "
-				+ "member_block, member_point, member_join, "
+				+ " member_point, member_join, "
 				+ "member_login, member_post, member_address1, member_address2, "
 				+ "member_height, member_weight"
 				+ ") "
-				+ "values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+				+ "values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		Object[] data = {
 				memberDto.getMemberId(), memberDto.getMemberPw(),
 				memberDto.getMemberName(), memberDto.getMemberNickname(), memberDto.getMemberEmail(), 
-				memberDto.getMemberBlock(), 
 				memberDto.getMemberPoint(), memberDto.getMemberJoin(),
 				memberDto.getMemberLogin(), memberDto.getMemberPost(), 
 				memberDto.getMemberAddress1(), memberDto.getMemberAddress2(),
