@@ -4,6 +4,7 @@
 </div>
         </div>
         <hr>
+        <div class="container w-1200">
         <div class="row my-0 flex-box" style="min-height: 200px;">
             <div class="w-50">
                 <div class="row">
@@ -52,6 +53,7 @@
             </div>
         </div>
     </div>
+        </div>
     
 </body>
 
