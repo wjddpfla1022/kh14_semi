@@ -73,4 +73,11 @@ public class MemberController {
 		return "/WEB-INF/views/member/joinFinish.jsp";
 	}
 	
+	@RequestMapping("/logout")
+	public String logout(HttpSession session) {
+		session.removeAttribute("createdUser");
+		session.removeAttribute("createdLevel");
+		return "redirect:/";
+	}
+	
 }
