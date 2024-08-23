@@ -25,6 +25,7 @@
                 memberIdCheckValid:false,//중복검사
                 memberPwValid:false,
                 memberPwCheck:false,
+                memberNameValid:false,
                 memberNicknameValid:false,//닉네임 형식검사
                 memberNicknameCheckValid:false,//닉네임 중복검사
                 memberEmailValid:false,
@@ -33,7 +34,7 @@
                 memberBirthValid:true,//선택항목
                 memberAddressValid:true,//선택항목
                 ok:function(){return this.memberIdValid&&this.memberIdCheckValid&&this.memberPwValid&&this.memberPwCheck&&
-                    this.memberNicknameValid&&this.memberEmailValid&&this.memberTelValid&&
+                    this.memberNicknameValid&&this.memberEmailValid&&this.memberTelValid&&this.memberNameValid&&
                     this.memberBirthValid&&this.memberAddressValid&&this.memberEmailCheckValid
                 }
             };
@@ -85,6 +86,17 @@
                 status.memberPwCheck=target1===target2;
                 $(this).addClass(status.memberPwCheck?"success":"fail");
             });
+            $("[name=memberName]").blur(function() {
+                var target = $(this).val();
+                var regex = /^[가-힣]{2,7}$/;
+                status.memberNameValid = regex.test(target);
+                $(this).removeClass("success fail fail2");
+                if (status.memberNameValid) {
+                    $(this).addClass("success");
+                } else {
+                    $(this).addClass("fail");
+                }
+            });
             $("[name=memberNickname]").blur(function(){
                 var target=$(this).val();
                 var regex=/^[가-힣0-9]{2,7}$/;
@@ -115,7 +127,7 @@
                 var target=$(this).val();
                 status.memberEmailValid=target.length>0;
                 $(this).removeClass("success fail");
-                if(memberEmailValid){
+                if(status.memberEmailValid){
                     $(this).addClass("success")
                 }
                 else{
@@ -221,18 +233,18 @@
                 $(this).removeClass("fa-eye-slash").addClass("fa-eye");
                }
             });
-            $("[name=attach]").change(function(){
-                //파일 태그에만 존재하는 files라는 항목에는 선택된 파일 정보가 담김
-                // - length 가 0이냐 아니냐
-                if(this.files.length==0){
-                    $(this).parent().next().children("img").attr("src","https://placeholder.co/150?text=NoImage");
-                }
-                else{
-                    var file=this.files[0];
-                    var url = window.URL.createObjectURL(file);
-                    $(this).parent().next().children("img").attr("src",url);
-                }
-            });
+//             $("[name=attach]").change(function(){
+//                 //파일 태그에만 재하는 files라는 항목에는 선택된 파일 정보가 담김
+//                 // - length 가 0이냐 아니냐
+//                 if(this.files.length==0){
+//                     $(this).parent().next().children("img").attr("src","https://placeholder.co/150?text=NoImage");
+//                 }
+//                 else{
+//                     var file=this.files[0];
+//                     var url = window.URL.createObjectURL(file);
+//                     $(this).parent().next().children("img").attr("src",url);
+//                 }
+//             });
             $("[name=memberPost],[name=memberAddress1],.btn-find-address").click(function(){
                 new daum.Postcode({
             oncomplete: function(data) {
@@ -330,6 +342,12 @@
 <!--                     </div> -->
                 </div>
                 <div class="page">
+                	<div class="row">
+                		<label class="title">이름<i class="fa-solid fa-asterisk red"></i></label>
+                		<input type="text" class="field w-100" name="memberName">
+                	</div>
+                </div>
+                <div class="page">
                     <div class="row">
                         <label class="title">닉네임<i class="fa-solid fa-asterisk red"></i></label>
                         <input type="text" class="field w-100" name="memberNickname" placeholder="한글과 숫자로 이루어진 2~7글자 ">
@@ -342,12 +360,9 @@
 <!--                         <button type="button" class="float-right btn btn-positive btn-next">다음</button> -->
 <!--                     </div> -->
                 </div>
-                	<div class="row title">
-                		<h3>------선택 사항 입니다------</h3>
-                	</div>
                 <div class="page">
                     <div class="row">
-				         <label class="title">이메일</label>
+				         <label class="title">이메일<i class="fa-solid fa-asterisk red"></i></label>
 				         <!-- 입력창 -->
 				         <div class="flex-box email-wrapper">
 				             <input type="email" name="memberEmail" class="field w-100" style="flex-grow:1">
@@ -356,15 +371,14 @@
 			           		 </button>
 		         		</div>
 	         		</div>
-<!--                     <div class="row float-box"> -->
-<!--                         <button type="button" class="float-left btn btn-positive btn-prev">이전</button> -->
-<!--                         <button type="button" class="float-right btn btn-positive btn-next">다음</button> -->
-<!--                     </div> -->
                 </div>
+                	<div class="row title">
+                		<h3>------선택 사항 입니다------</h3>
+                	</div>
                 <div class="page">
                     <div class="row">
                         <label class="title">전화번호</label>
-                        <input type="tel" class="field w-100" name="telInput" placeholder="숫자만 입력하세요">
+                        <input type="tel" class="field w-100" name="memberTel" placeholder="숫자만 입력하세요">
                         <div class="fail-feedback">번호의 형식이 올바르지 않습니다</div>
                     </div>
                     <div class="row">
