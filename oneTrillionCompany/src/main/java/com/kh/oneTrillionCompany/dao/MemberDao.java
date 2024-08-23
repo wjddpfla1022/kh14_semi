@@ -9,8 +9,10 @@ import org.springframework.stereotype.Repository;
 import com.kh.oneTrillionCompany.dto.MemberDto;
 import com.kh.oneTrillionCompany.mapper.MemberBlockMapper;
 import com.kh.oneTrillionCompany.mapper.MemberMapper;
+import com.kh.oneTrillionCompany.mapper.StatusVOMapper;
 import com.kh.oneTrillionCompany.vo.MemberBlockVO;
 import com.kh.oneTrillionCompany.vo.PageVO;
+import com.kh.oneTrillionCompany.vo.StatusVO;
 
 @Repository
 public class MemberDao {
@@ -23,6 +25,9 @@ public class MemberDao {
 	
 	@Autowired
 	private MemberBlockMapper memberBlockMapper;
+	
+	@Autowired
+	private StatusVOMapper statusVOMapper;
 	
 	//회원 가입
 	public void insert(MemberDto memberDto) {
@@ -118,10 +123,10 @@ public class MemberDao {
 		return jdbcTemplate.update(sql, data) > 0;
 	}
 	public boolean canIUseThisMemberNickname(String memberNickname) {
-		String sql="select * from member where memberNickname=?";
+		String sql="select * from member where member_nickname=?";
 		Object[] data= {memberNickname};
 		List<MemberDto> list=jdbcTemplate.query(sql, memberMapper, data);
-		return !list.isEmpty();
+		return list.isEmpty();
 	}
 	public List<MemberBlockVO> selectListWithBlock(String column, String keyword) {
 		String sql = "select "
@@ -164,5 +169,9 @@ public class MemberDao {
 		Object[] data = {pageVO.getKeyword()};
 		return jdbcTemplate.queryForObject(sql, int.class, data);
 	}
-	//
+	public List<StatusVO> statusByMemberLevel() {
+		String sql = "select member_Level title, count(*) cnt from member "
+				+ "group by member_level order by title desc";
+		return jdbcTemplate.query(sql, statusVOMapper);
+	}
 }

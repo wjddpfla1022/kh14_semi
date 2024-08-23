@@ -1,16 +1,16 @@
 package com.kh.oneTrillionCompany.restcontroller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.oneTrillionCompany.dao.MemberDao;
-
-import jakarta.servlet.http.HttpSession;
+import com.kh.oneTrillionCompany.vo.StatusVO;
 
 @CrossOrigin(origins="http://localhost:8080/")
 @RestController
@@ -29,5 +29,8 @@ public class MemberRestController {
 	public boolean checkNickname(@RequestParam String memberNickname) {
 		return memberDao.canIUseThisMemberNickname(memberNickname);
 	}
-	
+	@PostMapping("/status")
+	public List<StatusVO> status(){
+		return memberDao.statusByMemberLevel();
+	}
 }
