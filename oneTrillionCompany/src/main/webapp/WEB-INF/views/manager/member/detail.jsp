@@ -62,13 +62,25 @@
 	</div>
 	<div class="row">
 		<h2>주문내역</h2>
-		<c:choose>
 		
-		</c:choose>
 	</div>
 	<div class="row">
 		<h2>리뷰</h2>
-		
+			<c:choose>
+				<c:when test="${reviewWriteList.isEmpty()}">
+					<div class="row center">
+						리뷰가 존재하지 않습니다
+					</div>
+				</c:when>
+				<c:otherwise>
+					<c:forEach var="reviewDto" items="${reviewWriteList}">
+						<div class="row">
+							<span>별점: ${reviewDto.reviewScore}점</span>
+							<span>${reviewDto.reviewContent}</span>
+						</div>
+					</c:forEach>
+				</c:otherwise>
+			</c:choose>
 	</div>
 	<div class="row">
 		<h2>문의</h2>
