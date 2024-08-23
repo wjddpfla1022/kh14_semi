@@ -64,4 +64,10 @@ public class QnaDao {
 		return list.isEmpty() ? null : list.get(0);		
 	}
 	
+	//특정 회원의 문의 목록 조회
+	public List<QnaDto> selectListByWriter(String qnaWriter){
+		String sql = "select * from qna where qna_writer order by qna desc";
+		Object[] data = {qnaWriter};
+		return jdbcTemplate.query(sql, qnaMapper, data);
+	}
 }
