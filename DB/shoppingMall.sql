@@ -1,3 +1,4 @@
+
 CREATE TABLE member (
 	member_id	varchar2(20)		 primary key,
 	member_pw	varchar2(16)		not null,
@@ -6,7 +7,7 @@ CREATE TABLE member (
 	member_email varchar2(60) not null, 
 	member_block	char(1)		NULL,
 	member_rank	varchar2(12)	DEFAULT '일반회원'	NOT NULL,
-	member_point	number	DEFAULT 0	NULL,
+	member_point	number	DEFAULT 0,
 	member_join	date	DEFAULT sysdate	NULL,
 	member_login	date		NULL,
 	member_post	varchar2(6),
@@ -39,9 +40,11 @@ CREATE TABLE member (
     (member_post is not null and member_address1 is not null and member_address2 is not null)
 )
 );
-create sequence member_seq;
-SELECT * FROM MEMBER;
+INSERT INTO "MEMBER"(member_id, member_pw, member_name, member_nickname, member_email, 
+MEMBER_RANK) values('testuser1', 'Testuser1!', '일반회원', '일반회원', 'meansuck9998oo@gmail.com', '일반회원');
 
+SELECT * FROM MEMBER;
+commit;
 
 CREATE TABLE block (
 	block_no	number		primary key,
@@ -56,9 +59,8 @@ SELECT * FROM block;
 
 
 CREATE TABLE category (
-	cate_no	number		 primary key,
-	cate_no2	number	references category(cate_no)	NOT NULL,
-	cate_name	varchar2(30)	NOT NULL unique
+	cate_no	number	,
+	cate_name	varchar2(30)	primary key
 );
 create sequence category_seq;
 SELECT * FROM category;
@@ -78,6 +80,8 @@ CREATE TABLE item (
 	CHECK(item_cnt >= 1),
 	check(item_size IN ('S','M','L','XL'))
 	);
+
+
 create sequence item_seq;
 SELECT * FROM item;
 
@@ -182,6 +186,20 @@ CREATE TABLE review (
 );
 create sequence review_seq;
 SELECT * FROM review;
+INSERT INTO review (
+    review_no, 
+    review_item_no, 
+    review_writer, 
+    review_content, 
+    review_score
+) VALUES (
+    review_seq.NEXTVAL,    -- 자동 증가하는 review_no
+    1,                    -- 예시로 아이템 번호 1
+    'admin',              -- 리뷰 작성자
+    'This is a dummy review content for testing purposes.',  -- 리뷰 내용
+    5                     -- 리뷰 점수 (예: 5점)
+);
+commit;
 
 CREATE TABLE review_image (
 	review_no	number		NOT NULL,
@@ -189,5 +207,5 @@ CREATE TABLE review_image (
 );
 SELECT * FROM review_image;
 
-
 commit;
+
