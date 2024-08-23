@@ -68,7 +68,7 @@
             var memberId;
 
             $(".member_block").click(function(){
-            	memberId = $(this).data("member_id");   //클릭된 버튼의 memberId 값을 가져옴
+            	memberId = $(#).parents().children().val("memberId");   //클릭된 버튼의 memberId 값을 가져옴
                 $("#blockModal").show();
                 $("#modalMessage").text(memberId + "을(를) 차단 해제 하시겠습니까?"); //모달 메시지 설정
             });

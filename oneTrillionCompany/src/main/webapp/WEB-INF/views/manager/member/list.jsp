@@ -52,13 +52,13 @@
 								</td>
 								<td>${memberBlockVO.memberNickname}</td>
 								<td>${memberBlockVO.memberRank}</td>
-								<td>${memberBlockVO.memberBlock}</td>
+								<td>${memberBlockVO.blockType}</td>
 								<td>${memberBlockVO.memberJoin}</td>
 								<td>
 									<a href="update?memberId=${memberBlockVO.memberId}" class="btn btn-positive">수정</a>
 									<c:choose>
 										<c:when test="${memberBlockVO.blockType=='차단'}">
-											<a href="block?memberId=${memberBlockVO.memberId}" class="btn btn-neutral">해제</a>
+											<a href="clear?memberId=${memberBlockVO.memberId}" class="btn btn-neutral">해제</a>
 										</c:when>
 										<c:otherwise>
 											<a href="block?memberId=${memberBlockVO.memberId}"  class="btn btn-negative">차단</a>
