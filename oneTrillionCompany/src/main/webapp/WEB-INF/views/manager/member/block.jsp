@@ -68,7 +68,7 @@
             var memberId;
 
             $(".member_block").click(function(){
-            	memberId = $(this).data("memberId");   //클릭된 버튼의 memberId 값을 가져옴
+            	memberId = $('#idValue').val();   //클릭된 버튼의 memberId 값을 가져옴
             	console.log(memberId);
                 $("#blockModal").show();
                 $("#modalMessage").text(memberId + "을(를) 차단하시겠습니까?"); //모달 메시지 설정
@@ -93,7 +93,7 @@
 	        	<h1>${param.memberId}에 대한 차단 해제 설정</h1>
 	        </div>
         	<div class="row center">
-	            <input type="hidden" name="blockMember" value="${param.memberId}">
+	            <input type="text" id="idValue" name="blockMemberId" value="${param.memberId}">
 	            <textarea name="blockMemo" placeholder="차단 사유를 입력하세요" rows="10" cols="60"></textarea>
 	            <div>
 	                <button type="button" class="member_block">차단</button>

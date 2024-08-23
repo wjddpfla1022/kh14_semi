@@ -22,9 +22,9 @@ public class BlockDao {
 	public void insertBlock(BlockDto blockDto) {
 		String sql = "insert into block"
 					+ "(block_no, block_member_id, block_type, block_memo, block_time) "
-						+ "values(block_seq.nextval, ?, '차단', ?, ?)";
+						+ "values(block_seq.nextval, ?, '차단', ?, sysdate)";
 		Object[] data = {
-				blockDto.getBlockMemberId(), blockDto.getBlockMemo(),blockDto.getBlockTime()};
+				blockDto.getBlockMemberId(), blockDto.getBlockMemo()};
 		jdbcTemplate.update(sql, data);
 	}
 	
@@ -32,9 +32,9 @@ public class BlockDao {
 		public void insertClear(BlockDto blockDto) {
 			String sql = "insert into block"
 						+ "(block_no, block_member_id,block_type, block_memo, block_time) "
-							+ "values(block_seq.nextval, ?, '해제', ?, ?)";
+							+ "values(block_seq.nextval, ?, '해제', ?, sysdate)";
 			Object[] data = {
-					blockDto.getBlockMemberId(), blockDto.getBlockMemo(),blockDto.getBlockTime()};
+					blockDto.getBlockMemberId(), blockDto.getBlockMemo()};
 			jdbcTemplate.update(sql, data);
 		}
 		
