@@ -33,7 +33,7 @@ public class OrdersDao {
 	
 	//특정 회원의 주문 목록 조회
 	public List<OrdersDto> selectListByOrders(String orderMemberId){
-		String sql = "select * from orders where orders_member_id = ? order by order_no desc";
+		String sql = "select * from orders where order_member_id = ? order by order_no desc";
 		Object[] data = {orderMemberId};
 		return jdbcTemplate.query(sql, ordersMapper, data);
 	}
