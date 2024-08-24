@@ -24,12 +24,14 @@ public class ItemDao {
 		String sql="insert into item( "
 				+ "item_no, cate_no, item_name,"
 				+ "item_price, item_sale_price, item_date,"
-				+ "item_cnt, item_size"
-				+ ") values(item_seq.nextval, ?,?,?,?,?,?,?)";
-		Object[] data= {itemDto.getCateNo(),itemDto.getItemName(),
-						itemDto.getItemPrice(),itemDto.getItemSalePrice(),
-						itemDto.getItemDate(),itemDto.getItemCnt(),
-						itemDto.getItemSize()};
+				+ "item_cnt, item_size, item_cate1, item_cate2, item_cate3"
+				+ ") values(item_seq.nextval, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		Object[] data= {itemDto.getCateNo(), itemDto.getItemName(), 
+						itemDto.getItemPrice(), itemDto.getItemSalePrice(), 
+						itemDto.getItemDate(), itemDto.getItemCnt(), 
+						itemDto.getItemSize(), itemDto.getItemCate1(), 
+						itemDto.getItemCate2(), itemDto.getItemCate3(), 
+						};
 		jdbcTemplate.update(sql, data);
 	}
 	
@@ -49,9 +51,9 @@ public class ItemDao {
 		return jdbcTemplate.query(sql, itemMapper, data);
 	}
 	
-	//상품 카테고리 리스트
-	public List<ItemDto> selectListByCate(String keyword){
-		String sql = "select * from item where cate_no = ?";
+	//상품 카테고리별 리스트 조회
+	public List<ItemDto> selectListByCate(String column, String keyword){
+		String sql = "select * from item where itemCate"+ column +"  = ?"; //column은 1, 2, 3으로만 지정
 		Object[] data = {keyword};
 		return jdbcTemplate.query(sql, itemMapper, data);
 	}

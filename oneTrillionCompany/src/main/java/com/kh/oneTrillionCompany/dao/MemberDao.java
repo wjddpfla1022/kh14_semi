@@ -33,18 +33,18 @@ public class MemberDao {
 	public void insert(MemberDto memberDto) {
 		String sql = "insert into member("
 				+ "member_id, member_pw, member_name, member_nickname, member_email, "
-				+ " member_point, member_join, "
-				+ "member_login, member_post, member_address1, member_address2, "
-				+ "member_height, member_weight"
+				+ " member_point, "
+				+ " member_post, member_address1, member_address2, "
+				+ "member_height, member_weight, member_contact"
 				+ ") "
-				+ "values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+				+ "values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		Object[] data = {
 				memberDto.getMemberId(), memberDto.getMemberPw(),
 				memberDto.getMemberName(), memberDto.getMemberNickname(), memberDto.getMemberEmail(), 
-				memberDto.getMemberPoint(), memberDto.getMemberJoin(),
-				memberDto.getMemberLogin(), memberDto.getMemberPost(), 
+				memberDto.getMemberPoint(), memberDto.getMemberPost(), 
 				memberDto.getMemberAddress1(), memberDto.getMemberAddress2(),
-				memberDto.getMemberHeight(), memberDto.getMemberWeight()
+				memberDto.getMemberHeight(), memberDto.getMemberWeight(), 
+				memberDto.getMemberContact()
 		};
 		jdbcTemplate.update(sql, data);
 	}
@@ -69,12 +69,13 @@ public class MemberDao {
 	public boolean updateMember(MemberDto memberDto) {
 		String sql = "update member set "
 				+ "member_nickname = ?, member_email = ?, member_post = ?, "
-				+ "member_address1 = ?, member_address2 = ? "
+				+ "member_address1 = ?, member_address2 = ?, member_contact = ? "
 				+ "where member_id=?";
 		Object[] data = {
 				memberDto.getMemberNickname(), memberDto.getMemberEmail(), 
 				memberDto.getMemberPost(), memberDto.getMemberAddress1(), 
-				memberDto.getMemberAddress2(), memberDto.getMemberId()
+				memberDto.getMemberAddress2(), memberDto.getMemberContact(),
+				memberDto.getMemberId()
 		};
 		return jdbcTemplate.update(sql, data) > 0;
 	}

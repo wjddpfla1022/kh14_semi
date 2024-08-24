@@ -15,11 +15,11 @@ public class OrdersMapper implements RowMapper<OrdersDto> {
 	public OrdersDto mapRow(ResultSet rs, int rowNum) throws SQLException {
 		OrdersDto ordersDto = new OrdersDto();
 		ordersDto.setOrderNo(rs.getInt("order_no"));
-		ordersDto.setOrderMemberId(rs.getString("order_member_id"));
 		ordersDto.setOrderCartNo(rs.getInt("order_cart_no"));
 		ordersDto.setOrderPrice(rs.getInt("order_price"));
 		ordersDto.setOrderDate(rs.getDate("order_date"));
 		ordersDto.setOrderStatus(rs.getString("order_status"));
+		ordersDto.setOrderBuyer(rs.getString("order_buyer"));
 		
 		return ordersDto;
 	}

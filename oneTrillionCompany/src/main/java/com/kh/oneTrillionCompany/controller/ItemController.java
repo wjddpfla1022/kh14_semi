@@ -32,11 +32,13 @@ public class ItemController {
 	}
 	
 	@RequestMapping("/list/cate")
-	public String listCate(Model model, @RequestParam(required = false) String keyword) {
-		boolean isSearch = keyword != null;
+	public String listCate(Model model,
+			@RequestParam(required = false) String column, 
+			@RequestParam(required = false) String keyword) {
+		boolean isSearch = column != null && keyword != null;
 
-		List<ItemDto> list = isSearch ? itemDao.selectListByCate(keyword) : itemDao.selectList();
-		model.addAttribute("column", "cate_no");
+		List<ItemDto> list = isSearch ? itemDao.selectListByCate(column, keyword) : itemDao.selectList();
+		model.addAttribute("column", column);
 		model.addAttribute("keyword", keyword);// 검색어
 		model.addAttribute("list", list);// 조회결과
 		return "/WEB-INF/views/item/list.jsp";

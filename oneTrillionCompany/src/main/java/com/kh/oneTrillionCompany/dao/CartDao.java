@@ -20,11 +20,11 @@ public class CartDao {
 	
 	//장바구니 등록
 	public void insert(CartDto cartDto) {
-		String sql = "insert into cart(cart_no, cart_item_no, cart_cnt,"
+		String sql = "insert into cart(cart_no, cart_item_no, cart_buyer, cart_cnt,"
 					+ " item_attacth_no, cart_total_price)"
-					+ " values(cart_no_seq.nextval, cart_item_no_seq.nextval, ?, ?, ?)";
+					+ " values(cart_no_seq.nextval, cart_item_no_seq.nextval, ?, ?, ?, ?)";
 		Object[] data = {
-				cartDto.getCartNo(), cartDto.getCartItemNo(), 
+				cartDto.getCartNo(), cartDto.getCartItemNo(), cartDto.getCartBuyer(), 
 				cartDto.getCartCnt(), cartDto.getItemAttachNo(), 
 				cartDto.getCartTotalPrice()
 		};
@@ -69,6 +69,7 @@ public class CartDao {
 		List<CartDto> list = jdbcTemplate.query(sql, cartMapper, data);
 		return list.isEmpty() ? null : list.get(0);
 	}
+	
 	
 	//장바구니 검색
 	public List<CartDto> selectList(String column, String keyword) {

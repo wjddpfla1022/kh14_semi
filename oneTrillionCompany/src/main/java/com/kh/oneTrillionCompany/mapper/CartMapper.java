@@ -16,6 +16,7 @@ public class CartMapper implements RowMapper<CartDto> {
 		CartDto cartDto = new CartDto();
 		cartDto.setCartNo(rs.getInt("cart_no"));
 		cartDto.setCartItemNo(rs.getInt("cart_item_no"));
+		cartDto.setCartBuyer(rs.getString("cart_buyer"));
 		cartDto.setCartCnt(rs.getInt("cart_cnt"));
 		cartDto.setItemAttachNo(rs.getInt("item_attach_no"));
 		cartDto.setCartTotalPrice(rs.getInt("cart_total_price"));
