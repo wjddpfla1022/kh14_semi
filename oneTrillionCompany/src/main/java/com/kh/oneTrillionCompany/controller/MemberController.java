@@ -12,9 +12,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.kh.oneTrillionCompany.configuration.CustomCertProperties;
 import com.kh.oneTrillionCompany.dao.BlockDao;
+import com.kh.oneTrillionCompany.dao.CertDao;
 import com.kh.oneTrillionCompany.dao.MemberDao;
+import com.kh.oneTrillionCompany.dto.CertDto;
 import com.kh.oneTrillionCompany.dto.MemberDto;
+import com.kh.oneTrillionCompany.exception.TargetNotFoundException;
 
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -26,6 +30,10 @@ public class MemberController {
 	private MemberDao memberDao;
 	@Autowired
 	private BlockDao blockDao;
+	@Autowired
+	private CertDao certDao;
+	@Autowired
+	private CustomCertProperties customCertProperties;
 	
 	@GetMapping("/login")
 	public String login() {
@@ -84,4 +92,39 @@ public class MemberController {
 		model.addAttribute("blockList", blockDao.selectBlockHistory(createdUser));	//차단 내역 확인
 		return "/WEB-INF/views/member/mypage.jsp";
 	}
+	//비밀번호 재설정 페이지
+		@GetMapping("/resetPw")
+		public String resetPw(@ModelAttribute CertDto certDto
+							,@RequestParam String memberId
+							,Model model) {
+			boolean isValid = certDao.check(certDto, customCertProperties.getExpire());
+			//isValid 가 true인 경우만 통과하도록 처리하면 비정상적 접근을 막을 수 있다.
+			if(isValid) {
+				model.addAttribute("certDto", certDto);
+				model.addAttribute("memberId",memberId);
+				return "/WEB-INF/views/member/resetPw.jsp";
+			}
+			else {
+				throw new TargetNotFoundException("올바르지 않은 접근");
+			}
+		}
+		@PostMapping("/resetPw")
+		public String resetPw(@ModelAttribute CertDto certDto,
+							@ModelAttribute MemberDto memberDto) {
+			boolean isValid = certDao.check(certDto, customCertProperties.getExpire());
+			if(!isValid) {
+				throw new TargetNotFoundException("올바르지 않은 접근");
+			}
+			//인증 성공 시 인증번호 삭제
+			//이 페이지는 1회만 접근 가능해짐
+			certDao.delete(certDto.getCertEmail());
+			
+			//비밀번호 변경 처리
+			memberDao.updateMemberPw(memberDto.getMemberId(), memberDto.getMemberPw());
+			return "redirect:resetPwFinish";
+		}
+		@RequestMapping("/resetPwFinish")
+		public String resetPwFinish() {
+			return "/WEB-INF/views/member/resetPwFinish.jsp";
+		}
 }
