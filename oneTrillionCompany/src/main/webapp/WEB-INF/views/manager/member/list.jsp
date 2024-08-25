@@ -26,25 +26,20 @@
 	
 	<!-- 검색 결과 -->
 	<div class="row center">
-		<table class="table table-border table-hover">
-			<thead>
-				<tr>
-					<th>아이디</th>
-					<th>닉네임</th>
-					<th>등급</th>
-					<th>차단 상태</th>
-					<th>가입일</th>
-					<th>관리</th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:choose>
-					<%--검색 결과가 없을 때 --%>
-					<c:when test="${list.isEmpty()}">
-						<h3>검색 결과가 존재하지 않습니다</h3>
-					</c:when>
-					<%--검색 결과가 있을 때 --%>
-					<c:otherwise>
+		<c:choose>
+			<c:when test="${list.size() > 0}">
+				<table class="table table-border table-hover">
+					<thead>
+						<tr>
+							<th>아이디</th>
+							<th>닉네임</th>
+							<th>등급</th>
+							<th>차단 상태</th>
+							<th>가입일</th>
+							<th>관리</th>
+						</tr>
+					</thead>
+					<tbody>
 						<c:forEach var="memberBlockVO" items="${list}">
 							<tr>
 								<td>
@@ -67,10 +62,13 @@
 								</td>
 							</tr>
 						</c:forEach>
-					</c:otherwise>
-				</c:choose>
-			</tbody>
-		</table>
+					</tbody>
+				</table>
+			</c:when>
+			<c:otherwise>
+				<h3>검색 결과가 존재하지 않습니다</h3>
+			</c:otherwise>
+		</c:choose>
 	</div>
 </div>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
