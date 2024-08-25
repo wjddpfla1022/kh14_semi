@@ -139,7 +139,6 @@
             $(".btn-cert-send").click(function(){
                 //작성한 이메일을 불러온다
                 var email = $("[name=memberEmail]").val();
-
                 //step 2 - 작성한 이메일이 없으면 중단
                 if(email.length==0) return;
 
@@ -151,7 +150,6 @@
                         certEmail:email
                     },
                     beforeSend:function(){
-                        console.log("전송 전");
                         $(".email-wrapper").nextAll(".cert-wrapper").remove();
                         $(".btn-cert-send").prop("disabled",true);
                         $(".btn-cert-send").find(".fa-solid")
