@@ -7,7 +7,6 @@ import lombok.Data;
 @Data
 public class ItemDto {
 	private int itemNo; //상품번호
-	private int cateNo; //카테고리번호 왜래키
 	private String itemName; //상품명
 	private int itemPrice; //정가
 	private int itemSalePrice; //판매가

@@ -22,15 +22,15 @@ public class ItemDao {
 	//상품 추가
 	public void insert(ItemDto itemDto) {
 		String sql="insert into item( "
-				+ "item_no, cate_no, item_name,"
+				+ "item_no, item_name, "
 				+ "item_price, item_sale_price, item_date,"
 				+ "item_cnt, item_size, item_cate1, item_cate2, item_cate3"
-				+ ") values(item_seq.nextval, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-		Object[] data= {itemDto.getCateNo(), itemDto.getItemName(), 
-						itemDto.getItemPrice(), itemDto.getItemSalePrice(), 
-						itemDto.getItemDate(), itemDto.getItemCnt(), 
-						itemDto.getItemSize(), itemDto.getItemCate1(), 
-						itemDto.getItemCate2(), itemDto.getItemCate3(), 
+				+ ") values(item_seq.nextval, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		Object[] data= {itemDto.getItemName(), itemDto.getItemPrice(), 
+						itemDto.getItemSalePrice(), itemDto.getItemDate(), 
+						itemDto.getItemCnt(), itemDto.getItemSize(), 
+						itemDto.getItemCate1(), itemDto.getItemCate2(), 
+						itemDto.getItemCate3() 
 						};
 		jdbcTemplate.update(sql, data);
 	}
@@ -68,12 +68,14 @@ public class ItemDao {
 	
 	//상품 수정
 	public boolean update(ItemDto itemDto) {
-		String sql="update item set cate_no=?, item_name=?, item_price=?,"
-				+ "item_sale_price=?, item_date=?, item_cnt=?, item_size=? "
+		String sql="update item set item_name=?, item_price=?,"
+				+ "item_sale_price=?, item_date=?, item_cnt=?, item_size=?, item_cate1=?,"
+				+ "item_cate2=?, item_cate3=? "
 				+ "where item_no=?";
-		Object[] data= {itemDto.getCateNo(), itemDto.getItemName(), itemDto.getItemPrice(),
+		Object[] data= {itemDto.getItemName(), itemDto.getItemPrice(),
 						itemDto.getItemSalePrice(), itemDto.getItemDate(), itemDto.getItemCnt(),
-						itemDto.getItemSize(),itemDto.getCateNo()};
+						itemDto.getItemSize(), itemDto.getItemCate1(), itemDto.getItemCate2(),
+						itemDto.getItemCate3(), itemDto.getItemNo()};
 		return jdbcTemplate.update(sql, data)>0;
 	}
 	//상품삭제
