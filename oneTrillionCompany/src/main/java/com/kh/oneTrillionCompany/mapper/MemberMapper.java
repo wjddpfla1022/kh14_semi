@@ -29,6 +29,7 @@ public MemberDto mapRow(ResultSet rs, int rowNum) throws SQLException {
 	memberDto.setMemberAddress2(rs.getString("member_address2"));
 	memberDto.setMemberHeight(rs.getInt("member_height"));
 	memberDto.setMemberWeight(rs.getInt("member_weight"));
+	memberDto.setMemberContact(rs.getString("member_contact"));
 	
 	return memberDto;
 }

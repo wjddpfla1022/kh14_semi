@@ -5,7 +5,6 @@ import lombok.Data;
 @Data
 public class OrderDetailDto {
 	private int orderDetailNo;
-	private int orderDetailItemNo;
 	private int orderDetailOrderNo;
 	private int orderDetailPrice;
 	private int orderDetailCnt;

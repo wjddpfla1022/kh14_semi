@@ -6,6 +6,7 @@ import lombok.Data;
 public class CartDto {
 	private int cartNo;
 	private int cartItemNo;
+	private String cartBuyer;
 	private int cartCnt;
 	private int itemAttachNo;
 	private int cartTotalPrice;
