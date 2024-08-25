@@ -5,13 +5,14 @@ import java.io.IOException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 
+import com.kh.oneTrillionCompany.dao.BlockDao;
 import com.kh.oneTrillionCompany.dao.MemberDao;
 import com.kh.oneTrillionCompany.dto.MemberDto;
 
@@ -23,6 +24,8 @@ import jakarta.servlet.http.HttpSession;
 public class MemberController {
 	@Autowired
 	private MemberDao memberDao;
+	@Autowired
+	private BlockDao blockDao;
 	
 	@GetMapping("/login")
 	public String login() {
@@ -72,5 +75,13 @@ public class MemberController {
 		session.removeAttribute("createdLevel");
 		return "redirect:/";
 	}
-	
+	//마이페이지 구현
+	@RequestMapping("/mypage")
+	public String mypage(HttpSession session, Model model) {
+		String createdUser = (String) session.getAttribute("createdUser");
+		MemberDto memberDto = memberDao.selectOne(createdUser);
+		model.addAttribute("memberDto", memberDto);
+		model.addAttribute("blockList", blockDao.selectBlockHistory(createdUser));	//차단 내역 확인
+		return "/WEB-INF/views/member/mypage.jsp";
+	}
 }
