@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.oneTrillionCompany.dto.QnaDto;
 import com.kh.oneTrillionCompany.mapper.QnaMapper;
+import com.kh.oneTrillionCompany.vo.PageVO;
 
 @Repository
 public class QnaDao {
@@ -16,6 +17,12 @@ public class QnaDao {
 	
 	@Autowired
 	private QnaMapper qnaMapper;
+	
+	//시퀀스 생성
+	public int sequence() {
+		String sql = "select qna_seq.nextval from dual";
+		return jdbcTemplate.queryForObject(sql, int.class);
+	}
 	
 	//문의 등록
 	public void insert(QnaDto qnaDto) {
@@ -68,11 +75,57 @@ public class QnaDao {
 		Object[] data = {qnaWriter};
 		return jdbcTemplate.query(sql, qnaMapper, data);
 	}
+
+	//페이징객체를 이용한 목록 및 검색
+	public List<QnaDto> selectListByPaging(PageVO pageVO) {
+		if(pageVO.isSearch()) {//검색이라면
+			String sql = "select * from("
+						+ "select rownum rn, TMP.* from("
+							+ "select qna_no, qna_writer, qna_title, qna_content,"
+							+ " qna_time, qna_reply, qna_view from qna where instr("+pageVO.getColumn()+", ?) > 0 "
+						+ ") TMP"
+					+ ") where rn between ? and ?";
+			Object[] data= {pageVO.getKeyword(), pageVO.getBeginRow(), pageVO.getEndRow()};
+			return jdbcTemplate.query(sql, qnaMapper, data);			
+		}
+		else {
+			String sql="select * from("
+						+ "select rownum rn, TMP.* from("
+							+ "select qna_no, qna_writer, qna_title, qna_content,"
+							+ " qna_time, qna_reply, qna_view from qna order by qna_no desc"
+						+ ") TMP"
+					+ ") where rn between ? and ?";
+			Object[] data= {pageVO.getBeginRow(), pageVO.getEndRow()};
+			return jdbcTemplate.query(sql, qnaMapper, data);
+		}
+	}
+
+	public int countByPaging(PageVO pageVO) {
+		if(pageVO.isSearch()) {//검색카운트
+			String sql = "select count(*) from qna where instr("+pageVO.getColumn()+", ?) > 0";
+			Object[] data = {pageVO.getKeyword()};
+			return jdbcTemplate.queryForObject(sql, int.class, data);
+		}
+		else {//목록 카운트
+			String sql = "select count(*) from qna";
+			return jdbcTemplate.queryForObject(sql, int.class);
+		}
+	}
+
+	//댓글 수 최신화
+	public boolean updateQnaReply(int qnaNo) {
+		String sql = "update qna set qna_reply = "
+				+ "(select count(*) from reply where reply_origin = ?)"
+				+ " where qna_seq = ?";
+		Object[] data = {qnaNo, qnaNo};
+		return jdbcTemplate.update(sql, data) > 0;
+	}
 	
-	//시퀀스 생성
-	public int sequence() {
-		String sql = "select qna_seq.nextval from dual";
-		return jdbcTemplate.queryForObject(sql, int.class);
+	//조회수 증가
+	public boolean updateQnaView(int qnaNo) {
+		String sql="update qna set qna_view = qna_view+1 where qna_no = ?";
+		Object[] data= {qnaNo};
+		return jdbcTemplate.update(sql, data) > 0;
 	}
 	
 }

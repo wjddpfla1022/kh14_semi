@@ -47,6 +47,7 @@
             // 현재 버튼이 속한 행의 수량 및 재고 값 가져오기
             var row = $(this).closest('tr');
             var $cartCntInput = row.find("[name=cartCnt]");
+
             var cartCntValue = parseInt($cartCntInput.val());
             var itemCntValue = parseInt(row.find(".itemCnt-data").text());
 
@@ -55,18 +56,22 @@
                 if (cartCntValue < itemCntValue) {
                     cartCntValue += 1;
                     $cartCntInput.val(cartCntValue);
+
                 } else {
                     alert("최대 수량에 도달했습니다");
                 }
             } else if ($(this).hasClass('btn-down')) {
                 if (cartCnt > 1) {
                     cartCnt -= 1;
+
                     $cartCntInput.val(cartCntValue);
+
                 } else {
                     alert("최소 수량에 도달했습니다");
                 }
             }
         });
+
         //수량 서버에 업데이트 
         $.(ajax({
         	url: "rest/cert/update",
@@ -82,6 +87,7 @@
         		console.log('장바구니 업데이트 실패');
         	}
         });
+
 	});
 </script>
 <div class="container w-1200 my-50">

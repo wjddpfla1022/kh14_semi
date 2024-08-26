@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -31,6 +31,7 @@ public class CartController {
 	
 	
 	//장바구니 목록
+ 
 	@RequestMapping("/list")
 	public String list(Model model, HttpSession session) {
 			//로그인한 사용자 조회
@@ -45,7 +46,10 @@ public class CartController {
 			model.addAttribute("cartTotalPrice", (cartTotalPrice != null ? cartTotalPrice : 0));
 			
 			return "/WEB-INF/views/cart/list.jsp"; 
+      
+
 	}
+
 
 	//장바구니 삭제
 	@RequestMapping("/delete")
@@ -60,6 +64,21 @@ public class CartController {
 		}
 		return "redirect:list";
 	}
+	
+//	//1. 삭제 와 증가 
+//	@RequestMapping("update")
+//	//2. 만약에 cartNo이 날라온다면 delete 해버린다
+//	//3. 반대로 버튼을 눌러 수량이 증가된다면 디비에 업데이트 시키자
+//	public String udpateCart(@RequestParam(required = false) int cartNo) {
+//		try {//파일을 지우기
+//			int itemAttachmentNo = cartDao.findImage(cartNo);
+//			attachService.delete(itemAttachmentNo);
+//		}
+//		catch(Exception e) {}//문제가 생겨도 지우기
+//		finally {
+//			cartDao.delete(cartNo);
+//		}
+//	}
 	
 	//장바구니 여러개 삭제
 	@PostMapping("/deleteList")

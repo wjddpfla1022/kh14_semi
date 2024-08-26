@@ -40,7 +40,7 @@ public class CartDao {
 		return jdbcTemplate.update(sql, data) > 0;
 	}
 	
-	//장바구니 전체삭제
+	//장바구니 전체삭제//
 	public void deleteAll() {
 		String sql = "delete from cart";
 		jdbcTemplate.update(sql);
@@ -96,7 +96,7 @@ public class CartDao {
 							cartDto.getCartBuyer() };
 		return jdbcTemplate.update(sql,data) > 0;
 	}
-	
+
 	//장바구니 총 금액
 	public Integer sumCartTotalPrice(String memberId) {
 		
@@ -105,6 +105,18 @@ public class CartDao {
 				+ "where CART_BUYER = ?";
 		Object[] data = {memberId};
 		return jdbcTemplate.queryForObject(sql, Integer.class, data);
+
+//	//재고 수량 찾기
+//	public Integer findItemCnt(int cartNo) {
+//		try {
+//			String sql = "select item_cnt from item where item_no = ?";
+//			Object[] data = {cartNo};
+//		return jdbcTemplate.queryForObject(sql, Integer.class, data);
+//		} catch (EmptyResultDataAccessException e) {
+//			return null;
+//		}
+//	}
+
 	}
 	
 	
