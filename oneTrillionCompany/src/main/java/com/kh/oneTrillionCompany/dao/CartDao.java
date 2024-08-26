@@ -70,7 +70,6 @@ public class CartDao {
 		return list.isEmpty() ? null : list.get(0);
 	}
 	
-	
 	//장바구니 검색
 	public List<CartDto> selectList(String column, String keyword) {
 		String sql = "select * from cart "
@@ -86,5 +85,11 @@ public class CartDao {
 		Object[] data = {cartNo};
 		return jdbcTemplate.queryForObject(sql, Integer.class, data);
 	}
-
+	
+	//장바구니 전체 금액 합계
+	public Integer sumCartTotalPrice() {
+		String sql = "select sum(cart_total_price) from cart";
+		return jdbcTemplate.queryForObject(sql, Integer.class);
+	}
+	
 }

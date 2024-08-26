@@ -29,11 +29,16 @@ public class CartController {
 	//장바구니 목록
 	@RequestMapping("/list")
 	public String list(Model model) {
+		//장바구니 목록 
 		model.addAttribute("cartList", cartDao.selectList());
 		model.addAttribute("itemList", itemDao.selectList());
+		
+		//장바구니 주문 총 합계, 장바구니 테이블이 비어 있으면 null 들어가므로 처리
+		Integer cartTotalPrice = cartDao.sumCartTotalPrice();
+		model.addAttribute("cartTotalPrice", (cartTotalPrice != null ? cartTotalPrice : 0));
 		return "/WEB-INF/views/cart/list.jsp"; 
 	}
-	
+
 	//장바구니 삭제
 	@RequestMapping("/delete")
 	public String delete(@RequestParam int cartNo) {

@@ -69,7 +69,7 @@
 
             $(".member_block").click(function(){
             	memberId = $('#idValue').val();   //클릭된 버튼의 memberId 값을 가져옴
-            	console.log(memberId);
+            	//console.log(memberId);
                 $("#blockModal").show();
                 $("#modalMessage").text(memberId + "을(를) 차단하시겠습니까?"); //모달 메시지 설정
             });

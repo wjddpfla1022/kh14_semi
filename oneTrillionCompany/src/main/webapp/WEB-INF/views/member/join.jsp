@@ -139,9 +139,12 @@
             $(".btn-cert-send").click(function(){
                 //작성한 이메일을 불러온다
                 var email = $("[name=memberEmail]").val();
-                //step 2 - 작성한 이메일이 없으면 중단
-                if(email.length==0) return;
 
+
+                //step 2 - 작성한 이메일이 정규식에 맞지 않으면 중단
+                var regex=/^[a-z][a-z0-9\\-_]{4,19}@[a-z0-9]{2,40}(\.co\.kr|\.net|\.com|\.org|\.dev)$/;
+                if(!regex.test(email)) return;
+				
                 //step 3 - 서버로 이메일 발송을 요청(ajax)
                 $.ajax({
                     url:"/rest/cert/send",

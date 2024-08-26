@@ -39,7 +39,7 @@ public class CertRestController {
 		int duration = customCertProperties.getExpire();
 		boolean result = certDao.check(certDto, duration);
 		if(result) {
-			
+			certDao.delete(certDto.getCertEmail());
 		}
 		return result;
 	}

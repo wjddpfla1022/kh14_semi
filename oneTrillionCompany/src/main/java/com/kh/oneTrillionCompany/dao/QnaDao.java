@@ -22,12 +22,10 @@ public class QnaDao {
 		String sql = "insert into qna("
 				+ "qna_no, qna_writer, qna_title, "
 				+ "qna_content, qna_time"
-				+ ") values(qna_no_seq.nextval, ?, ?, ?, ?)";
+				+ ") values(?, ?, ?, ?, sysdate)";
 		Object[] data = {
 				qnaDto.getQnaNo(), qnaDto.getQnaWriter(),
-				qnaDto.getQnaTitle(), qnaDto.getQnaContent(),
-				qnaDto.getQnaTime()
-		};
+				qnaDto.getQnaTitle(), qnaDto.getQnaContent()};
 		jdbcTemplate.update(sql, data);
 	}
 	
@@ -70,4 +68,11 @@ public class QnaDao {
 		Object[] data = {qnaWriter};
 		return jdbcTemplate.query(sql, qnaMapper, data);
 	}
+	
+	//시퀀스 생성
+	public int sequence() {
+		String sql = "select qna_seq.nextval from dual";
+		return jdbcTemplate.queryForObject(sql, int.class);
+	}
+	
 }
