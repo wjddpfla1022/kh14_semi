@@ -116,7 +116,7 @@ public class QnaDao {
 	public boolean updateQnaReply(int qnaNo) {
 		String sql = "update qna set qna_reply = "
 				+ "(select count(*) from reply where reply_origin = ?)"
-				+ " where qna_seq = ?";
+				+ " where qna_no=?";
 		Object[] data = {qnaNo, qnaNo};
 		return jdbcTemplate.update(sql, data) > 0;
 	}
