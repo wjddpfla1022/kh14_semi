@@ -17,7 +17,7 @@ import com.kh.oneTrillionCompany.vo.PageVO;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
-@RequestMapping("/service/qna")
+@RequestMapping("/qna")
 public class QnaController {
 	
 	@Autowired
@@ -43,7 +43,7 @@ public class QnaController {
 		//return "redirect:list?qnaNo="+seq;
 		return "redirect:list";
 	}
-	@RequestMapping("list")
+	@RequestMapping("/list")
 	public String list(@ModelAttribute("pageVO") PageVO pageVO, Model model) {
 		model.addAttribute("qnaList", qnaDao.selectListByPaging(pageVO));
 		int count = qnaDao.countByPaging(pageVO);
