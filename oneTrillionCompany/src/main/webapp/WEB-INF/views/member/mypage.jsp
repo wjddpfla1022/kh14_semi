@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
@@ -26,6 +24,10 @@
 		<tr>
 			<th>이메일</th>
 			<td>${memberDto.memberEmail}</td>
+		</tr>
+		<tr>
+			<th>생년월일</th>
+			<td>${memberDto.memberBirth}</td>
 		</tr>
 		<tr>
 				<td>주소</td>
@@ -62,8 +64,8 @@
 </div>
 				<!-- 개인정보 변경 버튼 -->
 			<div class="flex-box flex-core mt-20 mb-30">
-				<a href="/member/resetPw?memberId=${memberDto.memberId}" class = "btn change-password" style="margin-right:5px;">비밀번호 변경하기</a>
-				<a href="#" class = "btn change-info" style="margin-right:5px;">개인정보 변경하기</a>
+				<a href="resetPw?memberId=${memberDto.memberId}" class = "btn change-password" style="margin-right:5px;">비밀번호 변경하기</a>
+				<a href="change" class = "btn change-info" style="margin-right:5px;">개인정보 변경하기</a>
 				<a href="#" class = "btn btn-negative member-delete">회원 탈퇴</a>
 			</div>
 
@@ -102,7 +104,8 @@
 				</c:choose>
 			</div>
 		</div>
-
+		
+<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
 
 	
 

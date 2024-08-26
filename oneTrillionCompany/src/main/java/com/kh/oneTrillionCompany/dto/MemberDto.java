@@ -9,6 +9,7 @@ public class MemberDto {
 	private String memberPw;
 	private String memberName;
 	private String memberNickname;
+	private String memberBirth;
 	private String memberEmail;
 	private String memberBlock;
 	private String memberRank;
