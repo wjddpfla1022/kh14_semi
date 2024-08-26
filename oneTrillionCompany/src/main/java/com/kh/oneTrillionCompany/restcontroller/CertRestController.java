@@ -1,5 +1,7 @@
 package com.kh.oneTrillionCompany.restcontroller;
 
+import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,10 +29,9 @@ public class CertRestController {
 	
 	//사용자가 요구하는 이메일로 인증메일을 보내는 기능
 	@PostMapping("/send")
-	public void send(@RequestParam String certEmail) throws MessagingException {
+	public void send(@RequestParam String certEmail) throws MessagingException, IOException {
 		int size=6;
 		emailService.sendCert(certEmail, size);
-//		emailService.sendCert2(certEmail, size);
 	}
 	//사용자가 입력한 인증번호가 유효한지를 판정하는 기능
 	@PostMapping("/check")

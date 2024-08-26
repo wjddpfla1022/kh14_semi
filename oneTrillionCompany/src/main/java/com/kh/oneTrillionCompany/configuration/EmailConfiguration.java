@@ -12,7 +12,6 @@ public class EmailConfiguration {
 //	수동으로 객체를 등록하기 위해서는 @Bean 을 사용한다
 	@Bean
 	public JavaMailSender sender() {//김밥 (업캐스팅)
-//	public JavaMailSenderImpl sender() {//참치김밥
 		JavaMailSenderImpl sender = new JavaMailSenderImpl();
 		
 		sender.setHost("smtp.gmail.com");//이용할 업체의 호스트정보

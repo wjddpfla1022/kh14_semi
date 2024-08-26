@@ -34,16 +34,23 @@ public class EmailService {
 	@Autowired
 	private MemberDao memberDao;
 	//회원가입시 임시 이메일 인증 코드 발송
-	public boolean sendCert(String email, int size) throws MessagingException {
+	public boolean sendCert(String email, int size) throws MessagingException, IOException {
 		String value=randomService.generateNumber(size);
 		
-		//메세지 생성
+		//메세지 생성 - 마임 메세지 객체
 		MimeMessage message = sender.createMimeMessage();
 		MimeMessageHelper helper = new MimeMessageHelper(message, false, "UTF-8");
+		helper.setTo(email);
+		helper.setSubject("[일조쇼핑몰] 인증번호 안내");
 		
 		
 		ClassPathResource resource = new ClassPathResource("templates/cert.html");
+		File target = resource.getFile();
+		Document document = Jsoup.parse(target, "UTF-8");
+		Element number = document.getElementById("cert-number");
+		number.text(value);
 		
+		helper.setText(document.toString(), true);
 		
 		sender.send(message);
 		

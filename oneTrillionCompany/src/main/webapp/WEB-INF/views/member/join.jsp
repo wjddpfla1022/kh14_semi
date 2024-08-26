@@ -140,6 +140,7 @@
                 //작성한 이메일을 불러온다
                 var email = $("[name=memberEmail]").val();
 
+
                 //step 2 - 작성한 이메일이 정규식에 맞지 않으면 중단
                 var regex=/^[a-z][a-z0-9\\-_]{4,19}@[a-z0-9]{2,40}(\.co\.kr|\.net|\.com|\.org|\.dev)$/;
                 if(!regex.test(email)) return;
@@ -152,7 +153,6 @@
                         certEmail:email
                     },
                     beforeSend:function(){
-                        console.log("전송 전");
                         $(".email-wrapper").nextAll(".cert-wrapper").remove();
                         $(".btn-cert-send").prop("disabled",true);
                         $(".btn-cert-send").find(".fa-solid")
