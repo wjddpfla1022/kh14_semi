@@ -33,9 +33,13 @@
                 memberTelValid:true,//선택항목
                 memberBirthValid:true,//선택항목
                 memberAddressValid:true,//선택항목
-                ok:function(){return this.memberIdValid&&this.memberIdCheckValid&&this.memberPwValid&&this.memberPwCheck&&
-                    this.memberNicknameValid&&this.memberEmailValid&&this.memberTelValid&&this.memberNameValid&&
-                    this.memberBirthValid&&this.memberAddressValid&&this.memberEmailCheckValid
+                ok:function(){
+                	return this.memberIdValid&&this.memberIdCheckValid
+                		&& this.memberPwValid&&this.memberPwCheck
+                		&& this.memberNicknameValid&&this.memberEmailValid
+                		&& this.memberTelValid&&this.memberNameValid
+                		&& this.memberBirthValid&&this.memberAddressValid
+                		&& this.memberEmailCheckValid&&this.memberNicknameCheckValid;
                 }
             };
             $("[name=memberId]").blur(function(){
@@ -53,7 +57,6 @@
                         data:{memberId:target},
                         success: function(response){
                             status.memberIdCheckValid=response;
-                            console.log("중복 확인 결과 : ",status.memberIdCheckValid);
                             if(status.memberIdCheckValid){
                                 $("[name=memberId]").addClass("success")
                             }
@@ -140,9 +143,11 @@
                 //작성한 이메일을 불러온다
                 var email = $("[name=memberEmail]").val();
 
-                //step 2 - 작성한 이메일이 없으면 중단
-                if(email.length==0) return;
 
+                //step 2 - 작성한 이메일이 정규식에 맞지 않으면 중단
+                var regex=/^[a-z][a-z0-9\\-_]{4,19}@[a-z0-9]{2,40}(\.co\.kr|\.net|\.com|\.org|\.dev)$/;
+                if(!regex.test(email)) return;
+				
                 //step 3 - 서버로 이메일 발송을 요청(ajax)
                 $.ajax({
                     url:"/rest/cert/send",
@@ -151,7 +156,6 @@
                         certEmail:email
                     },
                     beforeSend:function(){
-                        console.log("전송 전");
                         $(".email-wrapper").nextAll(".cert-wrapper").remove();
                         $(".btn-cert-send").prop("disabled",true);
                         $(".btn-cert-send").find(".fa-solid")
@@ -178,6 +182,46 @@
                     }
                 })
             });
+          	//이메일 인증번호 일치 확인
+          	$(document).on("click",".btn-cert-check",function(){
+          		var currentEmail = $("[name=memberEmail]").val();
+        	    if(certEmail != currentEmail) {
+        	        window.alert("이메일을 수정하여 다시 인증해야 합니다");
+        	        $(".cert-wrapper").remove();
+        	        return;
+        	    }
+        	
+        	    var certNumber = $(".cert-input").val();
+        	    var regex = /^[0-9]{6}$/;
+        	    if(regex.test(certNumber) == false) {//인증번호가 형식에 맞지 않으면
+        	        return;//진행 중지
+        	    }
+        	
+        	    //서버에 검사를 요청
+        	    $.ajax({
+        	        url:"/rest/cert/check",
+        	        method:"post",
+        	        data: {
+        	            certEmail : certEmail,
+        	            certNumber : certNumber,
+        	        },
+        	        success:function(response) {
+        	            if(response == true) {//인증 성공 - 화면을 제거 + 인증버튼 제거
+        	                $(".cert-wrapper").remove();
+        	                //(선택) 이메일 잠금처리 및 보내기 버튼 삭제
+        	                $("[name=memberEmail]").prop("readonly", true);
+        	                $(".btn-cert-send").remove();
+        	                //상태객체 값을 갱신
+        	                status.memberEmailCheckValid = true;
+        	            }
+        	            else {//인증 실패 - 번호가 틀린거니 화면을 유지시킨다
+        	                $(".cert-input").removeClass("success fail").addClass("fail");
+        	                //상태객체 값을 갱신
+        	                status.memberEmailCheckValid = false;
+        	            }
+        	        },
+        	    });
+        	});
             $("[name=telInput]").blur(function(){
                 var target=$(this).val();
                 var regex=/^010[1-9][0-9]{7}$/;
@@ -215,8 +259,16 @@
                     $("[name=memberAddress1],[name=memberAddress2],[name=memberPost]").addClass("fail");
                 }
             });
-            $(".check-form").submit(function(){
-                $("[name],.pwInputCheck").trigger();
+            $(".btn-submit").click(function(){
+                $("[name],.pwInput2").trigger("blur");
+                console.log(status.ok());
+	            if(!status.ok()){
+	            	event.preventDefault();
+	            	$(".fail-feedback").show();
+	            }
+	            else{
+	            	$("form").submit();
+	            }
                 return status.ok();
             });
             //부가기능
@@ -225,8 +277,8 @@
                 $("[name=memberPw],.pwInput2").attr("type",checked?"text":"password");
             });
             $(".fa-eye").click(function(){
-               var checked=$(this).hasClass("fa-eye");
-               if(checked){
+               var isChecked=$(this).hasClass("fa-eye");
+               if(isChecked){
                 $(this).removeClass("fa-eye").addClass("fa-eye-slash");
                }
                else{
@@ -297,7 +349,7 @@
      </script>
 </head>
 <body>
-    <form class="check-form" action="#" method="post" autocomplete="off" enctype="multipart/form-data">
+    <form class="check-form" action="#" method="post" autocomplete="off">
         <div class="container w-400 my-50">
         <div class="row center">
             <h1>회원가입</h1>
@@ -332,7 +384,7 @@
                     </div>
                     <div class="row left">
                         <label class="title">비밀번호 확인 <i class="fa-solid fa-asterisk red"></i></label>
-                        <input class="field w-100  pwInput2" type="password" placeholder="같은 비밀번호를 입력">
+                        <input class="field w-100  pwInput2" type="password" placeholder="비밀번호 재입력">
                         <div class="success-feedback">비밀번호가 일치합니다</div>
                         <div class="fail-feedback">비밀번호가 일치하지 않습니다</div>
                     </div>
@@ -399,8 +451,8 @@
                     	<label class="title">주소</label>
                         <div class="row">
                             <input type="text" class="field w-33" name="memberPost" placeholder="우편번호" readonly>
-                            <button class="btn btn-neutral btn-find-address"><i class="fa-solid fa-magnifying-glass"></i></button>
-                            <button class="btn btn-negative btn-clear-address">
+                            <button type="button" class="btn btn-neutral btn-find-address"><i class="fa-solid fa-magnifying-glass"></i></button>
+                            <button type="button" class="btn btn-negative btn-clear-address">
                                 <i class="fa-solid fa-xmark"></i>
                             </button>
                         </div>
@@ -432,8 +484,9 @@
 <!--                 </div> -->
             </div>
         <div class="row flex-core">
-            <button type="submit" class="btn btn-positive btn-submit w-100">가입하기</button> 
+            <button type="button" class="btn btn-positive btn-submit w-100">가입하기</button> 
             <div class="fail-feedback">모든 필수 항목을 입력해주세요</div>
+        </div>
         </div>
         </div>
 <!--         </div> 멀티페이지 영역--> 
