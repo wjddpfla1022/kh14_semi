@@ -12,8 +12,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.oneTrillionCompany.dao.CartDao;
 import com.kh.oneTrillionCompany.dao.ItemDao;
-import com.kh.oneTrillionCompany.dto.CartDto;
+
+import com.kh.oneTrillionCompany.dao.OrdersDao;
+
 import com.kh.oneTrillionCompany.service.AttachService;
+import com.kh.oneTrillionCompany.vo.CartVO;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -29,7 +32,8 @@ public class CartController {
 	@Autowired
 	private AttachService attachService;
 	
-	
+	@Autowired
+	private OrdersDao ordersDao;
 	//장바구니 목록
  
 	@RequestMapping("/list")
@@ -48,6 +52,11 @@ public class CartController {
 			return "/WEB-INF/views/cart/list.jsp"; 
       
 
+	}
+	@PostMapping("/list") //장바구니-> 주문창으로 갈때 orders 테이블에 등록f
+	public String list(@RequestParam List<CartVO>list) { //list.jsp에서 List<CartVO>로 값을 받아서 등록
+		ordersDao.insert(list);
+		return "redirect:/order/pay";
 	}
 
 
