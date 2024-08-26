@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.oneTrillionCompany.dto.QnaDto;
 import com.kh.oneTrillionCompany.mapper.QnaMapper;
+import com.kh.oneTrillionCompany.vo.PageVO;
 
 @Repository
 public class QnaDao {
@@ -73,6 +74,42 @@ public class QnaDao {
 	public int sequence() {
 		String sql = "select qna_seq.nextval from dual";
 		return jdbcTemplate.queryForObject(sql, int.class);
+	}
+
+	//페이징객체를 이용한 목록 및 검색
+	public List<QnaDto> selectListByPaging(PageVO pageVO) {
+		if(pageVO.isSearch()) {//검색이라면
+			String sql = "select * from("
+						+ "select rownum rn, TMP.* from("
+							+ "select qna_no, qna_writer, qna_title, qna_content,"
+							+ " qna_time from qna where instr("+pageVO.getColumn()+", ?) > 0 "
+						+ ") TMP"
+					+ ") where rn between ? and ?";
+			Object[] data= {pageVO.getKeyword(), pageVO.getBeginRow(), pageVO.getEndRow()};
+			return jdbcTemplate.query(sql, qnaMapper, data);			
+		}
+		else {
+			String sql="select * from("
+						+ "select rownum rn, TMP.* from("
+							+ "select qna_no, qna_writer, qna_title, qna_content,"
+							+ " qna_time from qna order by qna_no desc"
+						+ ") TMP"
+					+ ") where rn between ? and ?";
+			Object[] data= {pageVO.getBeginRow(), pageVO.getEndRow()};
+			return jdbcTemplate.query(sql, qnaMapper, data);
+		}
+	}
+
+	public int countByPaging(PageVO pageVO) {
+		if(pageVO.isSearch()) {//검색카운트
+			String sql = "select count(*) from qna where instr("+pageVO.getColumn()+", ?) > 0";
+			Object[] data = {pageVO.getKeyword()};
+			return jdbcTemplate.queryForObject(sql, int.class, data);
+		}
+		else {//목록 카운트
+			String sql = "select count(*) from qna";
+			return jdbcTemplate.queryForObject(sql, int.class);
+		}
 	}
 	
 }
