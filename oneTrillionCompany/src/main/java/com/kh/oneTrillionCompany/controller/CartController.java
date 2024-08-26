@@ -41,7 +41,7 @@ public class CartController {
 		model.addAttribute("cartTotalPrice", (cartTotalPrice != null ? cartTotalPrice : 0));
 		return "/WEB-INF/views/cart/list.jsp"; 
 	}
-	@PostMapping("/list") //장바구니-> 주문창으로 갈때 orders 테이블에 등록
+	@PostMapping("/list") //장바구니-> 주문창으로 갈때 orders 테이블에 등록f
 	public String list(@RequestParam List<CartVO>list) { //list.jsp에서 List<CartVO>로 값을 받아서 등록
 		ordersDao.insert(list);
 		return "redirect:/order/pay";
