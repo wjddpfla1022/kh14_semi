@@ -7,18 +7,28 @@
 		<h1>상품  Q&A</h1>
 	</div>
 	<hr>
+	
+<style>
+	.qna-title {
+		text-decoration:none;
+		color : gray;
+	}
+	.qna-title:hover	{
+		color : black;
+	}
+</style>
 
 <div class="container w-1000 my-30">
 	<%-- 비회원일 때와 회원일 때 다르게 보이도록 처리  --%>
 	<c:choose>
 		<c:when test="${sessionScope.createdUser != null}">
 			<div class="row right">
-				<h2><a href="write" class="btn regi-qna" style=text-decoration:none>문의 등록</a></h2>
+				<a href="write" class="btn regi-qna" style=text-decoration:none>문의 등록</a>
 			</div>	
 		</c:when>
 		<c:otherwise>
 			<div class="row right">
-				<h2><a title="로그인 후 이용하실 수 있습니다" class="btn regi-qna">문의 등록</a></h2>
+				<a title="로그인 후 이용하실 수 있습니다" class="btn regi-qna">문의 등록</a>
 			</div>
 		</c:otherwise>
 	</c:choose>
@@ -39,7 +49,11 @@
 							<td>${qnaDto.qnaNo}</td>
 							<td>${qnaDto.qnaTime}</td>
 							<td>
-								<a href="detail?qnaNo=${qnaDto.qnaNo}" style=text-decoration:none>${qnaDto.qnaTitle}</a>
+								<a href="detail?qnaNo=${qnaDto.qnaNo}" class="qna-title">${qnaDto.qnaTitle}</a>
+								<!--댓글 숫자 출력(0보다 크면) -->
+								<c:if test="${qnaDto.qnaReply >0}">
+									[${qnaDto.qnaReply}]
+								</c:if>
 							</td>
 <!-- 							<td>							 -->
 <%-- 								<c:choose> --%>
