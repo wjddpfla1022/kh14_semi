@@ -57,7 +57,7 @@
 					textInput.style.display = 'inline-block';
 					textInput.setAttribute('name', 'keyword');
 					categorySelect.style.display = 'none';
-				} else if (column === 'cate_no') {
+				} else if (column === 'item_cate1') {
 					textInput.style.display = 'none';
 					categorySelect.setAttribute('name', 'keyword');
 					categorySelect.style.display = 'inline-block';
