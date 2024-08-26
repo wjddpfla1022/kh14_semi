@@ -3,10 +3,12 @@ package com.kh.oneTrillionCompany.dao;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.oneTrillionCompany.dto.CartDto;
+import com.kh.oneTrillionCompany.dto.ItemDto;
 import com.kh.oneTrillionCompany.mapper.CartMapper;
 
 @Repository
@@ -57,9 +59,10 @@ public class CartDao {
 	}
 	
 	//장바구니 목록
-	public List<CartDto> selectList() {
-		String sql = "select * from cart order by cart_no asc";
-		return jdbcTemplate.query(sql, cartMapper);		
+	public List<CartDto> selectList(String memberId) {
+		String sql = "select * from cart where cart_buyer = ? order by cart_no asc";
+		Object[] data = {memberId};
+		return jdbcTemplate.query(sql, cartMapper, data);		
 	}
 	
 	//장바구니 상세 정보
@@ -85,11 +88,24 @@ public class CartDao {
 		Object[] data = {cartNo};
 		return jdbcTemplate.queryForObject(sql, Integer.class, data);
 	}
-	
-	//장바구니 전체 금액 합계
-	public Integer sumCartTotalPrice() {
-		String sql = "select sum(cart_total_price) from cart";
-		return jdbcTemplate.queryForObject(sql, Integer.class);
+		
+	//장바구니 수량 업데이트
+	public boolean updateCartCnt(CartDto cartDto) {
+		String sql = "update cart set cart_cnt=? where cart_no=? and cart_buyer=?";
+		Object[] data = { cartDto.getCartCnt(), cartDto.getCartNo(), 
+							cartDto.getCartBuyer() };
+		return jdbcTemplate.update(sql,data) > 0;
 	}
+	
+	//장바구니 총 금액
+	public Integer sumCartTotalPrice(String memberId) {
+		
+		String sql = "select sum(cart_cnt*item_price) from "
+				+ "cart join item on CART_ITEM_NO = item_no "
+				+ "where CART_BUYER = ?";
+		Object[] data = {memberId};
+		return jdbcTemplate.queryForObject(sql, Integer.class, data);
+	}
+	
 	
 }

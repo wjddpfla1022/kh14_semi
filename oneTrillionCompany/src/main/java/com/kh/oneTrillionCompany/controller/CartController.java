@@ -5,13 +5,17 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.oneTrillionCompany.dao.CartDao;
 import com.kh.oneTrillionCompany.dao.ItemDao;
+import com.kh.oneTrillionCompany.dto.CartDto;
 import com.kh.oneTrillionCompany.service.AttachService;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/cart")
@@ -28,15 +32,19 @@ public class CartController {
 	
 	//장바구니 목록
 	@RequestMapping("/list")
-	public String list(Model model) {
-		//장바구니 목록 
-		model.addAttribute("cartList", cartDao.selectList());
-		model.addAttribute("itemList", itemDao.selectList());
-		
-		//장바구니 주문 총 합계, 장바구니 테이블이 비어 있으면 null 들어가므로 처리
-		Integer cartTotalPrice = cartDao.sumCartTotalPrice();
-		model.addAttribute("cartTotalPrice", (cartTotalPrice != null ? cartTotalPrice : 0));
-		return "/WEB-INF/views/cart/list.jsp"; 
+	public String list(Model model, HttpSession session) {
+			//로그인한 사용자 조회
+			String memberId = (String) session.getAttribute("createdUser");
+			if(memberId != null) {
+				//장바구니 목록, 상품 목록 조회
+				model.addAttribute("cartList", cartDao.selectList(memberId));
+				model.addAttribute("itemList", itemDao.selectList());
+			}
+			//장바구니 주문 총 합계, 장바구니 테이블이 비어 있으면 null 들어가므로 처리
+			Integer cartTotalPrice = cartDao.sumCartTotalPrice(memberId);
+			model.addAttribute("cartTotalPrice", (cartTotalPrice != null ? cartTotalPrice : 0));
+			
+			return "/WEB-INF/views/cart/list.jsp"; 
 	}
 
 	//장바구니 삭제
@@ -99,4 +107,33 @@ public class CartController {
 //		return "/WEB-INF/views/emp/list.jsp"; 
 //	}
 	
-	}  
+//	//장바구니 담기 구현
+	// -임시 페이지 제작
+	@RequestMapping("/tempItem")
+	public String tempItem() {
+		return "/WEB-INF/views/cart/tempItem.jsp";
+	}
+	
+//	//장바구니 담기
+//	@RequestMapping("/addCart")
+//	public String cart(@ModelAttribute CartDto cartDto, 
+//			@RequestParam int itemNo, HttpSession session) {
+//		//세션에서 아이디 추출 후 장바구니에 첨부
+//		String createdUser = (String)session.getAttribute("createdUser");
+//		cartDto.setCartBuyer(createdUser);
+//		//비로그인 로그인 페이지로 보내기
+//		if(createdUser == null) {
+//			return "/WEB-INF/member/join.jsp";
+//		}
+//		else {
+//			//회원일 경우
+//			//item_no를 cart_no에 첨부
+//			cartDto.setCartNo(itemNo);
+//			cartDto.setCartBuyer("createdUser");
+//
+//			//등록 한다
+//			cartDao.insert(cartDto);
+//		}
+//		
+//		
+}
