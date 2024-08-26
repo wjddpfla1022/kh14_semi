@@ -6,19 +6,76 @@
  <!-- font awesome icon cdn -->
 
 <style>
+	/*장바구니 제목 스타일 */
+	.cart-title{
+		font-weight: 700;
+	    font-size: 36px;
+	    line-height: 40px;
+	    margin-bottom: 20px;
+	    padding-top: 10px;
+	}
+	/*테이블 스타일*/
+	table{
+		width: 100%;
+	    border: 0;
+	    border-collapse: collapse;
+	}
+	th {
+		background: #fbfafa;
+	    font-weight: bold;
+	}
+	tfoot{
+		background: #fbfafa;
+	}
+	tfoot td{
+		padding: 0.5em;
+	}	
+	td{
+    border-bottom: 1px solid #ddd !important;
+	}
+	
 	/* 주문 삭제버튼 스타일 */
 	.link-box {
 		width: 100%;
+		border: none;
 	}
 	.link-box a {
 		width: 150px;
 		text-align: center; 
 	}
-	/* 재고 수량을 숨김 */
-	.itemCnt-data { 		
+	
+	/* 재고, 장바구니 수량을 숨김 */
+	.itemCnt-data{ 		
 		display: none !important; 
 	}
+	.cartCnt-data{
+		display: none !important;
+	}
 	
+	/*주문 요약서 스타일*/
+	.cart-payment-Title{
+		color: #000;
+	    margin-bottom: 24px;
+	    font-size: 20px;
+	    line-height: 28px;
+	    text-transform: uppercase;
+	    font-weight: 700
+	}
+	/*장바구니 주문서*/
+	.cart-order{
+		border: 1px solid #000;
+	}
+	.cart-orderTitle{
+		color: #000;
+		font-size: 20px;
+		margin-bottom: 24px;
+   		line-height: 28px;
+    	text-transform: uppercase;
+		font-weight: 700;
+	}
+	.displayNone{
+		display: none;
+	}
 </style>
 
 <!-- jquery cdn -->
@@ -52,47 +109,53 @@
             var itemCntValue = parseInt(row.find(".itemCnt-data").text());
 
             // 버튼에 따른 수량 조절
-            if ($(this).hasClass('btn-up')) {
+            if ($(this).hasClass('btn-up')) { 
+            	// 장바구니 최대 수량(재고기준)
                 if (cartCntValue < itemCntValue) {
                     cartCntValue += 1;
-                    $cartCntInput.val(cartCntValue);
-
-                } else {
+                } 
+                else {
                     alert("최대 수량에 도달했습니다");
                 }
-            } else if ($(this).hasClass('btn-down')) {
-                if (cartCnt > 1) {
-                    cartCnt -= 1;
-
-                    $cartCntInput.val(cartCntValue);
-
-                } else {
-                    alert("최소 수량에 도달했습니다");
-                }
             }
+           	else if ($(this).hasClass('btn-down')) {
+           		 // 장바구니 최소 수량
+           		if (cartCntValue> 1) {
+                   	cartCntValue -= 1;
+               	} 
+           		else {
+                   alert("최소 수량에 도달했습니다");
+              	}
+           	}
+            $cartCntInput.val(cartCntValue);
+			
+	        //수량 서버에 업데이트 
+            var cartNo = parseInt(row.find(".cartCnt-data").text());
+	        $.ajax({
+	        	url: "/rest/cart/cartCntUpdate",
+	        	method: 'post',
+	        	data:{
+	        		cartNo: cartNo,
+	        		cartCnt: cartCntValue
+	        	},
+	        	success:function(response){
+	        		console.log('장바구니 업데이트 성공'); //나중에 지우기
+	        	},
+	        	error: function(){
+	        		console.log('장바구니 업데이트 실패'); //나중에 지우기
+	        		console.log(cartNo);
+	        	}
+	        });
         });
-
-        //수량 서버에 업데이트 
-        $.(ajax({
-        	url: "rest/cert/update",
-        	method: 'post',
-        	data:{
-        		cartNo: cartNo,
-        		cartCnt: cartCntValue
-        	},
-        	success:function(response){
-        		console.log('장바구니 업데이트 성공');
-        	},
-        	error; function(){
-        		console.log('장바구니 업데이트 실패');
-        	}
-        });
-
+       
 	});
+
+
 </script>
+
 <div class="container w-1200 my-50">
-	<div class="row center mb-50">
-		<h1>장바구니</h1>
+	<div class="row center mb-50 cart-title">
+		장바구니
 	</div>
 
 <!-- 장바구니가 비어있다면(회원, 비회원)  -->
@@ -127,6 +190,7 @@
 			<c:forEach var="cart" items="${cartList}">
 				<tr>
 					<td>
+						<span class="cartCnt-data">${cart.cartNo}</span><!-- 장바구니 수량을 el로 받아 제이쿼리에 적용 -->
 						<input type="checkbox" class="check-item" name="cartNo" value="${cart.cartNo}">
 					</td>
 					<td>
@@ -161,19 +225,80 @@
 					상품구매금액: ${cartTotalPrice}원
 				</td>
 			</tr>
-		</tfoot>
-			
+		</tfoot>	
 		</table>
 	</form>
+	
+	<!-- 버튼 -->
 	<div class="float-box" >
 		<form action="deleteAll" method="post" class="float-right"> <!-- form 블록요소 여기에 float 적용시킴 -->
 			<button type="submit" class="btn btn-empty btn-delete"><i class="fa-solid fa-trash-can"></i> 장바구니 비우기</button>
 		</form>
-	<!-- 주문 form 넣으면 됩니다 -->
+		<!-- 주문 form 넣으면 됩니다 -->
 			<button type="submit" class="btn float-left">선택상품 주문하기</button>
 			<button type="submit"  class="btn float-left">전체 주문하기</button>
 	</div>
+	
+	<!-- 장바구니 주문 미리보기 -->
+	<div class="row cart-payment-Title center mt-50">
+		주문 요약서
+	</div>
+	<table border="1" class="w-100  mt-20" >
+		<colgroup>
+			<col style="width:200px;">
+			<col style="width:200px;" class="displayNone">
+			<col style="width:200px;">
+			<col style="width:200px;" class="displayNone">
+			<col style="width:auto;">
+		</colgroup>
+		<thead>
+			<tr>
+				<th>
+					<strong>총 상품금액</strong>
+				</th>
+				<th>
+					<strong>총 배송비</strong>
+				</th>
+				<th>
+					<strong>결제예정금액</strong>
+				</th>
+			</tr>
+		</thead>
+		<tbody class="center">
+			<tr>
+				<td>
+					<div class="row">
+						<strong>
+							<span>
+								${cartTotalPrice}
+							</span>
+								원
+						</strong>
+					</div>
+				</td>
+				<td>
+					<div class="row">
+						<strong>
+							<span>
+								무료 배송
+							</span>
+						</strong>
+					</div>
+				</td>
+				<td>
+					<div class="row">
+						<strong>
+							<span>
+								 ${cartTotalPrice}
+							</span>
+						</strong>
+					</div>
+				</td>
+			</tr>
+		</tbody>
+	</table>
 	</c:otherwise>
-</c:choose>
+</c:choose>	
+	
 </div>
 <jsp:include page= "/WEB-INF/views/template/footer.jsp"></jsp:include>
