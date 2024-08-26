@@ -10,7 +10,7 @@
             	<div class="swiper">
                 	<div class="swiper-wrapper">
                     	<!-- Slides -->
-                   		 <div class="swiper-slide"><a href="#"><img src="http://via.placeholder.com/300.png"></a></div>
+                   		 <div class="swiper-slide"><a href="#"><img src="https://sitem.ssgcdn.com/06/09/87/item/1000183870906_i1_750.jpg"></a></div>
   					</div>                  
       			 </div>
       			 <div class="row">
