@@ -40,7 +40,7 @@ public class CartDao {
 		return jdbcTemplate.update(sql, data) > 0;
 	}
 	
-	//장바구니 전체삭제
+	//장바구니 전체삭제//
 	public void deleteAll() {
 		String sql = "delete from cart";
 		jdbcTemplate.update(sql);
