@@ -1,4 +1,5 @@
 
+
 CREATE TABLE member (
 	member_id	varchar2(20)		 primary key,
 	member_pw	varchar2(16)		not null,
@@ -15,6 +16,8 @@ CREATE TABLE member (
 	member_address2	varchar2(300),
 	member_height	number		NULL,
 	member_weight	number		NULL,
+	member_contact char(11),
+	member_sms char(1), 
 	check(regexp_like(member_id, '^[a-z][a-z0-9]{4,19}$')),
 	check(
     regexp_like(member_pw, '^[A-Za-z0-9!@#$]{8,16}$')
@@ -58,27 +61,31 @@ create sequence block_seq;
 SELECT * FROM block;
 
 
-CREATE TABLE category (
-	cate_no	number	,
-	cate_name	varchar2(30)	primary key
-);
-create sequence category_seq;
-SELECT * FROM category;
+--CREATE TABLE category (
+--	cate_no	number	,
+--	cate_name	varchar2(30)	primary key
+--);
+--create sequence category_seq;
+--SELECT * FROM category;
 
 
 CREATE TABLE item (
 	item_no	number		primary key,
-	cate_no	number	references CATEGORY(CATE_NO) on delete cascade	NOT NULL,
 	item_name	varchar2(300)		NOT NULL,
 	item_price	number		NOT NULL,
 	item_sale_price	number		NOT NULL,
 	item_date	Date	DEFAULT sysdate	NOT NULL,
 	item_cnt	number	DEFAULT 1	NOT NULL,
 	item_size	varchar2(3)		NOT NULL,
+	item_cate1 varchar2(2) not null, 
+	item_cate2 varchar2(2) not null, 
+	item_cate3 varchar2(2), 
+	item_discount_rate number default 0,
 	check(item_price >= 0),
 	check(item_sale_price >= 0),
 	CHECK(item_cnt >= 1),
-	check(item_size IN ('S','M','L','XL'))
+	check(item_size IN ('S','M','L','XL')), 
+	check(item_discount_rate >= 0)
 	);
 
 
@@ -90,6 +97,7 @@ SELECT * FROM item;
 CREATE TABLE cart (
 	cart_no	number		 primary key,
 	cart_item_no	number	references ITEM(ITEM_NO) on delete cascade	not NULL,
+	cart_buyer varchar(20) references member(member_id) on delete cascade not null, 
 	cart_cnt	number	DEFAULT 1	NOT NULL,
 	item_attach_no	number		NOT NULL,
 	cart_total_price	number		NOT NULL,
@@ -102,16 +110,16 @@ SELECT * FROM cart;
 
 CREATE TABLE orders (
 	order_no	number		primary key,
-	order_member_id	varchar2(20)	references member(member_id) on delete cascade	NOT NULL,
-	order_cart_no	number	references CART(CART_NO) on delete cascade	NOT NULL,
+--	order_cart_no	number	references CART(CART_NO) on delete cascade	NOT NULL,
 	order_price	number	DEFAULT 0	NOT NULL,
 	order_date	Date	DEFAULT sysdate	NOT NULL,
-	order_status	varchar2(12)		NOT NULL,
+--	order_status	varchar2(12)		NOT NULL,
+	order_buyer varchar2(20), 
 	check(ORDER_price >= 0)
 );
 CREATE sequence order_seq;
 SELECT * FROM orders;
-drop table orders;
+
 
 CREATE TABLE refund (
 	refund_order_no	number	references ORDERS(ORDER_NO) on delete cascade	NOT NULL,
@@ -125,10 +133,12 @@ SELECT * FROM refund;
 
 CREATE TABLE order_detail (
 	order_detail_no	number		primary key,
-	order_detail_item_no	number	references ITEM(ITEM_NO) on delete cascade	NOT NULL,
 	order_detail_order_no	number	references ORDERS(ORDER_NO) on delete cascade	NOT NULL,
+	order_detail_item_no number references item(item_no) on delete cascade not null, 
+	order_detail_buyer varchar2(20) references member(member_id) on DELETE cascade not null, 
 	order_detail_price	number		NOT NULL,
 	order_detail_cnt	number	DEFAULT 1	NOT NULL,
+	order_detail_status varchar2(12), 
 	check(order_detail_price >= 0),
 	check(order_detail_cnt >= 0)
 );
@@ -174,6 +184,7 @@ CREATE TABLE reply (
 	reply_content	varchar2(1000)		NOT NULL,
 	reply_time	date	DEFAULT sysdate	NOT NULL
 );
+CREATE sequence reply_seq;
 SELECT * FROM reply;
 
 
@@ -186,19 +197,6 @@ CREATE TABLE review (
 );
 create sequence review_seq;
 SELECT * FROM review;
-INSERT INTO review (
-    review_no, 
-    review_item_no, 
-    review_writer, 
-    review_content, 
-    review_score
-) VALUES (
-    review_seq.NEXTVAL,    -- 자동 증가하는 review_no
-    1,                    -- 예시로 아이템 번호 1
-    'admin',              -- 리뷰 작성자
-    'This is a dummy review content for testing purposes.',  -- 리뷰 내용
-    5                     -- 리뷰 점수 (예: 5점)
-);
 commit;
 
 CREATE TABLE review_image (
@@ -206,6 +204,8 @@ CREATE TABLE review_image (
 	attach_no	number		NOT NULL
 );
 SELECT * FROM review_image;
+
+
 
 commit;
 
