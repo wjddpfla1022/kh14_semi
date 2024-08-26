@@ -3,10 +3,12 @@ package com.kh.oneTrillionCompany.dao;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.oneTrillionCompany.dto.CartDto;
+import com.kh.oneTrillionCompany.dto.ItemDto;
 import com.kh.oneTrillionCompany.mapper.CartMapper;
 
 @Repository
@@ -38,7 +40,7 @@ public class CartDao {
 		return jdbcTemplate.update(sql, data) > 0;
 	}
 	
-	//장바구니 전체삭제
+	//장바구니 전체삭제//
 	public void deleteAll() {
 		String sql = "delete from cart";
 		jdbcTemplate.update(sql);
@@ -86,10 +88,23 @@ public class CartDao {
 		return jdbcTemplate.queryForObject(sql, Integer.class, data);
 	}
 	
+//	//재고 수량 찾기
+//	public Integer findItemCnt(int cartNo) {
+//		try {
+//			String sql = "select item_cnt from item where item_no = ?";
+//			Object[] data = {cartNo};
+//		return jdbcTemplate.queryForObject(sql, Integer.class, data);
+//		} catch (EmptyResultDataAccessException e) {
+//			return null;
+//		}
+//	}
+	
+	
 	//장바구니 전체 금액 합계
 	public Integer sumCartTotalPrice() {
 		String sql = "select sum(cart_total_price) from cart";
 		return jdbcTemplate.queryForObject(sql, Integer.class);
 	}
+	
 	
 }
