@@ -1,11 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 	<div class="row center">
-		<h1>상품  Q/A</h1>
+		<h1>상품  Q&A</h1>
 	</div>
 	<hr>
 
@@ -38,19 +37,18 @@
 				<c:forEach var="qnaDto" items="${qnaList}">
 						<tr>
 							<td>${qnaDto.qnaNo}</td>
+							<td>${qnaDto.qnaTime}</td>
 							<td>
 								<a href="detail?qnaNo=${qnaDto.qnaNo}" style=text-decoration:none>${qnaDto.qnaTitle}</a>
 							</td>
-							<td>
-							<%-- 
-								<c:choose>
-									<c:when test="${qnaDto.qnaWriter == null}">
-										탈퇴한 사용자
-									</c:when>
-									<c:otherwise>${qnaDto.qnaWriter}</c:otherwise>
-								</c:choose>
-								--%>	
-							</td>
+<!-- 							<td>							 -->
+<%-- 								<c:choose> --%>
+<%-- 									<c:when test="${qnaDto.qnaWriter == null}"> --%>
+<!-- 										탈퇴한 사용자 -->
+<%-- 									</c:when> --%>
+<%-- 									<c:otherwise>${qnaDto.qnaWriter}</c:otherwise> --%>
+<%-- 								</c:choose>								 --%>
+<!-- 							</td> -->
 							<td>${qnaDto.qnaWriter}</td>
 						</tr>
 				</c:forEach>

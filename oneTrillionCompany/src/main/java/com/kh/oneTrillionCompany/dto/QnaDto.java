@@ -11,4 +11,6 @@ public class QnaDto {
 	private String qnaTitle;
 	private String qnaContent;
 	private Date qnaTime;
+	private String qnaReply;
+	private int qnaView;
 }
