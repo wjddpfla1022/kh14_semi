@@ -19,7 +19,7 @@ public class QnaMapper implements RowMapper<QnaDto> {
 		qnaDto.setQnaTitle(rs.getString("qna_title"));
 		qnaDto.setQnaContent(rs.getString("qna_content"));
 		qnaDto.setQnaTime(rs.getDate("qna_time"));
-		qnaDto.setQnaReply(rs.getString("qna_reply"));
+		qnaDto.setQnaReply(rs.getInt("qna_reply"));
 		qnaDto.setQnaView(rs.getInt("qna_view"));
 		
 		return qnaDto;
