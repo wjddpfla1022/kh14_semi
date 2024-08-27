@@ -18,14 +18,14 @@ public class ReviewDao {
 	private ReviewMapper reviewMapper;
 	
 	
-	//등록
-	public void insert(ReviewDto reviewDto) {
-		String sql = "insert into review(review_no , review_item_no , review_writer , review_content , review_score)"
-							+ "values(review_seq.nextval , ? , ? ,? ,?)";
-		Object[] data = {reviewDto.getReviewItemNo() , reviewDto.getReviewWriter() , 
-								reviewDto.getReviewContent() , reviewDto.getReviewScore()};
-		jdbcTemplate.update(sql, data);
-	}
+//	//등록
+//	public void insert(ReviewDto reviewDto) {
+//		String sql = "insert into review(review_no , review_item_no , review_writer , review_content , review_score)"
+//							+ "values(review_seq.nextval , ? , ? ,? ,?)";
+//		Object[] data = {reviewDto.getReviewItemNo() , reviewDto.getReviewWriter() , 
+//								reviewDto.getReviewContent() , reviewDto.getReviewScore()};
+//		jdbcTemplate.update(sql, data);
+//	}
 	//리뷰 삭제
 	public boolean delete(int reviewNo) {
 		String sql = "delete review where review_no = ? ";
@@ -45,13 +45,21 @@ public class ReviewDao {
 		return jdbcTemplate.queryForObject(sql, int.class);
 	}
 	
+
 	//등록
-	public void insertWithSequence(ReviewDto reviewDto) {
+	public void insert(ReviewDto reviewDto) {
 		String sql = "insert into review(review_no , review_item_no , review_writer , review_content , review_score)"
-				+ "values(? , ? , ? ,? ,?)";
-		Object[] data = {reviewDto.getReviewItemNo() , reviewDto.getReviewWriter() , 
-								reviewDto.getReviewContent() , reviewDto.getReviewScore()};
+							+ "values(?, ?, ?, ?, ?)";
+		Object[] data = {reviewDto.getReviewNo(), reviewDto.getReviewItemNo(), reviewDto.getReviewWriter(), 
+								reviewDto.getReviewContent(), reviewDto.getReviewScore()};
 		jdbcTemplate.update(sql, data);
+	}
+	//상세
+	public ReviewDto selectOne(int reviewNo) {
+		String sql = "selsect * from review where reivew_no=?";
+		Object[]data = {reviewNo};
+		List<ReviewDto> list = jdbcTemplate.query(sql, reviewMapper, data);
+		return list.isEmpty() ? null : list.get(0);
 	}
 	
 	//특정 회원의 리뷰 목록 조회
