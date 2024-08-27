@@ -134,7 +134,7 @@
 						<li><a href="localhost:8080" id="favorite">즐겨찾기</a></li>
 						<li class="right-menu"><a href="/member/logout">로그아웃</a></li>
 						<li><a href="#">주문 / 배송조회</a></li>
-						<li><a href="/service/qna/list">1:1문의</a></li>
+						<li><a href="/qna/list">1:1문의</a></li>
 						<li><a href="#">커뮤니티</a>
 							<ul>
 								<li><a href="#">항목1</a></li>
