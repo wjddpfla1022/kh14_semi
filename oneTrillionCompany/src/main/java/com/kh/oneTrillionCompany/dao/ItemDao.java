@@ -37,7 +37,7 @@ public class ItemDao {
 	}
 	
 	//상품 상세
-	public ItemDto selectOne(String itemNo) {
+	public ItemDto selectOne(int itemNo) {
 		String sql="select * from item where item_no=?";
 		Object[] data= {itemNo};
 		List<ItemDto> list =jdbcTemplate.query(sql, itemMapper,data);
@@ -47,7 +47,7 @@ public class ItemDao {
 	//상품 검색
 	public List<ItemDto> selectList(String column, String keyword){
 		String sql="select * from item where instr("+ column +", ?)>0 "
-				+ "order by "+ column +" asc, item_no desc";
+				+ "order by item_no asc";
 		Object[] data= {keyword};
 		return jdbcTemplate.query(sql, itemMapper, data);
 	}
@@ -70,13 +70,13 @@ public class ItemDao {
 	//상품 수정
 	public boolean update(ItemDto itemDto) {
 		String sql="update item set item_name=?, item_price=?,"
-				+ "item_sale_price=?, item_date=?, item_cnt=?, item_size=?, item_cate1=?,"
-				+ "item_cate2=?, item_cate3=? "
+				+ "item_sale_price=?, item_cnt=?, item_size=?, item_cate1=?,"
+				+ "item_cate2=?, item_cate3=?, item_discount_rate=?, item_color=? "
 				+ "where item_no=?";
 		Object[] data= {itemDto.getItemName(), itemDto.getItemPrice(),
-						itemDto.getItemSalePrice(), itemDto.getItemDate(), itemDto.getItemCnt(),
+						itemDto.getItemSalePrice(), itemDto.getItemCnt(),
 						itemDto.getItemSize(), itemDto.getItemCate1(), itemDto.getItemCate2(),
-						itemDto.getItemCate3(), itemDto.getItemNo()};
+						itemDto.getItemCate3(), itemDto.getItemDiscountRate(), itemDto.getItemColor(), itemDto.getItemNo()};
 		return jdbcTemplate.update(sql, data)>0;
 	}
 	//상품삭제
@@ -102,39 +102,39 @@ public class ItemDao {
 	
 	//페이징
 	public List<ItemDto> selectListByPaging(PageVO pageVO) {
-	    if(pageVO.isSearch()) {//검색이라면
+	    if(pageVO.isSearch() == true) {//검색이라면
 	        String sql = "select * from ("
-	                            + "select rownum rn, TMP.* from ("
+	                            + "select rownum as rn, TMP.* from ("
 	                                + "select "
 	                                    + "item_no, item_name, item_price, item_sale_price, "
 	                                    + "item_date, item_cnt, item_size, "
 	                                    + "item_cate1, item_cate2, item_cate3, "
 	                                    + "item_discount_rate, item_color "        
 	                                + "from item "
-	                                + "where instr(#1, ?) > 0 "
+	                                + "where instr(" + pageVO.getColumn() + ", ?) > 0 "
 	                                + "order by item_no asc"
 	                            + ")TMP"
 	                    + ") where rn between ? and ?";
-	        sql = sql.replace("#1", pageVO.getColumn());
 	        Object[] data = {
 	                pageVO.getKeyword(), 
 	                pageVO.getBeginRow(), 
 	                pageVO.getEndRow() 
-	        };
-	        return jdbcTemplate.query(sql, itemMapper, data);
-	    }
-	    else {//목록이라면
-	        String sql = "select * from ("
-	                            + "select rownum rn, TMP.* from ("
-	                                + "select "
-	                                    + "item_no, item_name, item_price, item_sale_price, "
-	                                    + "item_date, item_cnt, item_size, "
-	                                    + "item_cate1, item_cate2, item_cate3, "
-	                                    + "item_discount_rate, item_color "
-	                                + "from item "
-	                                + "order by item_no asc" 
-	                            + ")TMP"
-	                    + ") where rn between ? and ?";
+	                };
+	                return jdbcTemplate.query(sql, itemMapper, data);
+	        }
+	    
+	    else{//목록이라면
+	    	String sql = "SELECT * FROM ("
+	                + "    SELECT ROWNUM AS rn, TMP.* FROM ("
+	                + "        SELECT "
+	                + "            item_no, item_name, item_price, item_sale_price, "
+	                + "            item_date, item_cnt, item_size, "
+	                + "            item_cate1, item_cate2, item_cate3, "
+	                + "            item_discount_rate, item_color "
+	                + "        FROM item "
+	                + "        ORDER BY item_no ASC"
+	                + "    ) TMP"
+	                + ") WHERE rn BETWEEN ? AND ?";
 	        Object[] data = {pageVO.getBeginRow(), pageVO.getEndRow()};
 	        return jdbcTemplate.query(sql, itemMapper, data);
 	    }
