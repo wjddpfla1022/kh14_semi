@@ -27,9 +27,52 @@
         	text-align: left;
         	padding-left : 0.5em;
         }
+        .reply-wrapper > .content-wrapper{
+        	font-size: 16px;
+        }
+        .reply-wrapper > .content-wrapper > .reply-writer{
+        	font-size: 1.25em;
+        }
+         .reply-wrapper > .content-wrapper > .reply-content{
+         	font-size: 1em;
+         	min-height: 50px;
+         }
 
 </style>
 
+
+<!-- 댓글 템플릿 -->
+<script type="text/template" id="reply-template">
+	<!-- 댓글 1개 영역 -->
+	<div class="reply-wrapper">
+
+		<!-- 내용 영역 -->
+		<div class="content-wrapper">
+			<div class="reply-writer">댓글 작성자</div>
+			<div class="reply-content">댓글 내용</div>
+			<div class="reply-info">
+				<span class="time">yyyy-MM-dd HH:mm:ss</span>
+				<a href="/rest/reply/update" class="link link-animation reply-update-btn">수정</a>
+				<a href="/rest/reply/delete" class="link link-animation reply-delete-btn">삭제</a>
+			</div>
+		</div>
+	</div>
+</script>
+
+<!-- 댓글 수정 템플릿 -->
+<script type="text/template" id="reply-update-template">
+	<div class="reply-wrapper reply-update-wrapper">
+		<div>
+			<div class="reply-title">작성자</div>
+			<textarea class="field w-100 reply-update-input"></textarea>
+			<div class="right">
+				<button class="btn btn-neutral reply-cancel-btn">취소</button>
+				<button class="btn btn-neutral reply-complete-btn">완료</button>
+			</div>
+		</div>
+	</div>
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
 <!-- 댓글 처리를 위한 JS코드 -->
 <script type="text/javascript">
 	$(function(){
@@ -41,7 +84,7 @@
 		var currentUser = "${sessionScope.createdUser}";
 		
 		//댓글 등록
-		$(".add-reply-btn").click(function(){
+		$(".reply-add-btn").click(function(){
 			//작성된 내용 읽기
 			var content = $(".reply-input").val();
 			if(content.length == 0) return;
@@ -81,43 +124,95 @@
 					$(html).find(".reply-writer").text(response[i].replyWriter);
 	                $(html).find(".reply-content").text(response[i].replyContent);
 					$(html).find(".reply-info > .time").text(response[i].replyTime);
-					
 					//시간형식 지정
 					var time = moment(response[i].replyTime).format("YYYY-MM-DD dddd HH:mm:ss");
-                    $(html).find(".reply-info > .time ").text(time);
+                    $(html).find(".reply-info > .time").text(time);
 					
 					if(response[i].replyWriter == currentUser) { //작성자가 현재 사용자(currentUser)라면
-						$(html).find(".reply-edit-btn , .reply-delete-btn").attr("data-reply-no", response[i].replyNo);	// 수정,삭제 버튼을 생성
+						$(html).find(".reply-update-btn , .reply-delete-btn").attr("data-reply-no", response[i].replyNo);	// 수정,삭제 버튼을 생성
 					}
 					else{
-						$(html).find(".reply-edit-btn , .reply-delete-btn").remove();	// 수정,삭제 버튼을 삭제
+						$(html).find(".reply-update-btn , .reply-delete-btn").remove();	// 수정,삭제 버튼을 삭제
 					}
 					$(".reply-list-wrapper").append(html);
 					}
 				}
 			});
 		} 
+		// 댓글 수정
+		$(document).on("click", ".reply-update-btn", function(e){
+		    e.preventDefault();
+		    
+		    // 기존 입력화면 제거
+		    $(".reply-wrapper").show();
+		    $(".reply-update-wrapper").remove(); 
+
+		    var template = $("#reply-update-template").text();
+		    var html = $.parseHTML(template);
+		    $(this).parents(".reply-wrapper").after(html); 
+		    $(this).parents(".reply-wrapper").hide();
+		    
+		    var replyWriter = $(this).parents(".reply-wrapper").find(".reply-writer").text();
+		    $(html).find(".reply-title").text(replyWriter);
+		    var replyContent = $(this).parents(".reply-wrapper").find(".reply-content").text();
+		    $(html).find(".reply-update-input").val(replyContent);
+		    
+		    var replyNo = $(this).attr("data-reply-no");
+		    $(html).find(".reply-complete-btn").attr("data-reply-no", replyNo);
+		});
+
 		
+		//수정 취소
+		$(document).on("click",".reply-cancel-btn", function(){
+			$(this).parents(".reply-update-wrapper").prev(".reply-wrapper").show();
+			$(this).parents(".reply-update-wrapper").remove();
+		});
+		
+		//수정 완료
+		$(document).on("click",".reply-complete-btn",function(){
+			var choice = window.alert("수정하시겠습니까?");
+			if(choice == false) return;
+			
+			var replyContent = $(this).parents(".reply-update-wrapper").find(".reply-update-input").val();
+			var replyNo = $(this).attr("data-reply-no");
+			if(replyContent.length==0){
+				window.alert("내용을 작성해주세요");
+				return;
+			}
+			//서버로 댓글 수정을 위한 정보 전달
+			$.ajax({
+				url: "/rest/reply/update",
+				method: "post",
+				data:{
+					replyNo : replyNo,
+					replyContent : replyContent
+				},
+				success : function(response){
+					loadList();
+				}
+			})
+		});
+		
+		//댓글 삭제
+		$(document).on("click",".reply-delete-btn",function(e){
+			e.preventDefault();
+			
+			var choice = window.confirm("삭제하시겠습니까?");
+			if(choice == false) return;
+			
+			var replyNo = $(this).attr("data-reply-no");
+			$.ajax({
+				url: "/rest/reply/delete",
+				method: "post",
+				data: {
+					replyNo : replyNo
+				},
+				success : function(response){
+					loadList();
+				},
+			});
+		});
 	});
-</script>
-
-
-<!-- 댓글 템플릿 -->
-<script type="text/template" id="reply-template">
-	<!-- 댓글 1개 영역 -->
-	<div class="reply-wrapper">
-
-		<!-- 내용 영역 -->
-		<div class="content-wrapper">
-			<div class="reply-writer">댓글 작성자</div>
-			<div class="reply-content">댓글 내용</div>
-			<div class="reply-info">
-				<span class="time">yyyy-MM-dd HH:mm:ss</span>
-				<a href="#" class="link link-animation reply-edit-btn">수정</a>
-				<a href="#" class="link link-animation reply-delete-btn">삭제</a>
-			</div>
-		</div>
-	</div>
 </script>
 
 <div class="container w-1000">
@@ -161,14 +256,20 @@
 				</tr>
 			</tbody>
 		</table>
-					<!-- 수정/삭제 버튼  -->
-					<div class= " flex-box ">
-						<a href="/qna/list"  class="btn btn-list">목록</a>
-				        <div>
-				            <a href="update?qnaNo=${qnaDto.qnaNo}" class="btn btn-update">수정</a>
-				            <a href="delete?qnaNo=${qnaDto.qnaNo}" class="btn btn-delete">삭제</a>
-				        </div>
-					</div>
+		<!-- 수정/삭제 버튼  -->
+		<div class= " flex-box ">
+			<a href="/qna/list"  class="btn btn-list">
+				<i class="fa-solid fa-list"></i> 목록
+			</a>
+	        <div>
+	            <a href="update?qnaNo=${qnaDto.qnaNo}" class="btn btn-update">
+	            	<i class="fa-solid fa-pen-to-square"></i> 수정
+	            </a>
+	            <a href="delete?qnaNo=${qnaDto.qnaNo}" class="btn btn-delete">
+	            	<i class="fa-solid fa-trash"></i> 삭제
+	            </a>
+	        </div>
+		</div>
 	</div>
 	<!-- 관리자 답변 댓글창 -->
 	<hr>
@@ -178,7 +279,7 @@
 	<!--   댓글 작성 기능 -->
 	<div class="row">
 		<textarea class="field w-100 reply-input"></textarea>
-		<button type="button" class="btn btn-positive add-reply-btn">
+		<button type="button" class="btn btn-positive reply-add-btn">
 			<i class="fa-solid fa-pen-to-square"></i> 댓글 작성
 		</button>
 	</div>
