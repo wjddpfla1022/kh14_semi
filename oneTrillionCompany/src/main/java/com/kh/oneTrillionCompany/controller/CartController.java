@@ -5,16 +5,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.oneTrillionCompany.dao.CartDao;
 import com.kh.oneTrillionCompany.dao.ItemDao;
-
 import com.kh.oneTrillionCompany.dao.OrdersDao;
-
 import com.kh.oneTrillionCompany.service.AttachService;
 import com.kh.oneTrillionCompany.vo.CartVO;
 
@@ -28,12 +25,12 @@ public class CartController {
 	private CartDao cartDao;
 	@Autowired
 	private ItemDao itemDao;
+	@Autowired
+	private OrdersDao ordersDao;
 	
 	@Autowired
 	private AttachService attachService;
-	
-	@Autowired
-	private OrdersDao ordersDao;
+
 	//장바구니 목록
  
 	@RequestMapping("/list")
@@ -48,17 +45,14 @@ public class CartController {
 			//장바구니 주문 총 합계, 장바구니 테이블이 비어 있으면 null 들어가므로 처리
 			Integer cartTotalPrice = cartDao.sumCartTotalPrice(memberId);
 			model.addAttribute("cartTotalPrice", (cartTotalPrice != null ? cartTotalPrice : 0));
-			
-			return "/WEB-INF/views/cart/list.jsp"; 
-      
 
+			return "/WEB-INF/views/cart/list.jsp"; 
 	}
 	@PostMapping("/list") //장바구니-> 주문창으로 갈때 orders 테이블에 등록f
 	public String list(@RequestParam List<CartVO>list) { //list.jsp에서 List<CartVO>로 값을 받아서 등록
 		ordersDao.insert(list);
 		return "redirect:/order/pay";
 	}
-
 
 	//장바구니 삭제
 	@RequestMapping("/delete")
@@ -73,21 +67,6 @@ public class CartController {
 		}
 		return "redirect:list";
 	}
-	
-//	//1. 삭제 와 증가 
-//	@RequestMapping("update")
-//	//2. 만약에 cartNo이 날라온다면 delete 해버린다
-//	//3. 반대로 버튼을 눌러 수량이 증가된다면 디비에 업데이트 시키자
-//	public String udpateCart(@RequestParam(required = false) int cartNo) {
-//		try {//파일을 지우기
-//			int itemAttachmentNo = cartDao.findImage(cartNo);
-//			attachService.delete(itemAttachmentNo);
-//		}
-//		catch(Exception e) {}//문제가 생겨도 지우기
-//		finally {
-//			cartDao.delete(cartNo);
-//		}
-//	}
 	
 	//장바구니 여러개 삭제
 	@PostMapping("/deleteList")
@@ -114,6 +93,7 @@ public class CartController {
 		} catch (Exception e) {}
 		return "redirect:list";
 	}
+	
 	//장바구니 목록+검색
 //	@RequestMapping("/list")
 //	public String list(Model model,

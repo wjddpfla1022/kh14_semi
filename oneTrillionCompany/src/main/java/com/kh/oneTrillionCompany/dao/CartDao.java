@@ -99,25 +99,11 @@ public class CartDao {
 
 	//장바구니 총 금액
 	public Integer sumCartTotalPrice(String memberId) {
-		
 		String sql = "select sum(cart_cnt*item_price) from "
 				+ "cart join item on CART_ITEM_NO = item_no "
 				+ "where CART_BUYER = ?";
 		Object[] data = {memberId};
 		return jdbcTemplate.queryForObject(sql, Integer.class, data);
-
-//	//재고 수량 찾기
-//	public Integer findItemCnt(int cartNo) {
-//		try {
-//			String sql = "select item_cnt from item where item_no = ?";
-//			Object[] data = {cartNo};
-//		return jdbcTemplate.queryForObject(sql, Integer.class, data);
-//		} catch (EmptyResultDataAccessException e) {
-//			return null;
-//		}
-//	}
-
 	}
-	
 	
 }
