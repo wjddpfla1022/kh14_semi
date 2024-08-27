@@ -12,5 +12,4 @@ public class QnaDto {
 	private String qnaContent;
 	private Date qnaTime;
 	private int qnaReply;
-	private int qnaView;
 }
