@@ -80,7 +80,7 @@
 					<th>정가</th>
 					<th>판매가</th>
 					<th>등록일</th>
-					<th>자고</th>
+					<th>수량</th>
 					<th>사이즈</th>
 				</tr>
 			</thead>
@@ -264,11 +264,11 @@
 				</c:choose>
 			</tbody>
 		</table>
-
+<jsp:include page= "/WEB-INF/views/template/navigator.jsp"/>
 
 	</div>
 	<div class="row right">
-		<a href="#" class="link link-animation"><h3
+		<a href="/manager/item/insert" class="link link-animation"><h3
 				style="margin-right: 1em;">상품 추가</h3></a>
 	</div>
 </div>

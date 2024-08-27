@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.oneTrillionCompany.dto.ItemDto;
 import com.kh.oneTrillionCompany.mapper.ItemMapper;
+import com.kh.oneTrillionCompany.vo.PageVO;
 
 @Repository
 public class ItemDao {
@@ -24,13 +25,13 @@ public class ItemDao {
 		String sql="insert into item( "
 				+ "item_no, item_name, "
 				+ "item_price, item_sale_price, item_date,"
-				+ "item_cnt, item_size, item_cate1, item_cate2, item_cate3, item_discount_rate"
-				+ ") values(item_seq.nextval, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+				+ "item_cnt, item_size, item_cate1, item_cate2, item_cate3, item_discount_rate, item_color"
+				+ ") values(item_seq.nextval, ?, ?, ?, sysdate, ?, ?, ?, ?, ?, ?, ?)";
 		Object[] data= {itemDto.getItemName(), itemDto.getItemPrice(), 
-						itemDto.getItemSalePrice(), itemDto.getItemDate(), 
+						itemDto.getItemSalePrice(), 
 						itemDto.getItemCnt(), itemDto.getItemSize(), 
 						itemDto.getItemCate1(), itemDto.getItemCate2(), 
-						itemDto.getItemCate3(), itemDto.getItemDiscountRate() 
+						itemDto.getItemCate3(), itemDto.getItemDiscountRate(), itemDto.getItemColor()
 						};
 		jdbcTemplate.update(sql, data);
 	}
@@ -98,5 +99,57 @@ public class ItemDao {
 		Object[] data = {itemNo};
 		return jdbcTemplate.queryForObject(sql, int.class, data);
 	}
+	
+	//페이징
+	public List<ItemDto> selectListByPaging(PageVO pageVO) {
+	    if(pageVO.isSearch()) {//검색이라면
+	        String sql = "select * from ("
+	                            + "select rownum rn, TMP.* from ("
+	                                + "select "
+	                                    + "item_no, item_name, item_price, item_sale_price, "
+	                                    + "item_date, item_cnt, item_size, "
+	                                    + "item_cate1, item_cate2, item_cate3, "
+	                                    + "item_discount_rate, item_color "        
+	                                + "from item "
+	                                + "where instr(#1, ?) > 0 "
+	                                + "order by item_no asc"
+	                            + ")TMP"
+	                    + ") where rn between ? and ?";
+	        sql = sql.replace("#1", pageVO.getColumn());
+	        Object[] data = {
+	                pageVO.getKeyword(), 
+	                pageVO.getBeginRow(), 
+	                pageVO.getEndRow() 
+	        };
+	        return jdbcTemplate.query(sql, itemMapper, data);
+	    }
+	    else {//목록이라면
+	        String sql = "select * from ("
+	                            + "select rownum rn, TMP.* from ("
+	                                + "select "
+	                                    + "item_no, item_name, item_price, item_sale_price, "
+	                                    + "item_date, item_cnt, item_size, "
+	                                    + "item_cate1, item_cate2, item_cate3, "
+	                                    + "item_discount_rate, item_color "
+	                                + "from item "
+	                                + "order by item_no asc" 
+	                            + ")TMP"
+	                    + ") where rn between ? and ?";
+	        Object[] data = {pageVO.getBeginRow(), pageVO.getEndRow()};
+	        return jdbcTemplate.query(sql, itemMapper, data);
+	    }
+	}
+	
+	public int countByPaging(PageVO pageVO) {
+	    String sql;
+	    if (pageVO.isSearch()) {
+	        sql = "select count(*) from item where instr(" + pageVO.getColumn() + ", ?) > 0";
+	        return jdbcTemplate.queryForObject(sql, Integer.class, pageVO.getKeyword());
+	    } else {
+	        sql = "select count(*) from item";
+	        return jdbcTemplate.queryForObject(sql, Integer.class);
+	    }
+	}
+
 	
 }
