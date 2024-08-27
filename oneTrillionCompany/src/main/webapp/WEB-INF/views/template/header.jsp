@@ -22,7 +22,6 @@
 <link rel="stylesheet" type="text/css"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 
-</head>
 <style>
 .menu {
 	background-color: antiquewhite;
@@ -104,7 +103,7 @@
 						});
 			});
 </script>
-
+</head>
 <body>
 	<!-- 문서의 출력 내용을 담는 태그 -->
 	<!-- 		<h1>내가 만든 홈페이지</h1> -->
