@@ -84,6 +84,7 @@
   					</th>
   				</c:if>
 					<th>상품번호</th>
+					<th>사진</th>
 					<th colspan='3'>카테고리</th>
 					<th>상품명</th>
 					<th>정가</th>
@@ -109,6 +110,7 @@
   								</td>
   							</c:if>
 								<td>${itemDto.itemNo}</td>
+								<td><img src = "image?itemNo=${itemDto.itemNo}" width="15" height="15"></td>
 								<c:choose>
 									<c:when test="${itemDto.itemCate1 == '11'}">
 										<td>상의</td>
