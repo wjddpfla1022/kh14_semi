@@ -54,9 +54,9 @@ public class ReplyDao {
 	}
 	
 	//댓글 조회(상세)
-	public ReplyDto selectOne(int replyOrigin) {
-		String sql = "select * from reply where reply_origin = ?";
-		Object[] data = {replyOrigin};
+	public ReplyDto selectOne(int replyNo) {
+		String sql = "select * from reply where reply_No = ?";
+		Object[] data = {replyNo};
 		List<ReplyDto> list = jdbcTemplate.query(sql, replyMapper, data);
 		return list.isEmpty() ? null : list.get(0);
 	}

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.kh.oneTrillionCompany.dao.QnaDao;
 import com.kh.oneTrillionCompany.dao.ReplyDao;
 import com.kh.oneTrillionCompany.dto.ReplyDto;
+import com.kh.oneTrillionCompany.exception.TargetNotFoundException;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -46,5 +47,34 @@ public class ReplyRestController {
 		return replyDao.selectList(replyOrigin);
 	}
 	
+	//댓글 수정
+	@PostMapping("/update")
+	public void update(HttpSession session, @ModelAttribute ReplyDto replyDto) {
+		String memberId = (String)session.getAttribute("createdUser");
+		ReplyDto originDto = replyDao.selectOne(replyDto.getReplyNo());
+		if(originDto==null) {
+			throw new TargetNotFoundException();
+		}
+		boolean isOwner = memberId.equals(originDto.getReplyWriter());
+		if(isOwner) {
+			replyDao.update(replyDto);
+		}
+	}
+	
+	//댓글 삭제
+	@PostMapping("/delete")
+	public void delete(HttpSession session, @RequestParam int replyNo) {
+		String memberId = (String)session.getAttribute("createdUser");
+		ReplyDto replyDto = replyDao.selectOne(replyNo);
+		if(replyDto==null) {
+			throw new TargetNotFoundException();
+		}
+		boolean isOwner = memberId.equals(replyDto.getReplyWriter());
+		if(isOwner) {
+			replyDao.delete(replyNo);
+			
+			qnaDao.updateQnaReply(replyDto.getReplyOrigin());
+		}
+	}
 	
 }
