@@ -66,17 +66,18 @@ public class QnaController {
 	@GetMapping("/update")
 	public String update(@RequestParam int qnaNo , Model model) {
 		QnaDto qnaDto = qnaDao.selectOne(qnaNo);
-		if(qnaDto == null)
-			throw new TargetNotFoundException("존재하지 않는 글 번호");
+		if(qnaDto == null) throw new TargetNotFoundException("존재하지 않는 글 번호");
 		model.addAttribute("qnaDto", qnaDto);
 		return "/WEB-INF/views/qna/update.jsp";
 	}
 	@PostMapping("/update")
 	public String update(@ModelAttribute QnaDto qnaDto) {
-		boolean result = qnaDao.update(qnaDto);
-		if(result == false) throw new TargetNotFoundException("존재하지 않는 글 번호");
-		return "redirect:/qna/detail?qnaNo="+qnaDto.getQnaNo();
-
+		QnaDto originDto = qnaDao.selectOne(qnaDto.getQnaNo());	//이전 글 조회
+		if(originDto == null) 
+			throw new TargetNotFoundException("존재하지 않는 글 번호");
+		
+		qnaDao.update(qnaDto);
+		return "redirect:detail?qnaNo="+qnaDto.getQnaNo();
 	}
 	
 	//삭제 기능

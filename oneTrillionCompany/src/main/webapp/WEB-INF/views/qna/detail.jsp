@@ -128,7 +128,7 @@
 					}
 				}
 			});
-		} 
+		}  
 		// 댓글 수정
 		$(document).on("click", ".reply-update-btn", function(e){
 		    e.preventDefault();
@@ -200,6 +200,18 @@
 				success : function(response){
 					loadList();
 				},
+			});
+		});
+		
+		//문의 글 삭제 코드 작성
+		$(function(){
+			$(".btn-delete").click(function(e){
+				e.preventDefault();
+				var historyDelete = window.confirm("삭제하시겠습니까?");
+				if(historyDelete) {
+					window.location.href = $(this).attr("href"); 	// 사용자가 확인을 클릭한 경우, 링크로 이동
+            		}
+					//취소 버튼을 누를 경우 동작 X
 			});
 		});
 	});
