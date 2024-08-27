@@ -43,6 +43,7 @@ public class QnaController {
 		//return "redirect:list?qnaNo="+seq;
 		return "redirect:list";
 	}
+	//리스트 기능
 	@RequestMapping("/list")
 	public String list(@ModelAttribute("pageVO") PageVO pageVO, Model model) {
 		model.addAttribute("qnaList", qnaDao.selectListByPaging(pageVO));
@@ -50,14 +51,44 @@ public class QnaController {
 		pageVO.setCount(count);
 	    return "/WEB-INF/views/qna/list.jsp";
 	}
-	
+	//상세 기능
 	@RequestMapping("/detail")
 	public String detail(@RequestParam int qnaNo, Model model) {
 		QnaDto qnaDto = qnaDao.selectOne(qnaNo);
-		if(qnaDto==null) {
+		if(qnaDto==null) 
 			throw new TargetNotFoundException("존재하지 않는 글번호");
-		}
+		
 		model.addAttribute("qnaDto", qnaDto);
 		return "/WEB-INF/views/qna/detail.jsp";
 	}
+	
+	//수정 기능
+	@GetMapping("/update")
+	public String update(@RequestParam int qnaNo , Model model) {
+		QnaDto qnaDto = qnaDao.selectOne(qnaNo);
+		if(qnaDto == null)
+			throw new TargetNotFoundException("존재하지 않는 글 번호");
+		model.addAttribute("qnaDto", qnaDto);
+		return "/WEB-INF/views/qna/update.jsp";
+	}
+	@PostMapping("/update")
+	public String update(@ModelAttribute QnaDto qnaDto) {
+		boolean result = qnaDao.update(qnaDto);
+		if(result == false) throw new TargetNotFoundException("존재하지 않는 글 번호");
+		return "redirect:/qna/detail?qnaNo="+qnaDto.getQnaNo();
+
+	}
+	
+	//삭제 기능
+	@RequestMapping("/delete")
+	public String delete(@RequestParam int qnaNo) {
+		boolean result = qnaDao.delete(qnaNo);
+		if(result == false) throw new TargetNotFoundException("존재하지 않는 글 번호");
+		return "redirect:list";
+	}
 }
+
+
+
+
+
