@@ -72,7 +72,7 @@
 		</div>
 	</div>
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+
 <!-- 댓글 처리를 위한 JS코드 -->
 <script type="text/javascript">
 	$(function(){
@@ -138,7 +138,9 @@
 					}
 				}
 			});
+
 		} 
+
 		// 댓글 수정
 		$(document).on("click", ".reply-update-btn", function(e){
 		    e.preventDefault();
@@ -146,6 +148,7 @@
 		    // 기존 입력화면 제거
 		    $(".reply-wrapper").show();
 		    $(".reply-update-wrapper").remove(); 
+
 
 		    var template = $("#reply-update-template").text();
 		    var html = $.parseHTML(template);
@@ -160,6 +163,7 @@
 		    var replyNo = $(this).attr("data-reply-no");
 		    $(html).find(".reply-complete-btn").attr("data-reply-no", replyNo);
 		});
+
 
 		
 		//수정 취소

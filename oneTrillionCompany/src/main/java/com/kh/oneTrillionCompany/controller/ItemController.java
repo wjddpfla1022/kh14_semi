@@ -46,7 +46,7 @@ public class ItemController {
 	}
 
 	@RequestMapping("/detail")
-	public String detail(@RequestParam String itemNo, Model model) {
+	public String detail(@RequestParam int itemNo, Model model) {
 		ItemDto itemdto = itemDao.selectOne(itemNo);
 		model.addAttribute("itemdto", itemdto);
 		return "/WEB-INF/views/item/detail.jsp";

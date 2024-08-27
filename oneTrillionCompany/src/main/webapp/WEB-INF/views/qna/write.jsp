@@ -33,70 +33,21 @@
             width: 100%;
             padding-top: 0.5em;
         }
-
-         /* 모달 스타일 */
-         .regiModal {
-            position: fixed;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            background-color: white;
-            padding: 20px;
-        }
-        .modal-content {
-            background-color: #fff;
-            border-radius: 0.75em;
-            padding: 10px 10px;
-            border: 1px solid #888;
-            font-size: 13px;
-            width: 300px;
-            text-align: center;
-            margin: auto;
-            position: relative;
-        }
-        .btn-confirm {
-            display: inline-block;
-            padding: 10px 13px;
-            font-size: 11px;
-            color: #fff;
-            background-color: #007bff; 
-            border: none;
-            border-radius: 5px; 
-            text-decoration: none;
-            cursor: pointer;
-        }
-        .btn-cancel {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            color: #888;
-            text-decoration: none;
-            font-size: 10px;
-            cursor: pointer;
-        }
-        .btn-cancel:hover {
-            color: black;
-        }
     </style>
     
 	<script type="text/javascript">
     
-        $(function(){
-
-            $(".btn-regi").click(function(){
-                $(".regiModal").show();
-                $("#modalMessage").text("등록하시겠습니까?"); //모달 메시지 설정
-            });
-          //확인 버튼을 누르면 form 제출
-            $(".btn-confirm").click(function(){ 
+	$(function(){
+		$(".btn-regi").click(function(e){
+			e.preventDefault();
+			var regi = window.confirm("등록하시겠습니까?");
+            if (regi) {
+                // 확인을 클릭한 경우 폼 제출
                 $("#regi-form").submit();
-            });
-            // X 버튼 클릭 시 모달창을 닫음
-            $(".btn-cancel").click(function(e){ 
-                e.preventDefault();
-                $(".regiModal").hide();
-            });
-        });
+            }
+            // 취소 버튼을 누를 경우 동작X
+		});
+	});
     </script>
     
 
@@ -124,18 +75,5 @@
                 <a href="/qna/list" class="btn">취소</a>
             </div>
         </div>
-
-          <!-- Modal 코드 작성-->
-          <div class="regiModal" style="display:none;">
-              <div class="modal-content">
-                  <a href="#" class="btn-cancel">
-                      <i class="fa-solid fa-xmark"></i>
-                  </a>
-                  <p id="modalMessage"></p>
-                  <div class="modal-buttons center">
-                      <a href="#" class="regi btn-confirm">확인</a>
-                  </div>
-              </div>
-          </div>
     </form>
 

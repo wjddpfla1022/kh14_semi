@@ -3,13 +3,17 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+<script src="/js/checkbox.js"></script>
 
 <div class="container w-1200">
 	<div class="row center">
 		<h1>상품 검색</h1>
 	</div>
 	<div class="row right">
-		<h3>데이터개수 : ${list.size()}</h3>
+		<h3>데이터개수 : ${itemList.size()}</h3>
+		${pageVO}
+		${pageVO.getColumn()}
+		${pageVO.isSearch()}
 	</div>
 	<!-- 검색창 -->
 	<div class="row center" style="margin-bottom: 10px;">
@@ -74,6 +78,11 @@
 		<table class="table table-border table-hover">
 			<thead>
 				<tr>
+				<c:if test= "${sessionScope.createdLevel == '관리자' }">
+  					<th>
+  						<input type="checkbox" class="check-all">
+  					</th>
+  				</c:if>
 					<th>상품번호</th>
 					<th colspan='3'>카테고리</th>
 					<th>상품명</th>
@@ -87,13 +96,18 @@
 			<tbody>
 				<c:choose>
 					<%--검색 결과가 없을 때 --%>
-					<c:when test="${list.isEmpty()}">
+					<c:when test="${itemList.isEmpty()}">
 						<h3>검색 결과가 존재하지 않습니다</h3>
 					</c:when>
 					<%--검색 결과가 있을 때 --%>
 					<c:otherwise>
-						<c:forEach var="itemDto" items="${list}">
+						<c:forEach var="itemDto" items="${itemList}">
 							<tr>
+							<c:if test= "${sessionScope.createdLevel == '관리자' }">
+  								<td>
+  									<input type="checkbox" class="check-item" name="poketmonNo" value="${dto.poketmonNo}">
+  								</td>
+  							</c:if>
 								<td>${itemDto.itemNo}</td>
 								<c:choose>
 									<c:when test="${itemDto.itemCate1 == '11'}">
@@ -271,5 +285,7 @@
 		<a href="/manager/item/insert" class="link link-animation"><h3
 				style="margin-right: 1em;">상품 추가</h3></a>
 	</div>
+	
+	
 </div>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
