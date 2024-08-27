@@ -98,5 +98,12 @@ public class ItemDao {
 		Object[] data = {itemNo};
 		return jdbcTemplate.queryForObject(sql, int.class, data);
 	}
+	//결제 후 상품 재고 차감
+	public boolean deductItem(int cnt,int itemNo) {
+		String sql="update item set item_cnt = item_cnt-? "
+				+ "where item_no = ? and item_cnt >= ?";
+		Object[] data= {cnt,itemNo, cnt};
+		return jdbcTemplate.update(sql, data)>0;
+	}
 	
 }

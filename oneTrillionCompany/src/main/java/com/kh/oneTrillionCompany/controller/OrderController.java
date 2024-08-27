@@ -1,7 +1,9 @@
 package com.kh.oneTrillionCompany.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -10,26 +12,78 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.kh.oneTrillionCompany.dao.ItemDao;
+import com.kh.oneTrillionCompany.dao.MemberDao;
+import com.kh.oneTrillionCompany.dao.OrderDetailDao;
+import com.kh.oneTrillionCompany.dao.OrdersDao;
+import com.kh.oneTrillionCompany.dto.OrderDetailDto;
+import com.kh.oneTrillionCompany.dto.OrdersDto;
 import com.kh.oneTrillionCompany.vo.OrderVO;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/order")
 public class OrderController {
-	
+	@Autowired
+	private OrdersDao ordersDao;
+	@Autowired
+	private OrderDetailDao orderDetailDao;
+	@Autowired
+	private MemberDao memberDao;
+	@Autowired
+	private ItemDao itemDao;
 	
 	@GetMapping("/pay")
-	public String pay(Model model) {
+	public String pay(Model model,HttpSession session) {
+		//세션 아이디 검사 및 보내기 
+		String memberId=(String) session.getAttribute("createdUser");
+		if(memberId ==null) return "error";//TargetNotFoundException 자리
+		model.addAttribute("memberId",memberId);
+		
+		//결제 세부목록 보내기
+		int orderNo=ordersDao.selectOne(memberId).getOrderNo();
+		List<OrderDetailDto> detailList=orderDetailDao.selectListByOrderDetail(memberId,orderNo);
+		model.addAttribute("orderDetailList",detailList);
+		//결제번호 보내기
+		model.addAttribute("orderNo",orderNo);
 		return "/WEB-INF/views/order/pay.jsp";
 	}
-	@Transactional //
+	@Transactional //중요한 절차이고 db를 거치는 횟수가 많아서 rollback이 가능하도록
 	@PostMapping("/pay")
-	public String pay(@RequestParam List<OrderVO>list) {
-		list.get(0).getItemNo();
-		list.get(1).getCnt();
+	public String pay(@RequestParam List<OrderVO>list, @RequestParam int orderNo,
+			HttpSession session) {
+		int payment=ordersDao.selectOne(orderNo).getOrderPrice();
+		String memberId=(String) session.getAttribute("createdUser");
+		boolean sessionVaild=list.get(0).getBuyer().equals(memberId); //토큰 유효성 검사
+		if(list.size()==0&&!sessionVaild) 
+			return"redirect:error?error=1";
+		//결제
+		memberDao.payment(memberId, payment);
+		//주문서 생성(detail)
+		List<OrderDetailDto> detailList= orderDetailDao.selectListByOrderDetail(memberId,orderNo);
+		List<Integer> detailNoList=new ArrayList<>();
+		for(int i=0; i<detailList.size(); i++) {
+			detailNoList.add(detailList.get(i).getOrderDetailNo());
+			//재고 차감
+			itemDao.deductItem(detailList.get(i).getOrderDetailCnt(),detailList.get(i).getOrderDetailItemNo());
+		}
+		orderDetailDao.payCompleteStatus(detailNoList);
+		//임시 주문서 삭제
+		ordersDao.delete(memberId);
 		return "redirect:payFinish";
 	}
-	@RequestMapping("/payFinish")
-	public String payFinish() {
+	@GetMapping("/payFinish")
+	public String payFinish(HttpSession session,Model model) {
+		String memberId = (String) session.getAttribute("createdUser");
+		model.addAttribute("orderDetailList",ordersDao.selectListByOrder(memberId));
 		return "/WEB-INF/views/order/payFinish.jsp";
+	}
+	@GetMapping("/detail")
+	public String detail(@RequestParam int orderNo,
+						Model model) {
+		OrdersDto ordersDto = ordersDao.selectOne(orderNo);
+		model.addAttribute("ordersDto",ordersDto);
+		return "/WEB-INF/views/order/detail.jsp";
 	}
 }

@@ -5,12 +5,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.oneTrillionCompany.dao.CartDao;
 import com.kh.oneTrillionCompany.dao.ItemDao;
+import com.kh.oneTrillionCompany.dao.OrderDetailDao;
 import com.kh.oneTrillionCompany.dao.OrdersDao;
 import com.kh.oneTrillionCompany.service.AttachService;
 import com.kh.oneTrillionCompany.vo.CartVO;
@@ -27,13 +29,15 @@ public class CartController {
 	private ItemDao itemDao;
 	@Autowired
 	private OrdersDao ordersDao;
+	@Autowired
+	private OrderDetailDao orderDetailDao;
 	
 	@Autowired
 	private AttachService attachService;
 
 	//장바구니 목록
  
-	@RequestMapping("/list")
+	@GetMapping("/list")
 	public String list(Model model, HttpSession session) {
 			//로그인한 사용자 조회
 			String memberId = (String) session.getAttribute("createdUser");
@@ -50,7 +54,9 @@ public class CartController {
 	}
 	@PostMapping("/list") //장바구니-> 주문창으로 갈때 orders 테이블에 등록f
 	public String list(@RequestParam List<CartVO>list) { //list.jsp에서 List<CartVO>로 값을 받아서 등록
-		ordersDao.insert(list);
+		int orderNo=ordersDao.sequence();
+		ordersDao.insertIntoOrdersTable(list,orderNo);
+		orderDetailDao.insertByCartVOList(list,orderNo);
 		return "redirect:/order/pay";
 	}
 

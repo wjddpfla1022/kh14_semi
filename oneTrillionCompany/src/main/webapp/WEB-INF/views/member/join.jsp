@@ -349,7 +349,7 @@
      </script>
 </head>
 <body>
-    <form class="check-form" action="#" method="post" autocomplete="off">
+    <form class="check-form" action="join" method="post" autocomplete="off">
         <div class="container w-400 my-50">
         <div class="row center">
             <h1>회원가입</h1>

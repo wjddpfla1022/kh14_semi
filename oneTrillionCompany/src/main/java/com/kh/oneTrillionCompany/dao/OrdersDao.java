@@ -20,39 +20,63 @@ public class OrdersDao {
 	@Autowired
 	private OrdersMapper ordersMapper;
 	
-	@Autowired
-	private CartDao cartDao;
+	//주문서 한개 검색(주문번호로)
+	public OrdersDto selectOne(int ordersNo) {
+		String sql="select * from orders where order_no=?";
+		Object[] data = {ordersNo};
+		List<OrdersDto> list = jdbcTemplate.query(sql, ordersMapper, data);
+		return list.isEmpty()?null:list.get(0);
+	}
+	//주문서 한개 검색(멤버 아이디로)
+	public OrdersDto selectOne(String memberId) {
+		String sql="select * from orders where order_buyer=?";
+		Object[] data = {memberId};
+		List<OrdersDto> list = jdbcTemplate.query(sql, ordersMapper, data);
+		return list.isEmpty()?null:list.get(0);
+	}
 	//주문 현황 목록(R)
 	public List<OrdersDto> selectList() {
-		String sql = "select * from orders order by orders_no=?";
+		String sql = "select * from orders order by order_no asc";
 		return jdbcTemplate.query(sql, ordersMapper);
 	}
-	//주문 현황 삭제(D)
-	public boolean delete (int orderNo) {
-		String sql = "delete orders where orders_no=?";
-		Object[]data = {orderNo};
+	//주문 현황 삭제(D)(주문번호로)
+	public boolean delete (int ordersNo) {
+		String sql = "delete orders where order_no=?";
+		Object[]data = {ordersNo};
+		return jdbcTemplate.update(sql, data)>0;
+	}
+	//주문 현황 삭제(아이디로)
+	public boolean delete (String memberId) {
+		String sql = "delete orders where order_buyer =?";
+		Object[] data= {memberId};
 		return jdbcTemplate.update(sql, data)>0;
 	}
 	
 	//특정 회원의 주문 목록 조회
-	public List<OrdersDto> selectListByOrders(String orderMemberId){
+	public List<OrdersDto> selectListByOrder(String orderMemberId){
 		String sql = "select * from orders where order_buyer = ? order by order_no desc";
 		Object[] data = {orderMemberId};
 		return jdbcTemplate.query(sql, ordersMapper, data);
 	}
 	//장바구니 -> 주문으로 이동시 필요한 주문 테이블 생성
-	public void insert(List<CartVO>list) {
-		int payment=0;
+	public void insertIntoOrdersTable(List<CartVO>list,int orderNo) {
+		long payment=0L;
 		String buyer = list.get(0).getBuyer();
 		for(int i=0; i<list.size(); i++) {
 			int cnt=list.get(i).getCartItemCnt();
 			int price=list.get(i).getCartItemPrice();
-			payment+=cnt*price;
+			if(cnt==0) continue;
+			payment+=(long)(cnt*price);
 		}
+		if(payment==0L) return ;
 		String sql= "insert into orders(order_no, order_price, order_buyer) "
-				+ "values(order_seq.nextval,?,?)";
-		Object[] data= {payment, buyer};
+				+ "values(?,?,?)";
+		Object[] data= {orderNo,payment, buyer};
 		jdbcTemplate.update(sql, data);
+	}
+	public int sequence() {
+		String sql="select order_seq.nextval from dual";
+		return jdbcTemplate.queryForObject(sql, int.class);
 	}
 
 
