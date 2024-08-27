@@ -5,7 +5,44 @@
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
-<div class="container w-600">
+<style>
+
+	.custom-shop .custom-menu {
+	    display: inline-block; /* 블록 요소를 인라인 블록으로 변경 */
+	    width: auto; /* 자동 너비로 변경 */
+	    margin: 0; /* 여백 초기화 */
+	    padding: 30px 30px;
+	    border-right: 1px solid #e9e9e9;
+	    border-bottom: 1px solid #e9e9e9;
+	    box-sizing: border-box;
+	    text-align: center;
+	    list-style-type: none;
+	}
+
+	
+	.custom-shop .custom-menu strong {
+	    font-size: 18px;
+	   	font-weight: bolder;
+	   	color : black;
+	}
+	
+	.custom-shop .custom-menu span {
+	    display: block;
+  	   	color : black;
+	}
+	
+	.custom-shop .custom-menu a {
+	    display: block;
+	    padding: 0 0 15px;
+	    text-decoration: none;
+	}
+	
+	.custom-shop .custom-menu a:hover {
+	    text-decoration: none;
+	}
+</style>
+
+<div class="container w-700">
 	<div class="row center">
 		<h1>${memberDto.memberId}님의 정보</h1>
 	</div>
@@ -60,31 +97,15 @@
 			</tr>
 		</table>
 	</div>
-	<div class="row">
-		<h2>주문내역</h2>
-		
-	</div>
-	<div class="row">
-		<h2>리뷰</h2>
-			<c:choose>
-				<c:when test="${reviewWriteList.isEmpty()}">
-					<div class="row center">
-						리뷰가 존재하지 않습니다
-					</div>
-				</c:when>
-				<c:otherwise>
-					<c:forEach var="reviewDto" items="${reviewWriteList}">
-						<div class="row">
-							<span>별점:${reviewDto.reviewScore}점</span>
-							<span>${reviewDto.reviewContent}</span>
-						</div>
-					</c:forEach>
-				</c:otherwise>
-			</c:choose>
-	</div>
-	<div class="row">
-		<h2>문의</h2>
-		
+	<div class="row custom-shop">
+		<ul>
+			<li class=custom-menu>
+					<a href="#">
+						<strong>Order</strong>
+						<span>주문내역 조회</span>
+					</a>
+			</li>
+		</ul>
 	</div>
 	
 	<div class="float-box">

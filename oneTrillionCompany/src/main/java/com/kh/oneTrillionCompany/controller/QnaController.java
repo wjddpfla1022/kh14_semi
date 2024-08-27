@@ -72,11 +72,14 @@ public class QnaController {
 	}
 	@PostMapping("/update")
 	public String update(@ModelAttribute QnaDto qnaDto) {
-		QnaDto originDto = qnaDao.selectOne(qnaDto.getQnaNo());	//이전 글 조회
-		if(originDto == null) 
-			throw new TargetNotFoundException("존재하지 않는 글 번호");
+		boolean result = qnaDao.update(qnaDto);
+		if(result == false) throw new TargetNotFoundException("존재하지 않는 글 번호");
 		
-		qnaDao.update(qnaDto);
+//		QnaDto originDto = qnaDao.selectOne(qnaDto.getQnaNo());	//이전 글 조회
+//		if(originDto == null) 
+//			throw new TargetNotFoundException("존재하지 않는 글 번호");
+		
+		
 		return "redirect:detail?qnaNo="+qnaDto.getQnaNo();
 	}
 	

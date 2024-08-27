@@ -45,6 +45,9 @@
             <div class="row center">
                 <h2>1:1문의 등록</h2>
             </div>
+	         <div class="row">
+	            <input type="hidden" name="qnaNo" value="${qnaDto.qnaNo}">
+	        </div>
             <!-- 문의 유형 선택 창 -->
             <div class="row">
                 <select class="row qna-select w-100" name="qnaTitle" >
@@ -57,7 +60,7 @@
             </div>
             <!-- 내용 입력 창 -->
             <div class="row qna-write ">
-                <textarea placeholder="내용을 입력하세요." name="qnaContent">${qnaDto.qnaContent}</textarea>
+                <textarea placeholder="내용을 입력하세요." name="qnaContent" >${qnaDto.qnaContent}</textarea>
             </div>
             <div class="row right">
                 <button type="submit" class="btn btn-positive btn-regi">수정</button>
