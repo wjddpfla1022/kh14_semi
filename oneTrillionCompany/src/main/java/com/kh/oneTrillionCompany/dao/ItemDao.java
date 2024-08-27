@@ -86,14 +86,14 @@ public class ItemDao {
 		return jdbcTemplate.update(sql, data)>0;
 	}
 	
-	//상품 이미지 조회
+	//상품 이미지 연결
 	public void connect(int itemNo, int attachNo) {
-		String sql = "insert into image(item, attach) values(?, ?)";
+		String sql = "insert into image(item_no, attach) values(?, ?)";
 		Object[] data = {itemNo, attachNo};
 		jdbcTemplate.update(sql, data);
 	}
 	
-	//상품 이미지 연결
+	//상품 이미지 조회
 	public int findImage(int itemNo) {
 		String sql = "select attach from image where item=?";
 		Object[] data = {itemNo};

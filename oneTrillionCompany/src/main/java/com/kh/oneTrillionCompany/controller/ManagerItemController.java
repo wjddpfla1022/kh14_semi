@@ -1,5 +1,6 @@
 package com.kh.oneTrillionCompany.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,16 +11,21 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.oneTrillionCompany.dao.ItemDao;
 import com.kh.oneTrillionCompany.dto.ItemDto;
 import com.kh.oneTrillionCompany.exception.TargetNotFoundException;
+import com.kh.oneTrillionCompany.service.AttachService;
 import com.kh.oneTrillionCompany.vo.PageVO;
 
 @Controller
 @RequestMapping("/manager/item")
 public class ManagerItemController {
 
+	@Autowired
+	private AttachService attachService;
+	
 	@Autowired
 	private ItemDao itemDao;
 	
@@ -53,11 +59,20 @@ public class ManagerItemController {
 		return "/WEB-INF/views/manager/item/insert.jsp";
 	}
 	@PostMapping("/insert")
-	public String insert(@ModelAttribute ItemDto itemDto) {
+	public String insert(@ModelAttribute ItemDto itemDto, MultipartFile attach) throws IllegalStateException, IOException {
 		itemDao.insert(itemDto);
-		
+		if(attach.isEmpty() == false) {
+			// 2. 첨부파일이 있다면 등록
+			// 2-1. 시퀀스 생성
+			int attachNo = attachService.save(attach);
+			// 3. 회원 이미지에 연결정보 저장
+			itemDao.connect(itemDto.getItemNo(), attachNo);
+			
+		}
 		return "redirect:list";
 	}
+	
+	
 	
 	//상품 수정
 	@GetMapping("/update")
@@ -86,6 +101,7 @@ public class ManagerItemController {
 	}
 	
 	// 이미지
+
 	@RequestMapping("/image")
 	public String image(@RequestParam int itemNo) {
 		try {

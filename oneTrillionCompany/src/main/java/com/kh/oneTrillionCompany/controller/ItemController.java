@@ -64,6 +64,7 @@ public class ItemController {
 		return "redirect:list";
 	}
 
+	
 	// 이미지
 	@RequestMapping("/image")
 	public String image(@RequestParam int itemNo) {
@@ -72,7 +73,7 @@ public class ItemController {
 			return "redirect:/attach/download?attachNo=" + attachNo;
 				}
 				catch(Exception e){
-					return "redirect:/images/200.png";
+					return "redirect:https://placehold.co/200";
 				}
 			}
 }
