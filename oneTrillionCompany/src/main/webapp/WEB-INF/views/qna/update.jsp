@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
   <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
    <style>
@@ -51,11 +51,10 @@
             <!-- 문의 유형 선택 창 -->
             <div class="row">
                 <select class="row qna-select w-100" name="qnaTitle" >
-                    <option value="">${qnaDto.qnaTitle}</option>
-                    <option value="배송 문의">배송 문의</option>
-                    <option value="주문/결제 문의">주문/결제 문의</option>
-                    <option value="교환/환불 문의">교환/환불 문의</option>
-                    <option value="기타 문의">기타 문의</option>
+                	<option value="배송 문의" <c:if test="${qnaDto.qnaTitle == '배송 문의'}">selected</c:if>>배송 문의</option>
+                    <option value="주문/결제 문의"  <c:if test="${qnaDto.qnaTitle == '주문/결제 문의'}">selected</c:if>>주문/결제 문의</option>
+                    <option value="교환/환불 문의" <c:if test="${qnaDto.qnaTitle == '교환/환불 문의'}">selected</c:if>>교환/환불 문의</option>
+                    <option value="기타 문의" <c:if test="${qnaDto.qnaTitle == '기타 문의'}">selected</c:if>>기타 문의</option>
                 </select>
             </div>
             <!-- 내용 입력 창 -->

@@ -6,39 +6,50 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 <style>
-
-	.custom-shop .custom-menu {
-	    display: inline-block; /* 블록 요소를 인라인 블록으로 변경 */
-	    width: auto; /* 자동 너비로 변경 */
-	    margin: 0; /* 여백 초기화 */
-	    padding: 30px 30px;
-	    border-right: 1px solid #e9e9e9;
-	    border-bottom: 1px solid #e9e9e9;
-	    box-sizing: border-box;
-	    text-align: center;
-	    list-style-type: none;
+	.flex-box {
 	}
 
-	
-	.custom-shop .custom-menu strong {
+	.custom-menu {
+	    display: inline-block; /* li를 인라인 블록으로 설정하여 가로로 배치 */
+	    padding: 30px; /* 여백 설정 */
+	    border: 1px solid #e9e9e9;
+	    border-right : none;
+	    list-style-type: none; /* 목록 스타일 제거 */
+	}
+	.custom-last-menu {
+	    display: inline-block; /* li를 인라인 블록으로 설정하여 가로로 배치 */
+	    padding: 30px; /* 여백 설정 */
+	    border: 1px solid #e9e9e9;
+	    border-left : none;
+	    list-style-type: none; /* 목록 스타일 제거 */
+	}
+	/* flex-box의 ul  */
+	.flex-box ul {
+	    text-align: center; 
+	}
+	/* 상단부 텍스트 */
+	#top-location {
 	    font-size: 18px;
 	   	font-weight: bolder;
 	   	color : black;
 	}
-	
-	.custom-shop .custom-menu span {
+	/* 하단부 텍스트 */
+	#bottom-location {	
+	font-size: 13px;
+	}
+	/* flex-box 안에 모든 span 태그 */
+	.flex-box span {
 	    display: block;
   	   	color : black;
+  	   	text-align: center;
 	}
-	
-	.custom-shop .custom-menu a {
-	    display: block;
-	    padding: 0 0 15px;
+	/* flex-box 안에 모든 a태그 */
+	.flex-box a {
 	    text-decoration: none;
 	}
 	
-	.custom-shop .custom-menu a:hover {
-	    text-decoration: none;
+	.custom-menu a:hover {
+	    color : red;
 	}
 </style>
 
@@ -97,15 +108,37 @@
 			</tr>
 		</table>
 	</div>
-	<div class="row custom-shop">
-		<ul>
-			<li class=custom-menu>
+	<div class="flex-box">
+			<div class=custom-menu>
 					<a href="#">
-						<strong>Order</strong>
-						<span>주문내역 조회</span>
+						<span id="top-location">Order</span>
+						<span id="bottom-location">주문내역 조회</span>
 					</a>
-			</li>
-		</ul>
+			</div>
+			<div class=custom-menu>
+					<a href="#">
+						<span id="top-location">Q&A</span>
+						<span id="bottom-location">문의내역 조회</span>
+					</a>
+			</div>			
+			<div class=custom-menu>
+					<a href="#">
+						<span id="top-location">Review</span>
+						<span id="bottom-location">리뷰내역 조회</span>
+					</a>
+			</div>			
+			<div class=custom-last-menu>
+					<a href="#">
+						<span id="top-location">Block</span>
+						<span id="bottom-location">차단내역 조회</span>
+					</a>
+			</div>	
+			<div class=custom-last-menu>
+					<a href="#">
+						<span id="top-location">Order</span>
+						<span id="bottom-location">#</span>
+					</a>
+			</div>	
 	</div>
 	
 	<div class="float-box">
