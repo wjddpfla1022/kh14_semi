@@ -23,7 +23,7 @@ public class CartRestController {
 	//장바구니 수량 증가 DB 업데이트
 	@PostMapping("/cartCntUpdate")
 	public void cartCntUpdate(@RequestParam int cartNo, 
-													@RequestParam int cartCnt, HttpSession session){
+							@RequestParam int cartCnt, HttpSession session){
 		String cartBuyer = (String) session.getAttribute("createdUser");
 		CartDto cartDto = new CartDto();
 		cartDto.setCartNo(cartNo);
@@ -31,5 +31,14 @@ public class CartRestController {
 		cartDto.setCartBuyer(cartBuyer);
 		
 		cartDao.updateCartCnt(cartDto);
+	}
+	
+	//장바구니 총구매금액
+	@PostMapping("/cartTotalPriceUpdate")
+	public Integer cartTotalPriceupdat(HttpSession session) {
+		String cartBuyer = (String) session.getAttribute("createdUser");
+		Integer cartTotalPrice = cartDao.sumCartTotalPrice(cartBuyer);
+		cartTotalPrice = cartTotalPrice != null ? cartTotalPrice : 0;
+		return cartTotalPrice;
 	}
 }
