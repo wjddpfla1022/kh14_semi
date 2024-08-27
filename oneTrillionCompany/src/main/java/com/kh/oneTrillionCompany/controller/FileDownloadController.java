@@ -22,9 +22,11 @@ public class FileDownloadController {
 	@Autowired
 	private AttachService attachService;
 	
+	
+	
 	@RequestMapping("/download")
-	public ResponseEntity<ByteArrayResource> download(@RequestParam int attachmentNo) throws IOException{
-		return attachService.find(attachmentNo);
+	public ResponseEntity<ByteArrayResource> download(@RequestParam int attachNo) throws IOException{
+		return attachService.find(attachNo);
 	}
 	
 }
