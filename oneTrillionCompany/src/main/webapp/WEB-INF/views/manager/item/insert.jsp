@@ -8,25 +8,30 @@
         <div class="row center">
             <h2>상품등록</h2>
         </div>
-        <form action="insert" method="post" autocomplete="off">
+        <form action="insert" method="post" enctype="multipart/form-data" autocomplete="off">
+                
+                <label>사진 등록</label>
             <div class="row">
+            	<input type="file" name="attach" class="field">
+            </div>
                 <label>상품명</label>
+            <div class="row">
                 <input type="text" name="itemName" class="field">
             </div>
-            <div class="row">
                 <label>정가</label>
+            <div class="row">
                 <input type="number" name="itemPrice" class="field">
             </div>
-            <div class="row">
                 <label>판매가</label>
+            <div class="row">
                 <input type="number" name="itemSalePrice" class="field">
             </div>
-            <div class="row">
                 <label>재고 수</label>
+            <div class="row">
                 <input type="number" name="itemCnt" class="field">
             </div>
-            <div class="row">
                 <label>사이즈</label>
+            <div class="row">
                 <select name="itemSize" class="field" style="width: 10em;">
                 	<option value="S">Small</option>
                 	<option value="M">Medium</option>
@@ -104,12 +109,12 @@
                     <option value="34">데님 반바지</option>
                 </select>
             </div>
-            <div class="row">
                 <label>할인율</label>
+            <div class="row">
                 <input type="number" name="itemDiscountRate" class="field">
             </div>
-            <div class="row">
             	<label>색상</label>
+            <div class="row">
             	<select name="itemColor" class="field" style="width: 10em;">
             		<option value="">선택없음</option>
             		<option value="black">검정</option>
