@@ -123,10 +123,10 @@
 					
 					$(html).find(".reply-writer").text(response[i].replyWriter);
 	                $(html).find(".reply-content").text(response[i].replyContent);
-					$(html).find(".reply-info > .time").text(response[i].replyTime);
 					//시간형식 지정
-					var time = moment(response[i].replyTime).format("YYYY-MM-DD dddd HH:mm:ss");
+					var time = moment(response[i].replyTime, "YYYY-MM-DD HH:mm").format("YYYY-MM-DD dddd HH:mm");
                     $(html).find(".reply-info > .time").text(time);
+// 					$(html).find(".reply-info > .time").text(response[i].replyTime);
 					
 					if(response[i].replyWriter == currentUser) { //작성자가 현재 사용자(currentUser)라면
 						$(html).find(".reply-update-btn , .reply-delete-btn").attr("data-reply-no", response[i].replyNo);	// 수정,삭제 버튼을 생성
@@ -147,8 +147,8 @@
 		    
 		    // 기존 입력화면 제거
 		    $(".reply-wrapper").show();
-		    $(".reply-update-wrapper").remove(); 
-
+		    $(".reply-input").hide(); 
+		    $(".reply-add-btn").hide();
 
 		    var template = $("#reply-update-template").text();
 		    var html = $.parseHTML(template);
@@ -170,6 +170,9 @@
 		$(document).on("click",".reply-cancel-btn", function(){
 			$(this).parents(".reply-update-wrapper").prev(".reply-wrapper").show();
 			$(this).parents(".reply-update-wrapper").remove();
+			
+			$(".reply-input").show();
+			$(".reply-add-btn").show();
 		});
 		
 		//수정 완료
@@ -195,6 +198,8 @@
 					loadList();
 				}
 			})
+			$(".reply-input").show();
+			$(".reply-add-btn").show();
 		});
 		
 		//댓글 삭제
