@@ -17,7 +17,7 @@
 	src="https://cdn.jsdelivr.net/npm/lightpick@1.6.2/lightpick.min.js"></script>
 <!-- 내가 만든 스타일 시트를 불러오는 코드 -->
 <link rel="stylesheet" type="text/css" href="/css/commons.css">
-<link rel="stylesheet" type="text/css" href="/css/test.css">
+<!-- <link rel="stylesheet" type="text/css" href="/css/test.css"> -->
 <!-- font awesome-->
 <link rel="stylesheet" type="text/css"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
@@ -143,8 +143,15 @@
 							<ul>
 								<li><a href="#">항목1</a></li>
 							</ul></li>
-						<li><a href="/cart/list"><i class="fa-solid fa-cart-shopping"></i></a>
-							<!-- 장바구니 --></li>
+							
+							<!-- 마이페이지 -->
+							<li>
+								<a href="/member/mypage"><i class="fa-solid fa-user"></i></a>
+							</li>
+							<!-- 장바구니 -->
+							<li>
+								<a href="/cart/list"><i class="fa-solid fa-cart-shopping"></i></a>
+							</li>
 					</ul>
 				</div>
 			</c:if>
@@ -161,8 +168,14 @@
 							<ul>
 								<li><a href="#">항목1</a></li>
 							</ul></li>
-						<li><a href="/cart/list"><i class="fa-solid fa-cart-shopping"></i></a>
-							<!-- 장바구니 --></li>
+							<!-- 마이페이지 -->
+							<li>
+								<a href="/cart/list"><i class="fa-solid fa-user"></i></a>
+							</li>
+							<!-- 장바구니 -->
+							<li>
+								<a href="/cart/list"><i class="fa-solid fa-cart-shopping"></i></a>
+							</li>
 					</ul>
 				</div>
 			</c:if>
@@ -179,10 +192,13 @@
 						<li class="right-menu"><a href="/member/logout">로그아웃</a></li>
 						<li><a href="#">주문 / 배송조회</a></li>
 						<li><a href="/manager/item/list">상품 조회</a></li>
-						<li><a href="/qna/list">1:1문의</a></li>
-						<li><a href="/manager/member/list">회원</a>
-							</li>
 						
+							<li><a href="#">관리자 메뉴</a>
+								<ul>
+									<li><a href="/manager/member/list">회원 검색</a></li>
+									<li><a href="/qna/list">1:1문의</a></li>	
+								</ul>
+							</li>
 					</ul>
 
 

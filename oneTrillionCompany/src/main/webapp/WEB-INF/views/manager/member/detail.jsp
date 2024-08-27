@@ -5,7 +5,55 @@
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
-<div class="container w-600">
+<style>
+	.flex-box {
+	}
+
+	.custom-menu {
+	    display: inline-block; /* li를 인라인 블록으로 설정하여 가로로 배치 */
+	    padding: 30px; /* 여백 설정 */
+	    border: 1px solid #e9e9e9;
+	    border-right : none;
+	    list-style-type: none; /* 목록 스타일 제거 */
+	}
+	.custom-last-menu {
+	    display: inline-block; /* li를 인라인 블록으로 설정하여 가로로 배치 */
+	    padding: 30px; /* 여백 설정 */
+	    border: 1px solid #e9e9e9;
+	    border-left : none;
+	    list-style-type: none; /* 목록 스타일 제거 */
+	}
+	/* flex-box의 ul  */
+	.flex-box ul {
+	    text-align: center; 
+	}
+	/* 상단부 텍스트 */
+	#top-location {
+	    font-size: 18px;
+	   	font-weight: bolder;
+	   	color : black;
+	}
+	/* 하단부 텍스트 */
+	#bottom-location {	
+	font-size: 13px;
+	}
+	/* flex-box 안에 모든 span 태그 */
+	.flex-box span {
+	    display: block;
+  	   	color : black;
+  	   	text-align: center;
+	}
+	/* flex-box 안에 모든 a태그 */
+	.flex-box a {
+	    text-decoration: none;
+	}
+	
+	.custom-menu a:hover {
+	    color : red;
+	}
+</style>
+
+<div class="container w-700">
 	<div class="row center">
 		<h1>${memberDto.memberId}님의 정보</h1>
 	</div>
@@ -60,31 +108,37 @@
 			</tr>
 		</table>
 	</div>
-	<div class="row">
-		<h2>주문내역</h2>
-		
-	</div>
-	<div class="row">
-		<h2>리뷰</h2>
-			<c:choose>
-				<c:when test="${reviewWriteList.isEmpty()}">
-					<div class="row center">
-						리뷰가 존재하지 않습니다
-					</div>
-				</c:when>
-				<c:otherwise>
-					<c:forEach var="reviewDto" items="${reviewWriteList}">
-						<div class="row">
-							<span>별점:${reviewDto.reviewScore}점</span>
-							<span>${reviewDto.reviewContent}</span>
-						</div>
-					</c:forEach>
-				</c:otherwise>
-			</c:choose>
-	</div>
-	<div class="row">
-		<h2>문의</h2>
-		
+	<div class="flex-box">
+			<div class=custom-menu>
+					<a href="#">
+						<span id="top-location">Order</span>
+						<span id="bottom-location">주문내역 조회</span>
+					</a>
+			</div>
+			<div class=custom-menu>
+					<a href="#">
+						<span id="top-location">Q&A</span>
+						<span id="bottom-location">문의내역 조회</span>
+					</a>
+			</div>			
+			<div class=custom-menu>
+					<a href="#">
+						<span id="top-location">Review</span>
+						<span id="bottom-location">리뷰내역 조회</span>
+					</a>
+			</div>			
+			<div class=custom-last-menu>
+					<a href="#">
+						<span id="top-location">Block</span>
+						<span id="bottom-location">차단내역 조회</span>
+					</a>
+			</div>	
+			<div class=custom-last-menu>
+					<a href="#">
+						<span id="top-location">Order</span>
+						<span id="bottom-location">#</span>
+					</a>
+			</div>	
 	</div>
 	
 	<div class="float-box">
