@@ -11,42 +11,11 @@
       <!-- my css -->
       <link rel="stylesheet" type="text/css" href="/css/commons.css">
       <!-- <link rel="stylesheet" type="text/css" href="./test.css"> -->
-      
+      <!--  font awesome cdn -->
+      <link rel="stylesheet" type="text/css"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <style>
-       .orderpage >.container{
-            margin: 50px auto;
-            background-color: #dfe6e9;
-            border-radius:0.5em;
-        } 
-        .field{
-            border-radius:0.5em;
-            background-color: transparent;
-        }
-        .ordersHeader{
-            justify-content: center; 
-            align-items: center;
-        }
-        .title{
-            font-size:28px;
-            font-weight:bold;
-        }
-        .title2{
-            font-size:24px;
-        }
-        .request-detail{
-            border:0.1em solid #b2bec3; 
-        }
-        .modal{
-            margin:0;
-            padding:0;
-        }
-        .modal > .row{
-            margin:0 !important;
-            padding:0 !important;
-        }
-        .loca-now{
-        	justify-content :flex-end;
-        }
+    	
     </style>
 	<!-- jquery cdn -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -58,7 +27,8 @@
                 
                 if (selectedValue === 'lookAtThis') {
                     memoContainer.html('<input type="text" class="field w-100" style="border-top:1px solid #636e72" placeholder="직접 입력하세요">');
-                } else {
+                } 
+                else {
                     var selectedText = $("select[name='requestMemo'] option:selected").text();
                     memoContainer.text(selectedText);
                 }
@@ -82,8 +52,8 @@
 	            </div>
 	        </div>
         <form action="pay" method="post">
-	        <div class="flex-box w-60">
-	            <div class="container w-600 my-20">
+	        <div class="flex-box w-100">
+	            <div class="container w-500 my-20">
 	                <div class="row title2 p-20">
 	                    <label>배송지</label>
 	                </div>
@@ -97,7 +67,15 @@
 	                        안심번호 사용
 	                    </div>
 	                    <div class="row">
-	                        ${memberDto.memberAddress1} ${memberDto.memberAddress2} (${memberDto.memberPost})
+	                    <c:choose>
+							<c:when test="${memberDto.memberAddress1}!=null">
+	                        	${memberDto.memberAddress1} ${memberDto.memberAddress2} (${memberDto.memberPost})
+							</c:when>
+							<c:otherwise>
+							<input type="text" placeholder="주소를 입력해주세요" readonly>
+							</c:otherwise>	                    
+	                    </c:choose>
+	                    
 	                    </div>
 	                    <hr>
 	                    <div class="row">
@@ -126,12 +104,22 @@
 	                </div>
 	            </div>
 	        </div>
-	        <div class="flex-box modal w-30">
+	        <div class="sidebar">
 	            <div class="row">
-	                <div class="container w-100" style="min-height:200px">
+	                <div class="container" style="min-height:200px">
 	                	<div class="row title">
 	                		결제상세
 	                		<div class="container">
+	                			<div class="row w-100">
+		                		<div class="flex-box column-2 w-100" style="font-size:18px">
+		                			<div class="row">
+			                			포인트 결제
+		                			</div>
+		                			<div class="row right">
+		                				${memberDto.memberPoint} <i class="fa-solid fa-coins"></i>
+		                			</div>
+		                			</div>
+		                		</div>
 	                		</div>
 	                	</div>
 	                </div>

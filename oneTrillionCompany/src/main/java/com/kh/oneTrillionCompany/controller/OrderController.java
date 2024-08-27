@@ -16,8 +16,10 @@ import com.kh.oneTrillionCompany.dao.ItemDao;
 import com.kh.oneTrillionCompany.dao.MemberDao;
 import com.kh.oneTrillionCompany.dao.OrderDetailDao;
 import com.kh.oneTrillionCompany.dao.OrdersDao;
+import com.kh.oneTrillionCompany.dto.MemberDto;
 import com.kh.oneTrillionCompany.dto.OrderDetailDto;
 import com.kh.oneTrillionCompany.dto.OrdersDto;
+import com.kh.oneTrillionCompany.exception.TargetNotFoundException;
 import com.kh.oneTrillionCompany.vo.OrderVO;
 
 import jakarta.servlet.http.HttpSession;
@@ -38,8 +40,11 @@ public class OrderController {
 	public String pay(Model model,HttpSession session) {
 		//세션 아이디 검사 및 보내기 
 		String memberId=(String) session.getAttribute("createdUser");
-		if(memberId ==null) return "error";//TargetNotFoundException 자리
-		model.addAttribute("memberId",memberId);
+		if(memberId ==null) new TargetNotFoundException();//TargetNotFoundException 자리
+		MemberDto memberDto = memberDao.selectOne(memberId);
+		memberDto.setMemberPw(null); //비밀번호를 지우고 view로 전송
+		System.out.println(memberDto);
+		model.addAttribute("memberDto",memberDto);
 		
 		//결제 세부목록 보내기
 		int orderNo=ordersDao.selectOne(memberId).getOrderNo();
