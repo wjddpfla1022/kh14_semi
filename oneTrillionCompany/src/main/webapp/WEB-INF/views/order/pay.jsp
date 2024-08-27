@@ -15,7 +15,29 @@
       <link rel="stylesheet" type="text/css"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <style>
-    	
+    	.orderpage{
+    		display:flex;
+    		flex-direction:column;
+    		min-width:1152px;
+    		min-height:100%;
+    		background-color:#f3f5f7;
+    	}
+    	.area-address{
+    	    font-size: 16px;
+		    line-height: 22px;
+		    letter-spacing: -0.3px;
+		    margin-top: 8px;
+		    color: #404048;
+		    font-weight: 500;
+		    word-wrap: break-word;
+    	}
+    	.container{
+		    margin-top: 12px;
+		    padding: 20px 16px;
+		    border-radius: 12px;    
+		    background-color:white;
+		    	
+    	}
     </style>
 	<!-- jquery cdn -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -66,13 +88,13 @@
 	                        <input type="checkbox">
 	                        안심번호 사용
 	                    </div>
-	                    <div class="row">
+	                    <div class="area-address">
 	                    <c:choose>
-							<c:when test="${memberDto.memberAddress1}!=null">
+							<c:when test="${memberDto.memberAddress1!=null}">
 	                        	${memberDto.memberAddress1} ${memberDto.memberAddress2} (${memberDto.memberPost})
 							</c:when>
 							<c:otherwise>
-							<input type="text" placeholder="주소를 입력해주세요" readonly>
+								아래에 주소를 입력해주세요
 							</c:otherwise>	                    
 	                    </c:choose>
 	                    
@@ -104,9 +126,8 @@
 	                </div>
 	            </div>
 	        </div>
-	        <div class="sidebar">
 	            <div class="row">
-	                <div class="container" style="min-height:200px">
+	                <div class="container" style="width:350px;height:2000px">
 	                	<div class="row title">
 	                		결제상세
 	                		<div class="container">
@@ -124,7 +145,6 @@
 	                	</div>
 	                </div>
 	            </div>
-	        </div>
         </form>
     </div>
     </body>
