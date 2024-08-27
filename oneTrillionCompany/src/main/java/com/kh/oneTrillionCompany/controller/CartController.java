@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.kh.oneTrillionCompany.dao.CartDao;
 import com.kh.oneTrillionCompany.dao.ItemDao;
 import com.kh.oneTrillionCompany.dao.OrdersDao;
+import com.kh.oneTrillionCompany.dto.ItemDto;
 import com.kh.oneTrillionCompany.service.AttachService;
 import com.kh.oneTrillionCompany.vo.CartVO;
 
@@ -41,11 +42,14 @@ public class CartController {
 				//장바구니 목록, 상품 목록 조회
 				model.addAttribute("cartList", cartDao.selectList(memberId));
 				model.addAttribute("itemList", itemDao.selectList());
+			
+				//장바구니 주문 총 합계, 장바구니 테이블이 비어 있으면 null 들어가므로 0 처리
+				Integer cartTotalPrice = cartDao.sumCartTotalPrice(memberId);
+				model.addAttribute("cartTotalPrice", (cartTotalPrice != null ? cartTotalPrice : 0));
+				//장바구니에 담긴 상품 갯수(상품별로)
+				Integer cartItemCnt = cartDao.lastCartNumber(memberId);
+				model.addAttribute("cartItemCnt", (cartItemCnt != null ? cartItemCnt : 0));
 			}
-			//장바구니 주문 총 합계, 장바구니 테이블이 비어 있으면 null 들어가므로 처리
-			Integer cartTotalPrice = cartDao.sumCartTotalPrice(memberId);
-			model.addAttribute("cartTotalPrice", (cartTotalPrice != null ? cartTotalPrice : 0));
-
 			return "/WEB-INF/views/cart/list.jsp"; 
 	}
 	@PostMapping("/list") //장바구니-> 주문창으로 갈때 orders 테이블에 등록f
@@ -118,7 +122,9 @@ public class CartController {
 //	//장바구니 담기 구현
 	// -임시 페이지 제작
 	@RequestMapping("/tempItem")
-	public String tempItem() {
+	public String tempItem(@RequestParam int itemNo, Model model) {
+		ItemDto itemdto = cartDao.selectOne(itemNo);
+		model.addAttribute("itemdto", itemdto);
 		return "/WEB-INF/views/cart/tempItem.jsp";
 	}
 	

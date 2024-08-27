@@ -34,7 +34,7 @@
     border-bottom: 1px solid #ddd !important;
 	}
 	
-	/* 주문 삭제버튼 스타일 */
+	/* 주문 삭제 버튼 스타일 */
 	.link-box {
 		width: 100%;
 		border: none;
@@ -44,14 +44,13 @@
 		text-align: center; 
 	}
 	
-	/* 재고, 장바구니 수량을 숨김 */
+	/* 재고, 수량을 숨김 */
 	.itemCnt-data{ 		
 		display: none !important; 
 	}
 	.cartCnt-data{
 		display: none !important;
 	}
-	
 	/*주문 요약서 스타일*/
 	.cart-payment-Title{
 		color: #000;
@@ -84,13 +83,30 @@
 <script type="text/javascript">
 	//전체선택//
 	$(function(){
-		// 전체선택
-        $('.all-checkbox').change(function() {
+		//전체선택
+        $('.all-checkbox').click(function() {//상태가 변경되면
             var checked = $(this).prop("checked");
-            $(".check-item").prop("checked", checked);
-            $(".check-item").trigger("change");
-        });
-
+            if(checked){
+            	$(".check-item").prop("checked",true);
+            }
+            else{
+            	$(".check-item").prop("checked", false);
+            }      
+         });
+		$(".check-item").click(function(){
+			//체크된 체크박스 개수
+			var checked_length = $(".check-item").prop("checked").length;
+			//전체 체크박수 개수
+			var checkbox_length = $(".check-item").length;
+			
+			if(checked_length == checkbox_length) {
+				$(".all-checkbox").prop("checked", true);
+			}
+			else{
+				$(".all-checkbox").prop("checked",false);
+			}
+		});
+    	
         // 삭제 버튼 누를 때 알림창
         $(".btn-delete").click(function(event) {
             var choice = confirm("장바구니를 비우시겠습니까?");
@@ -129,7 +145,7 @@
            	}
             $cartCntInput.val(cartCntValue);
 			
-	        //수량 서버에 업데이트 
+	        //수량 서버에 업데이트-ajax통신
             var cartNo = parseInt(row.find(".cartCnt-data").text());
 	        $.ajax({
 	        	url: "/rest/cart/cartCntUpdate",
@@ -140,14 +156,22 @@
 	        	},
 	        	success:function(response){
 	        		console.log('장바구니 업데이트 성공'); //나중에 지우기
-	        	},
-	        	error: function(){
-	        		console.log('장바구니 업데이트 실패'); //나중에 지우기
-	        		console.log(cartNo);
+	        		updateCartTotalPrice(); //수량을 업데이트 하면서 같이 ajax통신
 	        	}
 	        });
         });
-       
+        
+        //수량 변경 시-ajax통신 
+        //-상품 총구매금액 - ajax통신
+        function updateCartTotalPrice() {
+	        $.ajax({
+	        	url: "/rest/cart/cartTotalPriceUpdate",
+	        	method: 'post',
+	        	success:function(response){
+	        		$(".cart-total-price").text(response);
+	        	}
+	        });
+        }
 	});
 
 
@@ -167,7 +191,11 @@
 		</div>
 	</c:when>	
 	<c:otherwise>
+	
 	<!-- 결과가 있을때  -->
+	<div class="row cart-item-cnt">
+		<h3>담긴 상품(${cartItemCnt})</h3>
+	</div>
 	<!-- 장바구니 목록 -->
 	<form action="delete" method="post">
 		<table border="1" width="1200">
@@ -222,7 +250,7 @@
 		<tfoot class="right">
 			<tr>
 				<td colspan="10" >
-					상품구매금액: ${cartTotalPrice}원
+					상품구매금액: <span class="cart-total-price">${cartTotalPrice}</span>원
 				</td>
 			</tr>
 		</tfoot>	
@@ -269,7 +297,7 @@
 				<td>
 					<div class="row">
 						<strong>
-							<span>
+							<span class="cart-total-price"> <!-- 배송비 가격 미포 -->
 								${cartTotalPrice}
 							</span>
 								원
@@ -288,13 +316,13 @@
 				<td>
 					<div class="row">
 						<strong>
-							<span>
+							<span class="cart-total-price">
 								 ${cartTotalPrice}
 							</span>
 						</strong>
 					</div>
 				</td>
-			</tr>
+			</tr> 
 		</tbody>
 	</table>
 	</c:otherwise>

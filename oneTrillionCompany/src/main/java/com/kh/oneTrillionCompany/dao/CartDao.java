@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.oneTrillionCompany.dto.CartDto;
 import com.kh.oneTrillionCompany.dto.ItemDto;
 import com.kh.oneTrillionCompany.mapper.CartMapper;
+import com.kh.oneTrillionCompany.mapper.ItemMapper;
 
 @Repository
 public class CartDao {
@@ -19,6 +20,9 @@ public class CartDao {
 	
 	@Autowired
 	private CartMapper cartMapper;
+	//임시 삭제하기 장바구니 등록 상품으로 옮기면
+	@Autowired
+	private ItemMapper itemMapper;
 	
 	//장바구니 등록
 	public void insert(CartDto cartDto) {
@@ -66,9 +70,9 @@ public class CartDao {
 	}
 	
 	//장바구니 상세 정보
-	public CartDto selectOne(String cartNo) {
-		String sql = "select * from cart where cart_no = ?";
-		Object[] data = {cartNo};
+	public CartDto selectOne(String cartBuyer) {
+		String sql = "select * from cart where cart_buyer = ?";
+		Object[] data = {cartBuyer};
 		List<CartDto> list = jdbcTemplate.query(sql, cartMapper, data);
 		return list.isEmpty() ? null : list.get(0);
 	}
@@ -106,4 +110,26 @@ public class CartDao {
 		return jdbcTemplate.queryForObject(sql, Integer.class, data);
 	}
 	
-}
+	public Integer lastCartNumber(String memberId) {
+	    String sql = "select cart_no from("
+	            + "select cart_no from cart "
+	            + "where cart_buyer = ? "
+	            + "order by cart_no desc) where rownum = 1";
+	    Object[] data = {memberId};
+	    try {
+	        return jdbcTemplate.queryForObject(sql, Integer.class, data);
+	    } catch (EmptyResultDataAccessException e) {
+	        // 결과가 없는 경우 0 또는 null 반환
+	        return null; // 또는 return 0; (적절한 기본값으로 수정 가능)
+	    }
+	}
+	
+	//장바구니 담기 테스트 임시 메소드
+	//상품 상세
+		public ItemDto selectOne(int itemNo) {
+			String sql="select * from item where item_no=?";
+			Object[] data= {itemNo};
+			List<ItemDto> list =jdbcTemplate.query(sql, itemMapper,data);
+			return list.isEmpty()?null:list.get(0);
+		}
+}	
