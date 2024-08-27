@@ -127,4 +127,32 @@ public class MemberController {
 		public String resetPwFinish() {
 			return "/WEB-INF/views/member/resetPwFinish.jsp";
 		}
+		
+		//개인정보 변경
+		@GetMapping("/change")
+		public String change(HttpSession session, Model model) {
+			//아이디 추출
+			String memberId = (String)session.getAttribute("createdUser");
+			//회원정보 조회
+			MemberDto memberDto = memberDao.selectOne(memberId);
+			//화면에 전달
+			model.addAttribute("memberDto", memberDto);
+			return "/WEB-INF/views/member/change.jsp"; 
+		}
+		
+		@PostMapping("/change")
+		public String change(HttpSession session,
+									@ModelAttribute MemberDto inputDto) {
+			//기존 정보를 조회
+			String memberId = (String)session.getAttribute("createdUser");
+			MemberDto findDto = memberDao.selectOne(memberId);
+			//비밀번호 검사
+			boolean isValid = inputDto.getMemberPw().equals(findDto.getMemberPw());
+			if(isValid == false) return "redirect:change?error";
+			//변경처리
+			inputDto.setMemberId(memberId);//아이디 추가
+			memberDao.updateMember(inputDto);
+			return "redirect:mypage";
+		}
+		
 }

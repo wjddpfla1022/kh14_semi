@@ -421,6 +421,7 @@
 				             <button type="button" class="btn btn-neutral btn-cert-send" style="width:120px">
 				                <i class="fa-solid fa-paper-plane"></i><span>보내기</span>
 			           		 </button>
+			           		 <div class="row w-100 fail-feedback">올바르지 않은 이메일입니다</div>
 		         		</div>
 	         		</div>
                 </div>

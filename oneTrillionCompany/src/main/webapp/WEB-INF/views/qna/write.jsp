@@ -108,17 +108,13 @@
             </div>
             <!-- 문의 유형 선택 창 -->
             <div class="row">
-                <select class="row qna-select w-100">
+                <select class="row qna-select w-100" name="qnaTitle" >
                     <option value="">문의 유형을 선택해주세요.</option>
-                    <option value="배송">배송</option>
-                    <option value="주문/결제">주문/결제</option>
-                    <option value="교환/환불">교환/환불</option>
-                    <option value="기타문의">기타문의</option>
+                    <option value="배송 문의">배송 문의</option>
+                    <option value="주문/결제 문의">주문/결제 문의</option>
+                    <option value="교환/환불 문의">교환/환불 문의</option>
+                    <option value="기타 문의">기타 문의</option>
                 </select>
-            </div>
-            <!-- 제목 입력 창 -->
-            <div class="row w-100">
-                <input class="qna-title w-100" name="qnaTitle" type="text" placeholder="제목을 입력하세요.">
             </div>
             <!-- 내용 입력 창 -->
             <div class="row qna-write ">

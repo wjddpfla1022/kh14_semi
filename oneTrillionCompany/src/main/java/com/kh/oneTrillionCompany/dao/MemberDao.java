@@ -32,15 +32,16 @@ public class MemberDao {
 	//회원 가입
 	public void insert(MemberDto memberDto) {
 		String sql = "insert into member("
-				+ "member_id, member_pw, member_name, member_nickname, member_email, "
-				+ " member_point, "
+				+ "member_id, member_pw, member_name, member_nickname, member_birth, "//은수형 저주한다
+				+ " member_email, member_point, "
 				+ " member_post, member_address1, member_address2, "
 				+ "member_height, member_weight, member_contact"
 				+ ") "
-				+ "values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+				+ "values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		Object[] data = {
 				memberDto.getMemberId(), memberDto.getMemberPw(),
-				memberDto.getMemberName(), memberDto.getMemberNickname(), memberDto.getMemberEmail(), 
+				memberDto.getMemberName(), memberDto.getMemberNickname(),
+				memberDto.getMemberBirth(), memberDto.getMemberEmail(), 
 				memberDto.getMemberPoint(), memberDto.getMemberPost(), 
 				memberDto.getMemberAddress1(), memberDto.getMemberAddress2(),
 				memberDto.getMemberHeight(), memberDto.getMemberWeight(), 
@@ -68,11 +69,13 @@ public class MemberDao {
 	//개인정보 변경 - 회원용 (닉네임, 주소, 키, 몸무게)
 	public boolean updateMember(MemberDto memberDto) {
 		String sql = "update member set "
-				+ "member_nickname = ?, member_email = ?, member_post = ?, "
+				+ "member_nickname = ?, member_birth = ?, "
+				+ "member_email = ?, member_post = ?, "
 				+ "member_address1 = ?, member_address2 = ?, member_contact = ? "
 				+ "where member_id=?";
 		Object[] data = {
-				memberDto.getMemberNickname(), memberDto.getMemberEmail(), 
+				memberDto.getMemberNickname(), memberDto.getMemberBirth(),//은수형 저주한다
+				memberDto.getMemberEmail(), 
 				memberDto.getMemberPost(), memberDto.getMemberAddress1(), 
 				memberDto.getMemberAddress2(), memberDto.getMemberContact(),
 				memberDto.getMemberId()
@@ -174,4 +177,7 @@ public class MemberDao {
 				+ "group by member_level order by title desc";
 		return jdbcTemplate.query(sql, statusVOMapper);
 	}
+	
+
+
 }

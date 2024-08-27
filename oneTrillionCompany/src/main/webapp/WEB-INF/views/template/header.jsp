@@ -40,6 +40,9 @@
 }
 
 .menu>li>ul ul {
+	background-color: beige;
+}
+.menu>li>ul ul :hover {
 	background-color: azure;
 }
 
@@ -134,7 +137,7 @@
 						<li><a href="localhost:8080" id="favorite">즐겨찾기</a></li>
 						<li class="right-menu"><a href="/member/logout">로그아웃</a></li>
 						<li><a href="#">주문 / 배송조회</a></li>
-						<li><a href="#">1:1문의</a></li>
+						<li><a href="/qna/list">1:1문의</a></li>
 						<li><a href="#">커뮤니티</a>
 							<ul>
 								<li><a href="#">항목1</a></li>
@@ -213,10 +216,7 @@
 				<li class="flex-core all-menu"><i class="fa-solid fa-bars"></i>
 					전체메뉴
 					<ul class="all-menu-ul ul-horizon">
-						<li class="li-horizon"><a href="#">상의 상세항목1</a></li>
-						<li class="li-horizon"><a href="#">상의 상세항목1</a></li>
-						<li class="li-horizon"><a href="#">상의 상세항목1</a></li>
-						<li class="li-horizon"><a href="#">상의 상세항목1</a></li>
+						d
 					</ul>
 					<ul class="all-menu-ul ul-horizon">
 						<li class="li-horizon"><a href="#">상의 상세항목1</a></li>
@@ -224,85 +224,108 @@
 						<li class="li-horizon"><a href="#">상의 상세항목1</a></li>
 						<li class="li-horizon"><a href="#">상의 상세항목1</a></li>
 					</ul></li>
-				<li><a href="/item/list/cate?keyword=1">상의</a>
+				<li><a href="/item/list/cate?column=1&keyword=11">상의</a>
 					<ul>
-						<li><a href="#">항목1</a>
+						<li><a href="/item/list/cate?column=2&keyword=10">티셔츠</a>
 							<ul>
-								<li><a href="#">상세항목1</a></li>
-							</ul></li>
-						<li><a href="#">항목2</a>
+								<li><a href="/item/list/cate?column=3&keyword=10">7부</a></li>
+								<li><a href="/item/list/cate?column=3&keyword=11">민소매</a></li>
+								<li><a href="/item/list/cate?column=3&keyword=12">긴팔</a></li>
+								<li><a href="/item/list/cate?column=3&keyword=13">반팔</a></li>
+								<li><a href="/item/list/cate?column=3&keyword=14">맨투맨</a></li>
+								<li><a href="/item/list/cate?column=3&keyword=15">후드</a></li>
+								<li><a href="/item/list/cate?column=3&keyword=16">니트/스웨터</a></li>
+							</ul>
+						</li>
+						<li><a href="/item/list/cate?column=2&keyword=11">셔츠</a>
 							<ul>
-								<li><a href="#">상세항목1</a></li>
-							</ul></li>
-						<li><a href="#">항목3</a>
-							<ul>
-								<li><a href="#">상세항목1</a></li>
-							</ul></li>
-						<li><a href="#">항목4</a>
-							<ul>
-								<li><a href="#">상세항목1</a>
-							</ul></li>
-					</ul></li>
+								<li><a href="/item/list/cate?column=3&keyword=17">반팔 셔츠</a></li>
+								<li><a href="/item/list/cate?column=3&keyword=18">7부 셔츠</a></li>
+								<li><a href="/item/list/cate?column=3&keyword=19">긴팔 셔츠</a></li>
+								<li><a href="/item/list/cate?column=3&keyword=20">베이직/심플</a></li>
+								<li><a href="/item/list/cate?column=3&keyword=21">스트라이프</a></li>
+								<li><a href="/item/list/cate?column=3&keyword=22">체크</a></li>
+							</ul>
+						</li>
+					</ul>
+				</li>
 				<!-- 구분선 -->
-				<li><a href="/item/list/cate?keyword=2">하의</a>
+				<li><a href="/item/list/cate?column=1&keyword=33">하의</a>
 					<ul>
-						<li><a href="#">항목1</a>
+						<li><a href="/item/list/cate?column=2&keyword=30">슬랙스</a>
 							<ul>
-								<li><a href="#">상세항목1</a></li>
-							</ul></li>
-						<li><a href="#">항목2</a>
+								<li><a href="/item/list/cate?column=3&keyword=30">스트레이트핏</a></li>
+								<li><a href="/item/list/cate?column=3&keyword=31">테이퍼드핏</a></li>
+								<li><a href="/item/list/cate?column=3&keyword=32">와이드핏</a></li>
+							</ul>
+						</li>
+						<li><a href="/item/list/cate?column=2&keyword=31">데님</a>
 							<ul>
-								<li><a href="#">상세항목1</a></li>
-							</ul></li>
-						<li><a href="#">항목3</a>
+								<li><a href="/item/list/cate?column=3&keyword=35">스트레이트핏</a></li>
+								<li><a href="/item/list/cate?column=3&keyword=36">테이퍼드핏</a></li>
+								<li><a href="/item/list/cate?column=3&keyword=37">와이드핏</a></li>
+							</ul>
+						</li>
+						<li><a href="/item/list/cate?column=2&keyword=32">트레이닝</a>
 							<ul>
-								<li><a href="#">상세항목1</a></li>
-							</ul></li>
-						<li><a href="#">항목4</a>
+								<li><a href="/item/list/cate?column=3&keyword=38">트레이닝</a></li>
+								<li><a href="/item/list/cate?column=3&keyword=39">조거팬츠</a></li>
+							</ul>
+						</li>
+						<li><a href="/item/list/cate?column=2&keyword=33">반바지</a>
 							<ul>
-								<li><a href="#">상세항목1</a>
-							</ul></li>
-					</ul></li>
+								<li><a href="/item/list/cate?column=3&keyword=33">일반 반바지</a></li>
+								<li><a href="/item/list/cate?column=3&keyword=34">데님 반바지</a></li>
+							</ul>
+						</li>
+					</ul>
+				</li>
 				<!-- 구분선 -->
-				<li><a href="#">슈즈</a>
+				<li><a href="/item/list/cate?column=1&keyword=55">슈즈</a>
 					<ul>
-						<li><a href="#">항목1</a>
-							<ul>
-								<li><a href="#">상세항목1</a></li>
-							</ul></li>
-						<li><a href="#">항목2</a>
-							<ul>
-								<li><a href="#">상세항목1</a></li>
-							</ul></li>
-						<li><a href="#">항목3</a>
-							<ul>
-								<li><a href="#">상세항목1</a></li>
-							</ul></li>
-						<li><a href="#">항목4</a>
-							<ul>
-								<li><a href="#">상세항목1</a>
-							</ul></li>
-					</ul></li>
+						<li><a href="/item/list/cate?column=2&keyword=50">스니커즈</a>
+						<li><a href="/item/list/cate?column=2&keyword=51">로퍼/슬립온</a>
+						<li><a href="/item/list/cate?column=2&keyword=52">구두</a>
+						<li><a href="/item/list/cate?column=2&keyword=53">워커/부츠</a>
+						<li><a href="/item/list/cate?column=2&keyword=54">샌들/슬리퍼</a>
+						<li><a href="/item/list/cate?column=2&keyword=55">깔창/기타</a>
+					</ul>
+				</li>
+				<li><a href="/item/list/cate?column=1&keyword=77">아우터</a>
+					<ul>
+						<li><a href="/item/list/cate?column=2&keyword=70">가디건</a>
+						<li><a href="/item/list/cate?column=2&keyword=71">블루종</a>
+						<li><a href="/item/list/cate?column=2&keyword=72">집업</a>
+						<li><a href="/item/list/cate?column=2&keyword=73">바람막이</a>
+						<li><a href="/item/list/cate?column=2&keyword=74">블레이저</a>
+						<li><a href="/item/list/cate?column=2&keyword=75">청재킷</a>
+					</ul>
+				</li>
 				<!-- 구분선 -->
 				<li class="right-menu"><a href="#">문의</a>
 					<ul>
 						<li><a href="#">항목1</a>
 							<ul>
 								<li><a href="#">상세항목1</a></li>
-							</ul></li>
+							</ul>
+						</li>
 						<li><a href="#">항목2</a>
 							<ul>
 								<li><a href="#">상세항목1</a></li>
-							</ul></li>
+							</ul>
+						</li>
 						<li><a href="#">항목3</a>
 							<ul>
 								<li><a href="#">상세항목1</a></li>
-							</ul></li>
+							</ul>
+						</li>
 						<li><a href="#">항목4</a>
 							<ul>
 								<li><a href="#">상세항목1</a></li>
-							</ul></li>
-					</ul></li>
+							</ul>
+						</li>
+					</ul>
+				</li>
 				<!-- 구분선 -->
 			</ul>
 			<div class="row">

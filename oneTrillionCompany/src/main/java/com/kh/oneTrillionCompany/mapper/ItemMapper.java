@@ -24,6 +24,8 @@ public class ItemMapper implements RowMapper<ItemDto> {
 		itemDto.setItemCate1(rs.getString("item_cate1"));
 		itemDto.setItemCate2(rs.getString("item_cate2"));
 		itemDto.setItemCate3(rs.getString("item_cate3"));
+		itemDto.setItemDiscountRate(rs.getString("item_discount_rate"));
+		itemDto.setItemColor(rs.getString("item_color"));
 		return itemDto;
 	}
 	

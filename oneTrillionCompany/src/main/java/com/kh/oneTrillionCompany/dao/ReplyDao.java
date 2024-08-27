@@ -25,7 +25,7 @@ public class ReplyDao {
 	
 	//댓글 등록
 	public void insert(ReplyDto replyDto) {
-		String sql = "insert into reply(reply_no, reply_writer,  reply_content, reply_origin) "
+		String sql = "insert into reply(reply_no, reply_writer, reply_content, reply_origin) "
 						+ "values(?, ?, ?, ?)";
 		Object[] data = {replyDto.getReplyNo(), replyDto.getReplyWriter(), 
 								replyDto.getReplyContent(), replyDto.getReplyOrigin()};
@@ -61,4 +61,23 @@ public class ReplyDao {
 		return list.isEmpty() ? null : list.get(0);
 	}
 	
+	//댓글 페이징
+	public List<ReplyDto> selectList(int replyOrigin, int page, int size){
+		int endRow = page * size;
+		int beginRow = endRow - (size - 1);
+		String sql = "select * from ("
+					+ "select rownum rn, TMP.* from("
+						+ "select * from reply where reply_origin = ? order by reply_no desc)"
+					+ "TMP) "
+				+ "where rn between ? and? order by reply_no asc";
+		Object[] data= {replyOrigin, beginRow, endRow};
+		return jdbcTemplate.query(sql, replyMapper, data);
+	}
+	
+	//글번호에 따른 댓글 개수
+	public int count(int replyOrigin) {
+		String sql="select count(*) from reply where reply_origin = ?";
+		Object[] data = {replyOrigin};
+		return jdbcTemplate.queryForObject(sql, int.class, data);
+	}
 }
