@@ -48,7 +48,7 @@ public class ItemController {
 	@RequestMapping("/detail")
 	public String detail(@RequestParam int itemNo, Model model) {
 		ItemDto itemdto = itemDao.selectOne(itemNo);
-		model.addAttribute("itemdto", itemdto);
+		model.addAttribute("itemDto", itemdto);
 		return "/WEB-INF/views/item/detail.jsp";
 	}
 	
@@ -75,4 +75,12 @@ public class ItemController {
 					return "redirect:/images/200.png";
 				}
 			}
+	
+	//장바구니 담기 구현 완료 후 (삭제)
+		@RequestMapping("/detail2")
+		public String detail2(@RequestParam int itemNo, Model model) {
+			ItemDto itemDto = itemDao.selectOne(itemNo);
+			model.addAttribute("itemDto", itemDto);
+			return "/WEB-INF/views/item/detail2.jsp?itemNo=2";
+		}
 }
