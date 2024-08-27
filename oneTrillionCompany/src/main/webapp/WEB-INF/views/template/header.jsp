@@ -40,6 +40,9 @@
 }
 
 .menu>li>ul ul {
+	background-color: beige;
+}
+.menu>li>ul ul :hover {
 	background-color: azure;
 }
 
@@ -213,10 +216,7 @@
 				<li class="flex-core all-menu"><i class="fa-solid fa-bars"></i>
 					전체메뉴
 					<ul class="all-menu-ul ul-horizon">
-						<li class="li-horizon"><a href="#">상의 상세항목1</a></li>
-						<li class="li-horizon"><a href="#">상의 상세항목1</a></li>
-						<li class="li-horizon"><a href="#">상의 상세항목1</a></li>
-						<li class="li-horizon"><a href="#">상의 상세항목1</a></li>
+						d
 					</ul>
 					<ul class="all-menu-ul ul-horizon">
 						<li class="li-horizon"><a href="#">상의 상세항목1</a></li>

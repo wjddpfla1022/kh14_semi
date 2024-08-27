@@ -17,5 +17,6 @@ public class ItemDto {
 	private String itemCate2; //카테고리2 (셔츠, 티셔츠)
 	private String itemCate3; //카테고리3 (반팔, 긴팔, 후드)
 	private String itemDiscountRate;
+	private String itemColor;
 	
 }
