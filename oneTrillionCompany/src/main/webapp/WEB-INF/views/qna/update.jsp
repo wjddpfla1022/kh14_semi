@@ -85,7 +85,7 @@
 
             $(".btn-regi").click(function(){
                 $(".regiModal").show();
-                $("#modalMessage").text("등록하시겠습니까?"); //모달 메시지 설정
+                $("#modalMessage").text("수정하시겠습니까?"); //모달 메시지 설정
             });
           //확인 버튼을 누르면 form 제출
             $(".btn-confirm").click(function(){ 
@@ -100,7 +100,7 @@
     </script>
     
 
-    <form action="write" method="post" id="regi-form">
+    <form action="update" method="post" id="regi-form">
        <div class="container w-700 my-30">
             <div class="row center">
                 <h2>1:1문의 등록</h2>
@@ -120,8 +120,8 @@
                 <textarea placeholder="내용을 입력하세요." name="qnaContent"></textarea>
             </div>
             <div class="row right">
-                <button type="button" class="btn btn-positive btn-regi">등록</button>
-                <a href="/qna/list" class="btn">취소</a>
+                <button type="submit" class="btn btn-positive btn-regi">수정</button>
+                <a href="/qna/detail?qnaNo=${qnaDto.qnaNo}" class="btn">취소</a>
             </div>
         </div>
 

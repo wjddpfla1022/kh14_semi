@@ -6,6 +6,27 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 <style>
+	.flex-box {
+            display: flex;
+            justify-content: space-between; 
+            align-items: center; 
+            margin-top: 0.5em;
+	}
+        .row > textarea{
+            resize: none;
+            min-width: 500px;
+            min-height: 200px;
+            width: 100%;
+            padding-top: 0.5em;
+            margin-top : 1em;
+        }
+        .qna-content {
+        	min-height: 200px;
+        	padding-top: 0.3em;
+        	width: 100%;
+        	text-align: left;
+        	padding-left : 0.5em;
+        }
 
 </style>
 
@@ -104,7 +125,7 @@
 		<h1>${qnaDto.qnaTitle}</h1>
 	</div>
 	<hr>
-	<div class="row">
+	<div class="row mt-30">
 		<table class="table table-border">
 			<tbody>
 				<tr>
@@ -124,23 +145,37 @@
 					</td>
 				</tr>
 				<tr>
-					<td>${qnaDto.qnaContent}</td>
+					<td>
+						<div class="row qna-content">
+							${qnaDto.qnaContent}
+						</div>
+					</td>
 				</tr>
 				<tr>	
 				<!-- 댓글수 -->
 					<td>
 						<div class="row left">
-							<i class="fa-solid fa-eye"></i> <fmt:formatNumber value="${qnaDto.qnaView}" pattern="#,##0"/>
 							<i class="fa-regular fa-comment-dots"></i> <fmt:formatNumber value="${qnaDto.qnaReply}" pattern="#,##0"/>
 						</div>
 					</td>
 				</tr>
 			</tbody>
 		</table>
+					<!-- 수정/삭제 버튼  -->
+					<div class= " flex-box ">
+						<a href="/qna/list"  class="btn btn-list">목록</a>
+				        <div>
+				            <a href="update?qnaNo=${qnaDto.qnaNo}" class="btn btn-update">수정</a>
+				            <a href="delete?qnaNo=${qnaDto.qnaNo}" class="btn btn-delete">삭제</a>
+				        </div>
+					</div>
 	</div>
 	<!-- 관리자 답변 댓글창 -->
-	<div class="row reply-list-wrapper">
-	</div>
+	<hr>
+		<div class="row reply-list-wrapper">
+		</div>
+	<hr>
+	<!--   댓글 작성 기능 -->
 	<div class="row">
 		<textarea class="field w-100 reply-input"></textarea>
 		<button type="button" class="btn btn-positive add-reply-btn">

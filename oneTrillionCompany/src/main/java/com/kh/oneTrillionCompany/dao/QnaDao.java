@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.support.JdbcTransactionManager;
 import org.springframework.stereotype.Repository;
 
 import com.kh.oneTrillionCompany.dto.QnaDto;
@@ -42,6 +43,15 @@ public class QnaDao {
 		Object[] data = {qnaNo};
 		return jdbcTemplate.update(sql, data) > 0;
 	}
+	
+	//문의 수정
+	public boolean update(QnaDto qnaDto) {
+		String sql = "update qna set qna_title=? , qna_content=? "
+						+ "where qna_no=?";
+		Object[] data = {qnaDto.getQnaTitle() , qnaDto.getQnaContent() , qnaDto.getQnaNo()};
+		return jdbcTemplate.update(sql, data) > 0;
+	}
+	
 	
 	//문의 목록
 	public List<QnaDto> selectList() {
@@ -82,7 +92,7 @@ public class QnaDao {
 			String sql = "select * from("
 						+ "select rownum rn, TMP.* from("
 							+ "select qna_no, qna_writer, qna_title, qna_content,"
-							+ " qna_time, qna_reply, qna_view from qna where instr("+pageVO.getColumn()+", ?) > 0 "
+							+ " qna_time, qna_reply  from qna where instr("+pageVO.getColumn()+", ?) > 0 "
 						+ ") TMP"
 					+ ") where rn between ? and ?";
 			Object[] data= {pageVO.getKeyword(), pageVO.getBeginRow(), pageVO.getEndRow()};
@@ -92,7 +102,7 @@ public class QnaDao {
 			String sql="select * from("
 						+ "select rownum rn, TMP.* from("
 							+ "select qna_no, qna_writer, qna_title, qna_content,"
-							+ " qna_time, qna_reply, qna_view from qna order by qna_no desc"
+							+ " qna_time, qna_reply from qna order by qna_no desc"
 						+ ") TMP"
 					+ ") where rn between ? and ?";
 			Object[] data= {pageVO.getBeginRow(), pageVO.getEndRow()};
@@ -118,13 +128,6 @@ public class QnaDao {
 				+ "(select count(*) from reply where reply_origin = ?)"
 				+ " where qna_no=?";
 		Object[] data = {qnaNo, qnaNo};
-		return jdbcTemplate.update(sql, data) > 0;
-	}
-	
-	//조회수 증가
-	public boolean updateQnaView(int qnaNo) {
-		String sql="update qna set qna_view = qna_view+1 where qna_no = ?";
-		Object[] data= {qnaNo};
 		return jdbcTemplate.update(sql, data) > 0;
 	}
 	
