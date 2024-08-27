@@ -27,8 +27,19 @@
         	text-align: left;
         	padding-left : 0.5em;
         }
+        .reply-wrapper > .content-wrapper{
+        	font-size: 16px;
+        }
+        .reply-wrapper > .content-wrapper > .reply-writer{
+        	font-size: 1.25em;
+        }
+         .reply-wrapper > .content-wrapper > .reply-content{
+         	font-size: 1em;
+         	min-height: 50px;
+         }
 
 </style>
+
 
 <!-- 댓글 템플릿 -->
 <script type="text/template" id="reply-template">
@@ -113,10 +124,9 @@
 					$(html).find(".reply-writer").text(response[i].replyWriter);
 	                $(html).find(".reply-content").text(response[i].replyContent);
 					$(html).find(".reply-info > .time").text(response[i].replyTime);
-					
 					//시간형식 지정
 					var time = moment(response[i].replyTime).format("YYYY-MM-DD dddd HH:mm:ss");
-                    $(html).find(".reply-info > .time ").text(time);
+                    $(html).find(".reply-info > .time").text(time);
 					
 					if(response[i].replyWriter == currentUser) { //작성자가 현재 사용자(currentUser)라면
 						$(html).find(".reply-update-btn , .reply-delete-btn").attr("data-reply-no", response[i].replyNo);	// 수정,삭제 버튼을 생성
@@ -128,7 +138,9 @@
 					}
 				}
 			});
-		}  
+
+		} 
+
 		// 댓글 수정
 		$(document).on("click", ".reply-update-btn", function(e){
 		    e.preventDefault();
@@ -136,6 +148,7 @@
 		    // 기존 입력화면 제거
 		    $(".reply-wrapper").show();
 		    $(".reply-update-wrapper").remove(); 
+
 
 		    var template = $("#reply-update-template").text();
 		    var html = $.parseHTML(template);
@@ -150,6 +163,7 @@
 		    var replyNo = $(this).attr("data-reply-no");
 		    $(html).find(".reply-complete-btn").attr("data-reply-no", replyNo);
 		});
+
 
 		
 		//수정 취소
@@ -200,18 +214,6 @@
 				success : function(response){
 					loadList();
 				},
-			});
-		});
-		
-		//문의 글 삭제 코드 작성
-		$(function(){
-			$(".btn-delete").click(function(e){
-				e.preventDefault();
-				var historyDelete = window.confirm("삭제하시겠습니까?");
-				if(historyDelete) {
-					window.location.href = $(this).attr("href"); 	// 사용자가 확인을 클릭한 경우, 링크로 이동
-            		}
-					//취소 버튼을 누를 경우 동작 X
 			});
 		});
 	});
