@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.oneTrillionCompany.dto.ItemDto;
 import com.kh.oneTrillionCompany.mapper.ItemMapper;
@@ -20,14 +22,21 @@ public class ItemDao {
 	private JdbcTemplate jdbcTemplate;
 	//기본 CRUD
 	
+	//시퀀스
+	public int sequence() {
+		String sql = "select item_seq.nextval from dual";
+		return jdbcTemplate.queryForObject(sql, int.class);
+	}
+	
 	//상품 추가
 	public void insert(ItemDto itemDto) {
 		String sql="insert into item( "
 				+ "item_no, item_name, "
 				+ "item_price, item_sale_price, item_date,"
 				+ "item_cnt, item_size, item_cate1, item_cate2, item_cate3, item_discount_rate, item_color"
-				+ ") values(item_seq.nextval, ?, ?, ?, sysdate, ?, ?, ?, ?, ?, ?, ?)";
-		Object[] data= {itemDto.getItemName(), itemDto.getItemPrice(), 
+				+ ") values(?, ?, ?, ?, sysdate, ?, ?, ?, ?, ?, ?, ?)";
+		Object[] data= {itemDto.getItemNo(),
+						itemDto.getItemName(), itemDto.getItemPrice(), 
 						itemDto.getItemSalePrice(), 
 						itemDto.getItemCnt(), itemDto.getItemSize(), 
 						itemDto.getItemCate1(), itemDto.getItemCate2(), 
@@ -86,16 +95,18 @@ public class ItemDao {
 		return jdbcTemplate.update(sql, data)>0;
 	}
 	
+	
+	
 	//상품 이미지 연결
 	public void connect(int itemNo, int attachNo) {
-		String sql = "insert into image(item_no, attach) values(?, ?)";
+		String sql = "insert into image(item_no, attach_no) values(?, ?)";
 		Object[] data = {itemNo, attachNo};
 		jdbcTemplate.update(sql, data);
 	}
 	
 	//상품 이미지 조회
 	public int findImage(int itemNo) {
-		String sql = "select attach from image where item=?";
+		String sql = "select attach_no from image where item_no=?";
 		Object[] data = {itemNo};
 		return jdbcTemplate.queryForObject(sql, int.class, data);
 	}
