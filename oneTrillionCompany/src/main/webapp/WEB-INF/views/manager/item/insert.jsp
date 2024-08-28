@@ -9,10 +9,10 @@
             <h2>상품등록</h2>
         </div>
         <form action="insert" method="post" enctype="multipart/form-data" autocomplete="off">
-                
+                <input type="hidden" name="itemNo" value="${itemDto.getItemNo}">
                 <label>사진 등록</label>
             <div class="row">
-            	<input type="file" name="attach" class="field">
+            	<input type="file" name="attach" class="field" >
             </div>
                 <label>상품명</label>
             <div class="row">

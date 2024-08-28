@@ -106,7 +106,7 @@
 							<tr>
 							<c:if test= "${sessionScope.createdLevel == '관리자' }">
   								<td>
-  									<input type="checkbox" class="check-item" name="poketmonNo" value="${dto.poketmonNo}">
+  									<input type="checkbox" class="check-item" name="itemNo" value="${itemDto.itemNo}">
   								</td>
   							</c:if>
 								<td>${itemDto.itemNo}</td>
