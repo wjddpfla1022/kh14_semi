@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 	<div class="row center">
 		<h1>상품  Q&A</h1>
@@ -63,7 +64,21 @@
 <%-- 									<c:otherwise>${qnaDto.qnaWriter}</c:otherwise> --%>
 <%-- 								</c:choose>								 --%>
 <!-- 							</td> -->
-							<td>${qnaDto.qnaWriter}</td>
+							<td>
+						        <c:choose>
+							        <c:when test="${fn:length(qnaDto.qnaWriter) > 3}">
+							            <%-- 작성자의 아이디를 3글자 추출 후 표시 --%>
+							            <c:out value="${fn:substring(qnaDto.qnaWriter, 0, 3)}"/>
+							            <%-- 이후 아이디를 * 처리 --%>
+							            <c:out value="***"/>
+							        </c:when>
+							        <c:otherwise> 
+							        	<%-- 아이디의 길이가 3글자 이하인 경우를 처리 --%>
+							            <%-- 아이디를 출력합니다. --%>
+							            <c:out value="${qnaDto.qnaWriter}"/>
+							        </c:otherwise>
+							    </c:choose>
+							</td>
 						</tr>
 				</c:forEach>
 			</tbody>
