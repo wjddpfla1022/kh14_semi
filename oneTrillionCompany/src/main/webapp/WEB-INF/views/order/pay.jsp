@@ -9,56 +9,52 @@
     <title>일조 쇼핑몰</title>
 
       <!-- my css -->
-      <link rel="stylesheet" type="text/css" href="./commons.css">
+      <link rel="stylesheet" type="text/css" href="/css/commons.css">
       <!-- <link rel="stylesheet" type="text/css" href="./test.css"> -->
-      
+      <!--  font awesome cdn -->
+      <link rel="stylesheet" type="text/css"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <style>
-       .orderpage >.container{
-            margin: 50px auto;
-            background-color: #dfe6e9;
-            border-radius:0.5em;
-        } 
-        .field{
-            border-radius:0.5em;
-            background-color: transparent;
-        }
-        .ordersHeader{
-            justify-content: center; 
-            align-items: center;
-        }
-        .title{
-            font-size:28px;
-            font-weight:bold;
-        }
-        .title2{
-            font-size:24px;
-        }
-        .request-detail{
-            border:0.1em solid #b2bec3; 
-        }
-        .modal{
-            margin:0;
-            padding:0;
-        }
-        .modal > .row{
-            margin:0 !important;
-            padding:0 !important;
-        }
+    	.orderpage{
+    		display:flex;
+    		flex-direction:column;
+    		min-width:1152px;
+    		min-height:100%;
+    		background-color:#f3f5f7;
+    	}
+    	.area-address{
+    	    font-size: 16px;
+		    line-height: 22px;
+		    letter-spacing: -0.3px;
+		    margin-top: 8px;
+		    color: #404048;
+		    font-weight: 500;
+		    word-wrap: break-word;
+    	}
+    	.container{
+		    margin-top: 12px;
+		    padding: 20px 16px;
+		    border-radius: 12px;    
+		    background-color:white;
+		    	
+    	}
     </style>
-
+	<!-- jquery cdn -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <!-- 자바스크립트 코드 작성 영역 -->
      <script type="text/javascript">
-         document.getElementById('requestMemo').addEventListener('change', function() {
-        var memoContainer = document.getElementById('memoContainer');
-        var memoDiv = memoContainer.querySelector('.memo');
-        var selectedValue = this.value;
-
-        if (selectedValue === 'lookAtThis') {
-            memoDiv.innerHTML = '<input type="text" class="field w-100" style="border-top:1px solid #636e72" placeholder="직접 입력하세요">';
-        } else {
-            var selectedText = this.options[this.selectedIndex].text;
-            memoDiv.textContent = selectedText;
-        }
+        $(function(){
+                var selectedValue = $("select[name='requestMemo']").val();
+                var memoContainer = $(".memo");
+                
+                if (selectedValue === 'lookAtThis') {
+                    memoContainer.html('<input type="text" class="field w-100" style="border-top:1px solid #636e72" placeholder="직접 입력하세요">');
+                } 
+                else {
+                    var selectedText = $("select[name='requestMemo'] option:selected").text();
+                    memoContainer.text(selectedText);
+                }
+        });
     });
      </script>
 </head>
@@ -72,61 +68,84 @@
                 주문/결제            
             </div>
         </div>
-        <div class="row right">
-            <div class="flex-right px-50">
-                장바구니 > <div style="font-weight:bold">주문/결제</div> > 완료
-            </div>
-
-        </div>
-        <div class="flex-box w-60">
-            <div class="container w-600 my-20">
-                <div class="row title2 p-20">
-                    <label>배송지</label>
-                </div>
-                <div class="float-box p-10 mx-30">
-                    <div class="row">
-                        ${memberDto.memberName}
-                    </div>
-                    <div class="row">
-                        ${memberDto.memberContact}
-                        <input type="checkbox">
-                        안심번호 사용
-                    </div>
-                    <div class="row">
-                        ${memberDto.memberAddress1} ${memberDto.memberAddress2} (${memberDto.memberPost})
-                    </div>
-                    <hr>
-                    <div class="row">
-                        <input class="field" type="checkbox"> 배송메모 개별 입력
-                    </div>
-                    <div class="row">
-                        <div class="container request-detail">
-                                <select class="field w-100" name="requestMemo">
-                                    <option value="noSelect">선택 안 함</option>
-                                    <option value="lookAtThis">직접 입력하기</option>
-                                    <option value="door">부재시 문앞에 두고 가주세요</option>
-                                    <option value="home">부재시 집앞에 두고 가주세요</option>
-                                    <option value="contact">부재시 연락 부탁드려요</option>
-                                    <option value="beforeTaegbae">배송시 연락주세요</option>
-                                </select>
-                                <c:choose>
-                                    <c:when test="${param.requestMemo =='lookAtThis'}">
-                                        <input type="text" class="field w-100" style="border-top:1px border #636e72">
-                                    </c:when>
-                                    <c:otherwise>
-                                        <div class="memo"></div>
-                                    </c:otherwise>
-                                </c:choose>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="flex-box modal w-30">
-            <div class="row">
-                <div class="container w-100" style="min-height:200px"></div>
-            </div>
-        </div>
+	        <div class="row right">
+	            <div class="flex-box loca-now px-50">
+	                장바구니 > <div style="font-weight:bold">주문/결제</div> > 완료
+	            </div>
+	        </div>
+        <form action="pay" method="post">
+	        <div class="flex-box w-100">
+	            <div class="container w-500 my-20">
+	                <div class="row title2 p-20">
+	                    <label>배송지</label>
+	                </div>
+	                <div class="float-box p-10 mx-30">
+	                    <div class="row">
+	                        ${memberDto.memberName}
+	                    </div>
+	                    <div class="row">
+	                        ${memberDto.memberContact}
+	                        <input type="checkbox">
+	                        안심번호 사용
+	                    </div>
+	                    <div class="area-address">
+	                    <c:choose>
+							<c:when test="${memberDto.memberAddress1!=null}">
+	                        	${memberDto.memberAddress1} ${memberDto.memberAddress2} (${memberDto.memberPost})
+							</c:when>
+							<c:otherwise>
+								아래에 주소를 입력해주세요
+							</c:otherwise>	                    
+	                    </c:choose>
+	                    
+	                    </div>
+	                    <hr>
+	                    <div class="row">
+	                        <input class="field" type="checkbox"> 배송메모 개별 입력
+	                    </div>
+	                    <div class="row">
+	                        <div class="container request-detail">
+	                                <select class="field w-100" name="order_memo">
+	                                    <option value="noSelect">선택 안 함</option>
+	                                    <option value="lookAtThis">직접 입력하기</option>
+	                                    <option value="door">부재시 문앞에 두고 가주세요</option>
+	                                    <option value="home">부재시 집앞에 두고 가주세요</option>
+	                                    <option value="contact">부재시 연락 부탁드려요</option>
+	                                    <option value="beforeTaegbae">배송시 연락주세요</option>
+	                                </select>
+	                                <c:choose>
+	                                    <c:when test="${param.order_memo =='lookAtThis'}">
+	                                        <input type="text" class="field w-100" style="border-top:1px border #636e72">
+	                                    </c:when>
+	                                    <c:otherwise>
+	                                        <input type="text" class="memo field w-100" readonly style="border-top:1px border #636e72">
+	                                    </c:otherwise>
+	                                </c:choose>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	            <div class="row">
+	                <div class="container" style="width:350px;height:2000px">
+	                	<div class="row title">
+	                		결제상세
+	                		<div class="container">
+	                			<div class="row w-100">
+		                		<div class="flex-box column-2 w-100" style="font-size:18px">
+		                			<div class="row">
+			                			포인트 결제
+		                			</div>
+		                			<div class="row right">
+		                				${memberDto.memberPoint} <i class="fa-solid fa-coins"></i>
+		                			</div>
+		                			</div>
+		                		</div>
+	                		</div>
+	                	</div>
+	                </div>
+	            </div>
+        </form>
     </div>
     </body>
     </html>

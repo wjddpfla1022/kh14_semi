@@ -4,7 +4,10 @@
     앞으로 자주 사용할 디자인 코드들을 보관해두는 파일
 */
 
-
+div{
+	display:block;
+	unicode-bidi: isolate;
+}
 /*
     모든 태그에 폭 설정 기준을 "테두리"로 지정
 */

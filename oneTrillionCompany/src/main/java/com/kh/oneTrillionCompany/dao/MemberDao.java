@@ -195,7 +195,20 @@ public class MemberDao {
 				+ "group by member_level order by title desc";
 		return jdbcTemplate.query(sql, statusVOMapper);
 	}
-	
+	//결제시 포인트 차감 메서드
+	public boolean payment(String memberId, int point) {
+		String sql = "update member set member_	point = member_point - ? "
+				+ "where member_id=? and member_point>=?";
+		Object[] data= {point,memberId,point};
+		return jdbcTemplate.update(sql, data)>0;
+	}
+	//포인트 충전 메서드
+	public boolean chargePoint(String memberId, int point) {
+		String sql="update member set member_point = member_point +? "
+				+ "where member_id=?";
+		Object[] data= {point,memberId};
+		return jdbcTemplate.update(sql, data)>0;
+	}
 
 
 }

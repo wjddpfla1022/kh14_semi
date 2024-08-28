@@ -8,4 +8,5 @@ public class OrderVO {
 	private int itemPrice;
 	private String buyer;
 	private int cnt;
+	private int orderNo;
 }
