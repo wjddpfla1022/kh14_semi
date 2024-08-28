@@ -75,6 +75,12 @@
 
 	<!-- 검색 결과 -->
 	<div class="row center">
+	<form action="deleteAll" method="post">
+<c:if test= "${sessionScope.createdLevel == '관리자' }">
+<div class="row right">
+	<button type="submit" class="btn btn-negative">체크된 항목 삭제</button>
+</div>
+</c:if>
 		<table class="table table-border table-hover">
 			<thead>
 				<tr>
@@ -110,7 +116,7 @@
   								</td>
   							</c:if>
 								<td>${itemDto.itemNo}</td>
-								<td><img src = "image?itemNo=${itemDto.itemNo}" width="15" height="15"></td>
+								<td><img src = "/item/image?itemNo=${itemDto.itemNo}" width="30px" height="30px"></td>
 								<c:choose>
 									<c:when test="${itemDto.itemCate1 == '11'}">
 										<td>상의</td>
@@ -280,6 +286,7 @@
 				</c:choose>
 			</tbody>
 		</table>
+</form>
 <jsp:include page= "/WEB-INF/views/template/navigator.jsp"/>
 
 	</div>

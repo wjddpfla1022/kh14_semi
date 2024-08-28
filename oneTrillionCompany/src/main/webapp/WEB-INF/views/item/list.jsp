@@ -48,7 +48,7 @@
 		<div class="row image-align">
 		<c:forEach var= "itemDto" items= "${list}">
             <a href="#">
-            <img src="http://via.placeholder.com/300.png">
+            <img src = "/item/image?itemNo=${itemDto.itemNo}" width="200px" height="200px">
             <h4>${itemDto.itemName}</h4>
             <h4>${itemDto.itemPrice}원</h4>
             </a>
