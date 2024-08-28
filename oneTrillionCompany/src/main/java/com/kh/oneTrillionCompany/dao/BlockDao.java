@@ -46,11 +46,25 @@ public class BlockDao {
 			return list.isEmpty() ? null : list.get(0);
 		}
 		
-		//차단 내역 확인
+		//차단 내역 확인(아이디로 조회)
 		public List<BlockDto> selectBlockHistory(String blockMemberId) {
 			String sql = "select * from block where block_member_id = ? "
 							+ "order by block_no desc";
 			Object[] data = {blockMemberId};
 			return jdbcTemplate.query(sql, blockMapper, data);
+		}		
+		
+		//차단 내역 조회
+		public List<BlockDto> selectList(){
+			String sql = "select * from block order by block_no asc";
+			return jdbcTemplate.query(sql, blockMapper);
 		}
+		
+		//차단 내역 검색
+		public List<BlockDto> selectList(String column, String keyword){
+			String sql = "select * from block where instr("+column+", ?) > 0 order by block_no asc";
+			Object[] data= {keyword};
+			return jdbcTemplate.query(sql, blockMapper, data);
+		}
+				
 }
