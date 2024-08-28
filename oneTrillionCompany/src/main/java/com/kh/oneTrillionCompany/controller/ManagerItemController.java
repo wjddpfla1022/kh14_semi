@@ -60,14 +60,15 @@ public class ManagerItemController {
 	}
 	@PostMapping("/insert")
 	public String insert(@ModelAttribute ItemDto itemDto, MultipartFile attach) throws IllegalStateException, IOException {
-		itemDao.insert(itemDto);
-		if(attach.isEmpty() == false) {
 			// 2. 첨부파일이 있다면 등록
 			// 2-1. 시퀀스 생성
-			int attachNo = attachService.save(attach);
-			// 3. 회원 이미지에 연결정보 저장
-			itemDao.connect(itemDto.getItemNo(), attachNo);
+			int itemNo = itemDao.sequence();
+			itemDto.setItemNo(itemNo);
+			itemDao.insert(itemDto);
 			
+			if(!attach.isEmpty()) {
+			int attachNo = attachService.save(attach);
+			itemDao.connect(itemDto.getItemNo(), attachNo);
 		}
 		return "redirect:list";
 	}
@@ -99,6 +100,22 @@ public class ManagerItemController {
 		boolean result = itemDao.delete(itemNo);
 		return "redirect:list";
 	}
+	
+	//여러개 삭제
+		@PostMapping("/deleteAll")
+		public String deleteAll(@RequestParam(value="itemNo") List<Integer> list) {
+			for (int itemNo:list) {
+				try {
+					int attachNo = itemDao.findImage(itemNo);
+					attachService.delete(attachNo);
+				} catch (Exception e) {
+				}
+				finally {
+					itemDao.delete(itemNo);
+				}
+			}
+			return "redirect:list";
+		}
 	
 	// 이미지
 
