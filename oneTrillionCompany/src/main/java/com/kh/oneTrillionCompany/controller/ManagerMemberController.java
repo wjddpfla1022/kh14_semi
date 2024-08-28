@@ -18,6 +18,7 @@ import com.kh.oneTrillionCompany.dao.ReviewDao;
 import com.kh.oneTrillionCompany.dto.BlockDto;
 import com.kh.oneTrillionCompany.dto.MemberDto;
 import com.kh.oneTrillionCompany.dto.QnaDto;
+import com.kh.oneTrillionCompany.dto.ReviewDto;
 import com.kh.oneTrillionCompany.exception.TargetNotFoundException;
 import com.kh.oneTrillionCompany.vo.PageVO;
 
@@ -26,20 +27,15 @@ import com.kh.oneTrillionCompany.vo.PageVO;
 public class ManagerMemberController {
 	
 	@Autowired
-	private MemberDao memberDao;
-	
+	private MemberDao memberDao;	
 	@Autowired
-	private BlockDao blockDao;
-	
+	private BlockDao blockDao;	
 	@Autowired
-	private ReviewDao reviewDao;
-	
+	private ReviewDao reviewDao;	
 	@Autowired
-	private QnaDao qnaDao;
-	
+	private QnaDao qnaDao;	
 	@Autowired
-	private ItemDao itemDao; 
-	
+	private ItemDao itemDao; 	
 	@Autowired
 	private OrderDetailDao orderDetailDao;
 	
@@ -72,10 +68,8 @@ public class ManagerMemberController {
 		public String detail(@RequestParam String memberId , Model model) {
 			MemberDto memberDto = memberDao.selectOne(memberId);
 			BlockDto blockDto = blockDao.selectLastOne(memberId);
-			QnaDto qnaDto = qnaDao.selectOne(memberId);
 			if(memberDto == null)
 				throw new TargetNotFoundException("존재하지 않는 회원입니다.");
-			model.addAttribute("qnaDto", qnaDto);
 			model.addAttribute("memberDto", memberDto);
 			model.addAttribute("blockDto", blockDto);
 			model.addAttribute("reviewWriteList" , reviewDao.selectListByWriter(memberId));
