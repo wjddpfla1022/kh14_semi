@@ -18,14 +18,14 @@ public class ReviewDao {
 	private ReviewMapper reviewMapper;
 	
 	
-//	//등록
-//	public void insert(ReviewDto reviewDto) {
-//		String sql = "insert into review(review_no , review_item_no , review_writer , review_content , review_score)"
-//							+ "values(review_seq.nextval , ? , ? ,? ,?)";
-//		Object[] data = {reviewDto.getReviewItemNo() , reviewDto.getReviewWriter() , 
-//								reviewDto.getReviewContent() , reviewDto.getReviewScore()};
-//		jdbcTemplate.update(sql, data);
-//	}
+	//등록
+	public void insert(ReviewDto reviewDto) {
+		String sql = "insert into review(review_no , review_item_no , review_writer , review_content , review_score)"
+							+ "values(review_seq.nextval , ? , ? ,? ,?)";
+		Object[] data = {reviewDto.getReviewItemNo() , reviewDto.getReviewWriter() , 
+								reviewDto.getReviewContent() , reviewDto.getReviewScore()};
+		jdbcTemplate.update(sql, data);
+	}
 	//리뷰 삭제
 	public boolean delete(int reviewNo) {
 		String sql = "delete review where review_no = ? ";
@@ -47,12 +47,21 @@ public class ReviewDao {
 	
 
 	//등록
-	public void insert(ReviewDto reviewDto) {
+	public void insertWithSequence(ReviewDto reviewDto) {
 		String sql = "insert into review(review_no , review_item_no , review_writer , review_content , review_score)"
 							+ "values(?, ?, ?, ?, ?)";
 		Object[] data = {reviewDto.getReviewNo(), reviewDto.getReviewItemNo(), reviewDto.getReviewWriter(), 
 								reviewDto.getReviewContent(), reviewDto.getReviewScore()};
 		jdbcTemplate.update(sql, data);
+	}
+	
+	//연결기능
+	public void connect(int reviewNo, int attachNo) {
+		String sql = "insert into review_image(review_no, attach_no) "
+				+ "values(?, ?)";
+		Object[]data = {reviewNo, attachNo};
+		jdbcTemplate.update(sql, data);
+				
 	}
 	//상세
 	public ReviewDto selectOne(int reviewNo) {
