@@ -21,10 +21,7 @@ import jakarta.servlet.http.HttpSession;
 public class ReviewController {
 
 	@Autowired
-	private ReviewDao reviewDao;
-	
-	
-	
+	private ReviewDao reviewDao;	
 	
 	//리뷰 글 등록 페이지
 	@GetMapping("/write")
@@ -57,13 +54,15 @@ public class ReviewController {
 		return "/WEB-INF/views/review/complete.jsp";
 	}
 	
-//	//리뷰 목록,검색
-//	@RequestMapping("/list")
-//	public String list(@RequestParam(required = false) String column, @RequestParam(required = false) String keyword, Model model) {
-//		boolean isSearch = column != null && keyword != null;
-//		List<>
-//		model.addAttribute("list", list);
-//		return "/WEB-INF/views/review/list.jsp";
-//	}
+	//리뷰 목록,검색
+	@RequestMapping("/list")
+	public String list(@RequestParam(required = false) String column, @RequestParam(required = false) String keyword, Model model) {
+		boolean isSearch = column != null && keyword != null;
+		List<ReviewDto> list = isSearch ? reviewDao.selectList(column, keyword) : reviewDao.selectList();
+		model.addAttribute("list", list);
+		model.addAttribute("column", column);
+		model.addAttribute("keyword", keyword);
+		return "/WEB-INF/views/review/list.jsp";
+	}
 	
 }

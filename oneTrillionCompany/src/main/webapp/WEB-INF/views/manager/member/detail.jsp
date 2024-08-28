@@ -131,13 +131,13 @@
 					</a>
 			</div>
 			<div class=custom-menu>
-					<a href="/qna/list?column=qna_writer&keyword=${qnaDto.qnaWriter}">
+					<a href="/qna/list?column=qna_writer&keyword=${memberDto.memberId}">
 						<span id="top-location">Q&A</span>
 						<span id="bottom-location">문의내역 조회</span>
 					</a>
 			</div>			
 			<div class=custom-menu>
-					<a href="#">
+					<a href="/review/list?column=review_writer&keyword=${memberDto.memberId}">
 						<span id="top-location">Review</span>
 						<span id="bottom-location">리뷰내역 조회</span>
 					</a>
