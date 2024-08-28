@@ -10,10 +10,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.oneTrillionCompany.dao.BlockDao;
+import com.kh.oneTrillionCompany.dao.ItemDao;
 import com.kh.oneTrillionCompany.dao.MemberDao;
+import com.kh.oneTrillionCompany.dao.OrderDetailDao;
+import com.kh.oneTrillionCompany.dao.QnaDao;
 import com.kh.oneTrillionCompany.dao.ReviewDao;
 import com.kh.oneTrillionCompany.dto.BlockDto;
 import com.kh.oneTrillionCompany.dto.MemberDto;
+import com.kh.oneTrillionCompany.dto.QnaDto;
 import com.kh.oneTrillionCompany.exception.TargetNotFoundException;
 import com.kh.oneTrillionCompany.vo.PageVO;
 
@@ -29,6 +33,15 @@ public class ManagerMemberController {
 	
 	@Autowired
 	private ReviewDao reviewDao;
+	
+	@Autowired
+	private QnaDao qnaDao;
+	
+	@Autowired
+	private ItemDao itemDao; 
+	
+	@Autowired
+	private OrderDetailDao orderDetailDao;
 	
 	//회원 검색+목록
 	@RequestMapping("/list")
@@ -55,15 +68,21 @@ public class ManagerMemberController {
 	}
 	
 	//회원 상세
-	@RequestMapping("/detail")
-	public String detail(@RequestParam String memberId , Model model) {
-		MemberDto memberDto = memberDao.selectOne(memberId);
-		if(memberDto == null)
-			throw new TargetNotFoundException("존재하지 않는 회원입니다.");
-		model.addAttribute("memberDto", memberDto);
-		model.addAttribute("reviewWriteList" , reviewDao.selectListByWriter(memberId));
-		return "/WEB-INF/views/manager/member/detail.jsp";
-	}
+		@RequestMapping("/detail")
+		public String detail(@RequestParam String memberId , Model model) {
+			MemberDto memberDto = memberDao.selectOne(memberId);
+			BlockDto blockDto = blockDao.selectLastOne(memberId);
+			QnaDto qnaDto = qnaDao.selectOne(memberId);
+			if(memberDto == null)
+				throw new TargetNotFoundException("존재하지 않는 회원입니다.");
+			model.addAttribute("qnaDto", qnaDto);
+			model.addAttribute("memberDto", memberDto);
+			model.addAttribute("blockDto", blockDto);
+			model.addAttribute("reviewWriteList" , reviewDao.selectListByWriter(memberId));
+			model.addAttribute("orderList", orderDetailDao.selectListByOrderDetail(memberId));
+			model.addAttribute("qnaWriteList", qnaDao.selectListByWriter(memberId));
+			return "/WEB-INF/views/manager/member/detail.jsp";
+		}
 	
 	//회원 정보 수정 
 	@GetMapping("/update")
