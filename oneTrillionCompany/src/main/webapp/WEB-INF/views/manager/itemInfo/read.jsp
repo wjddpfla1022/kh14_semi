@@ -10,5 +10,5 @@
 		<h3>${infoDto.infoContent}</h3>
 	</div>
 </div>
-
+<%-- <jsp:include page="/WEB-INF/views/manager/itemInfo/read.jsp"></jsp:include> --%>
 <%-- <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include> --%>

@@ -12,7 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.oneTrillionCompany.dao.ItemDao;
+import com.kh.oneTrillionCompany.dao.ItemInfoDao;
 import com.kh.oneTrillionCompany.dto.ItemDto;
+import com.kh.oneTrillionCompany.dto.ItemInfoDto;
+import com.kh.oneTrillionCompany.exception.TargetNotFoundException;
 import com.kh.oneTrillionCompany.vo.PageVO;
 
 @Controller
@@ -22,6 +25,9 @@ public class ItemController {
 	@Autowired
 	private ItemDao itemDao;
 
+	@Autowired
+	private ItemInfoDao infoDao;
+	
 	@RequestMapping("/list")
 	public String list(@ModelAttribute("pageVO") PageVO pageVO, Model model) {
 		model.addAttribute("itemList", itemDao.selectListByPaging(pageVO));
@@ -48,9 +54,16 @@ public class ItemController {
 	@RequestMapping("/detail")
 	public String detail(@RequestParam int itemNo, Model model) {
 		ItemDto itemDto = itemDao.selectOne(itemNo);
-		model.addAttribute("itemDto", itemDto);//itemdto -> itemDto로 변경
-		return "/WEB-INF/views/item/detail.jsp";
+		ItemInfoDto infoDto = infoDao.selectOne(itemNo);
+		if(infoDto == null) throw new TargetNotFoundException("존재하지 않는 글 번호");
+		model.addAttribute("itemDto", itemDto);
+	    model.addAttribute("infoDto", infoDto);
+	    model.addAttribute("itemNo", itemNo);
+		return "/WEB-INF/views/item/detail2.jsp";
 	}
+	
+	
+	
 	
 	@GetMapping("/insert")
 	public String insert() {
@@ -77,11 +90,11 @@ public class ItemController {
 				}
 			}
 	
-	//장바구니 담기 구현 - 완료 후 (삭제)
+	//장바구니 담기 구현 완료 후 (삭제)
 		@RequestMapping("/detail2")
 		public String detail2(@RequestParam int itemNo, Model model) {
 			ItemDto itemDto = itemDao.selectOne(itemNo);
 			model.addAttribute("itemDto", itemDto);
-			return "/WEB-INF/views/item/detail2.jsp?itemNo=5";
+			return "/WEB-INF/views/item/detail2.jsp?itemNo=2";
 		}
 }
