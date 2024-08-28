@@ -7,6 +7,7 @@
 
 <style>
 	.flex-box {
+		
 	}
 
 	.custom-menu {
@@ -15,13 +16,15 @@
 	    border: 1px solid #e9e9e9;
 	    border-right : none;
 	    list-style-type: none; /* 목록 스타일 제거 */
+	    width: 100%;
 	}
 	.custom-last-menu {
 	    display: inline-block; /* li를 인라인 블록으로 설정하여 가로로 배치 */
 	    padding: 30px; /* 여백 설정 */
 	    border: 1px solid #e9e9e9;
-	    border-left : none;
+/* 	    border-left : none; */
 	    list-style-type: none; /* 목록 스타일 제거 */
+	    width: 100%;
 	}
 	/* flex-box의 ul  */
 	.flex-box ul {
@@ -35,7 +38,7 @@
 	}
 	/* 하단부 텍스트 */
 	#bottom-location {	
-	font-size: 13px;
+	font-size: 12px;
 	}
 	/* flex-box 안에 모든 span 태그 */
 	.flex-box span {
@@ -120,7 +123,7 @@
 			</tr>
 		</table>
 	</div>
-	<div class="flex-box">
+	<div class="flex-box row">
 			<div class=custom-menu>
 					<a href="#">
 						<span id="top-location">Order</span>
@@ -128,7 +131,7 @@
 					</a>
 			</div>
 			<div class=custom-menu>
-					<a href="#">
+					<a href="/qna/list?column=qna_writer&keyword=${qnaDto.qnaWriter}">
 						<span id="top-location">Q&A</span>
 						<span id="bottom-location">문의내역 조회</span>
 					</a>
@@ -144,13 +147,7 @@
 						<span id="top-location">Block</span>
 						<span id="bottom-location">차단내역 조회</span>
 					</a>
-			</div>	
-			<div class=custom-last-menu>
-					<a href="#">
-						<span id="top-location">Order</span>
-						<span id="bottom-location">#</span>
-					</a>
-			</div>	
+			</div>
 	</div>
 	
 	<div class="float-box">
