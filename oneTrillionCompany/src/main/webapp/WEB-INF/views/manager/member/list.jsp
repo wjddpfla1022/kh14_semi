@@ -4,6 +4,12 @@
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
+	<style>
+		.field-column {
+			padding : 0.5em 0.5em 0.7em 0.5em;
+		}
+	</style>
+	
 <div class="container w-1200">
 	<div class="row center">
 		<h1>회원 검색</h1>
@@ -14,13 +20,16 @@
 	<!-- 검색창 -->
 	<div class="row center" style=" margin-bottom:10px;">
 		<form action="list" method="get" autocomplete="off" class="field">
-			<select name="column" class="field">
+			<select name="column" class="field-column">
 				<option value="member_id" <c:if test="${param.column=='member_id'}">selected</c:if>>아이디</option>
 				<option value="member_nickname" <c:if test="${param.column=='member_nickname'}">selected</c:if>>닉네임</option>
 				<option value="member_rank" <c:if test="${param.column=='member_rank'}">selected</c:if>>등급</option>
 			</select>
-		<input class="field" type="text" name="keyword" value="${param.keyword}" >	
-		<button class="btn btn-neutral" type="submit">검색</button>
+		<input class="field" type="text" name="keyword" value="${param.keyword}" class="field" >	
+			<button class="btn btn-neutral" type="submit">
+				<i class="fa-solid fa-magnifying-glass"></i>
+				검색
+			</button>
 		</form>
 	</div>
 	
