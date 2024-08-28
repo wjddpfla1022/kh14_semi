@@ -58,9 +58,9 @@ public class ItemInfoDao {
 	}
 	
 	//상세
-	public ItemInfoDto selectOne(int infoNo) {
-		String sql = "select * from item_info where info_no = ?";
-		Object[] data = {infoNo};
+	public ItemInfoDto selectOne(int itemNo) {
+		String sql = "select * from item_info where info_item_no = ?";
+		Object[] data = {itemNo};
 		List<ItemInfoDto> list = jdbcTemplate.query(sql, infoMapper, data);
 		return list.isEmpty() ? null : list.get(0);
 	}
