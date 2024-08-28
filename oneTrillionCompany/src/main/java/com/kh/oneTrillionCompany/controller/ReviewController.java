@@ -1,5 +1,7 @@
 package com.kh.oneTrillionCompany.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.oneTrillionCompany.dao.ReviewDao;
 import com.kh.oneTrillionCompany.dto.ReviewDto;
@@ -54,5 +57,13 @@ public class ReviewController {
 		return "/WEB-INF/views/review/complete.jsp";
 	}
 	
+//	//리뷰 목록,검색
+//	@RequestMapping("/list")
+//	public String list(@RequestParam(required = false) String column, @RequestParam(required = false) String keyword, Model model) {
+//		boolean isSearch = column != null && keyword != null;
+//		List<>
+//		model.addAttribute("list", list);
+//		return "/WEB-INF/views/review/list.jsp";
+//	}
 	
 }

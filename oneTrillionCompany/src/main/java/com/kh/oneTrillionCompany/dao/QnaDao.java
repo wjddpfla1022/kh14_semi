@@ -50,8 +50,7 @@ public class QnaDao {
 						+ "where qna_no=?";
 		Object[] data = {qnaDto.getQnaTitle() , qnaDto.getQnaContent() , qnaDto.getQnaNo()};
 		return jdbcTemplate.update(sql, data) > 0;
-	}
-	
+	}	
 	
 	//문의 목록
 	public List<QnaDto> selectList() {
@@ -71,13 +70,21 @@ public class QnaDao {
 		return jdbcTemplate.query(sql, qnaMapper, data);		
 	}
 	
-	//문의 상세 검색
+	//문의 상세 검색 (글 번호로 검색)
 	public QnaDto selectOne(int qnaNo) {
 		String sql= "select * from qna where qna_no=?";
 		Object[] data = {qnaNo};
 		List<QnaDto> list = jdbcTemplate.query(sql, qnaMapper, data);
 		return list.isEmpty() ? null : list.get(0);		
 	}
+	
+	//문의 상세 검색 (작성자로 검색)
+		public QnaDto selectOne(String qnaWriter) {
+			String sql= "select * from qna where qna_writer=?";
+			Object[] data = {qnaWriter};
+			List<QnaDto> list = jdbcTemplate.query(sql, qnaMapper, data);
+			return list.isEmpty() ? null : list.get(0);		
+		}
 	
 	//특정 회원의 문의 목록 조회
 	public List<QnaDto> selectListByWriter(String qnaWriter){
