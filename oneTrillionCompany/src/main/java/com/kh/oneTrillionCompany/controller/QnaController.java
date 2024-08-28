@@ -41,7 +41,7 @@ public class QnaController {
 		qnaDao.insert(qnaDto);
 		
 		//return "redirect:list?qnaNo="+seq;
-		return "redirect:list";
+		return "redirect:detail?qnaNo="+qnaDto.getQnaNo();
 	}
 	//리스트 기능
 	@RequestMapping("/list")

@@ -45,25 +45,25 @@ public class ManagerMemberController {
 	@RequestMapping("/list")
 	public String list(
 			@ModelAttribute("pageVO") PageVO pageVO, Model model) {
-		if(pageVO.isSearch() && checkSearch(pageVO)) {
+//		if(pageVO.isSearch() && checkSearch(pageVO)) { //관리자-회원 검색 시 column, keyword
 			model.addAttribute("list", memberDao.selectListWithBlockByPaging(pageVO));	
 			int count = memberDao.countByPaging(pageVO);
 			pageVO.setCount(count);
-		}
+//		}
 		return "/WEB-INF/views/manager/member/list.jsp";
 	}
-	private boolean checkSearch(PageVO pageVO) {
-		if(pageVO.getColumn() == null) return false;
-		if(pageVO.getKeyword() == null) return false;
-		switch(pageVO.getColumn()) {
-		case "member_id":
-		case "member_email":
-		case "member_nickname":
-		case "member_rank":
-			return true;
-		}
-		return false;
-	}
+//	private boolean checkSearch(PageVO pageVO) {
+//		if(pageVO.getColumn() == null) return false;
+//		if(pageVO.getKeyword() == null) return false;
+//		switch(pageVO.getColumn()) {
+//		case "member_id":
+//		case "member_email":
+//		case "member_nickname":
+//		case "member_rank":
+//			return true;
+//		}
+//		return false;
+//	}
 	
 	//회원 상세
 		@RequestMapping("/detail")
