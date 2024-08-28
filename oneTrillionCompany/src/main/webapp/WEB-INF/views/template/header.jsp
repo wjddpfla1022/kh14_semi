@@ -32,6 +32,7 @@
 
 .menu :hover {
 	filter: brightness(100%);
+
 }
 
 .menu ul {
@@ -39,7 +40,11 @@
 }
 
 .menu ul :hover {
-	background-color: white;
+	background-color: #dfe6e9;
+}
+
+.menu ul>li{
+background-color: white;
 }
 
 .menu>li>ul ul {
@@ -52,7 +57,7 @@
 }
 
 .top-menu :hover {
-	background-color: rgb(184, 184, 184);
+	background-color: #dfe6e9;;
 }
 
 .all-menu-ul {
@@ -245,8 +250,8 @@ session 수
 		
 			<ul class="menu">
 				<!-- 구분선 -->
-				<li class="flex-core all-menu" style="font-weight: bold;"><i class="fa-solid fa-bars"></i>
-					전체메뉴
+				<li class="flex-core all-menu" style="font-weight: bold;"><i class="fa-solid fa-bars"></i> 
+					&nbsp;전체메뉴
 					<ul class="all-menu-ul ul-horizon"></ul>
 					<ul class="all-menu-ul ul-horizon">
 						<li class="li-horizon"><a href="#">상의 상세항목1</a></li>
