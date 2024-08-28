@@ -62,6 +62,13 @@ public class ReviewDao {
 		return list.isEmpty() ? null : list.get(0);
 	}
 	
+	//리뷰 검색
+	public List<ReviewDto> selectList(String column, String keyword){
+		String sql = "select * from review where instr("+column+", ?) > 0 order by review_no asc";
+		Object[] data = {keyword};
+		return jdbcTemplate.query(sql, reviewMapper, data);
+	}
+	
 	//특정 회원의 리뷰 목록 조회
 	public List<ReviewDto> selectListByWriter(String reviewWriter){
 		String sql = "select * from review where review_writer = ? order by review_no desc";
