@@ -47,8 +47,8 @@ public class ItemController {
 
 	@RequestMapping("/detail")
 	public String detail(@RequestParam int itemNo, Model model) {
-		ItemDto itemdto = itemDao.selectOne(itemNo);
-		model.addAttribute("itemDto", itemdto);
+		ItemDto itemDto = itemDao.selectOne(itemNo);
+		model.addAttribute("itemDto", itemDto);//itemdto -> itemDto로 변경
 		return "/WEB-INF/views/item/detail.jsp";
 	}
 	
@@ -77,11 +77,11 @@ public class ItemController {
 				}
 			}
 	
-	//장바구니 담기 구현 완료 후 (삭제)
+	//장바구니 담기 구현 - 완료 후 (삭제)
 		@RequestMapping("/detail2")
 		public String detail2(@RequestParam int itemNo, Model model) {
 			ItemDto itemDto = itemDao.selectOne(itemNo);
 			model.addAttribute("itemDto", itemDto);
-			return "/WEB-INF/views/item/detail2.jsp?itemNo=2";
+			return "/WEB-INF/views/item/detail2.jsp?itemNo=5";
 		}
 }

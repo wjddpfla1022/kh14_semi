@@ -41,4 +41,13 @@ public class CartRestController {
 		cartTotalPrice = cartTotalPrice != null ? cartTotalPrice : 0;
 		return cartTotalPrice;
 	}
+	
+	//장바구니 등록
+	@PostMapping("/insertCart")
+	public void insertCart(HttpSession session,
+							@RequestParam String itemName, @RequestParam String itemColor, 
+							@RequestParam int cartCnt ) {
+		String cartBuyer = (String)session.getAttribute("createdUser");
+		cartDao.itemInsertCart(cartBuyer, itemName, itemColor, cartCnt);
+	}
 }
