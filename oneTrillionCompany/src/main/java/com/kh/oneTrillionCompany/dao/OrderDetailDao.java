@@ -19,9 +19,9 @@ public class OrderDetailDao {
 	private OrderDetailMapper orderDetailMapper;
 	
 	//특정 회원의 주문 목록 조회
-		public List<OrderDetailDto> selectListByOrderDetail(String orderMemberId,int orderNo){
-			String sql = "select * from order_detail where order_detail_buyer = ? and order_detail_no =? order by order_detail_no desc";
-			Object[] data = {orderMemberId,orderNo};
+		public List<OrderDetailDto> selectListByOrderDetail(String memberId,int orderNo){
+			String sql = "select * from order_detail where order_detail_buyer = ? and order_detail_order_no =? order by order_detail_no desc";
+			Object[] data = {memberId,orderNo};
 			return jdbcTemplate.query(sql, orderDetailMapper, data);
 		}
 

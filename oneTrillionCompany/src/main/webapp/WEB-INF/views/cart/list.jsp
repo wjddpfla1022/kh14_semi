@@ -176,7 +176,7 @@
 
 
 </script>
-
+<form action="list" method="post">
 <div class="container w-1200 my-50">
 	<div class="row center mb-50 cart-title">
 		장바구니
@@ -197,7 +197,7 @@
 		<h3>담긴 상품(${cartItemCnt})</h3>
 	</div>
 	<!-- 장바구니 목록 -->
-	<form action="delete" method="post">
+<!-- 	<form action="delete" method="post"> -->
 		<table border="1" width="1200">
 			<thead>
 				<tr>
@@ -259,9 +259,9 @@
 	
 	<!-- 버튼 -->
 	<div class="float-box" >
-		<form action="deleteAll" method="post" class="float-right"> <!-- form 블록요소 여기에 float 적용시킴 -->
+<!-- 		<form action="deleteAll" method="post" class="float-right"> form 블록요소 여기에 float 적용시킴 -->
 			<button type="submit" class="btn btn-empty btn-delete"><i class="fa-solid fa-trash-can"></i> 장바구니 비우기</button>
-		</form>
+<!-- 		</form> -->
 		<!-- 주문 form 넣으면 됩니다 -->
 			<button type="submit" class="btn float-left">선택상품 주문하기</button>
 			<button type="submit"  class="btn float-left">전체 주문하기</button>
@@ -329,4 +329,5 @@
 </c:choose>	
 	
 </div>
+</form>
 <jsp:include page= "/WEB-INF/views/template/footer.jsp"></jsp:include>

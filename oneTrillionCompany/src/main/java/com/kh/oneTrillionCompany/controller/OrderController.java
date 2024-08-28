@@ -43,13 +43,26 @@ public class OrderController {
 		if(memberId ==null) new TargetNotFoundException();//TargetNotFoundException 자리
 		MemberDto memberDto = memberDao.selectOne(memberId);
 		memberDto.setMemberPw(null); //비밀번호를 지우고 view로 전송
-		System.out.println(memberDto);
 		model.addAttribute("memberDto",memberDto);
 		
 		//결제 세부목록 보내기
 		int orderNo=ordersDao.selectOne(memberId).getOrderNo();
 		List<OrderDetailDto> detailList=orderDetailDao.selectListByOrderDetail(memberId,orderNo);
 		model.addAttribute("orderDetailList",detailList);
+		//사진 번호 보내기
+		
+		//총 금액 보내기
+		int totalPrice=0;
+		for(int i=0; i<detailList.size(); i++) {
+		totalPrice+=detailList.get(i).getOrderDetailCnt()*detailList.get(i).getOrderDetailPrice();
+		}
+		model.addAttribute("totalPrice",totalPrice);
+		//총 갯수 보내기
+		int cnt=0;
+		for(int i=0; i<detailList.size(); i++) {
+			cnt+= detailList.get(i).getOrderDetailCnt();
+		}
+		model.addAttribute("cnt",cnt);
 		//결제번호 보내기
 		model.addAttribute("orderNo",orderNo);
 		return "/WEB-INF/views/order/pay.jsp";
