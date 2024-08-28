@@ -104,7 +104,19 @@
 			</tr>
 			<tr>
 				<td>차단 여부</td>
-				<td>${memberBlockVO.blockType}</td>
+				<td>
+					<c:choose>
+						<c:when test="${blockDto.blockType=='차단'}">
+							${blockDto.blockType}							
+						</c:when>
+						<c:when test="${blockDto.blockType=='해제'}">
+							${blockDto.blockType}	
+						</c:when>
+						<c:otherwise>
+							차단 이력 없음
+						</c:otherwise>
+					</c:choose>
+				</td>
 			</tr>
 		</table>
 	</div>
@@ -145,7 +157,7 @@
 		<a href="list" class="btn btn-positive">회원 검색</a>
 		<a href="update?memberId=${memberDto.memberId}" class="btn btn-positive">회원정보 수정</a>
 		<c:choose>
-			<c:when test="${memberBlockVO.blockType=='차단'}">
+			<c:when test="${blockDto.blockType=='차단'}">
 				<a href="block?memberId=${memberDto.memberId}" class="btn btn-negative float-right">회원 차단 해제</a>
 			</c:when>
 			<c:otherwise>
