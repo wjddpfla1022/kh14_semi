@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.oneTrillionCompany.dto.CartDto;
 import com.kh.oneTrillionCompany.dto.ItemDto;
 import com.kh.oneTrillionCompany.mapper.CartMapper;
-import com.kh.oneTrillionCompany.mapper.ItemMapper;
+import com.kh.oneTrillionCompany.vo.ItemCartVO;
 
 @Repository
 public class CartDao {
@@ -21,14 +21,13 @@ public class CartDao {
 	@Autowired
 	private CartMapper cartMapper;
 	//임시 삭제하기 장바구니 등록 상품으로 옮기면
-	@Autowired
-	private ItemMapper itemMapper;
+
 	
 	//장바구니 등록
 	public void insert(CartDto cartDto) {
 		String sql = "insert into cart(cart_no, cart_item_no, cart_buyer, cart_cnt,"
 					+ " item_attacth_no, cart_total_price)"
-					+ " values(cart_no_seq.nextval, cart_item_no_seq.nextval, ?, ?, ?, ?)";
+					+ " values(cart_seq.nextval, cart_item_no_seq.nextval, ?, ?, ?, ?)";
 		Object[] data = {
 				cartDto.getCartNo(), cartDto.getCartItemNo(), cartDto.getCartBuyer(), 
 				cartDto.getCartCnt(), cartDto.getItemAttachNo(), 
@@ -124,12 +123,23 @@ public class CartDao {
 	    }
 	}
 	
-	//장바구니 담기 테스트 임시 메소드
-	//상품 상세
-		public ItemDto selectOne(int itemNo) {
-			String sql="select * from item where item_no=?";
-			Object[] data= {itemNo};
-			List<ItemDto> list =jdbcTemplate.query(sql, itemMapper,data);
-			return list.isEmpty()?null:list.get(0);
-		}
-}	
+	//컬러와 상품명으로 아이템을 찾기
+	public Integer findItemNo(String itemName, String itemColor) {
+		String sql = "select item_no from item where item_name=? and item_color=?";
+		Object[] data = {itemName, itemColor};
+		 try {
+	         return jdbcTemplate.queryForObject(sql, Integer.class, data);
+		 } catch (Exception e) {
+	            return null;
+	        }
+	 }
+
+	public void itemInsertCart(String cartBuyer, String itemName, 
+												String itemColor, int cartCnt) {
+		Integer itemNo = findItemNo(itemName, itemColor);
+		String sql ="insert into cart (cart_no, cart_buyer, cart_item_no, cart_cnt) values(cart_seq.nextval, ?, ?, ?)";
+		Object[] data = {cartBuyer, itemNo, cartCnt};
+		jdbcTemplate.update(sql, data);
+	}
+	
+}
