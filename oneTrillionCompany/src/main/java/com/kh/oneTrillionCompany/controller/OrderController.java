@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -69,8 +70,23 @@ public class OrderController {
 	}
 	@Transactional //중요한 절차이고 db를 거치는 횟수가 많아서 rollback이 가능하도록
 	@PostMapping("/pay")
-	public String pay(@RequestParam List<OrderVO>list, @RequestParam int orderNo,
+	public String pay(@RequestParam("list[0].itemNo") List<Integer> itemNos,
+		    @RequestParam("list[0].itemPrice") List<Integer> itemPrices,
+		    @RequestParam("list[0].cnt") List<Integer> cnts,
+		    @RequestParam("list[0].buyer") List<String> buyers,
+		    @RequestParam("list[0].orderNo") List<Integer> orderNos, @RequestParam int orderNo,
 			HttpSession session) {
+		List<OrderVO> list = new ArrayList<>();
+	    for (int i = 0; i < itemNos.size(); i++) {
+	        OrderVO order = new OrderVO();
+	        order.setItemNo(itemNos.get(i));
+	        order.setItemPrice(itemPrices.get(i));
+	        order.setCnt(cnts.get(i));
+	        order.setBuyer(buyers.get(i));
+	        order.setOrderNo(orderNos.get(i));
+	        list.add(order);
+	    }
+		System.out.println(list);
 		int payment=ordersDao.selectOne(orderNo).getOrderPrice();
 		String memberId=(String) session.getAttribute("createdUser");
 		boolean sessionVaild=list.get(0).getBuyer().equals(memberId); //토큰 유효성 검사

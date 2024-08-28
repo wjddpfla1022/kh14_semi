@@ -47,7 +47,7 @@ public class OrderDetailDao {
 		public void payCompleteStatus(List<Integer>list) {
 			for(int i=0; i<list.size(); i++) {
 				int detailNo=list.get(i);
-				String sql="update order_detail set ("
+				String sql="update order_detail set "
 						+ "order_detail_status='결제완료' "
 						+ "where order_detail_no=?";
 				Object[] data= {detailNo};

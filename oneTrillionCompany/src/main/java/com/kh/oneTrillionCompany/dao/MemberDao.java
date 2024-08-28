@@ -197,7 +197,7 @@ public class MemberDao {
 	}
 	//결제시 포인트 차감 메서드
 	public boolean payment(String memberId, int point) {
-		String sql = "update member set member_	point = member_point - ? "
+		String sql = "update member set member_point = member_point - ? "
 				+ "where member_id=? and member_point>=?";
 		Object[] data= {point,memberId,point};
 		return jdbcTemplate.update(sql, data)>0;
