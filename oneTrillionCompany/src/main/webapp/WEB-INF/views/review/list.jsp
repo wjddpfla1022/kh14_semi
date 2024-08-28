@@ -15,7 +15,9 @@
 	<div class="row center">
 		<form action="list" method="get" autocomplete="off" class="field">
 			<select name="column" class="field">
-				<option value="review_writer">아이디</option>
+				<option value="review_writer"<c:if test="${param.column=='review_writer'}">selected</c:if>>아이디</option>
+				<option value="review_item_no"<c:if test="${param.column=='review_item_no'}">selected</c:if>>상품번호</option>
+				<option value="review_score"<c:if test="${param.column=='review_score'}">selected</c:if>>별점</option>
 			</select>
 			<input class="field" type="text" name="keyword">
 			<button class="btn btn-poditive" type="submit">검색</button>
