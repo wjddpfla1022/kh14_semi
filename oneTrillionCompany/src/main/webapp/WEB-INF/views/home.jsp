@@ -53,7 +53,7 @@
 			loop : true, // 슬라이드 종료지점과 시작지점을 연결 할 것인가
 			autoplay : true,
 			autoplay : {
-				delay : 3000,
+				delay : 2000,
 				disableOnInteraction : true, // 사용자가 제어중일 경우 자동재생 해제
 				pauseOnMouseEnter : true,
 			},

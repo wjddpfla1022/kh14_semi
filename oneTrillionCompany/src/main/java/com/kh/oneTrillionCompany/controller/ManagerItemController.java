@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.oneTrillionCompany.dao.ItemDao;
+import com.kh.oneTrillionCompany.dao.ItemInfoDao;
 import com.kh.oneTrillionCompany.dto.ItemDto;
+import com.kh.oneTrillionCompany.dto.ItemInfoDto;
 import com.kh.oneTrillionCompany.exception.TargetNotFoundException;
 import com.kh.oneTrillionCompany.service.AttachService;
 import com.kh.oneTrillionCompany.vo.PageVO;
@@ -28,6 +30,8 @@ public class ManagerItemController {
 	
 	@Autowired
 	private ItemDao itemDao;
+	
+	
 	
 	//상품 검색 + 목록
 	@RequestMapping("/list")
@@ -129,5 +133,31 @@ public class ManagerItemController {
 					return "redirect:/images/200.png";
 				}
 			}
+	
+	//Infomation
+	
+	@Autowired
+	private ItemInfoDao infoDao;
+	
+	@GetMapping("/info/write")
+	public String write() {
+		return "/WEB-INF/views/itemInfo/write.jsp";
+	}
+	@PostMapping("/info/write")
+	public String write(@ModelAttribute ItemInfoDto infoDto, @RequestParam int itemNo) {
+		int sequence = infoDao.sequence();
+		infoDto.setInfoNo(sequence);
+		infoDto.setInfoItemNo(itemNo);
+		infoDao.write(infoDto);
+		return "redirect:/manager/item/list";
+	}
+	
+	@RequestMapping("/read")
+	public String read(@RequestParam int infoNo, Model model) {
+		ItemInfoDto infoDto = infoDao.selectOne(infoNo);
+		if(infoDto == null) throw new TargetNotFoundException("존재하지 않는 글 번호");
+		model.addAttribute("infoDto", infoDto);
+		return "/WEB-INF/views/itemInfo/read.jsp";
+	}
 	
 }
