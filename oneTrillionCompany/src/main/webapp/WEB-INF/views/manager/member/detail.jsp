@@ -143,7 +143,7 @@
 					</a>
 			</div>			
 			<div class=custom-last-menu>
-					<a href="#">
+					<a href="/manager/member/blockList?column=block_member_id&keyword=${memberDto.memberId}">
 						<span id="top-location">Block</span>
 						<span id="bottom-location">차단내역 조회</span>
 					</a>

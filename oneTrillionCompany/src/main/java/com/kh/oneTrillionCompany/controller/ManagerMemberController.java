@@ -1,5 +1,7 @@
 package com.kh.oneTrillionCompany.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -131,6 +133,17 @@ public class ManagerMemberController {
 			blockDao.insertClear(blockDto);
 		}
 		return "redirect:list";
+	}
+	
+	//차단 내역 목록,검색
+	@RequestMapping("/blockList")
+	public String list(@RequestParam(required = false) String column, @RequestParam(required = false) String keyword, Model model) {
+		boolean isSearch = column != null && keyword != null;
+		List<BlockDto> list = isSearch ? blockDao.selectList(column, keyword) : blockDao.selectList();
+		model.addAttribute("list", list);
+		model.addAttribute("column", column);
+		model.addAttribute("keyword", keyword);
+		return "/WEB-INF/views/manager/member/blockList.jsp";
 	}
 }	
 
