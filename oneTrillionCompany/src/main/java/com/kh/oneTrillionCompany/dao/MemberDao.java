@@ -51,7 +51,7 @@ public class MemberDao {
 	}
 	
 	//회원 상세 정보
-	public MemberDto selectOne(String memberId) {
+	public MemberDto selectOne(String memberId) { 
 		String sql = "select * from member where member_id = ?";
 		Object[] data = {memberId};
 		List<MemberDto> list = jdbcTemplate.query(sql, memberMapper, data);
