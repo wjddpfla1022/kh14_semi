@@ -10,8 +10,6 @@
 <meta charset="UTF-8">
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/lightpick@1.6.2/css/lightpick.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/locale/ko.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/moment@2.30.1/moment.min.js"></script>
 <script
 	src="https://cdn.jsdelivr.net/npm/lightpick@1.6.2/lightpick.min.js"></script>
@@ -22,10 +20,14 @@
 <link rel="stylesheet" type="text/css"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 
+</head>
 <style>
+/*카테고리 메뉴 디자인*/
 .menu {
-	background-color: antiquewhite;
+	background-color: white;
 	font-size: 16px;
+    width: 100%;
+    box-shadow: 0 0 1px 0 rgb(53, 53, 53);
 }
 
 .menu :hover {
@@ -33,18 +35,15 @@
 }
 
 .menu ul {
-	background-color: beige;
+	background-color: white;
 }
 
 .menu ul :hover {
-	background-color: antiquewhite;
+	background-color: white;
 }
 
 .menu>li>ul ul {
-	background-color: beige;
-}
-.menu>li>ul ul :hover {
-	background-color: azure;
+	background-color: white;
 }
 
 .top-menu {
@@ -67,6 +66,16 @@
 	/* flexbox를 사용하여 가로 배치 */
 	font-size: 12px;
 }
+/*글씨굵기*/
+#favorite{
+	font-weight:bolder;
+}
+
+session 수
+.hide{
+	color: white;
+}
+
 
 /* .ul-horizon{
 
@@ -101,9 +110,14 @@
 									+ '+D 키를 눌러 즐겨찾기에 등록하실 수 있습니다.');
 							return triggerDefault;
 						});
-			});
+       });
+		//버튼 표시 제어
+	   $(".btn-toggle").click(function(){
+           $(".target").slideToggle();
+	});
+	
 </script>
-</head>
+
 <body>
 	<!-- 문서의 출력 내용을 담는 태그 -->
 	<!-- 		<h1>내가 만든 홈페이지</h1> -->
@@ -114,11 +128,11 @@
 			<div class="row">
 				<ul class="menu top-menu">
 					<!-- 구분선 -->
-					<li><a href="#">고객센터</a></li>
-					<li><a href="localhost:8080" id="favorite">즐겨찾기</a></li>
-					<li class="right-menu"><a href="/member/login">로그인</a></li>
-					<li><a href="/member/join">회원가입</a></li>
-					<li><a href="#">커뮤니티</a>
+					<li><a style="font-weight: bold;" href="#">고객센터</a></li>
+					<li><a style="font-weight: bold;" href="localhost:8080" id="favorite"><i class="fa-solid fa-bookmark"></i>즐겨찾기</a></li>
+					<li class="right-menu"><a href="/member/login" style="font-weight:bolder;">로그인</a></li>
+					<li><a style="font-weight: bold;" href="/member/join" style="font-weight:bolder;">회원가입</a></li>
+					<li><a style="font-weight: bold;" href="#">커뮤니티</a>
 						<ul>
 							<li><a href="#">항목1</a></li>
 						</ul></li>
@@ -134,17 +148,17 @@
 				<div class="row">
 					<ul class="menu top-menu">
 						<!-- 구분선 -->
-						<li><a href="#">고객센터</a></li>
+						<li><a style="font-weight: bold;" href="#">고객센터</a></li>
 						<li><a href="localhost:8080" id="favorite">즐겨찾기</a></li>
-						<li class="right-menu"><a href="/member/logout">로그아웃</a></li>
-						<li><a href="#">주문 / 배송조회</a></li>
-						<li><a href="/qna/list">1:1문의</a></li>
-						<li><a href="#">커뮤니티</a>
+						<li class="right-menu"><a style="font-weight: bold;" href="/member/logout">로그아웃</a></li>
+						<li><a style="font-weight: bold;" href="#">주문 / 배송조회</a></li>
+						<li><a style="font-weight: bold;" href="/qna/list">1:1문의</a></li>
+						<li><a style="font-weight: bold;" href="#">커뮤니티</a>
 							<ul>
 								<li><a href="#">항목1</a></li>
 							</ul></li>
 							
-							<!-- 마이페이지 -->
+								<!-- 마이페이지 -->
 							<li>
 								<a href="/member/mypage"><i class="fa-solid fa-user"></i></a>
 							</li>
@@ -152,6 +166,7 @@
 							<li>
 								<a href="/cart/list"><i class="fa-solid fa-cart-shopping"></i></a>
 							</li>
+							<!-- 장바구니 -->
 					</ul>
 				</div>
 			</c:if>
@@ -159,12 +174,12 @@
 				<div class="row">
 					<ul class="menu top-menu">
 						<!-- 구분선 -->
-						<li><a href="#">고객센터</a></li>
-						<li><a href="localhost:8080" id="favorite">즐겨찾기</a></li>
-						<li class="right-menu"><a href="/member/logout">로그아웃</a></li>
-						<li><a href="#">주문 / 배송조회</a></li>
-						<li><a href="/qna/list">1:1문의</a></li>
-						<li><a href="#">커뮤니티</a>
+						<li><a style="font-weight: bold;" href="#">고객센터</a></li>
+						<li><a style="font-weight: bold;" href="localhost:8080" id="favorite">즐겨찾기</a></li>
+						<li class="right-menu"><a style="font-weight: bold;" href="/member/logout">로그아웃</a></li>
+						<li><a style="font-weight: bold;" href="#">주문 / 배송조회</a></li>
+						<li><a style="font-weight: bold;" href="/qna/list">1:1문의</a></li>
+						<li><a style="font-weight: bold;" href="#">커뮤니티</a>
 							<ul>
 								<li><a href="#">항목1</a></li>
 							</ul></li>
@@ -186,19 +201,18 @@
 				<div class="row">
 					<ul class="menu top-menu">
 						<!-- 구분선 -->
-						<li><a href="#">고객센터</a></li>
-						<li><a href="localhost:8080" id="favorite">즐겨찾기</a></li>
-						<li><a href="#">바로가기</a></li>
+						<li><a style="font-weight: bold;" href="#">고객센터</a></li>
+						<li><a style="font-weight: bold;" href="localhost:8080" id="favorite">즐겨찾기</a></li>
+						<li><a style="font-weight: bold;" href="#">바로가기</a></li>
 						<li class="right-menu"><a href="/member/logout">로그아웃</a></li>
-						<li><a href="#">주문 / 배송조회</a></li>
-						<li><a href="/manager/item/list">상품 조회</a></li>
-						
-							<li><a href="#">관리자 메뉴</a>
+						<li><a style="font-weight: bold;" href="#">주문 / 배송조회</a></li>
+						<li><a style="font-weight: bold;" href="/manager/item/list">상품 조회</a></li>
+						<li><a style="font-weight: bold;" href="#">관리자 메뉴</a>
 								<ul>
 									<li><a href="/manager/member/list">회원 검색</a></li>
 									<li><a href="/qna/list">1:1문의</a></li>	
 								</ul>
-							</li>
+						</li>
 					</ul>
 
 
@@ -208,7 +222,7 @@
 					<!-- 구분선 -->
 					
 			<div class="row center">
-				<a href="/"> <img src="http://via.placeholder.com/300x100.png">
+				<a href="/"> <img src="https://obvious.com/wp-content/uploads/2022/06/One-1200x1200-1.jpeg" width="300px" height="100px">
 				</a>
 			</div>
 
@@ -228,20 +242,19 @@
 			-->
 
 
+		
 			<ul class="menu">
 				<!-- 구분선 -->
-				<li class="flex-core all-menu"><i class="fa-solid fa-bars"></i>
+				<li class="flex-core all-menu" style="font-weight: bold;"><i class="fa-solid fa-bars"></i>
 					전체메뉴
-					<ul class="all-menu-ul ul-horizon">
-						d
-					</ul>
+					<ul class="all-menu-ul ul-horizon"></ul>
 					<ul class="all-menu-ul ul-horizon">
 						<li class="li-horizon"><a href="#">상의 상세항목1</a></li>
 						<li class="li-horizon"><a href="#">상의 상세항목1</a></li>
 						<li class="li-horizon"><a href="#">상의 상세항목1</a></li>
 						<li class="li-horizon"><a href="#">상의 상세항목1</a></li>
 					</ul></li>
-				<li><a href="/item/list/cate?column=1&keyword=11">상의</a>
+				<li><a href="/item/list/cate?column=1&keyword=11" style="font-weight: bold;">상의</a>
 					<ul>
 						<li><a href="/item/list/cate?column=2&keyword=10">티셔츠</a>
 							<ul>
@@ -267,7 +280,7 @@
 					</ul>
 				</li>
 				<!-- 구분선 -->
-				<li><a href="/item/list/cate?column=1&keyword=33">하의</a>
+				<li><a href="/item/list/cate?column=1&keyword=33" style="font-weight: bold;">하의</a>
 					<ul>
 						<li><a href="/item/list/cate?column=2&keyword=30">슬랙스</a>
 							<ul>
@@ -298,7 +311,7 @@
 					</ul>
 				</li>
 				<!-- 구분선 -->
-				<li><a href="/item/list/cate?column=1&keyword=55">슈즈</a>
+				<li><a href="/item/list/cate?column=1&keyword=55" style="font-weight: bold;">슈즈</a>
 					<ul>
 						<li><a href="/item/list/cate?column=2&keyword=50">스니커즈</a>
 						<li><a href="/item/list/cate?column=2&keyword=51">로퍼/슬립온</a>
@@ -308,7 +321,7 @@
 						<li><a href="/item/list/cate?column=2&keyword=55">깔창/기타</a>
 					</ul>
 				</li>
-				<li><a href="/item/list/cate?column=1&keyword=77">아우터</a>
+				<li><a href="/item/list/cate?column=1&keyword=77" style="font-weight: bold;">아우터</a>
 					<ul>
 						<li><a href="/item/list/cate?column=2&keyword=70">가디건</a>
 						<li><a href="/item/list/cate?column=2&keyword=71">블루종</a>
@@ -345,9 +358,13 @@
 				</li>
 				<!-- 구분선 -->
 			</ul>
+			
+		
+        	
+				
 			<div class="row">
-				<p>로그인 아이디 : ${sessionScope.createdUser}</p>
-				<p>회원 등급 : ${sessionScope.createdLevel}</p>
+				<p class="hide" style="color: white;">로그인 아이디 : ${sessionScope.createdUser}</p>
+				<p class="hide" style="color: white;">회원 등급 : ${sessionScope.createdLevel}</p>
 			</div>
 	</div>
 	<!-- 중단(Container) -->
