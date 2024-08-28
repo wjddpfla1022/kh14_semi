@@ -155,7 +155,7 @@
 		<a href="update?memberId=${memberDto.memberId}" class="btn btn-positive">회원정보 수정</a>
 		<c:choose>
 			<c:when test="${blockDto.blockType=='차단'}">
-				<a href="block?memberId=${memberDto.memberId}" class="btn btn-negative float-right">회원 차단 해제</a>
+				<a href="clear?memberId=${memberDto.memberId}" class="btn btn-negative float-right">회원 차단 해제</a>
 			</c:when>
 			<c:otherwise>
 				<a href="block?memberId=${memberDto.memberId}" class="btn btn-negative float-right">회원 차단</a>
