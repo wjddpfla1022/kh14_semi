@@ -32,7 +32,6 @@ public class ManagerItemController {
 	private ItemDao itemDao;
 	
 	
-	
 	//상품 검색 + 목록
 	@RequestMapping("/list")
 	public String list(@ModelAttribute("pageVO") PageVO pageVO, 
@@ -139,9 +138,13 @@ public class ManagerItemController {
 	@Autowired
 	private ItemInfoDao infoDao;
 	
-	@GetMapping("/info/write")
-	public String write() {
-		return "/WEB-INF/views/itemInfo/write.jsp";
+	@RequestMapping("/info/write")
+	public String write(Model model,@RequestParam int itemNo, @ModelAttribute ItemDto itemDto) {
+		
+		model.addAttribute("itemDto", itemDto);
+		model.addAttribute("itemNo", itemNo);
+		model.addAttribute(itemDto);
+		return "/WEB-INF/views/manager/itemInfo/write.jsp";
 	}
 	@PostMapping("/info/write")
 	public String write(@ModelAttribute ItemInfoDto infoDto, @RequestParam int itemNo) {
@@ -152,12 +155,14 @@ public class ManagerItemController {
 		return "redirect:/manager/item/list";
 	}
 	
-	@RequestMapping("/read")
-	public String read(@RequestParam int infoNo, Model model) {
-		ItemInfoDto infoDto = infoDao.selectOne(infoNo);
+	@RequestMapping("/info/read")
+	public String read(@RequestParam int itemNo, Model model, @ModelAttribute ItemDto itemDto) {
+		ItemInfoDto infoDto = infoDao.selectOne(itemNo);
 		if(infoDto == null) throw new TargetNotFoundException("존재하지 않는 글 번호");
+		model.addAttribute("itemDto", itemDto);
+		model.addAttribute("itemNo", itemNo);
 		model.addAttribute("infoDto", infoDto);
-		return "/WEB-INF/views/itemInfo/read.jsp";
+		return "/WEB-INF/views/manager/itemInfo/read.jsp";
 	}
 	
 }

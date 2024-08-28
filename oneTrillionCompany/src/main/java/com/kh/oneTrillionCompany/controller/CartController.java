@@ -125,15 +125,7 @@ public class CartController {
 //		return "/WEB-INF/views/emp/list.jsp"; 
 //	}
 	
-//	//장바구니 담기 구현1 (삭제)
-	// -임시 페이지 제작
-	@RequestMapping("/tempItem")
-	public String tempItem(@RequestParam int itemNo, Model model) {
-		ItemDto itemdto = cartDao.selectOne(itemNo);
-		model.addAttribute("itemdto", itemdto);
-		return "/WEB-INF/views/cart/tempItem.jsp";
-	}
-		
+	
 //	//장바구니 담기
 //	@RequestMapping("/addCart")
 //	public String cart(@ModelAttribute CartDto cartDto, 
