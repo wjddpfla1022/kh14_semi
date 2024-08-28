@@ -160,7 +160,7 @@
 	        <div class="w-50 p-10">
 	            <div id="bigImage">
 	                <div id="container">
-	                	<img class="shoppingmal" src="https://d2u3dcdbebyaiu.cloudfront.net/uploads/atch_img/197/d72693912bf2868da3e848dc5b779d4a_res.jpeg" width="100%">
+	                	<img class="shoppingmal" src = "/item/image?itemNo=${itemDto.itemNo}" width="100%">
 	                </div>
 		            <div class="row smallImages">    
 		                <img id="smallShirts" src="https://sitem.ssgcdn.com/06/09/87/item/1000183870906_i1_750.jpg" width="100%">
@@ -287,6 +287,15 @@
 <div class="left">
     <div class="test-score2" data-max="5" data-rate="3"></div>
 </div>
+
+<div class="container w-1000">
+	<h3>정보 번호 : ${infoDto.infoNo}</h3>
+	<h3>상품 번호 : ${infoDto.infoItemNo}</h3>
+	<div class="row center">
+		<h3>${infoDto.infoContent}</h3>
+	</div>
+</div>
 </body>
 
 
+<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
