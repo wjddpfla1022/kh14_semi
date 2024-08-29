@@ -8,28 +8,28 @@
 
 <style>
 	.table-border-top{
-		background-color: #f9f9f9;
+		background-color: transparent;
 		border: 2px solid black;
 		border-left: none;
 		border-right: none;
 		border-bottom: 1px solid #e9e9e9;
 	}
 	.table-border-middle{
-		background-color: #f9f9f9;
+		background-color: transparent;
 		border-top: none;
 		border-left: none;
 		border-right: none;
 		border-bottom: 1px solid #e9e9e9;
 	}
 	.table-border-center{
-		background-color: #f9f9f9;
+		background-color: transparent;
 		border-top: none;
 		border-left: none;
 		border-right: 1px solid #e9e9e9;
 		border-bottom: none;
 	}
 	.table-border-side{
-		background-color: #f9f9f9;
+		background-color: transparent;
 		border-top: none;
 		border-left: 1px solid #e9e9e9;
 		border-right: 1px solid #e9e9e9;

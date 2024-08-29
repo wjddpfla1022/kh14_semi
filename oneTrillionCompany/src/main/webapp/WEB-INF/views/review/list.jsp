@@ -42,7 +42,7 @@
 							<tr>
 								<td>${reviewDto.reviewWriter}</td>
 								<td>${reviewDto.reviewItemNo}</td>
-								<td>${reviewDto.reviewContent}</td>
+								<td><a href="detail?reviewNo=${reviewDto.reviewNo}" class="link">${reviewDto.reviewContent}</a></td>
 								<td>${reviewDto.reviewScore}</td>
 							</tr>
 						</c:forEach>
@@ -55,3 +55,5 @@
 		</c:choose>
 	</div>
 </div>
+
+<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
