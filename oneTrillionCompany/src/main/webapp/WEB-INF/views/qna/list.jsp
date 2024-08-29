@@ -20,7 +20,7 @@
 	}
 	/* tr 테이블 상단 (번호 ,작성일 , 제목 , 작성자) */
 	.tr-table-top {
-		background-color: #f9f9f9;
+		background-color: #f0f0f0 !important;
 	}
 	/* th 테이블 상단 (번호 ,작성일 , 제목 , 작성자) */
 	.th-table-top {
@@ -66,8 +66,7 @@
 	<c:choose>
 		<c:when test="${sessionScope.createdUser != null}">
 			<div class="row right">
-				<a href="write" class="btn regi-qna" style="text-decoration: none">문의
-					등록</a>
+				<a href="write" class="btn regi-qna" style="text-decoration: none">문의 등록</a>
 			</div>
 		</c:when>
 		<c:otherwise>
@@ -91,8 +90,9 @@
 			<tbody>
 				<tr>
 					<!-- 테이블 셀의 colspan을 사용하여 메시지를 한 줄로 표시 -->
-					<td class="qna-login-msg" colspan="4"><i
-						class="fa-solid fa-headphones"></i> 로그인 후 이용 가능합니다.</td>
+					<td class="qna-login-msg" colspan="4">
+						<i class="fa-solid fa-headphones"></i> 로그인 후 이용 가능합니다.
+					</td>
 				</tr>
 			</tbody>
 		</table>
@@ -122,29 +122,25 @@
 							<td class="td-table-bottom">${qnaDto.qnaNo}</td>
 							<td class="td-table-bottom"><a
 								href="detail?qnaNo=${qnaDto.qnaNo}" class="qna-title">${qnaDto.qnaTitle}</a>
-								<!--댓글 숫자 출력(0보다 크면) --> <c:if test="${qnaDto.qnaReply > 0}">
+								<!--댓글 숫자 출력(0보다 크면) --> 
+								<c:if test="${qnaDto.qnaReply > 0}">
 	                                [${qnaDto.qnaReply}]
-	                            </c:if></td>
-							<!-- 							<td>							 -->
-							<%-- 								<c:choose> --%>
-							<%-- 									<c:when test="${qnaDto.qnaWriter == null}"> --%>
-							<!-- 										탈퇴한 사용자 -->
-							<%-- 									</c:when> --%>
-							<%-- 									<c:otherwise>${qnaDto.qnaWriter}</c:otherwise> --%>
-							<%-- 								</c:choose>								 --%>
-							<!-- 							</td> -->
-							<td class="td-table-bottom"><c:choose>
-									<c:when test="${fn:length(qnaDto.qnaWriter) > 3}">
-										<%-- 작성자의 아이디를 3글자 추출 후 표시 --%>
-										<c:out value="${fn:substring(qnaDto.qnaWriter, 0, 3)}" />
-										<%-- 이후 아이디를 * 처리 --%>
-										<c:out value="***" />
-									</c:when>
-									<c:otherwise>
-										<%-- 아이디의 길이가 3글자 이하인 경우를 처리 --%>
-										<c:out value="${qnaDto.qnaWriter}" />
-									</c:otherwise>
-								</c:choose></td>
+	                            </c:if>
+                            </td>
+								<td class="td-table-bottom">
+									<c:choose>
+										<c:when test="${fn:length(qnaDto.qnaWriter) > 3}">
+											<%-- 작성자의 아이디를 3글자 추출 후 표시 --%>
+											<c:out value="${fn:substring(qnaDto.qnaWriter, 0, 3)}" />
+											<%-- 이후 아이디를 * 처리 --%>
+											<c:out value="***" />
+										</c:when>
+										<c:otherwise>
+											<%-- 아이디의 길이가 3글자 이하인 경우를 처리 --%>
+											<c:out value="${qnaDto.qnaWriter}" />
+										</c:otherwise>
+									</c:choose>
+								</td>
 							<td class="td-table-bottom">${qnaDto.qnaTime}</td>
 						</tr>
 					</c:when>
@@ -174,32 +170,32 @@
 					<c:forEach var="qnaDto" items="${qnaList}">
 						<tr class="tr-table-bottom">
 							<td class="td-table-bottom">${qnaDto.qnaNo}</td>
-							<td class="td-table-bottom"><a
-								href="detail?qnaNo=${qnaDto.qnaNo}" class="qna-title">${qnaDto.qnaTitle}</a>
-								<!--댓글 숫자 출력(0보다 크면) --> <c:if test="${qnaDto.qnaReply >0}">
-									[${qnaDto.qnaReply}]
-								</c:if></td>
-							<!-- 							<td>							 -->
-							<%-- 								<c:choose> --%>
-							<%-- 									<c:when test="${qnaDto.qnaWriter == null}"> --%>
-							<!-- 										탈퇴한 사용자 -->
-							<%-- 									</c:when> --%>
-							<%-- 									<c:otherwise>${qnaDto.qnaWriter}</c:otherwise> --%>
-							<%-- 								</c:choose>								 --%>
-							<!-- 							</td> -->
-							<td class="td-table-bottom"><c:choose>
-									<c:when test="${fn:length(qnaDto.qnaWriter) > 3}">
-										<%-- 작성자의 아이디를 3글자 추출 후 표시 --%>
-										<c:out value="${fn:substring(qnaDto.qnaWriter, 0, 3)}" />
-										<%-- 이후 아이디를 * 처리 --%>
-										<c:out value="***" />
-									</c:when>
-									<c:otherwise>
-										<%-- 아이디의 길이가 3글자 이하인 경우를 처리 --%>
-										<%-- 아이디를 출력합니다. --%>
-										<c:out value="${qnaDto.qnaWriter}" />
-									</c:otherwise>
-								</c:choose></td>
+							<td class="td-table-bottom">
+								<a href="detail?qnaNo=${qnaDto.qnaNo}" class="qna-title">${qnaDto.qnaTitle}</a>
+								<!--댓글 숫자 출력(0보다 크면) -->
+									 <c:if test="${qnaDto.qnaReply >0}">
+										[${qnaDto.qnaReply}]
+									</c:if>
+								</td>
+	 							 
+								<td class="td-table-bottom">
+									<c:choose>
+										<c:when test="${qnaDto.qnaWriter == null}">
+	 										탈퇴한 사용자 
+										</c:when>
+										<c:when test="${fn:length(qnaDto.qnaWriter) > 3}">
+											<%-- 작성자의 아이디를 3글자 추출 후 표시 --%>
+											<c:out value="${fn:substring(qnaDto.qnaWriter, 0, 3)}" />
+											<%-- 이후 아이디를 * 처리 --%>
+											<c:out value="***" />
+										</c:when>
+											<c:otherwise>
+												<%-- 아이디의 길이가 3글자 이하인 경우를 처리 --%>
+												<%-- 아이디를 출력합니다. --%>
+												<c:out value="${qnaDto.qnaWriter}" />
+											</c:otherwise>
+									</c:choose>
+								</td>
 							<td class="td-table-bottom">${qnaDto.qnaTime}</td>
 						</tr>
 					</c:forEach>
