@@ -125,6 +125,8 @@ public class OrderController {
 		String memberId=(String) session.getAttribute("createdUser");
 		
 		List<OrderDetailDto>detailList=orderDetailDao.selectListByOrderDetailComplete(memberId);
+		for(int i=0; i<detailList.size(); i++) {
+		}
 		model.addAttribute("memberId",memberId);
 		model.addAttribute("detailList",detailList);
 		return "/WEB-INF/views/order/list.jsp";

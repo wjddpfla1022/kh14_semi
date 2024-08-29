@@ -21,7 +21,6 @@ public class OrderDetailMapper implements RowMapper<OrderDetailDto> {
 		orderDetailDto.setOrderDetailPrice(rs.getInt("order_detail_price"));
 		orderDetailDto.setOrderDetailCnt(rs.getInt("order_detail_cnt"));
 		orderDetailDto.setOrderDetailStatus(rs.getString("order_detail_status"));
-		
 		return orderDetailDto;
 	}
 

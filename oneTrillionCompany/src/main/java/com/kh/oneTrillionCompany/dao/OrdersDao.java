@@ -29,10 +29,10 @@ public class OrdersDao {
 	}
 	//주문서 한개 검색(멤버 아이디로)
 	public OrdersDto selectOne(String memberId) {
-		String sql="select * from orders where order_buyer=?";
+		String sql="select * from orders where order_buyer=? order by order_no asc";
 		Object[] data = {memberId};
 		List<OrdersDto> list = jdbcTemplate.query(sql, ordersMapper, data);
-		return list.isEmpty()?null:list.get(0);
+		return list.isEmpty()?null:list.get(list.size()-1);
 	}
 	//주문 현황 목록(R)
 	public List<OrdersDto> selectList() {

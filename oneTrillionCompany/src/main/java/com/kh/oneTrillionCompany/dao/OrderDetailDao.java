@@ -31,7 +31,7 @@ public class OrderDetailDao {
 		}
 		//특정 회원의 주문 결제완료상태 목록 조회(아이디로조회)
 		public List<OrderDetailDto> selectListByOrderDetailComplete(String orderMemberId){
-			String sql = "select * from order_detail where order_detail_buyer = ? where order_detail_status ='결제완료' order by order_detail_no desc";
+			String sql = "select * from order_detail where order_detail_buyer = ? and order_detail_status ='결제완료' order by order_detail_no desc";
 			Object[] data = {orderMemberId};
 			return jdbcTemplate.query(sql, orderDetailMapper, data);
 		}
