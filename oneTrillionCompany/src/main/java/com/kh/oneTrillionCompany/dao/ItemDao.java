@@ -54,8 +54,8 @@ public class ItemDao {
 	}
 	
 	//상품 검색
-	public List<ItemDto> selectList(String column, String keyword){
-		String sql="select * from item where instr("+ column +", ?)>0 "
+	public List<ItemDto> selectList(String keyword){
+		String sql="select * from item where instr(item_name, ?)>0 "
 				+ "order by item_no asc";
 		Object[] data= {keyword};
 		return jdbcTemplate.query(sql, itemMapper, data);
