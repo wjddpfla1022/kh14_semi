@@ -17,10 +17,16 @@ public class OrderDetailDao {
 	@Autowired
 	private OrderDetailMapper orderDetailMapper;
 	
-	//특정 회원의 주문 목록 조회
+		//특정 회원의 주문 목록 조회(아이디, 주문번호로 조회)
 		public List<OrderDetailDto> selectListByOrderDetail(String memberId,int orderNo){
 			String sql = "select * from order_detail where order_detail_buyer = ? and order_detail_order_no =? order by order_detail_no desc";
 			Object[] data = {memberId,orderNo};
+			return jdbcTemplate.query(sql, orderDetailMapper, data);
+		}
+		//특정 회원의 주문 목록 조회(아이디로 조회)
+		public List<OrderDetailDto> selectListByOrderDetail(String memberId){
+			String sql = "select * from order_detail where order_detail_buyer = ? order by order_detail_no desc";
+			Object[] data = {memberId};
 			return jdbcTemplate.query(sql, orderDetailMapper, data);
 		}
 		//특정 회원의 주문 결제준비상태 목록 조회(아이디로 조회)
