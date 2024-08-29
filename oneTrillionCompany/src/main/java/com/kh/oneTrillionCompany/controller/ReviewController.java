@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.oneTrillionCompany.dao.ReviewDao;
 import com.kh.oneTrillionCompany.dto.ReviewDto;
+import com.kh.oneTrillionCompany.exception.TargetNotFoundException;
 import com.kh.oneTrillionCompany.service.AttachService;
 
 import jakarta.servlet.http.HttpSession;
@@ -40,31 +41,40 @@ public class ReviewController {
 	}
 	@Transactional
 	@PostMapping("/write")
-	public String write(@ModelAttribute ReviewDto reviewDto, HttpSession session, MultipartFile attach) throws IllegalStateException, IOException {
+	public String write(@ModelAttribute ReviewDto reviewDto, HttpSession session,
+			@RequestParam MultipartFile attach) throws IllegalStateException, IOException {
 		
 		//세션에서 아이디 추출
 		String createdUser = (String)session.getAttribute("createdUser");
 		reviewDto.setReviewWriter(createdUser);
 		
 		//시퀀스 번호 생성
-		int seq = reviewDao.sequence();
+		int reviewseq = reviewDao.sequence();
 		
 		//등록할 정보에 번호 첨부
-		reviewDto.setReviewNo(seq);
+		reviewDto.setReviewNo(reviewseq);
 		//등록
 		reviewDao.insertWithSequence(reviewDto);
 		
-		if(!attach.isEmpty()) {
-		int attachNo = attachService.save(attach);
-		reviewDao.connect(reviewDto.getReviewNo(), attachNo);
+		if(attach.isEmpty() == false) {
+			int attachNo = attachService.save(attach);
+			reviewDao.connect(reviewseq, attachNo);
 		}
+		return "redirect:detail?reviewNo="+reviewseq;
+	}		
+		
 		//생성한 번호에 맞는 상세페이지로 리다이렉트(추방)
-		return "redirect:complete";
+		//상세 기능
+	@RequestMapping("/detail")
+	public String detail(@RequestParam int reviewNo, Model model) {
+		ReviewDto reviewDto = reviewDao.selectOne(reviewNo);
+		if(reviewDto==null)
+			throw new TargetNotFoundException("존재하지 않는 글번호");
+		
+		model.addAttribute("reviewDto", reviewDto);
+		return "/WEB-INF/views/review/detail.jsp";
 	}
-	@RequestMapping("/complete")
-	public String complete() {
-		return "/WEB-INF/views/review/complete.jsp";
-	}
+
 	
 	//리뷰 목록,검색
 	@RequestMapping("/list")
