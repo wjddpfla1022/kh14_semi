@@ -118,7 +118,7 @@
         // 수량 증가 및 감소
         $(".btn-up, .btn-down").click(function() {
             // 현재 버튼이 속한 행의 수량 및 재고 값 가져오기
-            var row = $(this).closest('tr');
+            var row = $(this).closest('tr'); //cartCnt 갖고 오려는 dom
             var $cartCntInput = row.find("[name=cartCnt]");
 
             var cartCntValue = parseInt($cartCntInput.val());

@@ -46,8 +46,9 @@ public class CartRestController {
 	@PostMapping("/insertCart")
 	public void insertCart(HttpSession session,
 							@RequestParam String itemName, @RequestParam String itemColor, 
-							@RequestParam int cartCnt ) {
+							@RequestParam Integer itemSalePrice, @RequestParam int cartCnt,@RequestParam Integer attachNo ) {
 		String cartBuyer = (String)session.getAttribute("createdUser");
-		cartDao.itemInsertCart(cartBuyer, itemName, itemColor, cartCnt);
+		cartDao.itemInsertCart(itemName, itemColor, cartBuyer, itemSalePrice != null ? 
+										itemSalePrice : 0, cartCnt, attachNo != null ? attachNo : 0);
 	}
 }

@@ -168,6 +168,17 @@ public class ItemDao {
 	        return jdbcTemplate.queryForObject(sql, Integer.class);
 	    }
 	}
-
 	
+	//itemNo로 이름을 찾는다-장바구니
+	public String findItemName (int itemNo) {
+		String sql= "select item_name from item where item_no=?";
+		return jdbcTemplate.queryForObject(sql, String.class, itemNo);
+	}
+	//품절 유무를 위해 아이템 컬러를 뽑는다-장바구니
+	public List<String> selectItemColors(int itemNo) {
+		String itemName = findItemName(itemNo);
+		String sql = "select item_color from item where item_name=?";
+		Object[] data = {itemName};
+		return jdbcTemplate.queryForList(sql, String.class, data);
+	}
 }
