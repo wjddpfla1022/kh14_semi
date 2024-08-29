@@ -1,5 +1,7 @@
 package com.kh.oneTrillionCompany.restcontroller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.kh.oneTrillionCompany.dao.CartDao;
 import com.kh.oneTrillionCompany.dto.CartDto;
+import com.kh.oneTrillionCompany.service.AttachService;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -49,5 +52,25 @@ public class CartRestController {
 							@RequestParam int cartCnt ) {
 		String cartBuyer = (String)session.getAttribute("createdUser");
 		cartDao.itemInsertCart(cartBuyer, itemName, itemColor, cartCnt);
+	}
+	
+	//장바구니 한개 제거
+	@PostMapping("/delete")
+	public void delete(@RequestParam int cartNo) {
+		cartDao.delete(cartNo);
+	}
+	
+	//장바구니 전체 제거
+	@PostMapping("/deleteAll")
+	public void deleteAll() {
+		try {
+			cartDao.deleteAll();
+		} catch (Exception e) {}
+	}
+	
+	//선택된 항목들을 삭제
+	@PostMapping("/checkDelete")
+	public void checkDelete(@RequestParam List<Integer>cartNo) {
+		cartDao.checkDelete(cartNo);
 	}
 }

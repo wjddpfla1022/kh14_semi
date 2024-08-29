@@ -50,8 +50,8 @@ public class CartController {
 				//장바구니 주문 총 합계, 장바구니 테이블이 비어 있으면 null 들어가므로 0 처리
 				Integer cartTotalPrice = cartDao.sumCartTotalPrice(memberId);
 				model.addAttribute("cartTotalPrice", (cartTotalPrice != null ? cartTotalPrice : 0));
+				Integer cartItemCnt = cartDao.dataCount(memberId);
 				//장바구니에 담긴 상품 갯수(상품별로)
-				Integer cartItemCnt = cartDao.lastCartNumber(memberId);
 				model.addAttribute("cartItemCnt", (cartItemCnt != null ? cartItemCnt : 0));
 			}
 			return "/WEB-INF/views/cart/list.jsp"; 
@@ -64,36 +64,6 @@ public class CartController {
 		return "redirect:/order/pay";
 	}
 
-	//장바구니 삭제
-	@RequestMapping("/delete")
-	public String delete(@RequestParam int cartNo) {
-		try {//파일을 지우기
-			int itemAttachmentNo = cartDao.findImage(cartNo);
-			attachService.delete(itemAttachmentNo);
-		}
-		catch(Exception e) {}//문제가 생겨도 지우기
-		finally {
-			cartDao.delete(cartNo);
-		}
-		return "redirect:list";
-	}
-	
-	//장바구니 여러개 삭제
-	@PostMapping("/deleteList")
-	public String deleteList(
-						@RequestParam(value = "cartNo") List<Integer> list) {//int니깐 여러개
-		for(int cartNo : list) {
-			try {//파일 지우기
-					int itemAttachmentNo = cartDao.findImage(cartNo);
-					attachService.delete(itemAttachmentNo);
-			}
-			catch(Exception e) {} 
-			finally {
-				cartDao.delete(cartNo);
-			}
-		}
-		return "redirect:list";
-	}
 	
 	//장바구니 전체 삭제
 	@PostMapping("/deleteAll")
@@ -124,28 +94,5 @@ public class CartController {
 //		}
 //		return "/WEB-INF/views/emp/list.jsp"; 
 //	}
-	
-	
-//	//장바구니 담기
-//	@RequestMapping("/addCart")
-//	public String cart(@ModelAttribute CartDto cartDto, 
-//			@RequestParam int itemNo, HttpSession session) {
-//		//세션에서 아이디 추출 후 장바구니에 첨부
-//		String createdUser = (String)session.getAttribute("createdUser");
-//		cartDto.setCartBuyer(createdUser);
-//		//비로그인 로그인 페이지로 보내기
-//		if(createdUser == null) {
-//			return "/WEB-INF/member/join.jsp";
-//		}
-//		else {
-//			//회원일 경우
-//			//item_no를 cart_no에 첨부
-//			cartDto.setCartNo(itemNo);
-//			cartDto.setCartBuyer("createdUser");
-//
-//			//등록 한다
-//			cartDao.insert(cartDto);
-//		}
-//		
-//		
+		
 }

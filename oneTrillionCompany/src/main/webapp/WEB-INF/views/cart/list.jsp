@@ -107,22 +107,77 @@
 			}
 		});
     	
-        // 삭제 버튼 누를 때 알림창
-        $(".btn-delete").click(function(event) {
-            var choice = confirm("장바구니를 비우시겠습니까?");
+		//삭제 ajax 통신-한개 삭제
+		$(".btn-delete").click(function(event){
+			var choice = confirm("장바구니를 비우시겠습니까?");
+			if(!choice) {
+				event.preventDefault(); //클릭 이벤트 중지
+				return; //종료
+			}
+			var row = $(this).closest('tr');//리스트 항목 전체 선택
+			var cartNoValue = $(this).closest('tr').find(".cartCnt-data").text();
+				$.ajax({
+					url: "/rest/cart/delete",
+					method: 'post',
+					data:{
+						cartNo : cartNoValue
+					},
+					success:function(response){
+						location.reload(); //페이지 새고
+					}
+				});
+		});	
+		
+		//선택한 항목을 삭제
+		$(".btn-selected-checkBox").click(function(){
+			var carNoList = [];
+				$(".check-item:checked").each(function() {
+					carNoList.push($(this).val());
+            });
+			
+			//삭제 알림창
+			var choice = confirm("선택한 항목을 삭제하시겠습니까?");
             if (!choice) {
-                event.preventDefault();
+                return; // 선택하지 않은 경우
             }
-        });
-
+	            $.ajax({
+		        	url: "/rest/cart/checkDelete",
+		        	method: 'post',
+		        	data:{
+		        		cartNo: carNoList,
+		        	},
+		        	success:function(response){
+		        		location.reload();
+		        	}
+		        });
+		});
+		
+		//장바구니 비우기 - 전체 삭제
+		$(".btn-deleteAll").click(function(evnet){
+			var choice = confirm("장바구니를 비우시겠습니까?");
+			if(!choice) {
+				event.preventDefault();
+				return;
+			}
+			var row = $(this).closest('tr');//리스트 항목 전체 선택
+			var cartNoValue = $(this).closest('tr').find(".cartCnt-data").text();
+				$.ajax({
+					url: "/rest/cart/deleteAll",
+					method: 'post',
+		
+					success:function(response){
+						location.reload(); //페이지 새고
+					}
+				});
+		});
+		
         // 수량 증가 및 감소
         $(".btn-up, .btn-down").click(function() {
             // 현재 버튼이 속한 행의 수량 및 재고 값 가져오기
-            var row = $(this).closest('tr');
-            var $cartCntInput = row.find("[name=cartCnt]");
-
-            var cartCntValue = parseInt($cartCntInput.val());
-            var itemCntValue = parseInt(row.find(".itemCnt-data").text());
+            var row = $(this).closest('tr'); // 현재 버튼이 속한 행 
+   			var cartCntInput = row.find("[name=cartCntInput]"); // 현재 행의 수량 입력 필드
+            var cartCntValue = parseInt(cartCntInput.val(), 10); //cartCnt 값이 들어감
+            var itemCntValue = parseInt(row.find(".itemCnt-data").text(), 10); //재고
 
             // 버튼에 따른 수량 조절
             if ($(this).hasClass('btn-up')) { 
@@ -143,10 +198,10 @@
                    alert("최소 수량에 도달했습니다");
               	}
            	}
-            $cartCntInput.val(cartCntValue);
+            cartCntInput.val(cartCntValue);
 			
 	        //수량 서버에 업데이트-ajax통신
-            var cartNo = parseInt(row.find(".cartCnt-data").text());
+       		var cartNo = row.find(".cartCnt-data").text(); // 현재 행의 cartNo 값
 	        $.ajax({
 	        	url: "/rest/cart/cartCntUpdate",
 	        	method: 'post',
@@ -176,7 +231,6 @@
 
 
 </script>
-<form action="list" method="post">
 <div class="container w-1200 my-50">
 	<div class="row center mb-50 cart-title">
 		장바구니
@@ -197,7 +251,7 @@
 		<h3>담긴 상품(${cartItemCnt})</h3>
 	</div>
 	<!-- 장바구니 목록 -->
-<!-- 	<form action="delete" method="post"> -->
+	<form action="list" method="post">
 		<table border="1" width="1200">
 			<thead>
 				<tr>
@@ -232,8 +286,8 @@
 			            </c:if>
 			        </c:forEach>
 					<td>
-						<span class="input_cartCnt">
-							<input type="text"  name="cartItemCnt"  value="${cart.cartCnt}" size="2">
+						<span>
+							<input type="text"  name="cartCntInput"  value="${cart.cartCnt}" size="2">
 							<button type="button" class="btn-cnt btn-up"><i class="fa-solid fa-angle-up Icon_carCnt"></i></button>
 							<button type="button" class="btn-cnt btn-down"><i class="fa-solid fa-angle-down Icon_carCnt"></i></button>
 						</span>
@@ -241,7 +295,7 @@
 					<td>기본배송</td>
 			 		<td class="link-box flex-box"  style="flex-direction: column; align-items:center;">
 						<button type="submit" class="btn btn-positive">주문하기</button>
-						<button type="submit" class="btn btn-negative btn-delete">삭제하기</button>
+						<button type="button" class="btn btn-negative btn-delete">삭제하기</button>
 					</td>
 				</tr>
 			</c:forEach>
@@ -255,18 +309,16 @@
 			</tr>
 		</tfoot>	
 		</table>
-	</form>
 	
 	<!-- 버튼 -->
 	<div class="float-box" >
-<!-- 		<form action="deleteAll" method="post" class="float-right"> form 블록요소 여기에 float 적용시킴 -->
-			<button type="button" class="btn btn-empty btn-delete"><i class="fa-solid fa-trash-can"></i> 장바구니 비우기</button>
-<!-- 		</form> -->
-		<!-- 주문 form 넣으면 됩니다 -->
+			<button type="button" class="btn btn-deleteAll float-right"><i class="fa-solid fa-trash-can"></i> 장바구니 비우기</button>
+			<button type="button" class="btn btn-selected-checkBox float-right">선택상품 삭제하기</button>
 			<button type="submit" class="btn float-left">선택상품 주문하기</button>
 			<button type="submit"  class="btn float-left">전체 주문하기</button>
 	</div>
-	
+	</form>	
+
 	<!-- 장바구니 주문 미리보기 -->
 	<div class="row cart-payment-Title center mt-50">
 		주문 요약서
@@ -327,7 +379,7 @@
 	</table>
 	</c:otherwise>
 </c:choose>	
-	
 </div>
-</form>
+
+
 <jsp:include page= "/WEB-INF/views/template/footer.jsp"></jsp:include>
