@@ -113,11 +113,15 @@ public class OrderController {
 		model.addAttribute("orderDetailList",ordersDao.selectListByOrder(memberId));
 		return "/WEB-INF/views/order/payFinish.jsp";
 	}
-	@GetMapping("/detail")
-	public String detail(@RequestParam int orderNo,
-						Model model) {
+	@RequestMapping("/detail")
+	public String detail(HttpSession session,Model model,
+			@RequestParam int orderNo) {
+		String memberId=(String) session.getAttribute("createdUser");
 		OrdersDto ordersDto = ordersDao.selectOne(orderNo);
 		model.addAttribute("ordersDto",ordersDto);
+		System.out.println(ordersDto);
+		List<OrderDetailDto> list=orderDetailDao.selectListByOrderDetail(memberId, orderNo);
+		model.addAttribute("detailList",list);
 		return "/WEB-INF/views/order/detail.jsp";
 	}
 	@GetMapping("/list")
