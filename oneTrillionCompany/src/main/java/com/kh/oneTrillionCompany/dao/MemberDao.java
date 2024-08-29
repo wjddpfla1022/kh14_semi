@@ -145,9 +145,8 @@ public class MemberDao {
 		return jdbcTemplate.query(sql, memberBlockMapper, data);
 	}
 	
-	//페이징 관련 메소드
-		public List<MemberBlockVO> selectListWithBlockByPaging(PageVO pageVO) {
-			if(pageVO.isSearch()) {
+	public List<MemberBlockVO> selectListWithBlockByPaging(PageVO pageVO) {
+		if(pageVO.isSearch()) {
 			String sql = "select * from ("
 								+ "select rownum rn, TMP.* from ("
 										+ "select "
@@ -157,33 +156,31 @@ public class MemberDao {
 											+ "left outer join block_latest B "
 											+ "on M.member_id=B.block_member_id "
 											+ "where instr(#1, ?) > 0 "
-											+ "order by #1 asc, M.member_id asc"
+											+ "order by M.member_id asc"
 								+ ")TMP"
 							+ ") where rn between ? and ?";
 			sql = sql.replace("#1", pageVO.getColumn());
-			Object[] data = {
-				pageVO.getKeyword(), pageVO.getBeginRow(),
-				pageVO.getEndRow()
-			};
-			return jdbcTemplate.query(sql, memberBlockMapper, data);
-		}
-			else {
-				String sql =  "select * from ("
+			Object[] data = {pageVO.getKeyword(), pageVO.getBeginRow(),
+									pageVO.getEndRow()};
+		return jdbcTemplate.query(sql, memberBlockMapper, data);
+	}
+		else {
+			String sql =  "select * from ("
 						+ "select rownum rn, TMP.* from ("
-						+ "select "
+							+ "select "
 							+ "M.*, B.block_no, B.block_time, B.block_memo, "
 							+ "B.block_member_id, nvl(B.block_type, '해제') block_type "
-						+ "from member M "
+							+ "from member M "
 							+ "left outer join block_latest B "
 							+ "on M.member_id = B.block_member_id "
 							+ "order by M.member_id asc"
-							+ ") TMP"
-							+ ") where rn between ? and ?";
-				sql = sql.replace("#1", pageVO.getColumn());
-				Object[] data = {pageVO.getBeginRow(),pageVO.getEndRow()};
-				return jdbcTemplate.query(sql, memberBlockMapper, data);
-			}
+						+ ") TMP"
+					+ ") where rn between ? and ?";
+			Object[] data = {pageVO.getBeginRow(),pageVO.getEndRow()};
+			return jdbcTemplate.query(sql, memberBlockMapper, data);
 		}
+	}
+	
 	public int countByPaging(PageVO pageVO) {
 		String sql = "select count(*) from member where instr(#1, ?) > 0";
 		sql = sql.replace("#1", pageVO.getColumn());
