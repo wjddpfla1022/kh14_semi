@@ -19,8 +19,6 @@ import com.kh.oneTrillionCompany.dao.QnaDao;
 import com.kh.oneTrillionCompany.dao.ReviewDao;
 import com.kh.oneTrillionCompany.dto.BlockDto;
 import com.kh.oneTrillionCompany.dto.MemberDto;
-import com.kh.oneTrillionCompany.dto.QnaDto;
-import com.kh.oneTrillionCompany.dto.ReviewDto;
 import com.kh.oneTrillionCompany.exception.TargetNotFoundException;
 import com.kh.oneTrillionCompany.vo.PageVO;
 
@@ -45,19 +43,24 @@ public class ManagerMemberController {
 	@RequestMapping("/list")
 	public String list(
 			@ModelAttribute("pageVO") PageVO pageVO, Model model) {
-//		if(pageVO.isSearch() && checkSearch(pageVO)) { //관리자-회원 검색 시 column, keyword
+//		if(pageVO.isSearch()) { //관리자-회원 검색 시 column, keyword
+		boolean isSearch = pageVO.getColumn() != null && pageVO.getKeyword() != null;
+		if(isSearch) {
 			model.addAttribute("list", memberDao.selectListWithBlockByPaging(pageVO));	
 			int count = memberDao.countByPaging(pageVO);
 			pageVO.setCount(count);
+		}
+		else {
+			model.addAttribute("list", memberDao.selectListWithBlockByPaging(pageVO));
+		}
 //		}
 		return "/WEB-INF/views/manager/member/list.jsp";
 	}
 //	private boolean checkSearch(PageVO pageVO) {
-//		if(pageVO.getColumn() == null) return false;
-//		if(pageVO.getKeyword() == null) return false;
+//		if(pageVO.getColumn() == null) return true;
+//		if(pageVO.getKeyword() == null) return true;
 //		switch(pageVO.getColumn()) {
 //		case "member_id":
-//		case "member_email":
 //		case "member_nickname":
 //		case "member_rank":
 //			return true;

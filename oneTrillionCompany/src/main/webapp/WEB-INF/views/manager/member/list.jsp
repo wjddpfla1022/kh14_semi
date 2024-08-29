@@ -21,6 +21,7 @@
 	<div class="row center" style=" margin-bottom:10px;">
 		<form action="list" method="get" autocomplete="off" class="field">
 			<select name="column" class="field-column">
+				<option value="" >선택</option>
 				<option value="member_id" <c:if test="${param.column=='member_id'}">selected</c:if>>아이디</option>
 				<option value="member_nickname" <c:if test="${param.column=='member_nickname'}">selected</c:if>>닉네임</option>
 				<option value="member_rank" <c:if test="${param.column=='member_rank'}">selected</c:if>>등급</option>
