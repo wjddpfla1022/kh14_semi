@@ -90,7 +90,12 @@ public class ReviewDao {
 		Object[] data= {reviewWriter};
 		return jdbcTemplate.query(sql, reviewMapper, data);
 	}
-	
+	//이미지 번호 찾기 기능
+    public Integer findImage(int reviewNo) {
+        String sql = "select attach from review_image review=?";
+        Object[]data = {reviewNo};
+        return jdbcTemplate.queryForObject(sql, Integer.class, data);
+    }
 	
 	
 	
