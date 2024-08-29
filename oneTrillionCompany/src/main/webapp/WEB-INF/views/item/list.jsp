@@ -44,7 +44,7 @@
 			 <div class="container w-1000">
         <div class="row center">
 		</div>
-		<h3>데이터 개수 : ${list.size()}</h3>
+		<h3>데이터 개수 : ${itemList.size()}</h3>
 		<div class="row image-align">
 		<c:forEach var= "itemDto" items= "${list}">
             <a href="/item/detail?itemNo=${itemDto.itemNo}">
