@@ -71,10 +71,11 @@
 
 .container-grid {
 	display: grid;
-	grid-template-columns: 500px 400px;
-	grid-template-rows: 500px 500px;
+	grid-template-columns: 600px 600px;
+	grid-template-rows: 600px 600px;
 	row-gap: 10px;
 	column-gap: 20px;
+	width:100%;
 }
 </style>
 <!-- jquery cdn -->
@@ -179,7 +180,7 @@
 					</div>
 				</div>
 				<div class="item">
-					<div class="container" style="width: 350px; height: 100%">
+					<div class="container" style="width: 450px; height: 100%">
 						<div class="title">결제상세</div>
 						<div class="container">
 							<div class="row w-100">
@@ -249,6 +250,7 @@
 									</c:forEach>
 								</tbody>
 							</table>
+						</div>
 						</div>
 					</div>
 				</div>
