@@ -86,7 +86,6 @@ public class OrderController {
 	        order.setOrderNo(orderNos.get(i));
 	        list.add(order);
 	    }
-		System.out.println(list);
 		int payment=ordersDao.selectOne(orderNo).getOrderPrice();
 		String memberId=(String) session.getAttribute("createdUser");
 		boolean sessionVaild=list.get(0).getBuyer().equals(memberId); //세션 유효성 검사
@@ -105,12 +104,14 @@ public class OrderController {
 		orderDetailDao.payCompleteStatus(detailNoList);
 		//임시 주문서 삭제
 //		ordersDao.delete(memberId);
-		return "redirect:payFinish";
+		return "redirect:payFinish?orderNo="+orderNo;
 	}
-	@GetMapping("/payFinish")
-	public String payFinish(HttpSession session,Model model) {
+	@RequestMapping("/payFinish")
+	public String payFinish(HttpSession session,Model model,
+			@RequestParam int orderNo) {
 		String memberId = (String) session.getAttribute("createdUser");
-		model.addAttribute("orderDetailList",ordersDao.selectListByOrder(memberId));
+		model.addAttribute("ordersDto",ordersDao.selectOne(orderNo));
+		model.addAttribute("detailList",orderDetailDao.selectListByOrderDetail(memberId, orderNo));
 		return "/WEB-INF/views/order/payFinish.jsp";
 	}
 	@RequestMapping("/detail")

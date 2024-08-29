@@ -83,27 +83,6 @@
 <!-- 자바스크립트 코드 작성 영역 -->
 <script type="text/javascript">
 	$(function() {
-		var overallTotalPrice = 0; // 전체 총합을 저장할 변수
-
-	    // 각 항목의 totalPrice를 계산
-	    $('tbody tr').each(function() {
-	        var itemPrice = parseInt($(this).find('input[name*="itemPrice"]').val());
-	        var cnt = parseInt($(this).find('input[name*="cnt"]').val());
-
-	        // 각 항목의 totalPrice 계산
-	        var totalPrice = itemPrice * cnt;
-
-	        // 계산된 totalPrice를 각 항목에 표시할 수 있는 곳이 있다면 추가할 수 있습니다.
-	        // 예: $(this).find('.total-price').text(totalPrice + " 원");
-
-	        // 전체 총합에 추가
-	        overallTotalPrice += totalPrice;
-	    });
-
-	    // 전체 총합을 어디에 표시할지 정해서 추가
-	    $('.overall-total-price').text("최대 " +overallTotalPrice + " 원");
-
-	    
 		$("select[name='order_memo']")
 				.change(
 						function() {
@@ -151,7 +130,7 @@
 		</div>
 		<form action="pay" method="post">
 			<label class="row title">배송지</label>
-			<div class="container-grid px-20">
+			<div class="container-grid">
 				<div class="item">
 					<div class="flex-box w-100">
 						<div class="container container-left my-20">
@@ -217,19 +196,16 @@
 								<div class="container">
 									<div class="flex-box column-2">
 										<div class="row">구매적립</div>
-										<div class="row flex-right pay-coin green">${totalPrice*3/100}
+										<div class="row flex-right pay-coin">${totalPrice*3/100}
 											원</div>
 									</div>
 									<div class="flex-box column-2">
 										<div class="row">리뷰적립</div>
-										<div class="row flex-right review-coin green"></div>
+										<div class="row flex-right review-coin">${cnt*150}원</div>
 									</div>
 									<div class="row">동일상품의 상품 적립은 1회로 제한</div>
 								</div>
-								<div class="row flex-box">
-									<div class="flex-left green">${totalPrice} 원</div>
-									<button type="submit" class="btn btn-positive center flex-right" style="">결제하기</button>
-								</div>
+								<button type="submit" class="btn btn-positive center">결제하기</button>
 							</div>
 						</div>
 					</div>
