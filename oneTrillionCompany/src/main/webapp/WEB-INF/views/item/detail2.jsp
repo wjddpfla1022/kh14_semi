@@ -276,11 +276,11 @@
     <div class="cotainer w-1200 my-50">
         <div class="row flex-box column-2">
             <div class="left">
-                <h3>REVIEW ()</h3>
+                <h3>REVIEW (${list.size()})</h3>
             </div>
            
             <div class="left">
-                <h3>전체 상품 리뷰</h3>
+                <a href="/review/list?reviewNo=${itemDto.itemNo}" class="btn">상품 리뷰</a>
             </div>
         </div>
 </div><hr>

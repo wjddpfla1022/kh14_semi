@@ -13,9 +13,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.oneTrillionCompany.dao.ItemDao;
 import com.kh.oneTrillionCompany.dao.ItemInfoDao;
+import com.kh.oneTrillionCompany.dao.ReviewDao;
 import com.kh.oneTrillionCompany.dto.ItemDto;
 import com.kh.oneTrillionCompany.dto.ItemInfoDto;
-import com.kh.oneTrillionCompany.exception.TargetNotFoundException;
+import com.kh.oneTrillionCompany.dto.ReviewDto;
 import com.kh.oneTrillionCompany.vo.PageVO;
 
 @Controller
@@ -27,6 +28,8 @@ public class ItemController {
 
 	@Autowired
 	private ItemInfoDao infoDao;
+	@Autowired
+	private ReviewDao reviewDao;
 	
 	@RequestMapping("/list")
 	public String list(@ModelAttribute("pageVO") PageVO pageVO, Model model) {
@@ -55,7 +58,9 @@ public class ItemController {
 	public String detail(@RequestParam int itemNo, Model model) {
 		ItemDto itemDto = itemDao.selectOne(itemNo);
 		ItemInfoDto infoDto = infoDao.selectOne(itemNo);
+		List<ReviewDto> list=reviewDao.selectList();
 		//if(infoDto == null) throw new TargetNotFoundException("존재하지 않는 글 번호");
+		model.addAttribute("list",list);
 		model.addAttribute("itemDto", itemDto);
 	    model.addAttribute("infoDto", infoDto);
 	    model.addAttribute("itemNo", itemNo);
