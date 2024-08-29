@@ -41,6 +41,7 @@
 			</select>
 		</div>
 		<div class="row refund-write">
+			<input type="hidden" class="field" value="${refundDto.refundOrderDetailNo}" name="refundOrderDetailNo">
 			<textarea placeholder="내용을 입력하세요" name="refundMemo"></textarea>
 		</div>
 		<div class="row right">

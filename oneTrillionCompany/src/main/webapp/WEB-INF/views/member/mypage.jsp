@@ -6,56 +6,136 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 
+<style>
+	.table-border-top{
+		background-color: #f9f9f9;
+		border: 2px solid black;
+		border-left: none;
+		border-right: none;
+		border-bottom: 1px solid #e9e9e9;
+	}
+	.table-border-middle{
+		background-color: #f9f9f9;
+		border-top: none;
+		border-left: none;
+		border-right: none;
+		border-bottom: 1px solid #e9e9e9;
+	}
+	.table-border-center{
+		background-color: #f9f9f9;
+		border-top: none;
+		border-left: none;
+		border-right: 1px solid #e9e9e9;
+		border-bottom: none;
+	}
+</style>
+
 <div class="container w-700 my-50">
 	<div class = "row center">
 		<h1>${memberDto.memberId} 님의 개인 정보</h1>
 	</div>
 	
 	<div class = "row center"> 
-		<table class="table table-border">
-		<tr>
-			<td>이름</td>
-			<td>${memberDto.memberName}</td>
+		<table class="table table-border-top">
+		<tr  class="table-border-middle">
+			<th class="table-border-center">
+				<div class="row left ps-30">
+					<span>이름</span>
+				</div>
+			</th>
+			<td>
+				<div class="row center">
+					<span>
+						${memberDto.memberName}
+					</span>
+				</div>
+			</td>		
 		</tr>
-		<tr>
-			<th width="25%">닉네임</th>
-			<td>${memberDto.memberNickname}</td>
+		<tr class="table-border-middle">
+			<th class="table-border-center">
+				<div class="row left ps-30">
+					<span>닉네임</span>
+				</div>
+			</th>
+			<td>				
+				<span>${memberDto.memberNickname}</span>
+			</td>
 		</tr>
-		<tr>
-			<th>이메일</th>
-			<td>${memberDto.memberEmail}</td>
+		<tr class="table-border-middle">
+			<th class="table-border-center">
+				<div class="row left ps-30">
+					<span>이메일</span>
+				</div>				
+			</th>
+			<td>
+				<span>${memberDto.memberEmail}</span>
+			</td>
 		</tr>
-		<tr>
-			<th>생년월일</th>
-			<td>${memberDto.memberBirth}</td>
+		<tr class="table-border-middle">
+			<th class="table-border-center">
+				<div class="row left ps-30">
+					<span>생년월일</span>
+				</div>				
+			</th>
+			<td>
+				<span>${memberDto.memberBirth}</span>
+			</td>
 		</tr>
-		<tr>
-				<td>주소</td>
-					<c:choose>
-						<c:when test="${memberDto.memberPost==null && memberDto.memberAddress1==null && memberAddress2==null}">
-							<td></td>
-						</c:when>
-						<c:otherwise>
-							<td>[${memberDto.memberPost}] ${memberDto.memberAddress1}, ${memberDto.memberAddress2}</td>
-						</c:otherwise>						
-					</c:choose>				
+		<tr class="table-border-middle">
+			<th class="table-border-center">
+				<div class="row left ps-30">
+					주소
+				</div>				
+			</th>
+				<c:choose>
+					<c:when test="${memberDto.memberPost==null && memberDto.memberAddress1==null && memberDto.memberAddress2==null}">
+						<td>
+							<span></span>
+						</td>
+					</c:when>
+					<c:otherwise>
+						<td>
+							<span>[${memberDto.memberPost}] ${memberDto.memberAddress1}, ${memberDto.memberAddress2}</span>
+						</td>
+					</c:otherwise>						
+				</c:choose>				
 			</tr>
-			<tr>
-				<td>등급</td>
-				<td>${memberDto.memberRank}</td>
+			<tr class="table-border-middle">
+				<th class="table-border-center">
+					<div class="row left ps-30">
+						등급
+					</div>
+				</th>
+				<td>
+					<span>${memberDto.memberRank}</span>
+				</td>
 			</tr>
-			<tr>
-				<td>포인트</td>
-				<td>${memberDto.memberPoint}p</td>
+			<tr class="table-border-middle">
+				<td class="table-border-center">
+				<div class="row left ps-30">
+					<span>포인트</span>
+				</div>
+				</td>
+				<td>
+					<span>${memberDto.memberPoint}p</span>
+				</td>
 			</tr>
-			<tr>
-				<td>가입일</td>
+			<tr class="table-border-middle">
+				<td class="table-border-center">
+					<div class="row left ps-30">
+						<span>가입일</span>
+					</div>
+				</td>
 				<td>
 					<fmt:formatDate value="${memberDto.memberJoin}" pattern="y년 M월 d일"/>
 				</td>
 			</tr>
-			<tr>
-				<td>최종 로그인</td>
+			<tr class="table-border-middle">
+				<td class="table-border-center">
+					<div class="row left ps-30">
+						<span>최종 로그인</span>
+					</div>
+				</td>
 				<td>
 					<fmt:formatDate value="${memberDto.memberLogin}" pattern="y년 M월 d일 E H시 m분"/>
 				</td>

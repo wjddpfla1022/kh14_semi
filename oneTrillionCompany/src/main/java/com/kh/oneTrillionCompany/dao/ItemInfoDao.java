@@ -40,9 +40,9 @@ public class ItemInfoDao {
 	public boolean update(ItemInfoDto infoDto) {
 		String sql = "update item_info set "
 				+ "info_content = ? "
-				+ "where info_no = ?";
+				+ "where info_item_no = ?";
 		Object[] data = {
-				infoDto.getInfoContent(), infoDto.getInfoNo()
+				infoDto.getInfoContent(), infoDto.getInfoItemNo()
 		};
 		return jdbcTemplate.update(sql, data) > 0;
 	}
