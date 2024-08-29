@@ -122,7 +122,7 @@
 				</div>
 				</td>
 				<td>
-					<span>${memberDto.memberPoint}p</span>
+					<span>${memberDto.memberPoint}<i class="fa-solid fa-coins"></i></span>
 				</td>
 			</tr>
 			<tr class="table-border-middle">
