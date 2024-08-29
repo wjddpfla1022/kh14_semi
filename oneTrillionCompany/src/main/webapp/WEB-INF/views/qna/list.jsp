@@ -126,40 +126,6 @@
 							<td class="td-table-bottom">
 						        <c:choose>
 							        <c:when test="${fn:length(qnaDto.qnaWriter) > 3}">
-		<%-- 테이블 작성  --%>
-		<div class ="row">
-			<table class="table">
-				<thead>
-					<tr class="tr-table-top">
-						<th width=10%>번호</th>
-						<th width=20%>작성일</th>
-						<th width =50%>제목</th>
-						<th width=20%>작성자</th>
-					</tr>
-				</thead>
-				<tbody align="center" >
-					<c:forEach var="qnaDto" items="${qnaList}">
-							<tr class="tr-table-bottom">
-								<td>${qnaDto.qnaNo}</td>
-								<td>${qnaDto.qnaTime}</td>
-								<td>
-									<a href="detail?qnaNo=${qnaDto.qnaNo}" class="qna-title">${qnaDto.qnaTitle}</a>
-									<!--댓글 숫자 출력(0보다 크면) -->
-									<c:if test="${qnaDto.qnaReply >0}">
-										[${qnaDto.qnaReply}]
-									</c:if>
-								</td>
-	<!-- 							<td>							 -->
-	<%-- 								<c:choose> --%>
-	<%-- 									<c:when test="${qnaDto.qnaWriter == null}"> --%>
-	<!-- 										탈퇴한 사용자 -->
-	<%-- 									</c:when> --%>
-	<%-- 									<c:otherwise>${qnaDto.qnaWriter}</c:otherwise> --%>
-	<%-- 								</c:choose>								 --%>
-	<!-- 							</td> -->
-								<td>
-							        <c:choose>
-								        <c:when test="${fn:length(qnaDto.qnaWriter) > 3}">
 								            <%-- 작성자의 아이디를 3글자 추출 후 표시 --%>
 								            <c:out value="${fn:substring(qnaDto.qnaWriter, 0, 3)}"/>
 								            <%-- 이후 아이디를 * 처리 --%>
@@ -182,6 +148,7 @@
 </div>
 
 
+
 	<!-- 검색창 -->
 	<form action="list" method="get" autocomplete="off">
 		<div class="row center">
@@ -193,20 +160,7 @@
 			<button type="submit">검색</button>
 		</div>
 	</form>
-								        </c:when>
-								        <c:otherwise> 
-								        	<%-- 아이디의 길이가 3글자 이하인 경우를 처리 --%>
-								            <%-- 아이디를 출력합니다. --%>
-								            <c:out value="${qnaDto.qnaWriter}"/>
-								        </c:otherwise>
-								    </c:choose>
-								</td>
-							</tr>
-					</c:forEach>
-				</tbody>
-			</table>
-		</div>
-</div>
+
 
 
 <!-- 검색창 -->
