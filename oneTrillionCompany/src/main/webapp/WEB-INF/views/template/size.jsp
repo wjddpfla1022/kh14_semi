@@ -7,17 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>쇼핑몰</title>
 
-    <!-- google font cdn -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
-
-    <!-- font awesome icon cdn -->
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-
-    <!-- my css -->
-    <link rel="stylesheet" type="text/css" href="./commons.css">
-    <link rel="stylesheet" type="text/css" href="./test.css">
     <style>
         
         @keyframes blink-effect {
@@ -30,10 +19,6 @@
         
     </style>
 
-    <!--kakako맵-->
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f99d9d3b97bb141d46438392bef76880"></script>
-	
-
     <!--score jquery plugin-->
     <script src="https://cdn.jsdelivr.net/gh/hiphop5782/score@latest/score.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/hiphop5782/score@latest/score.min.js"></script>
@@ -45,9 +30,6 @@
      <script src="multipage.js"></script>
      <script src="chart.js"></script>
 
-    <!--summernote cdn-->
-    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.js"></script>
     
     <!-- 자바스크립트 코드 작성 영역 -->
     <script type="text/javascript">
@@ -61,11 +43,11 @@
         </div>
         <div class="row flex-box column-2">
             <div class="left">
-                <img src="./images/shirts.jpg" style="max-width: 100%; height: auto;">
+                <img src='https://ifh.cc/g/7jYYwV.png' style="max-width: 100%; height: auto;">
             </div>
 
             <div class="right">
-                <img src="./images/pants.jpg" style="max-width: 100%; height: auto;">
+                <img src='https://ifh.cc/g/VL2f7w.png' style="max-width: 100%; height: auto;">
             </div>    
         </div>
         <div class="row flex-box column-2">

@@ -227,7 +227,7 @@ session 수
 					<!-- 구분선 -->
 					
 			<div class="row center">
-				<a href="/"> <img src="images/로고.png" width="300px" height="100px">
+				<a href="/"> <img src='https://ifh.cc/g/SbA93J.png' width="300px" height="100px">
 				</a>
 			</div>
 
