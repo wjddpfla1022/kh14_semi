@@ -40,6 +40,11 @@ public class ItemController {
 		
 		return "/WEB-INF/views/item/list.jsp";
 	}
+	private boolean checkSearch(String keyword) {
+		if(keyword != null) return true;
+		
+		return false;
+	}
 	
 	@RequestMapping("/list/cate")
 	public String listCate(Model model,

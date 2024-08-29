@@ -101,6 +101,8 @@ session 수
             height: 100%;
 
             background-color: rgba(0, 0, 0, 0.4);
+            
+            z-index : 9999;
         }
 
         .modal-body{
@@ -397,16 +399,18 @@ session 수
 				<p class="hide" style="color: white;">회원 등급 : ${sessionScope.createdLevel}</p>
 			</div>
 	</div>
+	<form action="/manager/item/list"  method="post">
 	 <div class="modal">
             <div class="modal-body">
                 <div class="row right" style="margin-top : 5px;"><button class="btn btn-negative btn-close-modal"><i class="fa-solid fa-xmark"></i></button></div>
             	
                 <h2>검색창</h2>
-                <input type="text" name="itemName" class="field">
+                <input type="text" name="keyword" class="field">
                 <button type="submit" class="btn btn-positive">검색</button>
                 
             </div>
         </div>
+	</form>
     <script>
         var modal = document.querySelector('.modal');
         var btnOpenModal=document.querySelector('.btn-open-modal');
