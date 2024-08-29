@@ -233,7 +233,7 @@
 			        </c:forEach>
 					<td>
 						<span class="input_cartCnt">
-							<input type="text"  name="cartCnt"  value="${cart.cartCnt}" size="2">
+							<input type="text"  name="cartItemCnt"  value="${cart.cartCnt}" size="2">
 							<button type="button" class="btn-cnt btn-up"><i class="fa-solid fa-angle-up Icon_carCnt"></i></button>
 							<button type="button" class="btn-cnt btn-down"><i class="fa-solid fa-angle-down Icon_carCnt"></i></button>
 						</span>
@@ -260,7 +260,7 @@
 	<!-- 버튼 -->
 	<div class="float-box" >
 <!-- 		<form action="deleteAll" method="post" class="float-right"> form 블록요소 여기에 float 적용시킴 -->
-			<button type="submit" class="btn btn-empty btn-delete"><i class="fa-solid fa-trash-can"></i> 장바구니 비우기</button>
+			<button type="button" class="btn btn-empty btn-delete"><i class="fa-solid fa-trash-can"></i> 장바구니 비우기</button>
 <!-- 		</form> -->
 		<!-- 주문 form 넣으면 됩니다 -->
 			<button type="submit" class="btn float-left">선택상품 주문하기</button>
