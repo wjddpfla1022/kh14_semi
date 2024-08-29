@@ -28,6 +28,13 @@
 		border-right: 1px solid #e9e9e9;
 		border-bottom: none;
 	}
+	.table-border-side{
+		background-color: #f9f9f9;
+		border-top: none;
+		border-left: 1px solid #e9e9e9;
+		border-right: 1px solid #e9e9e9;
+		border-bottom: none;
+	}
 </style>
 
 <div class="container w-700 my-50">
@@ -45,9 +52,7 @@
 			</th>
 			<td>
 				<div class="row center">
-					<span>
-						${memberDto.memberName}
-					</span>
+					<span>	${memberDto.memberName}</span>
 				</div>
 			</td>		
 		</tr>
@@ -117,7 +122,7 @@
 				</div>
 				</td>
 				<td>
-					<span>${memberDto.memberPoint}p</span>
+					<span>${memberDto.memberPoint}<i class="fa-solid fa-coins"></i></span>
 				</td>
 			</tr>
 			<tr class="table-border-middle">
@@ -140,50 +145,51 @@
 					<fmt:formatDate value="${memberDto.memberLogin}" pattern="y년 M월 d일 E H시 m분"/>
 				</td>
 			</tr>
-	</table>
-</div>
-				<!-- 개인정보 변경 버튼 -->
-			<div class="flex-box flex-core mt-20 mb-30">
-				<a href="resetPw?memberId=${memberDto.memberId}" class = "btn change-password" style="margin-right:5px;">비밀번호 변경하기</a>
-				<a href="change" class = "btn change-info" style="margin-right:5px;">개인정보 변경하기</a>
-				<a href="#" class = "btn btn-negative member-delete">회원 탈퇴</a>
-			</div>
+		</table>
+	</div>
 
-				<!-- 회원의 차단 이력을 출력 -->
-				<hr>
-				<div class = "row center">
-					<div>
-						<h1>차단/해제 이력</h1>
-					</div>
-				<c:choose>
-					<c:when test="${blockList.isEmpty()}">
-						<h3 style= "color:red">차단 이력이 존재하지 않습니다</h3>
-					</c:when>
-					<c:otherwise>
-						<table class="table table-border">
-							<thead>
-								<tr>
-									<th width="35%">일시</th>
-									<th width="15%">구분</th>
-									<th>사유</th>
-								</tr>
-							</thead>
-							<tbody>
-								<c:forEach var="blockDto" items="${blockList}">
-								<tr>
-									<td>
-										<fmt:formatDate value="${blockDto.blockTime}"	pattern="y년 M월 d일 E H시 m분"/>
-									</td>
-									<td>${blockDto.blockType}</td> <!--구분 -->
-									<td>${blockDto.blockMemo}</td> <!-- 사유 --> 
-								</tr>
-								</c:forEach>
-							</tbody>
-						</table>
-					</c:otherwise>
-				</c:choose>
+	<!-- 개인정보 변경 버튼 -->
+	<div class="flex-box flex-core mt-20 mb-30">
+		<a href="resetPw?memberId=${memberDto.memberId}" class = "btn change-password" style="margin-right:5px;">비밀번호 변경하기</a>
+		<a href="change" class = "btn change-info" style="margin-right:5px;">개인정보 변경하기</a>
+		<a href="#" class = "btn btn-negative member-delete">회원 탈퇴</a>
+	</div>
+
+		<!-- 회원의 차단 이력을 출력 -->
+		<hr>
+		<div class = "row center">
+			<div>
+				<h1>차단/해제 이력</h1>
 			</div>
-		</div>
+		<c:choose>
+			<c:when test="${blockList.isEmpty()}">
+				<h3 style= "color:red">차단 이력이 존재하지 않습니다</h3>
+			</c:when>
+			<c:otherwise>
+				<table class="table table-border-top">
+					<thead>
+						<tr class="table-border-middle">
+							<th class="table-border-side" width="35%">일시</th>
+							<th class="table-border-center" width="15%">구분</th>
+							<th class="table-border-center">사유</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach var="blockDto" items="${blockList}">
+						<tr class="table-border-middle">
+							<td class="table-border-side">
+								<fmt:formatDate value="${blockDto.blockTime}"	pattern="y년 M월 d일 E H시 m분"/>
+							</td>
+							<td class="table-border-center">${blockDto.blockType}</td> <!--구분 -->
+							<td class="table-border-center">${blockDto.blockMemo}</td> <!-- 사유 --> 
+						</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</c:otherwise>
+		</c:choose>
+	</div>
+</div>
 		
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
 
