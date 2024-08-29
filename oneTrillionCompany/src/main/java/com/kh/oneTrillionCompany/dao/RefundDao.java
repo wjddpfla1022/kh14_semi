@@ -27,9 +27,9 @@ public class RefundDao {
 		jdbcTemplate.update(sql, data);
 	}
 	
-	//환불 목록
-	public List<RefundDto> selectList(){
-		String sql = "select * from refund order by refund_no asc";
-		return jdbcTemplate.query(sql, refundMapper);
-	}
+//	//환불 목록
+//	public List<RefundDto> selectList(){
+//		String sql = "select * from refund order by refund_order_no asc";
+//		return jdbcTemplate.query(sql, refundMapper);
+//	}
 }
