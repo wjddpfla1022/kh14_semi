@@ -227,7 +227,7 @@ session 수
 					<!-- 구분선 -->
 					
 			<div class="row center">
-				<a href="/"> <img src="https://obvious.com/wp-content/uploads/2022/06/One-1200x1200-1.jpeg" width="300px" height="100px">
+				<a href="/"> <img src="images/로고.png" width="300px" height="100px">
 				</a>
 			</div>
 
