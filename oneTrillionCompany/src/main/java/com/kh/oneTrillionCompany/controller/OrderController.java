@@ -89,7 +89,7 @@ public class OrderController {
 		System.out.println(list);
 		int payment=ordersDao.selectOne(orderNo).getOrderPrice();
 		String memberId=(String) session.getAttribute("createdUser");
-		boolean sessionVaild=list.get(0).getBuyer().equals(memberId); //토큰 유효성 검사
+		boolean sessionVaild=list.get(0).getBuyer().equals(memberId); //세션 유효성 검사
 		if(list.size()==0&&!sessionVaild) 
 			return"redirect:error?error=1";
 		//결제
@@ -104,7 +104,7 @@ public class OrderController {
 		}
 		orderDetailDao.payCompleteStatus(detailNoList);
 		//임시 주문서 삭제
-		ordersDao.delete(memberId);
+//		ordersDao.delete(memberId);
 		return "redirect:payFinish";
 	}
 	@GetMapping("/payFinish")
@@ -119,5 +119,14 @@ public class OrderController {
 		OrdersDto ordersDto = ordersDao.selectOne(orderNo);
 		model.addAttribute("ordersDto",ordersDto);
 		return "/WEB-INF/views/order/detail.jsp";
+	}
+	@GetMapping("/list")
+	public String list(HttpSession session, Model model) {
+		String memberId=(String) session.getAttribute("createdUser");
+		
+		List<OrderDetailDto>detailList=orderDetailDao.selectListByOrderDetailComplete(memberId);
+		model.addAttribute("memberId",memberId);
+		model.addAttribute("detailList",detailList);
+		return "/WEB-INF/views/order/list.jsp";
 	}
 }

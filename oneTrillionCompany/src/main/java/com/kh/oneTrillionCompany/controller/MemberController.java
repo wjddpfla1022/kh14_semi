@@ -154,5 +154,21 @@ public class MemberController {
 			memberDao.updateMember(inputDto);
 			return "redirect:mypage";
 		}
-		
+		@GetMapping("leave")
+		public String leave(HttpSession session,Model model) {
+			String memberId = (String) session.getAttribute("createdUser");
+			model.addAttribute("memberId",memberId);
+			return "/WEB-INF/views/member/leave.jsp";
+			}
+		@PostMapping("/leave")
+		public String leave(HttpSession session,@RequestParam String leaveId) {
+			
+			String memberId = (String) session.getAttribute("createdUser");
+			memberDao.delete(memberId);
+			return "redirect:leaveFinish";
+		}
+		@RequestMapping("/leaveFinish")
+		public String leaveFinish() {
+			return "WEB-INF/views/member/leaveFinish.jsp";
+		}
 }
