@@ -89,7 +89,40 @@ session 수
             display: inline-block;
             margin-right: 20px;
         }  */
-</style>
+        .modal{
+            position: absolute;
+            display: none;
+
+            justify-content: center;
+            top: 0;
+            left: 0;
+
+            width: 100%;
+            height: 100%;
+
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .modal-body{
+            position: absolute;
+            top: 30%;
+
+            width: 400px;
+            height: 220px;
+
+            padding: 40px;
+
+            text-align: center;
+
+            background-color: rgb(255, 255, 255);
+            border-radius: 10px;
+            box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
+
+            transform: translateY(-50%);
+
+        }
+
+    </style>
 <link rel="stylesheet" type="text/css" href="/js/checkbox.js">
 <!-- jquery cdn -->
 <script
@@ -336,6 +369,8 @@ session 수
 					</ul>
 				</li>
 				<!-- 구분선 -->
+				<li class="right-menu">
+        			<button class="btn btn-open-modal btn-positive">검색</button></li>
 				<li class="right-menu"><a href="#">문의</a>
 					<ul>
 						<li><a href="#">항목1</a>
@@ -348,18 +383,9 @@ session 수
 								<li><a href="#">상세항목1</a></li>
 							</ul>
 						</li>
-						<li><a href="#">항목3</a>
-							<ul>
-								<li><a href="#">상세항목1</a></li>
-							</ul>
-						</li>
-						<li><a href="#">항목4</a>
-							<ul>
-								<li><a href="#">상세항목1</a></li>
-							</ul>
-						</li>
 					</ul>
 				</li>
+				
 				<!-- 구분선 -->
 			</ul>
 			
@@ -371,4 +397,28 @@ session 수
 				<p class="hide" style="color: white;">회원 등급 : ${sessionScope.createdLevel}</p>
 			</div>
 	</div>
+	 <div class="modal">
+            <div class="modal-body">
+                <div class="row right" style="margin-top : 5px;"><button class="btn btn-negative btn-close-modal"><i class="fa-solid fa-xmark"></i></button></div>
+            	
+                <h2>검색창</h2>
+                <input type="text" name="itemName" class="field">
+                <button type="submit" class="btn btn-positive">검색</button>
+                
+            </div>
+        </div>
+    <script>
+        var modal = document.querySelector('.modal');
+        var btnOpenModal=document.querySelector('.btn-open-modal');
+        var btnCloseModal=document.querySelector('.btn-close-modal');
+        var swiper = document.querySelector('.swiper-slide');
+        
+        btnOpenModal.addEventListener("click", ()=>{
+            modal.style.display="flex";
+            swiper.style.visibility = "hidden";
+        });
+        btnCloseModal.addEventListener("click", ()=>{
+        	modal.style.display="none";
+        });
+    </script>
 	<!-- 중단(Container) -->

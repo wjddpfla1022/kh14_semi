@@ -68,28 +68,28 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td style="font-weight: bold; height: 57px; background-color: #f8fbfd;">S</td>
+                            <td style="font-weight: bold; height: 51px; background-color: #f8fbfd;">S</td>
                             <td>46</td>
                             <td>49</td>
                             <td>56</td>
                             <td>65</td>
                         </tr>
                         <tr>
-                            <td style="font-weight: bold; height: 57px; background-color: #f8fbfd;">M</td>
+                            <td style="font-weight: bold; height: 51px;background-color: #f8fbfd;">M</td>
                             <td>48</td>
                             <td>51</td>
                             <td>57</td>
                             <td>67</td>
                         </tr>
                         <tr>
-                            <td style="font-weight: bold; height: 57px; background-color: #f8fbfd;">L</td>
+                            <td style="font-weight: bold; height: 51px; background-color: #f8fbfd;">L</td>
                             <td>50</td>
                             <td>53</td>
                             <td>58</td>
                             <td>69</td>
                         </tr>
                         <tr>
-                            <td style="font-weight: bold; height: 57px; background-color: #f8fbfd;">XL</td>
+                            <td style="font-weight: bold; height: 51px; background-color: #f8fbfd;">XL</td>
                             <td>52</td>
                             <td>55</td>
                             <td>59</td>
