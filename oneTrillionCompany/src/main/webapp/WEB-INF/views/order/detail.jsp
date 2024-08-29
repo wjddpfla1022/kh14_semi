@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <!DOCTYPE html>
 <html lang="ko">
@@ -37,14 +36,6 @@
             font-size: 16px;
             color: #555;
         }
-        .link {
-        text-decoration: none;
-        color: gray;
-    	}
-
-	    .link:hover {
-	        color: black;
-	    }
     </style>
     <!-- 자바스크립트 코드 작성 영역 -->
      <script type="text/javascript">
@@ -54,29 +45,23 @@
 <body>
     <div class="container w-1200 my-50" style="min-height:620px">
       <div class="row center">
-         <h1>${memberId}님 주문 목록</h1>
+         <h1>결제 내역 상세</h1>
       </div>
-      <div class="row w-100">
-         <table style="width:100%">
+      <div class="flex-box  w-100 flex-core">
+         <table >
          	<thead>
          		<tr>
-         			<th width=20%;>상품번호</th>
-         			<th width=20%;>수량</th>
-         			<th width=25%;>결제금액</th>
-         			<th width=25%;>상태</th>
-         			<th width="10%"></th>
+         			<th>결제시간</th>
+         			<th>총 결제금액</th>
+         			<th>배송원 참고사항</th>
          		</tr>
          	</thead>
          	<tbody>
-         		<c:forEach var="orderDetailDto" items="${detailList}">
-	        		<tr class="center">
-	        			<td>${orderDetailDto.orderDetailNo}</td>
-	        			<td>${orderDetailDto.orderDetailCnt}</td>
-	        			<td>${orderDetailDto.orderDetailPrice*orderDetailDto.orderDetailCnt}</td>
-	        			<td>${orderDetailDto.orderDetailStatus}</td>
-	        			<td><a href="/order/detail?orderNo=${orderDetailDto.orderDetailOrderNo}" class="link">결제상세</a><td>
-	        		</tr>
-         		</c:forEach>
+         		<tr>
+	       			<td>${ordersDto.orderDate}</td>
+	       			<td>${ordersDto.orderPrice}</td>
+	       			<td>${ordersDto.orderMemo}</td>
+       			</tr>
          	</tbody>
          </table>
       </div>

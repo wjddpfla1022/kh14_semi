@@ -156,7 +156,7 @@ session 수
 						<li><a style="font-weight: bold;" href="#">고객센터</a></li>
 						<li><a href="localhost:8080" id="favorite">즐겨찾기</a></li>
 						<li class="right-menu"><a style="font-weight: bold;" href="/member/logout">로그아웃</a></li>
-						<li><a style="font-weight: bold;" href="#">주문 / 배송조회</a></li>
+						<li><a style="font-weight: bold;" href="/order/list">주문 / 배송조회</a></li>
 						<li><a style="font-weight: bold;" href="/qna/list">1:1문의</a></li>
 						<li><a style="font-weight: bold;" href="#">커뮤니티</a>
 							<ul>
