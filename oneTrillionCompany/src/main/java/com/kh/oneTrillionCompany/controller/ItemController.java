@@ -59,6 +59,9 @@ public class ItemController {
 		model.addAttribute("itemDto", itemDto);
 	    model.addAttribute("infoDto", infoDto);
 	    model.addAttribute("itemNo", itemNo);
+	    //품절시 버튼 비활성화-장바구니
+	    model.addAttribute("colorList", itemDao.selectItemColors(itemNo));
+		model.addAttribute("attachNo", itemDao.findImage(itemNo));
 		return "/WEB-INF/views/item/detail2.jsp";
 	}
 	
@@ -95,6 +98,9 @@ public class ItemController {
 		public String detail2(@RequestParam int itemNo, Model model) {
 			ItemDto itemDto = itemDao.selectOne(itemNo);
 			model.addAttribute("itemDto", itemDto);
+			//장바구니 담기 /detail로 옮기기
+			model.addAttribute("colorList", itemDao.selectItemColors(itemNo));
+			model.addAttribute("attachNo", itemDao.findImage(itemNo));
 			return "/WEB-INF/views/item/detail2.jsp?itemNo=2";
 		}
 }

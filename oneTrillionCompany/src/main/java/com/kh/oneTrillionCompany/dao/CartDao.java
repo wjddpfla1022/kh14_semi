@@ -10,7 +10,8 @@ import org.springframework.stereotype.Repository;
 import com.kh.oneTrillionCompany.dto.CartDto;
 import com.kh.oneTrillionCompany.dto.ItemDto;
 import com.kh.oneTrillionCompany.mapper.CartMapper;
-import com.kh.oneTrillionCompany.vo.ItemCartVO;
+import com.kh.oneTrillionCompany.mapper.ItemMapper;
+
 
 @Repository
 public class CartDao {
@@ -22,7 +23,6 @@ public class CartDao {
 	private CartMapper cartMapper;
 	//임시 삭제하기 장바구니 등록 상품으로 옮기면
 
-	
 	//장바구니 등록
 	public void insert(CartDto cartDto) {
 		String sql = "insert into cart(cart_no, cart_item_no, cart_buyer, cart_cnt,"
@@ -119,11 +119,11 @@ public class CartDao {
 	        return jdbcTemplate.queryForObject(sql, Integer.class, data);
 	    } catch (EmptyResultDataAccessException e) {
 	        // 결과가 없는 경우 0 또는 null 반환
-	        return null; // 또는 return 0; (적절한 기본값으로 수정 가능)
+	        return null; // 또는 return 0;
 	    }
 	}
 	
-	//컬러와 상품명으로 아이템을 찾기
+	//컬러와 상품명으로 아이템 번호를 찾는다
 	public Integer findItemNo(String itemName, String itemColor) {
 		String sql = "select item_no from item where item_name=? and item_color=?";
 		Object[] data = {itemName, itemColor};
@@ -133,13 +133,25 @@ public class CartDao {
 	            return null;
 	        }
 	 }
-
-	public void itemInsertCart(String cartBuyer, String itemName, 
-												String itemColor, int cartCnt) {
+	
+	//상품을 장바구니에 등록하는 메소드
+	public void itemInsertCart(String itemName, String itemColor,String cartBuyer, 
+											int itemSalePrice, int cartCnt, int attachNo) {
 		Integer itemNo = findItemNo(itemName, itemColor);
-		String sql ="insert into cart (cart_no, cart_buyer, cart_item_no, cart_cnt) values(cart_seq.nextval, ?, ?, ?)";
-		Object[] data = {cartBuyer, itemNo, cartCnt};
+		Integer cartTotalPrice = sumCartTotalPrice(cartBuyer);
+
+		//장바구니 총합계에 새로운 아이템이 추가될때마다 가격을 증가시킨다
+		cartTotalPrice = cartTotalPrice != null ? cartTotalPrice + (itemSalePrice * cartCnt) : (itemSalePrice * cartCnt);
+		String sql ="insert into cart (cart_no, cart_item_no, cart_buyer, cart_cnt, "
+				+ "item_attach_no, cart_total_price"
+				+ ") values(cart_seq.nextval, ?, ?, ?, ?, ?)";
+		Object[] data = {itemNo, cartBuyer, cartCnt, attachNo, cartTotalPrice};
 		jdbcTemplate.update(sql, data);
 	}
 	
+	//품절 유무를 위해 아이템 컬러를 뽑는다 -> itemDao로 옮기기
+	public List<String> selectItemColors(String itemName) {
+		String sql = "select item_color from item where item_name=?";
+		return jdbcTemplate.queryForList(sql, String.class, itemName);
+	}
 }

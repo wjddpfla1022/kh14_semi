@@ -14,7 +14,7 @@ import com.kh.oneTrillionCompany.dao.CartDao;
 import com.kh.oneTrillionCompany.dao.ItemDao;
 import com.kh.oneTrillionCompany.dao.OrderDetailDao;
 import com.kh.oneTrillionCompany.dao.OrdersDao;
-import com.kh.oneTrillionCompany.dto.ItemDto;
+
 import com.kh.oneTrillionCompany.service.AttachService;
 import com.kh.oneTrillionCompany.vo.CartVO;
 
@@ -103,6 +103,7 @@ public class CartController {
 		} catch (Exception e) {}
 		return "redirect:list";
 	}
+	
 	
 	//장바구니 목록+검색
 //	@RequestMapping("/list")
