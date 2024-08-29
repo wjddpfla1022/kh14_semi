@@ -137,6 +137,7 @@ session 수
 					<li><a style="font-weight: bold;" href="localhost:8080" id="favorite"><i class="fa-solid fa-bookmark"></i>즐겨찾기</a></li>
 					<li class="right-menu"><a href="/member/login" style="font-weight:bolder;">로그인</a></li>
 					<li><a style="font-weight: bold;" href="/member/join" style="font-weight:bolder;">회원가입</a></li>
+					<li><a style="font-weight: bold;" href="/qna/list">1:1문의</a></li>
 					<li><a style="font-weight: bold;" href="#">커뮤니티</a>
 						<ul>
 							<li><a href="#">항목1</a></li>
@@ -190,7 +191,7 @@ session 수
 							</ul></li>
 							<!-- 마이페이지 -->
 							<li>
-								<a href="/cart/list"><i class="fa-solid fa-user"></i></a>
+								<a href="/member/mypage"><i class="fa-solid fa-user"></i></a>
 							</li>
 							<!-- 장바구니 -->
 							<li>
@@ -211,21 +212,19 @@ session 수
 						<li><a style="font-weight: bold;" href="#">바로가기</a></li>
 						<li class="right-menu"><a href="/member/logout">로그아웃</a></li>
 						<li><a style="font-weight: bold;" href="#">주문 / 배송조회</a></li>
-						<li><a style="font-weight: bold;" href="/manager/item/list">상품 조회</a></li>
+						<li><a href="/member/mypage"><i class="fa-solid fa-user"></i></a></li>
 						<li><a style="font-weight: bold;" href="#">관리자 메뉴</a>
 								<ul>
 									<li><a href="/manager/member/list">회원 검색</a></li>
 									<li><a href="/qna/list">1:1문의</a></li>	
+									<li><a href="/manager/item/list">상품 조회</a></li>
 								</ul>
 						</li>
 					</ul>
-
-
 				</div>
 			</c:if>
 			
 					<!-- 구분선 -->
-					
 			<div class="row center">
 				<a href="/"> <img src='https://ifh.cc/g/SbA93J.png' width="300px" height="100px">
 				</a>

@@ -223,74 +223,88 @@
 			});
 		});
 	});
+	/* 게시글삭제 버튼시 알림창 생성 */
+	$(function(){
+		$(".btn-delete").click(function(e){
+			e.preventDefault();
+			var historyDel = window.confirm("게시글을 삭제 하시겠습니까?");
+            if (historyDel) {
+                // 확인을 클릭한 경우 폼 제출
+                $("#checkForm").submit();
+            }
+            // 취소 버튼을 누를 경우 동작X
+		});
+	});
 </script>
 
-<div class="container w-1000">
-	<div class="row center">
-		<h1>${qnaDto.qnaTitle}</h1>
-	</div>
-	<hr>
-	<div class="row mt-30">
-		<table class="table table-border">
-			<tbody>
-				<tr>
-					<td>
-						<div class="row left">
-							<span class="write-deco">작성자</span>
-							${qnaDto.qnaWriter}
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<div class="row left">
-							<span class="write-deco">작성일</span>
-							<fmt:formatDate value="${qnaDto.qnaTime}" pattern="y-MM-d H:mm"/>
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<div class="row qna-content">
-							${qnaDto.qnaContent}
-						</div>
-					</td>
-				</tr>
-				<tr>	
-				<!-- 댓글수 -->
-					<td>
-						<div class="row left">
-							<i class="fa-regular fa-comment-dots"></i> <fmt:formatNumber value="${qnaDto.qnaReply}" pattern="#,##0"/>
-						</div>
-					</td>
-				</tr>
-			</tbody>
-		</table>
-		<!-- 수정/삭제 버튼  -->
-		<div class= " flex-box ">
-			<a href="/qna/list"  class="btn btn-list">
-				<i class="fa-solid fa-list"></i> 목록
-			</a>
-	        <div>
-	            <a href="update?qnaNo=${qnaDto.qnaNo}" class="btn btn-update">
-	            	<i class="fa-solid fa-pen-to-square"></i> 수정
-	            </a>
-	            <a href="delete?qnaNo=${qnaDto.qnaNo}" class="btn btn-delete">
-	            	<i class="fa-solid fa-trash"></i> 삭제
-	            </a>
-	        </div>
+<form action="delete?qnaNo=${qnaDto.qnaNo}" method="post" id="checkForm">
+	<div class="container w-1000">
+		<div class="row center">
+			<h1>${qnaDto.qnaTitle}</h1>
+		</div>
+		<hr>
+		<div class="row mt-30">
+			<table class="table table-border">
+				<tbody>
+					<tr>
+						<td>
+							<div class="row left">
+								<span class="write-deco">작성자</span>
+								${qnaDto.qnaWriter}
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<div class="row left">
+								<span class="write-deco">작성일</span>
+								<fmt:formatDate value="${qnaDto.qnaTime}" pattern="y-MM-d H:mm"/>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<div class="row qna-content" >
+								<pre>${qnaDto.qnaContent}</pre>
+							</div>
+						</td>
+					</tr>
+					<tr>	
+					<!-- 댓글수 -->
+						<td>
+							<div class="row left">
+								<i class="fa-regular fa-comment-dots"></i> <fmt:formatNumber value="${qnaDto.qnaReply}" pattern="#,##0"/>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<!-- 수정/삭제 버튼  -->
+			<div class= " flex-box ">
+				<a href="/qna/list"  class="btn btn-list">
+					<i class="fa-solid fa-list"></i> 목록
+				</a>
+		        <div>
+		            <a href="update?qnaNo=${qnaDto.qnaNo}" class="btn btn-update">
+		            	<i class="fa-solid fa-pen-to-square"></i> 수정
+		            </a>
+		            <button type="button" class="btn btn-delete">
+		            	<i class="fa-solid fa-trash"></i> 삭제
+		            </button>
+		        </div>
+			</div>
+		</div>
+		<!-- 관리자 답변 댓글창 -->
+		<hr>
+			<div class="row reply-list-wrapper">
+			</div>
+		<hr>
+		<!--   댓글 작성 기능 -->
+		<div class="row">
+			<textarea class="field w-100 reply-input"></textarea>
+			<button type="button" class="btn btn-positive reply-add-btn">
+				<i class="fa-solid fa-pen-to-square"></i> 댓글 작성
+			</button>
 		</div>
 	</div>
-	<!-- 관리자 답변 댓글창 -->
-	<hr>
-		<div class="row reply-list-wrapper">
-		</div>
-	<hr>
-	<!--   댓글 작성 기능 -->
-	<div class="row">
-		<textarea class="field w-100 reply-input"></textarea>
-		<button type="button" class="btn btn-positive reply-add-btn">
-			<i class="fa-solid fa-pen-to-square"></i> 댓글 작성
-		</button>
-	</div>
-</div>
+</form>
