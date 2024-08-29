@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
 import com.kh.oneTrillionCompany.dto.OrderDetailDto;
 import com.kh.oneTrillionCompany.mapper.OrderDetailMapper;
 import com.kh.oneTrillionCompany.vo.CartVO;
-import com.kh.oneTrillionCompany.vo.OrderVO;
 
 @Repository
 public class OrderDetailDao {
@@ -19,9 +18,15 @@ public class OrderDetailDao {
 	private OrderDetailMapper orderDetailMapper;
 	
 	//특정 회원의 주문 목록 조회
-		public List<OrderDetailDto> selectListByOrderDetail(String orderMemberId,int orderNo){
-			String sql = "select * from order_detail where order_detail_buyer = ? and order_detail_no =? order by order_detail_no desc";
-			Object[] data = {orderMemberId,orderNo};
+		public List<OrderDetailDto> selectListByOrderDetail(String memberId,int orderNo){
+			String sql = "select * from order_detail where order_detail_buyer = ? and order_detail_order_no =? order by order_detail_no desc";
+			Object[] data = {memberId,orderNo};
+			return jdbcTemplate.query(sql, orderDetailMapper, data);
+		}
+		//특정 회원의 주문 목록 조회(아이디로 조회)
+		public List<OrderDetailDto> selectListByOrderDetail(String orderMemberId){
+			String sql = "select * from order_detail where order_detail_buyer = ? order by order_detail_no desc";
+			Object[] data = {orderMemberId};
 			return jdbcTemplate.query(sql, orderDetailMapper, data);
 		}
 
@@ -42,7 +47,7 @@ public class OrderDetailDao {
 		public void payCompleteStatus(List<Integer>list) {
 			for(int i=0; i<list.size(); i++) {
 				int detailNo=list.get(i);
-				String sql="update order_detail set ("
+				String sql="update order_detail set "
 						+ "order_detail_status='결제완료' "
 						+ "where order_detail_no=?";
 				Object[] data= {detailNo};

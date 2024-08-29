@@ -75,6 +75,10 @@
             background-image:url("https://sitem.ssgcdn.com/06/09/87/item/1000183870906_i1_750.jpg");
             }
         
+       /* 사용자가 선택한 옵션 창 - 숨기기*/
+       .hidden {
+       		display: none;
+       }
     </style>
 
     <!--jquery cdn-->
@@ -84,84 +88,70 @@
     
     <script type="text/javascript">
         $(function(){
-        //버튼에 사진 투명도 조절
-        //     $(".btn-opacity").on("click", function(){
-            //         $(".image-style").removeClass("img-show");
-            //         $(".image-style").addClass("img-opacity");
-            //     });
-            //     $(".btn-show").on("click", function(){
-                //         $(".image-style").removeClass("img-opacity");
-                //         $(".image-style").addClass("img-show");
-                //     });
-                
-                //사진 이동 구현
-          
-        //버튼 색 조절
-       
-            
-        //상세 페이지 표시 제어
-        $(".btn-toggle").click(function(){
-            $(".target").slideToggle();
-        });
-
-        //별점
-        $(".test-score2").score({
-                editable:true,
-                display:{
-                    showNumber:true,
-                    placeLimit:2
-                }
-         });
-        
-     //회원이 선택한 항목을 띄운다-컬러*
-     $(function(){
-	   	$(".btn-show").click(function(e) {
-	    	 e.preventDefault();
-	    	 var buyerSelectedColor = $(this).data('color');
-	    	 $(".buyer-selected-color").text(buyerSelectedColor);
-	    	 showSelectedInfo();
-    	});
-	   	function showSelectedInfo(){
-	   		if(buyerSelectedColor) {
-	   			$(".item-option-show").removeClass("hidden");
-	   		}
-	   	}
-     		//회원이 선택한 항목을 띄운다-사이즈(시간있으면 사용)*
-    	/*  $(".btn-show-size").click(function(e) {
-	    	 e.preventDefault();
-	    	 var buyerSelectedSize = $(this).data('size');
-    	 });
-     		 */
-     });
-     
-     
-    //장바구니 ajax 통신*
-   	$(function(){
-		//장바구니에 담기 -비동기
-		$(".btn-add-cart").click(function(){
-			//이 페이지의 파라미터 중 boardNo의 값을 알아내는 코드
-			var params = new URLSearchParams(location.search);
-			var buyerItemNoValue = param.get("itemNo");
+	        //버튼에 사진 투명도 조절
+	        //     $(".btn-opacity").on("click", function(){
+	            //         $(".image-style").removeClass("img-show");
+	            //         $(".image-style").addClass("img-opacity");
+	            //     });
+	            //     $(".btn-show").on("click", function(){
+	                //         $(".image-style").removeClass("img-opacity");
+	                //         $(".image-style").addClass("img-show");
+	                //     });
+	                
+	                //사진 이동 구현
+	          
+	        //버튼 색 조절
+	        
+	        //상세 페이지 표시 제어
+	        $(".btn-toggle").click(function(){
+	            $(".target").slideToggle();
+	        });
 			
-			var buyerItemColorValue = ${itemDto.itemNo};
-			var buyerItemColorValue = ${itemDto.itemColor};
-			var buyerItemCnt = ${itemDto.itemCnt};
-			/*var buyerItemSizeValue = ${itemDto.itemSize};*/ //나중에 업그레이드 할때
-			$.ajax({
-				url: "/rest/cart/itemInsertCart",
-				method: 'post',
-				data:{
-					buyerItemNo : buyerItemNoValue,
-					buyerItemColor : buyerItemColorValue,
-					/*buyerItemSize : buyerItemSizeValue,*/ //나중에 업그레이드 할때
-					buyerItemCnt : buyerItemCntValue,
-				},
-				success:function(response){
-					alert("장바구니에 등록 되었습니다.");
-				}
+	        /*에러나서 잠시 막아뒀습니다*/
+	        
+	        /* //별점
+	        $(".test-score2").score({
+	                editable:true,
+	                display:{
+	                    showNumber:true,
+	                    placeLimit:2
+	                }
+	         });
+     	    */
+	    //장바구니 ajax 통신*
+	   	$(function(){
+	   		//전역변수
+	   		var itemColorValue = "";
+			//장바구니에 담기 -비동기
+			$(".btn-show").click(function(){
+				itemColorValue = $(this).data("color");
+			
 			});
+			$(".btn-add-cart").click(function(){
+				//이 페이지의 파라미터 중 boardNo의 값을 알아내는 코드
+			/* 	var params = new URLSearchParams(location.search);
+				var buyerItemNoValue = param.get("itemNo"); */
+				var itemNameValue = $(".itemName").text().trim();//공백제거
+				var cartCntValue = '2';
+				
+				console.log(itemNameValue);
+				console.log(itemColorValue);
+				console.log(cartCntValue);
+				
+				$.ajax({
+					url: "/rest/cart/insertCart",
+					method: 'post',
+					data:{
+						itemName : itemNameValue,
+						itemColor : itemColorValue,
+						cartCnt : cartCntValue,
+					},
+					success:function(response){
+						alert("장바구니에 등록 되었습니다.");
+					}
+				});
 			});
-	   	});
+	    });
     });
   	</script>
 
@@ -170,7 +160,7 @@
 	        <div class="w-50 p-10">
 	            <div id="bigImage">
 	                <div id="container">
-	                	<img class="shoppingmal" src="https://d2u3dcdbebyaiu.cloudfront.net/uploads/atch_img/197/d72693912bf2868da3e848dc5b779d4a_res.jpeg" width="100%">
+	                	<img class="shoppingmal" src = "/item/image?itemNo=${itemDto.itemNo}" width="100%">
 	                </div>
 		            <div class="row smallImages">    
 		                <img id="smallShirts" src="https://sitem.ssgcdn.com/06/09/87/item/1000183870906_i1_750.jpg" width="100%">
@@ -179,8 +169,8 @@
 	        </div>
 	        
 	        <div class="w-50 p-10">
-	        	<!--상품이름 -->
-	            <div class="row mt-0" style="font-size: 30px;">
+	        	<!--상품이름 클래스 추가*-->
+	            <div class="row mt-0 itemName" style="font-size: 30px;">
 	           		${itemDto.itemName}
 	            </div>
 	            <div class="row flex-box column-2">
@@ -238,9 +228,9 @@
 	                        </div>
 	                        <div style="display: flex; flex-wrap: nowrap;">
 	                        	<!-- 상품컬러데이터값추가* -->
-	                            <button type="button" class="btn btn-shirt btn-show" data-color="블랙">블랙</button>
+	                            <button type="button" class="btn btn-shirt btn-show" data-color="black">블랙</button>
 	                            <button type="button" class="btn btn-shirt btn-show" data-color="네이비">네이비</button>
-	                            <button type="button" class="btn btn-shirt btn-show" data-color="옐로우">옐로우</button>
+	                            <button type="button" class="btn btn-shirt btn-show" data-color="yellow">옐로우</button>
 	                        </div>
                             <div class="row my-0">
                                 <div class="left">
@@ -249,12 +239,19 @@
                                     <button type="button" class="btn btn-shirt btn-show" data-color="베이지">베이지</button>
                                 </div>
                             </div>
-	                
-	                             <div class="row my-0">
-	                                <div class="left">
+	                        <div class="row my-0">
+	                           	<div class="left">
 	                                 <button type="button" class="btn btn-shirt btn-show" data-color="레드">레드</button>
 	                                <button type="button" class="btn btn-shirt btn-show" data-color="카키">카키</button>
 	                            </div>
+	                        </div>
+	                        <!-- 수량 선택추가* -->
+	                        <div class="row my-0">
+	                        	<span class="input_cartCnt" name="itemCnt">
+									<input type="text"  name="cartCnt"  value="${cart.cartCnt}" size="2">
+									<button type="button" class="btn-cnt btn-up"><i class="fa-solid fa-angle-up Icon_carCnt"></i></button>
+									<button type="button" class="btn-cnt btn-down"><i class="fa-solid fa-angle-down Icon_carCnt"></i></button>
+								</span>
 	                        </div>
 	                     </div>
 	
@@ -264,17 +261,9 @@
 	                        <p style="font-size: 11px; color: #999;"><i class="fa-regular fa-circle-exclamation"></i>배송비<b>2,500원 (60,000원 이상 구매 시 무료)</b></p>
 	                     </div>
 							
-							<!-- 상세에서 클릭시 정보가 뜸* -->
-							<div class="row item-option-show hidden">
-								<p>${itemDto.itemName}</p>
-								<p class="buyer-selected-color"></p>
-<!--  시간 남으면 추가<p class="buyer-selected-size"></p>-->
-								<p>${itemDto.itemSize}</p>
-							</div>
-							
 	                    <div class="row">
 	                        <button type="submit" class="btn w-100" style="color: white; background-color: black;">구매하기</button>
-	                        <!-- 장바구니 담당자가 만든 버튼입니다 -->
+	                        <!-- 장바구니버튼 -->
 	                        <button type="button" class="btn w-100 btn-add-cart" style="color: white; background-color: black;">장바구니</button>
 	                    </div>
 	                </div>  
@@ -298,5 +287,15 @@
 <div class="left">
     <div class="test-score2" data-max="5" data-rate="3"></div>
 </div>
+
+<div class="container w-1000">
+	<h3>정보 번호 : ${infoDto.infoNo}</h3>
+	<h3>상품 번호 : ${infoDto.infoItemNo}</h3>
+	<div class="row center">
+		<h3>${infoDto.infoContent}</h3>
+	</div>
+</div>
 </body>
 
+
+<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

@@ -83,7 +83,8 @@
 			<h2>상품 정보 등록</h2>
 		</div>
 		<form action="write" method="post" enctype="multipart/form-data" autocomplete="off">
-			<input type="text" name="itemNo" >
+			<input type="hidden" name="itemNo" value="${itemNo}" >
+			
 			<div class="row">
             	<textarea name="infoContent" class="field w-100" draggable="true"></textarea>    
         	</div>

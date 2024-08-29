@@ -269,7 +269,7 @@
 										<td></td>
 									</c:otherwise>
 								</c:choose>
-								<td><a href="detail?itemNo=${itemDto.itemNo}" class="link">${itemDto.itemName}</a>
+								<td><a href="/manager/item/info/read?itemNo=${itemDto.itemNo}" class="link">${itemDto.itemName}</a>
 								</td>
 								<td>${itemDto.itemPrice}</td>
 								<td>${itemDto.itemSalePrice}</td>
@@ -280,6 +280,8 @@
 									class="btn btn-positive">수정</a></td>
 								<td><a href="delete?itemNo=${itemDto.itemNo}"
 									class="btn btn-positive">삭제</a></td>
+								<td><a href="info/write?itemNo=${itemDto.itemNo}"
+									class="btn btn-positive">정보 입력</a></td>
 							</tr>
 						</c:forEach>
 					</c:otherwise>
