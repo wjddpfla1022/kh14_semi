@@ -52,9 +52,7 @@
 			</th>
 			<td>
 				<div class="row center">
-					<span>
-						${memberDto.memberName}
-					</span>
+					<span>	${memberDto.memberName}</span>
 				</div>
 			</td>		
 		</tr>
