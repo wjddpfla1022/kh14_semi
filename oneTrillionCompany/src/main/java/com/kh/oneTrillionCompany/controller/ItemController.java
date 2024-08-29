@@ -55,7 +55,7 @@ public class ItemController {
 	public String detail(@RequestParam int itemNo, Model model) {
 		ItemDto itemDto = itemDao.selectOne(itemNo);
 		ItemInfoDto infoDto = infoDao.selectOne(itemNo);
-		if(infoDto == null) throw new TargetNotFoundException("존재하지 않는 글 번호");
+		//if(infoDto == null) throw new TargetNotFoundException("존재하지 않는 글 번호");
 		model.addAttribute("itemDto", itemDto);
 	    model.addAttribute("infoDto", infoDto);
 	    model.addAttribute("itemNo", itemNo);
