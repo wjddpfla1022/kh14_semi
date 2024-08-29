@@ -21,10 +21,17 @@ public class RefundDao {
 	
 	//환불 등록(신청)
 	public void insert(RefundDto refundDto) {
-		String sql = "insert into refund(refund_order_no , refund_memo , refund_date)"
+		String sql = "insert into refund(refund_order_detail_no , refund_memo , refund_date)"
 				+ "values(? ,? ,sysdate)";
-		Object[] data = {refundDto.getRefundOrderNo() , refundDto.getRefundMemo()};
+		Object[] data = {refundDto.getRefundOrderDetailNo() , refundDto.getRefundMemo()};
 		jdbcTemplate.update(sql, data);
+	}
+
+	public RefundDto selectOne(int refundOrderDetailNo) {
+		String sql = "select * from refund where refund_order_detail_no = ?";
+		Object[] data = {refundOrderDetailNo};
+		List<RefundDto> list = jdbcTemplate.query(sql, refundMapper, data);
+		return list.isEmpty() ? null : list.get(0);
 	}
 	
 //	//환불 목록

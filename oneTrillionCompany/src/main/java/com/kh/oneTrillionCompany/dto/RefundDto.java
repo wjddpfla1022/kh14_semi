@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 public class RefundDto {
-	private int refundOrderNo;
+	private int refundOrderDetailNo;
 	private String refundMemo;
 	private Date refundDate;
 }

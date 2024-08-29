@@ -14,7 +14,7 @@ public class RefundMapper implements RowMapper<RefundDto> {
 	@Override
 	public RefundDto mapRow(ResultSet rs, int rowNum) throws SQLException {
 		RefundDto refundDto = new RefundDto();
-		refundDto.setRefundOrderNo(rs.getInt("refund_order_no"));
+		refundDto.setRefundOrderDetailNo(rs.getInt("refund_order_detail_no"));
 		refundDto.setRefundMemo(rs.getString("refund_memo"));
 		refundDto.setRefundDate(rs.getDate("refund_Date"));
 		
