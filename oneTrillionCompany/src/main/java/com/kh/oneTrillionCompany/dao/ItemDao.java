@@ -112,12 +112,13 @@ public class ItemDao {
 		return jdbcTemplate.queryForObject(sql, int.class, data);
 	}
 	//결제 후 상품 재고 차감
-	public void deductItem(int cnt,int itemNo) {
+	public boolean deductItem(int cnt,int itemNo) {
 		String sql="update item set item_cnt = item_cnt-? "
 				+ "where item_no = ? and item_cnt >= ?";
 		Object[] data= {cnt,itemNo, cnt};
-		boolean isPassed=jdbcTemplate.update(sql, data)>0;
-		if(!isPassed) new TargetNotFoundException("재고가 부족합니다");
+		boolean isEnough=jdbcTemplate.update(sql, data)>0;
+		if(!isEnough) throw new TargetNotFoundException("재고가 부족합니다");
+		return isEnough;
 	}
 	
 	//페이징

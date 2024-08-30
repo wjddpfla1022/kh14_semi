@@ -4,7 +4,6 @@
 <jsp:include page= "/WEB-INF/views/template/header.jsp"></jsp:include>
 
  <!-- font awesome icon cdn -->
-
 <style>
 	/*장바구니 제목 스타일 */
 	.cart-title{
