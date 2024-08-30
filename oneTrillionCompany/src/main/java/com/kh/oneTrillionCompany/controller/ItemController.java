@@ -36,10 +36,7 @@ public class ItemController {
 									@RequestParam(required = false) String keyword) {
 		boolean isSearch = keyword != null;
 		
-		model.addAttribute("itemList", itemDao.selectListByPaging(pageVO));
-		int count = itemDao.countByPaging(pageVO);
-		pageVO.setCount(12);
-		model.addAttribute("pageVO", pageVO);
+		model.addAttribute("itemList", itemDao.selectList());
 		
 		return "/WEB-INF/views/item/list.jsp";
 	}
