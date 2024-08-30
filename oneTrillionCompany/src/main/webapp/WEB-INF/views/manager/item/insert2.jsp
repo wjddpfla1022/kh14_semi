@@ -42,6 +42,7 @@
             <div class="row">
         <h3>카테고리</h3>
         <select name="itemCate1" id="cate1-select" class="field">
+        	<option value="">상위 카테고리 선택</option>
             <option value="11">상의</option>
             <option value="33">하의</option>
             <option value="55">신발</option>
@@ -74,6 +75,7 @@
             		<option value="blue">파랑</option>
             		<option value="brown">브라운</option>
             		<option value=" pink">분홍</option>
+            		<option value="white">흰색</option>
             	</select>
             </div>
         <div class="right">
@@ -155,9 +157,7 @@
             var cate2Select = document.getElementById('cate2-select');
             var cate3Select = document.getElementById('cate3-select');
             
-            // Update cate2 options based on cate1 selection
             updateSelectOptions(cate2Select, cate2Options[cate1Value] || []);
-            // Clear cate3 options
             updateSelectOptions(cate3Select, []);
         });
 
@@ -165,7 +165,6 @@
             var cate2Value = this.value;
             var cate3Select = document.getElementById('cate3-select');
             
-            // Update cate3 options based on cate2 selection
             updateSelectOptions(cate3Select, cate3Options[cate2Value] || []);
         });
 

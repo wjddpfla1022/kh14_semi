@@ -98,7 +98,7 @@ session 수
             left: 0;
 
             width: 100%;
-            height: 100%;
+            height: 200%;
 
             background-color: rgba(0, 0, 0, 0.4);
             
@@ -109,19 +109,23 @@ session 수
             position: absolute;
             top: 30%;
 
-            width: 400px;
-            height: 220px;
+            width: 360px;
+            height: 160px;
 
-            padding: 40px;
+            padding: 20px;
 
             text-align: center;
 
-            background-color: rgb(255, 255, 255);
+            background-color: #ecf0f1;
             border-radius: 10px;
             box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
 
             transform: translateY(-50%);
 
+        }
+        .btn-close-modal {
+        	font-size: 12px;
+        	padding: 0.3em 0.5em;
         }
 
     </style>
@@ -365,7 +369,7 @@ session 수
 				</li>
 				<!-- 구분선 -->
 				<li class="right-menu">
-        			<button class="btn btn-open-modal btn-positive">검색</button></li>
+        			<button class="btn btn-open-modal btn-positive"><i class="fa-solid fa-magnifying-glass"></i></button></li>
 				<li class="right-menu"><a href="#">문의</a>
 					<ul>
 						<li><a href="#">항목1</a>
@@ -397,10 +401,9 @@ session 수
                 <div class="row right" style="margin-top : 5px;"><button class="btn btn-negative btn-close-modal"><i class="fa-solid fa-xmark"></i></button></div>
             	
 	<form action="/item/list"  method="get">
-                <h2>검색창</h2>
                 <input type="hidden" name="column" value="item_name">
                 <input type="text" name="keyword" class="field">
-                <button type="submit" class="btn btn-positive">검색</button>
+                <button type="submit" class="btn btn-positive"><i class="fa-solid fa-magnifying-glass"></i></button>
 	</form>
                 
             </div>
@@ -409,14 +412,23 @@ session 수
         var modal = document.querySelector('.modal');
         var btnOpenModal=document.querySelector('.btn-open-modal');
         var btnCloseModal=document.querySelector('.btn-close-modal');
-        var swiper = document.querySelector('.swiper-slide');
+        var body = document.body;
+
+        function preventScroll(event) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
         
         btnOpenModal.addEventListener("click", ()=>{
             modal.style.display="flex";
             swiper.style.visibility = "hidden";
+            body.style.overflow = 'hidden';
+            body.addEventListener('wheel', preventScroll, { passive: false });
         });
         btnCloseModal.addEventListener("click", ()=>{
         	modal.style.display="none";
+        	body.style.overflow = '';
+        	body.removeEventListener('wheel', preventScroll, { passive: false });
         });
     </script>
 	<!-- 중단(Container) -->
