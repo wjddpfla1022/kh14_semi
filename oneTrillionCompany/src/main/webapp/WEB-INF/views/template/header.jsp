@@ -284,15 +284,8 @@ session 수
 		
 			<ul class="menu">
 				<!-- 구분선 -->
-				<li class="flex-core all-menu" style="font-weight: bold;"><i class="fa-solid fa-bars"></i> 
-					&nbsp;전체메뉴
-					<ul class="all-menu-ul ul-horizon"></ul>
-					<ul class="all-menu-ul ul-horizon">
-						<li class="li-horizon"><a href="#">상의 상세항목1</a></li>
-						<li class="li-horizon"><a href="#">상의 상세항목1</a></li>
-						<li class="li-horizon"><a href="#">상의 상세항목1</a></li>
-						<li class="li-horizon"><a href="#">상의 상세항목1</a></li>
-					</ul></li>
+				<li class="flex-core all-menu" style="font-weight: bold;"><a href="/item/list"><i class="fa-solid fa-bars"></i> 
+					&nbsp;전체상품</a></li>
 				<li><a href="/item/list/cate?column=1&keyword=11" style="font-weight: bold;">상의</a>
 					<ul>
 						<li><a href="/item/list/cate?column=2&keyword=10">티셔츠</a>
@@ -399,18 +392,19 @@ session 수
 				<p class="hide" style="color: white;">회원 등급 : ${sessionScope.createdLevel}</p>
 			</div>
 	</div>
-	<form action="/manager/item/list"  method="post">
 	 <div class="modal">
             <div class="modal-body">
                 <div class="row right" style="margin-top : 5px;"><button class="btn btn-negative btn-close-modal"><i class="fa-solid fa-xmark"></i></button></div>
             	
+	<form action="/item/list"  method="get">
                 <h2>검색창</h2>
+                <input type="hidden" name="column" value="item_name">
                 <input type="text" name="keyword" class="field">
                 <button type="submit" class="btn btn-positive">검색</button>
+	</form>
                 
             </div>
         </div>
-	</form>
     <script>
         var modal = document.querySelector('.modal');
         var btnOpenModal=document.querySelector('.btn-open-modal');

@@ -44,17 +44,17 @@ public class ManagerItemController {
 		
 		return "/WEB-INF/views/manager/item/list.jsp";
 	}
-	private boolean checkSearch(String column, String keyword) {
-		if(column == null) return false;
-		if(keyword == null) return false;
-		switch(column) {
-		case "item_no":
-		case "item_cate1":
-		case "item_name":
-			return true;
-		}
-		return false;
-	}
+//	private boolean checkSearch(String column, String keyword) {
+//		if(column == null) return false;
+//		if(keyword == null) return false;
+//		switch(column) {
+//		case "item_no":
+//		case "item_cate1":
+//		case "item_name":
+//			return true;
+//		}
+//		return false;
+//	}
 	
 	//상품 추가
 	@GetMapping("/insert")

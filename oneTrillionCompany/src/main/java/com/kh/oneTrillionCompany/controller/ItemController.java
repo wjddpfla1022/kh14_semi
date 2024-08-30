@@ -32,20 +32,23 @@ public class ItemController {
 	private ReviewDao reviewDao;
 	
 	@RequestMapping("/list")
-	public String list(@ModelAttribute("pageVO") PageVO pageVO, Model model) {
+	public String list(@ModelAttribute("pageVO") PageVO pageVO, Model model,
+									@RequestParam(required = false) String keyword) {
+		boolean isSearch = keyword != null;
+		
 		model.addAttribute("itemList", itemDao.selectListByPaging(pageVO));
 		int count = itemDao.countByPaging(pageVO);
-		pageVO.setCount(count);
+		pageVO.setCount(12);
 		model.addAttribute("pageVO", pageVO);
 		
 		return "/WEB-INF/views/item/list.jsp";
 	}
-	private boolean checkSearch(String keyword) {
-		if(keyword != null) return true;
-		
-		return false;
-	}
-	
+//	private boolean checkSearch(String keyword) {
+//		if(keyword != null) return true;
+//		
+//		return false;
+//	}
+//	
 	@RequestMapping("/list/cate")
 	public String listCate(Model model,
 			@RequestParam(required = false) String column, 
@@ -55,7 +58,7 @@ public class ItemController {
 		List<ItemDto> list = isSearch ? itemDao.selectListByCate(column, keyword) : itemDao.selectList();
 		model.addAttribute("column", column);
 		model.addAttribute("keyword", keyword);// 검색어
-		model.addAttribute("list", list);// 조회결과
+		model.addAttribute("itemList", list);// 조회결과
 		return "/WEB-INF/views/item/list.jsp";
 	}
 
