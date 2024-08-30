@@ -269,11 +269,12 @@
 			
 			<!-- cartList 반복문 -->
 			<tbody class="center">
-			<c:forEach var="cart" items="${cartList}">
+			<c:forEach var="cart" items="${cartList}" varStatus="status">
 				<tr>
 					<td>
 						<span class="cartCnt-data">${cart.cartNo}</span><!-- 장바구니 수량을 el로 받아 제이쿼리에 적용 -->
 						<input type="checkbox" class="check-item" name="cartNo" value="${cart.cartNo}">
+						<input type="hidden" name="cartList[${status.index}].cartItemNo" value="${cart.cartItemNo}">
 					</td>
 					<td>
 						<a href="#"><img src="https://via.placeholder.com/20"></a> <!-- 임시 이미지 -->
@@ -282,12 +283,13 @@
 					<c:forEach var="item" items="${itemList}">
 			            <c:if test="${item.itemNo == cart.cartItemNo}">
 			                <td>${item.itemName}</td> 
-			                <td>${item.itemPrice}원 <span class="itemCnt-data">${item.itemCnt}</span></td><!-- 재고값을 el로 받아 제이쿼리에 적용 -->
+			                <td><input type="text" name="cartList[${status.index}].cartItemPrice" value="${item.itemPrice}" readonly> 원<span class="itemCnt-data">${item.itemCnt}</span></td><!-- 재고값을 el로 받아 제이쿼리에 적용 -->
 			            </c:if>
 			        </c:forEach>
 					<td>
 						<span>
-							<input type="text"  name="cartCntInput"  value="${cart.cartCnt}" size="2">
+							<input type="text"  name="cartList[${status.index}].cartItemCnt"  value="${cart.cartCnt}" readonly size="2">
+							<input type="hidden" name="cartList[${status.index}].buyer" value="${sessionScope.createdUser}">
 							<button type="button" class="btn-cnt btn-up"><i class="fa-solid fa-angle-up Icon_carCnt"></i></button>
 							<button type="button" class="btn-cnt btn-down"><i class="fa-solid fa-angle-down Icon_carCnt"></i></button>
 						</span>
@@ -314,7 +316,7 @@
 	<div class="float-box" >
 			<button type="button" class="btn btn-deleteAll float-right"><i class="fa-solid fa-trash-can"></i> 장바구니 비우기</button>
 			<button type="button" class="btn btn-selected-checkBox float-right">선택상품 삭제하기</button>
-			<button type="submit" class="btn float-left">선택상품 주문하기</button>
+			<button type="button" class="btn float-left selected-order">선택상품 주문하기</button>
 			<button type="submit"  class="btn float-left">전체 주문하기</button>
 	</div>
 	</form>	

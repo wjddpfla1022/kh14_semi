@@ -48,7 +48,7 @@ public class OrderDetailDao {
 			CartVO cartVO=list.get(i);
 			String sql="insert into order_detail("
 					+ "order_detail_no,order_detail_order_no,order_detail_item_no,"
-					+ "order_detail_price, order_detail_cnt, order_detail_status,"
+					+ "order_detail_price, order_detail_cnt, "
 					+ "order_detail_buyer,order_detail_status"
 					+ ") values("
 					+ "order_detail_seq.nextval,?,?,?,?,?,'결제준비')";

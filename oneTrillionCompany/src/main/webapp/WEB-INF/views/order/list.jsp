@@ -60,17 +60,17 @@
          <table style="width:100%">
          	<thead>
          		<tr>
-         			<th width=20%;>상품번호</th>
-         			<th width=20%;>수량</th>
-         			<th width=25%;>결제금액</th>
+         			<th width=20%;>상품</th>
+         			<th width=10%;>수량</th>
+         			<th width=20%;>결제금액</th>
          			<th width=25%;>상태</th>
-         			<th width="10%"></th>         			
+         			<th width="25%"></th>         			
          		</tr>
          	</thead>
          	<tbody>
          		<c:forEach var="orderDetailDto" items="${detailList}">
 	        		<tr class="center">
-	        			<td>${orderDetailDto.orderDetailNo}</td>
+	        			<td>${orderDetailDto.orderDetailItemName}</td>
 	        			<td>${orderDetailDto.orderDetailCnt}</td>
 	        			<td>${orderDetailDto.orderDetailPrice*orderDetailDto.orderDetailCnt}</td>
 	        			<td>${orderDetailDto.orderDetailStatus}</td>

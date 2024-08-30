@@ -1,5 +1,6 @@
 package com.kh.oneTrillionCompany.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,7 @@ import com.kh.oneTrillionCompany.dao.CartDao;
 import com.kh.oneTrillionCompany.dao.ItemDao;
 import com.kh.oneTrillionCompany.dao.OrderDetailDao;
 import com.kh.oneTrillionCompany.dao.OrdersDao;
-
+import com.kh.oneTrillionCompany.dto.CartDto;
 import com.kh.oneTrillionCompany.service.AttachService;
 import com.kh.oneTrillionCompany.vo.CartVO;
 
@@ -39,10 +40,9 @@ public class CartController {
 	//장바구니 목록
  
 	@GetMapping("/list")
-	public String list(Model model, HttpSession session) {
+	public String list(Model model,HttpSession session) {
 			//로그인한 사용자 조회
 			String memberId = (String) session.getAttribute("createdUser");
-			if(memberId != null) {
 				//장바구니 목록, 상품 목록 조회
 				model.addAttribute("cartList", cartDao.selectList(memberId));
 				model.addAttribute("itemList", itemDao.selectList());
@@ -53,15 +53,30 @@ public class CartController {
 				Integer cartItemCnt = cartDao.dataCount(memberId);
 				//장바구니에 담긴 상품 갯수(상품별로)
 				model.addAttribute("cartItemCnt", (cartItemCnt != null ? cartItemCnt : 0));
-			}
 			return "/WEB-INF/views/cart/list.jsp"; 
 	}
-	@PostMapping("/list") //장바구니-> 주문창으로 갈때 orders 테이블에 등록f
-	public String list(@RequestParam List<CartVO>list) { //list.jsp에서 List<CartVO>로 값을 받아서 등록
-		int orderNo=ordersDao.sequence();
-		ordersDao.insertIntoOrdersTable(list,orderNo);
-		orderDetailDao.insertByCartVOList(list,orderNo);
-		return "redirect:/order/pay";
+	@PostMapping("/list")
+	public String list(
+	        @RequestParam("cartList[].cartItemNo") List<Integer> cartItemNoList,
+	        @RequestParam("cartList[].cartItemPrice") List<Integer> cartItemPriceList,
+	        @RequestParam("cartList[].cartItemCnt") List<Integer> cartItemCntList,
+	        @RequestParam("cartList[].buyer") List<String> buyerList) {
+
+	    List<CartVO> list = new ArrayList<>();
+	    for(int i = 0; i < cartItemNoList.size(); i++) {
+	        CartVO cartVO = new CartVO();
+	        cartVO.setBuyer(buyerList.get(i));
+	        cartVO.setCartItemCnt(cartItemCntList.get(i));
+	        cartVO.setCartItemNo(cartItemNoList.get(i));
+	        cartVO.setCartItemPrice(cartItemPriceList.get(i));
+	        list.add(cartVO);
+	    }
+	    System.out.println(cartItemNoList);
+	    int orderNo = ordersDao.sequence();
+	    ordersDao.insertIntoOrdersTable(list, orderNo);
+	    orderDetailDao.insertByCartVOList(list, orderNo);
+
+	    return "redirect:/order/pay";
 	}
 
 	
