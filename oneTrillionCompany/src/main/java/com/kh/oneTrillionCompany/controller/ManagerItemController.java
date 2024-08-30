@@ -60,7 +60,7 @@ public class ManagerItemController {
 	@GetMapping("/insert")
 	public String insert() {
 		
-		return "/WEB-INF/views/manager/item/insert.jsp";
+		return "/WEB-INF/views/manager/item/insert2.jsp";
 	}
 	@PostMapping("/insert")
 	public String insert(@ModelAttribute ItemDto itemDto, MultipartFile attach) throws IllegalStateException, IOException {
