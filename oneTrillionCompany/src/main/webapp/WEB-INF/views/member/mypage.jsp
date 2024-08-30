@@ -155,40 +155,44 @@
 		<a href="#" class = "btn btn-negative member-delete">회원 탈퇴</a>
 	</div>
 
-		<!-- 회원의 차단 이력을 출력 -->
-		<hr>
-		<div class = "row center">
-			<div>
-				<h1>차단/해제 이력</h1>
-			</div>
+		<%--  관리자가 아닐 경우에만 차단이력을 출력 --%> 
 		<c:choose>
-			<c:when test="${blockList.isEmpty()}">
-				<h3 style= "color:red">차단 이력이 존재하지 않습니다</h3>
+			<c:when test="${memberDto.memberRank != '관리자'}">
+				<hr>
+					<div class = "row center">
+								<div>
+									<h1>차단/해제 이력</h1>
+								</div>
+							<c:choose>
+								<c:when test="${blockList.isEmpty()}">
+									<h3 style= "color:red">차단 이력이 존재하지 않습니다</h3>
+								</c:when>
+									<c:otherwise>
+										<table class="table table-border-top">
+											<thead>
+												<tr class="table-border-middle">
+													<th class="table-border-side" width="35%">일시</th>
+													<th class="table-border-center" width="15%">구분</th>
+													<th class="table-border-center">사유</th>
+												</tr>
+											</thead>
+											<tbody>
+												<c:forEach var="blockDto" items="${blockList}">
+												<tr class="table-border-middle">
+													<td class="table-border-side">
+														<fmt:formatDate value="${blockDto.blockTime}"	pattern="y년 M월 d일 E H시 m분"/>
+													</td>
+													<td class="table-border-center">${blockDto.blockType}</td> <!--구분 -->
+													<td class="table-border-center">${blockDto.blockMemo}</td> <!-- 사유 --> 
+												</tr>
+												</c:forEach>
+											</tbody>
+										</table>
+									</c:otherwise>
+							</c:choose>
+						</div>
 			</c:when>
-			<c:otherwise>
-				<table class="table table-border-top">
-					<thead>
-						<tr class="table-border-middle">
-							<th class="table-border-side" width="35%">일시</th>
-							<th class="table-border-center" width="15%">구분</th>
-							<th class="table-border-center">사유</th>
-						</tr>
-					</thead>
-					<tbody>
-						<c:forEach var="blockDto" items="${blockList}">
-						<tr class="table-border-middle">
-							<td class="table-border-side">
-								<fmt:formatDate value="${blockDto.blockTime}"	pattern="y년 M월 d일 E H시 m분"/>
-							</td>
-							<td class="table-border-center">${blockDto.blockType}</td> <!--구분 -->
-							<td class="table-border-center">${blockDto.blockMemo}</td> <!-- 사유 --> 
-						</tr>
-						</c:forEach>
-					</tbody>
-				</table>
-			</c:otherwise>
 		</c:choose>
-	</div>
 </div>
 		
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
