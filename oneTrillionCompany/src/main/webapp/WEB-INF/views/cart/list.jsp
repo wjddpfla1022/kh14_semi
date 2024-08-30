@@ -231,34 +231,33 @@
 	        	}
 	        });
         }
+        
+      //장바구니에서 주문으로 order list 저장 통신 - 우선 1개만 구현
+    	$,(".btn-order").click(function()){
+    		 //장바구니에서 주문 목록으로 넘어갈 VO 생성
+    		var list = [];
+    	    for (var i = 0; i < cartItemCnt.length; i++) {
+    	    	var cartVO = {
+    		    	"carItemNo": carItemNo[i],
+    	            "cartItemPrice": itemPrice[i],
+    	            "cartItemCnt": cartCnt[i]
+    	    	};
+    	    	list.push(cartVO);
+    	    }
+    	    console.log(list);
+    			
+    		$.ajax({
+    			url: "/cart/list",
+    			method:'post',
+    			contentType: 'application/json', // JSON 데이터 전송을 위해 설정
+    	        data: JSON.stringify(list), // list를 JSON 문자열로 변환
+    			success:function(response){
+    				console.log("성공")
+    			}
+    		});
+    	});
 	});
 	
-	//장바구니에서 주문으로 order list 저장 통신 - 우선 1개만 구현
-	$,(".btn-Oneorder").click(function(){
-		 //장바구니에서 주문 목록으로 넘어갈 VO 생성
-		var list = [];
-	    for (var i = 0; i < carItemNo.length; i++) {
-	    	var cartVO = {
-		    	"carItemNo": carItemNo[i],
-	            "cartItemPrice": itemPrice[i],
-	            "cartItemCnt": cartCnt[i]
-	    	};
-	    list.push(cartVO);
-	    }
-	    console.log(carItemNo);
-			
-		$.ajax({
-			url: "/cart/list",
-			method: 'post',
-			contentType: 'application/x-www-form-urlencoded', // URL 인코딩 형식으로 전송
-	        data: queryString, // 쿼리 문자열 형식으로 데이터 전송
-			success:function(response){
-				console.log("성공")
-			}
-		});
-	});
-
-
 </script>
 <div class="container w-1200 my-50">
 	<div class="row center mb-50 cart-title">
@@ -329,7 +328,7 @@
 					</td>
 					<td>기본배송</td>
 			 		<td class="link-box flex-box"  style="flex-direction: column; align-items:center;">
-						<button type="submit" class="btn btn-Oneorder btn-positive">주문하기</button>
+						<button type="submit" class="btn btn-order btn-positive">주문하기</button>
 						<button type="button" class="btn btn-negative btn-delete">삭제하기</button>
 					</td>
 				</tr>
