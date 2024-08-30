@@ -36,10 +36,6 @@
 			<div class="center">
 	        	<img src="image?reviewNo=${reviewDto.reviewNo}" width="150" height="150">
 	        </div>			
-			<div>
-				<span style="color: white">${reviewDto.reviewNo}</span>
-				<span style="color: white">${reviewDto.reviewItemNo}</span>
-			</div>
 		</div>
 		<div class="row right">
 			<a href="delete?reviewNo=${reviewDto.reviewNo}" class="btn btn-delete">삭제</a>

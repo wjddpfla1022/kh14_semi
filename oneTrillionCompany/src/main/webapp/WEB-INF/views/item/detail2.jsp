@@ -335,17 +335,18 @@
 	    </div>
    </div>
    
-    <div class="cotainer w-1200 my-50">
+   <div class="cotainer w-1200 my-50">
         <div class="row flex-box column-2">
             <div class="left">
                 <h3>REVIEW (${list.size()})</h3>
             </div>
            
             <div class="left">
-                <a href="/review/list?reviewNo=${itemDto.itemNo}" class="btn">상품 리뷰</a>
+                <a href="/review/list?column=review_item_no&keyword=${itemDto.itemNo}" class="btn">상품 리뷰</a>
             </div>
         </div>
-</div><hr>
+</div>
+<hr>
 <div class="left">
     <div class="test-score2" data-max="5" data-rate="3"></div>
 </div>
