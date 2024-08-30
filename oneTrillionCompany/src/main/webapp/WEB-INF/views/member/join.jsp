@@ -438,10 +438,6 @@
                         <label class="title">생년월일</label>
                         <input type="text" class="field w-100" name="memberBirth">
                     </div>
-                    <div class="row">
-                        <label class="title">연락처</label>
-                        <input type="tel" class="field w-100">
-                    </div>
 <!--                     <div class="row float-box"> -->
 <!--                         <button type="button" class="float-left btn btn-positive btn-prev">이전</button> -->
 <!--                         <button type="button" class="float-right btn btn-positive btn-next">다음</button> -->
