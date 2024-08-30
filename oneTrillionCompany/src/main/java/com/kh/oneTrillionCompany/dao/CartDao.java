@@ -37,9 +37,9 @@ public class CartDao {
 	}
 	
 	//장바구니 삭제
-	public boolean delete(int itemNo) {
+	public boolean delete(int cartNo) {
 		String sql = "delete cart where cart_no = ?";
-		Object[] data = {itemNo};
+		Object[] data = {cartNo};
 		return jdbcTemplate.update(sql, data) > 0;
 	}
 	
@@ -108,19 +108,11 @@ public class CartDao {
 		Object[] data = {memberId};
 		return jdbcTemplate.queryForObject(sql, Integer.class, data);
 	}
-	
-	public Integer lastCartNumber(String memberId) {
-	    String sql = "select cart_no from("
-	            + "select cart_no from cart "
-	            + "where cart_buyer = ? "
-	            + "order by cart_no desc) where rownum = 1";
+	//데이터 갯수 가져오기
+	public int dataCount(String memberId) {
+	    String sql =  "select count(*) from cart where cart_buyer = ?";
 	    Object[] data = {memberId};
-	    try {
-	        return jdbcTemplate.queryForObject(sql, Integer.class, data);
-	    } catch (EmptyResultDataAccessException e) {
-	        // 결과가 없는 경우 0 또는 null 반환
-	        return null; // 또는 return 0;
-	    }
+	    return jdbcTemplate.queryForObject(sql, Integer.class, data);
 	}
 	
 	//컬러와 상품명으로 아이템 번호를 찾는다
@@ -149,9 +141,36 @@ public class CartDao {
 		jdbcTemplate.update(sql, data);
 	}
 	
+
+	//장바구니 체크 항목들 삭제
+	public boolean checkDelete(List<Integer> cartNoList) {
+		if (cartNoList == null || cartNoList.isEmpty()) {
+            return false; // 삭제할 항목이 없으면 false 반환
+        }
+
+        // SQL 쿼리 문자열 생성 (IN 절 사용)
+        StringBuilder sql = new StringBuilder("DELETE FROM cart WHERE cart_no IN (");
+        for (int i = 0; i < cartNoList.size(); i++) {
+            sql.append("?");
+            if (i < cartNoList.size() - 1) {
+                sql.append(", ");
+            }
+        }
+        sql.append(")");
+
+        // 데이터를 배열로 변환
+        Object[] data = cartNoList.toArray();
+
+        // SQL 쿼리 실행
+        return jdbcTemplate.update(sql.toString(), data) > 0;
+	}
+		
+	
+
 	//품절 유무를 위해 아이템 컬러를 뽑는다 -> itemDao로 옮기기
 	public List<String> selectItemColors(String itemName) {
 		String sql = "select item_color from item where item_name=?";
 		return jdbcTemplate.queryForList(sql, String.class, itemName);
 	}
+
 }
