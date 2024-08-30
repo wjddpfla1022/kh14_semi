@@ -5,11 +5,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -21,6 +19,7 @@ import com.kh.oneTrillionCompany.dto.MemberDto;
 import com.kh.oneTrillionCompany.dto.OrderDetailDto;
 import com.kh.oneTrillionCompany.dto.OrdersDto;
 import com.kh.oneTrillionCompany.exception.TargetNotFoundException;
+import com.kh.oneTrillionCompany.service.PayService;
 import com.kh.oneTrillionCompany.vo.OrderVO;
 
 import jakarta.servlet.http.HttpSession;
@@ -36,6 +35,8 @@ public class OrderController {
 	private MemberDao memberDao;
 	@Autowired
 	private ItemDao itemDao;
+	@Autowired
+	private PayService payService;
 	
 	@GetMapping("/pay")
 	public String pay(Model model,HttpSession session) {
@@ -68,14 +69,14 @@ public class OrderController {
 		model.addAttribute("orderNo",orderNo);
 		return "/WEB-INF/views/order/pay.jsp";
 	}
-	@Transactional //중요한 절차이고 db를 거치는 횟수가 많아서 rollback이 가능하도록
+//	@Transactional //중요한 절차이고 db를 거치는 횟수가 많아서 rollback이 가능하도록
 	@PostMapping("/pay")
 	public String pay(@RequestParam("list[0].itemNo") List<Integer> itemNos,
 		    @RequestParam("list[0].itemPrice") List<Integer> itemPrices,
 		    @RequestParam("list[0].cnt") List<Integer> cnts,
 		    @RequestParam("list[0].buyer") List<String> buyers,
 		    @RequestParam("list[0].orderNo") List<Integer> orderNos, @RequestParam int orderNo,
-			HttpSession session) {
+			HttpSession session) throws Exception {
 		List<OrderVO> list = new ArrayList<>();
 	    for (int i = 0; i < itemNos.size(); i++) {
 	        OrderVO order = new OrderVO();
@@ -86,24 +87,25 @@ public class OrderController {
 	        order.setOrderNo(orderNos.get(i));
 	        list.add(order);
 	    }
-		int payment=ordersDao.selectOne(orderNo).getOrderPrice();
-		String memberId=(String) session.getAttribute("createdUser");
-		boolean sessionVaild=list.get(0).getBuyer().equals(memberId); //세션 유효성 검사
-		if(list.size()==0&&!sessionVaild) 
-			return"redirect:error?error=1";
-		//결제
-		memberDao.payment(memberId, payment);
-		//주문서 생성(detail)
-		List<OrderDetailDto> detailList= orderDetailDao.selectListByOrderDetail(memberId,orderNo);
-		List<Integer> detailNoList=new ArrayList<>();
-		for(int i=0; i<detailList.size(); i++) {
-			detailNoList.add(detailList.get(i).getOrderDetailNo());
-			//재고 차감
-			itemDao.deductItem(detailList.get(i).getOrderDetailCnt(),detailList.get(i).getOrderDetailItemNo());
-		}
-		orderDetailDao.payCompleteStatus(detailNoList);
-		//임시 주문서 삭제
-//		ordersDao.delete(memberId);
+	    payService.pay(list,orderNo, session);
+//		int payment=ordersDao.selectOne(orderNo).getOrderPrice();
+//		String memberId=(String) session.getAttribute("createdUser");
+//		boolean sessionVaild=list.get(0).getBuyer().equals(memberId); //세션 유효성 검사
+//		if(list.size()==0&&!sessionVaild) 
+//			new TargetNotFoundException("장바구니를 확인해주세요");
+//		//결제
+//		memberDao.payment(memberId, payment);
+//		//주문서 생성(detail)
+//		List<OrderDetailDto> detailList= orderDetailDao.selectListByOrderDetail(memberId,orderNo);
+//		List<Integer> detailNoList=new ArrayList<>();
+//		for(int i=0; i<detailList.size(); i++) {
+//			detailNoList.add(detailList.get(i).getOrderDetailNo());
+//			//재고 차감
+//			itemDao.deductItem(detailList.get(i).getOrderDetailCnt(),detailList.get(i).getOrderDetailItemNo());
+//		}
+//		orderDetailDao.payCompleteStatus(detailNoList);
+//		//임시 주문서 삭제
+////		ordersDao.delete(memberId);
 		return "redirect:payFinish?orderNo="+orderNo;
 	}
 	@RequestMapping("/payFinish")

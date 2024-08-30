@@ -106,14 +106,5 @@ public class ItemController {
 				}
 			}
 	
-	//장바구니 담기 구현 완료 후 (삭제)
-		@RequestMapping("/detail2")
-		public String detail2(@RequestParam int itemNo, Model model) {
-			ItemDto itemDto = itemDao.selectOne(itemNo);
-			model.addAttribute("itemDto", itemDto);
-			//장바구니 담기 /detail로 옮기기
-			model.addAttribute("colorList", itemDao.selectItemColors(itemNo));
-			model.addAttribute("attachNo", itemDao.findImage(itemNo));
-			return "/WEB-INF/views/item/detail2.jsp?itemNo=2";
-		}
+
 }

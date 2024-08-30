@@ -197,16 +197,19 @@
 								<div class="container">
 									<div class="flex-box column-2">
 										<div class="row">구매적립</div>
-										<div class="row flex-right pay-coin">${totalPrice*3/100}
+										<div class="row flex-right pay-coin">${Math.round(totalPrice/100)*3}
 											원</div>
 									</div>
 									<div class="flex-box column-2">
 										<div class="row">리뷰적립</div>
-										<div class="row flex-right review-coin">${cnt*150}원</div>
+										<div class="row flex-right review-coin">${cnt*150} 원</div>
 									</div>
 									<div class="row">동일상품의 상품 적립은 1회로 제한</div>
 								</div>
-								<button type="submit" class="btn btn-positive center">결제하기</button>
+								<div class="flex-box column-2">
+									<div class="flex-left center">결제금액 : ${totalPrice}</div>
+									<button type="submit" class="btn btn-positive w-33">결제하기</button>
+								</div>
 							</div>
 						</div>
 					</div>
