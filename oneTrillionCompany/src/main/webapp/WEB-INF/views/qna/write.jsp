@@ -28,7 +28,6 @@
         /* textarea 설정 */
         .qna-write > textarea{
             resize: none;
-            min-width: 500px;
             min-height: 150px;
             width: 100%;
             padding-top: 0.5em;
@@ -40,6 +39,20 @@
 	$(function(){
 		$(".btn-regi").click(function(e){
 			e.preventDefault();
+			
+			/* 문의 유형 선택이 되지 않은경우 메시지 출력 */
+			var choice = $("select[name=qnaTitle]").val();
+			if(choice=== "") {
+				window.alert("문의 유형을 선택해주세요.")
+				return;
+			}
+			/* 작성된 내용이 없는경우 메시지 출력 */
+			var noText = $("textarea[name=qnaContent]").val().trim();
+			if(noText.length == 0) {
+				window.alert("문의 내용을 작성해주세요.");
+				return;
+			}
+			
 			var regi = window.confirm("등록하시겠습니까?");
             if (regi) {
                 // 확인을 클릭한 경우 폼 제출
@@ -52,7 +65,7 @@
     
 
     <form action="write" method="post" id="regi-form">
-       <div class="container w-700 my-30">
+       <div class="container w-800 my-30">
             <div class="row center">
                 <h2>1:1문의 등록</h2>
             </div>

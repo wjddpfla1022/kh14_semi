@@ -15,7 +15,7 @@
 	}
         .row > textarea{
             resize: none;
-            min-width: 500px;
+            min-width: 100%;
             min-height: 200px;
             width: 100%;
             padding-top: 0.5em;
@@ -27,6 +27,16 @@
         	width: 100%;
         	text-align: left;
         	padding-left : 0.5em;
+        	font-size : 16px;
+        	
+        }
+        /* 텍스트 엔터,스페이스 container 박스 넘어가는 문제 해결 */
+        .content-box {
+        	white-space: pre-wrap;
+        }
+        .qna-content {
+        	height : 100%;
+        	
         }
         .reply-wrapper > .content-wrapper{
         	font-size: 16px;
@@ -38,6 +48,7 @@
          	font-size: 1em;
          	min-height: 50px;
          }
+         
 
 </style>
 
@@ -177,7 +188,8 @@
 		});
 		
 		//수정 완료
-		$(document).on("click",".reply-complete-btn",function(){
+		$(document).on("click",".reply-complete-btn",function(e){
+			e.preventDefault();
 			var choice = window.alert("수정하시겠습니까?");
 			if(choice == false) return;
 			
@@ -250,7 +262,8 @@
 						<td>
 							<div class="row left">
 								<span class="write-deco">작성자</span>
-								${qnaDto.qnaWriter}
+									<c:if test="${qnaDto.qnaWriter == null}">탈퇴한 사용자</c:if>
+									<c:if test="${qnaDto.qnaWriter != null}"> ${qnaDto.qnaWriter} </c:if>
 							</div>
 						</td>
 					</tr>
@@ -265,7 +278,7 @@
 					<tr>
 						<td>
 							<div class="row qna-content" >
-								<pre>${qnaDto.qnaContent}</pre>
+								<pre class="content-box">${qnaDto.qnaContent}</pre>
 							</div>
 						</td>
 					</tr>
@@ -294,12 +307,12 @@
 		        </div>
 			</div>
 		</div>
-		<!-- 관리자 답변 댓글창 -->
+		<%-- 관리자 답변 댓글창  --%> 
 		<hr>
 			<div class="row reply-list-wrapper">
 			</div>
 		<hr>
-		<!--   댓글 작성 기능 -->
+		
 		<div class="row">
 			<textarea class="field w-100 reply-input"></textarea>
 			<button type="button" class="btn btn-positive reply-add-btn">
@@ -308,3 +321,5 @@
 		</div>
 	</div>
 </form>
+
+
