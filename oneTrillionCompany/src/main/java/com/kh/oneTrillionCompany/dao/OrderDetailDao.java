@@ -57,7 +57,7 @@ public class OrderDetailDao {
 			jdbcTemplate.update(sql, data);
 			}
 		}
-		public void checkStatus(List<Integer> list) {
+		public void checkStatus(List<Integer> list) {//중복 결제를 막는 메서드(상태체크로)
 			for(int i=0; i<list.size(); i++) { 
 				String sql="select order_detail_status from order_detail where order_detail_no = ?";
 				Object[] data= {list.get(i)};
