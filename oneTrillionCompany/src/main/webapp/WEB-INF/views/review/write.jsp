@@ -53,7 +53,7 @@
         </div>
         <div class="row">
             <label>결제상세넘버</label>
-            <input type="text" name="reviewItemNo" class="field w-100">
+            <input type="text" name="reviewItemNo" class="field w-100" value="${orderDetailDto.orderDetailItemNo}" readonly>
         </div>
             <div class="row">
                 <!-- 별점 선택 값을 저장하는 input 필드 -->

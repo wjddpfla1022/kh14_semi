@@ -66,5 +66,11 @@ public class OrderDetailDao {
 				jdbcTemplate.update(sql, data);
 			}
 		}
+		public OrderDetailDto selectOne(int orderDetailNo) {
+			String sql = "select * from order_detail where order_detail_no = ?";
+			Object[] data= {orderDetailNo};
+			List<OrderDetailDto> list = jdbcTemplate.query(sql, orderDetailMapper, data);
+			return list.isEmpty() ? null : list.get(0);
+		}
 
 }
