@@ -45,8 +45,7 @@
         <div class="row center">
 		</div>
 		<h3>데이터 개수 : ${itemList.size()}</h3>
-		
-		<div class="row image-align" id="images">
+		<div class="row image-align">
 		<c:forEach var= "itemDto" items= "${itemList}">
             <a href="/item/detail?itemNo=${itemDto.itemNo}">
             <img src = "/item/image?itemNo=${itemDto.itemNo}" width="200px" height="200px">
@@ -56,17 +55,6 @@
         </c:forEach>
 
         </div>
-        <script>
-        $(document).ready(function() {
-            $(window).endlessScroll({
-                inflowPixels: 300,
-                callback: function() {
-                    var $img = $('#images li:nth-last-child(5)').clone();
-                    $('#images').append($img);
-                }
-            });
-        });
-</script>
             <div class="row center">
 <!--                 <button class="btn btn-more">더보기<i class="fa-solid fa-caret-down"></i></button> -->
             </div>
@@ -76,5 +64,4 @@
 		</form>
 	</div>
 </body>
-
-<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
+</html>

@@ -276,14 +276,14 @@
 								<td>${itemDto.itemDate}</td>
 								<td>${itemDto.itemCnt}</td>
 								<td>${itemDto.itemSize}</td>
-								<td><a href="update?itemNo=${itemDto.itemNo}"
-									class="btn btn-positive">수정</a></td>
-								<td><a href="delete?itemNo=${itemDto.itemNo}"
-									class="btn btn-negative">삭제</a></td>
 								<td><a href="info/write?itemNo=${itemDto.itemNo}"
 									class="btn btn-positive">정보 입력</a>
 									<a href="info/edit?itemNo=${itemDto.itemNo}"
 									class="btn btn-positive">정보 수정</a></td>
+								<td><a href="update?itemNo=${itemDto.itemNo}"
+									class="btn btn-positive">수정</a></td>
+								<td><a href="delete?itemNo=${itemDto.itemNo}"
+									class="btn btn-negative">삭제</a></td>
 							</tr>
 						</c:forEach>
 					</c:otherwise>
