@@ -34,15 +34,13 @@ public class OrderController {
 	@Autowired
 	private MemberDao memberDao;
 	@Autowired
-	private ItemDao itemDao;
-	@Autowired
 	private PayService payService;
 	
 	@GetMapping("/pay")
 	public String pay(Model model,HttpSession session) {
 		//세션 아이디 검사 및 보내기 
 		String memberId=(String) session.getAttribute("createdUser");
-		if(memberId ==null) new TargetNotFoundException();//TargetNotFoundException 자리
+		if(memberId ==null) throw new TargetNotFoundException("다시 로그인 해주세요");//세션,주문자 불일치시 예외처리
 		MemberDto memberDto = memberDao.selectOne(memberId);
 		memberDto.setMemberPw(null); //비밀번호를 지우고 view로 전송
 		model.addAttribute("memberDto",memberDto);
@@ -88,24 +86,6 @@ public class OrderController {
 	        list.add(order);
 	    }
 	    payService.pay(list,orderNo, session);
-//		int payment=ordersDao.selectOne(orderNo).getOrderPrice();
-//		String memberId=(String) session.getAttribute("createdUser");
-//		boolean sessionVaild=list.get(0).getBuyer().equals(memberId); //세션 유효성 검사
-//		if(list.size()==0&&!sessionVaild) 
-//			new TargetNotFoundException("장바구니를 확인해주세요");
-//		//결제
-//		memberDao.payment(memberId, payment);
-//		//주문서 생성(detail)
-//		List<OrderDetailDto> detailList= orderDetailDao.selectListByOrderDetail(memberId,orderNo);
-//		List<Integer> detailNoList=new ArrayList<>();
-//		for(int i=0; i<detailList.size(); i++) {
-//			detailNoList.add(detailList.get(i).getOrderDetailNo());
-//			//재고 차감
-//			itemDao.deductItem(detailList.get(i).getOrderDetailCnt(),detailList.get(i).getOrderDetailItemNo());
-//		}
-//		orderDetailDao.payCompleteStatus(detailNoList);
-//		//임시 주문서 삭제
-////		ordersDao.delete(memberId);
 		return "redirect:payFinish?orderNo="+orderNo;
 	}
 	@RequestMapping("/payFinish")
