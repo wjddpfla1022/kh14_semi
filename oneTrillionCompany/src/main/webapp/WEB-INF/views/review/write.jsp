@@ -59,7 +59,7 @@
                 <!-- 별점 선택 값을 저장하는 input 필드 -->
                 <label>별점</label>
                 <div class="test-score"></div>
-                <input type="hidden" name="reviewScore" class="field w-100">
+                <input type="text" name="reviewScore" class="field w-100">
             </div>
         <div class="row">
             <label>이미지</label>

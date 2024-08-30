@@ -15,7 +15,6 @@ import com.kh.oneTrillionCompany.dao.CartDao;
 import com.kh.oneTrillionCompany.dao.ItemDao;
 import com.kh.oneTrillionCompany.dao.OrderDetailDao;
 import com.kh.oneTrillionCompany.dao.OrdersDao;
-import com.kh.oneTrillionCompany.dto.CartDto;
 import com.kh.oneTrillionCompany.service.AttachService;
 import com.kh.oneTrillionCompany.vo.CartVO;
 
@@ -75,9 +74,10 @@ public class CartController {
 	    int orderNo = ordersDao.sequence();
 	    ordersDao.insertIntoOrdersTable(list, orderNo);
 	    orderDetailDao.insertByCartVOList(list, orderNo);
-
+	
 	    return "redirect:/order/pay";
 	}
+
 
 	
 	//장바구니 전체 삭제
