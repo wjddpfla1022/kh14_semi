@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -56,10 +57,11 @@ public class CartController {
 			}
 			return "/WEB-INF/views/cart/list.jsp"; 
 	}
-	@PostMapping("/list") //장바구니-> 주문창으로 갈때 orders 테이블에 등록f
-	public String list(@RequestParam List<CartVO>list) { //list.jsp에서 List<CartVO>로 값을 받아서 등록
+	@PostMapping("/list") //장바구니-> 주문창으로 갈때 orders 테이블에 등록
+	public String list(@RequestBody List<CartVO>list, HttpSession session) { //list.jsp에서 List<CartVO>로 값을 받아서 등록
 		int orderNo=ordersDao.sequence();
-		ordersDao.insertIntoOrdersTable(list,orderNo);
+		String buyer = (String)session.getAttribute("createdUser");
+		ordersDao.insertIntoOrdersTable(list,orderNo,buyer);
 		orderDetailDao.insertByCartVOList(list,orderNo);
 		return "redirect:/order/pay";
 	}

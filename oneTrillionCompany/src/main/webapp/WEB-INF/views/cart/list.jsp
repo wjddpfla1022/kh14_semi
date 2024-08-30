@@ -4,6 +4,7 @@
 <jsp:include page= "/WEB-INF/views/template/header.jsp"></jsp:include>
 
  <!-- font awesome icon cdn -->
+
 <style>
 	/*장바구니 제목 스타일 */
 	.cart-title{
@@ -44,6 +45,9 @@
 	}
 	
 	/* 재고, 수량을 숨김 */
+	.hidden{
+		display: none !important; 
+	}
 	.itemCnt-data{ 		
 		display: none !important; 
 	}
@@ -228,6 +232,31 @@
 	        });
         }
 	});
+	
+	//장바구니에서 주문으로 order list 저장 통신 - 우선 1개만 구현
+	$,(".btn-Oneorder").click(function(){
+		 //장바구니에서 주문 목록으로 넘어갈 VO 생성
+		var list = [];
+	    for (var i = 0; i < carItemNo.length; i++) {
+	    	var cartVO = {
+		    	"carItemNo": carItemNo[i],
+	            "cartItemPrice": itemPrice[i],
+	            "cartItemCnt": cartCnt[i]
+	    	};
+	    list.push(cartVO);
+	    }
+	    console.log(carItemNo);
+			
+		$.ajax({
+			url: "/cart/list",
+			method: 'post',
+			contentType: 'application/x-www-form-urlencoded', // URL 인코딩 형식으로 전송
+	        data: queryString, // 쿼리 문자열 형식으로 데이터 전송
+			success:function(response){
+				console.log("성공")
+			}
+		});
+	});
 
 
 </script>
@@ -260,6 +289,8 @@
 					</th>
 					<th>이미지</th>
 					<th>상품정보</th>
+					<th>색상</th>
+					<!-- 사이즈추가 -->
 					<th>가격</th>
 					<th>수량</th>
 					<th>배송구분</th>
@@ -275,13 +306,17 @@
 						<span class="cartCnt-data">${cart.cartNo}</span><!-- 장바구니 수량을 el로 받아 제이쿼리에 적용 -->
 						<input type="checkbox" class="check-item" name="cartNo" value="${cart.cartNo}">
 					</td>
-					<td>
-						<a href="#"><img src="https://via.placeholder.com/20"></a> <!-- 임시 이미지 -->
-					</td>
 					<!--itemList 반복문 -->
 					<c:forEach var="item" items="${itemList}">
 			            <c:if test="${item.itemNo == cart.cartItemNo}">
+					<td>
+						<!-- itemNo 제이쿼리에서 쓰기 -->
+						<span class="hidden">${item.itemNo}</span>
+						<a href="#"><img class="shoppingmal" src = "/item/image?itemNo=${item.itemNo}" width="50px"></a> <!-- 임시 이미지 -->
+					</td>
 			                <td>${item.itemName}</td> 
+			                <td>${item.itemColor}</td>
+			                <span class="hidden">${item.itemPrice}</span>
 			                <td>${item.itemPrice}원 <span class="itemCnt-data">${item.itemCnt}</span></td><!-- 재고값을 el로 받아 제이쿼리에 적용 -->
 			            </c:if>
 			        </c:forEach>
@@ -294,7 +329,7 @@
 					</td>
 					<td>기본배송</td>
 			 		<td class="link-box flex-box"  style="flex-direction: column; align-items:center;">
-						<button type="submit" class="btn btn-positive">주문하기</button>
+						<button type="submit" class="btn btn-Oneorder btn-positive">주문하기</button>
 						<button type="button" class="btn btn-negative btn-delete">삭제하기</button>
 					</td>
 				</tr>
