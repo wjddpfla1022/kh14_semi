@@ -179,6 +179,7 @@
             var cartCntValue = parseInt(cartCntInput.val(), 10); //cartCnt 값이 들어감
             var itemCntValue = parseInt(row.find(".itemCnt-data").text(), 10); //재고
 
+
             // 버튼에 따른 수량 조절
             if ($(this).hasClass('btn-up')) { 
             	// 장바구니 최대 수량(재고기준)

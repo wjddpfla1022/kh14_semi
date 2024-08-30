@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.oneTrillionCompany.dto.ItemDto;
+import com.kh.oneTrillionCompany.exception.TargetNotFoundException;
 import com.kh.oneTrillionCompany.mapper.ItemMapper;
 import com.kh.oneTrillionCompany.vo.PageVO;
 
@@ -111,11 +112,12 @@ public class ItemDao {
 		return jdbcTemplate.queryForObject(sql, int.class, data);
 	}
 	//결제 후 상품 재고 차감
-	public boolean deductItem(int cnt,int itemNo) {
+	public void deductItem(int cnt,int itemNo) {
 		String sql="update item set item_cnt = item_cnt-? "
 				+ "where item_no = ? and item_cnt >= ?";
 		Object[] data= {cnt,itemNo, cnt};
-		return jdbcTemplate.update(sql, data)>0;
+		boolean isPassed=jdbcTemplate.update(sql, data)>0;
+		if(!isPassed) new TargetNotFoundException("재고가 부족합니다");
 	}
 	
 	//페이징
@@ -168,6 +170,17 @@ public class ItemDao {
 	        return jdbcTemplate.queryForObject(sql, Integer.class);
 	    }
 	}
-
 	
+	//itemNo로 이름을 찾는다-장바구니
+	public String findItemName (int itemNo) {
+		String sql= "select item_name from item where item_no=?";
+		return jdbcTemplate.queryForObject(sql, String.class, itemNo);
+	}
+	//품절 유무를 위해 아이템 컬러를 뽑는다-장바구니
+	public List<String> selectItemColors(int itemNo) {
+		String itemName = findItemName(itemNo);
+		String sql = "select item_color from item where item_name=?";
+		Object[] data = {itemName};
+		return jdbcTemplate.queryForList(sql, String.class, data);
+	}
 }
