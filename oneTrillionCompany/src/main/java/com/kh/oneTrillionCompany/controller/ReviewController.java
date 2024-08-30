@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.kh.oneTrillionCompany.dao.OrderDetailDao;
 import com.kh.oneTrillionCompany.dao.ReviewDao;
+import com.kh.oneTrillionCompany.dto.OrderDetailDto;
 import com.kh.oneTrillionCompany.dto.ReviewDto;
 import com.kh.oneTrillionCompany.exception.TargetNotFoundException;
 import com.kh.oneTrillionCompany.service.AttachService;
@@ -26,17 +28,19 @@ import jakarta.servlet.http.HttpSession;
 public class ReviewController {
 
 	@Autowired
-	private ReviewDao reviewDao;	
-	
+	private ReviewDao reviewDao;		
+	@Autowired
+	private OrderDetailDao orderDetailDao;
 	@Autowired
 	private AttachService attachService;
 	
 	//리뷰 글 등록 페이지
 	@GetMapping("/write")
-	public String write(HttpSession session, Model model) {
+	public String write(HttpSession session, Model model, @RequestParam int orderDetailNo) {
 		String memberId = (String)session.getAttribute("createdUser");
+		OrderDetailDto orderDetailDto = orderDetailDao.selectOne(orderDetailNo);
 		model.addAttribute("memberId", memberId);
-		
+		model.addAttribute("orderDetailDto", orderDetailDto);
 		return "/WEB-INF/views/review/write.jsp";
 	}
 	@Transactional

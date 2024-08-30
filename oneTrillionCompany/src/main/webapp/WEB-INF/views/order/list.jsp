@@ -64,7 +64,7 @@
          			<th width=20%;>수량</th>
          			<th width=25%;>결제금액</th>
          			<th width=25%;>상태</th>
-         			<th width="10%"></th>
+         			<th width="10%"></th>         			
          		</tr>
          	</thead>
          	<tbody>
@@ -74,7 +74,11 @@
 	        			<td>${orderDetailDto.orderDetailCnt}</td>
 	        			<td>${orderDetailDto.orderDetailPrice*orderDetailDto.orderDetailCnt}</td>
 	        			<td>${orderDetailDto.orderDetailStatus}</td>
-	        			<td><a href="/order/detail?orderNo=${orderDetailDto.orderDetailOrderNo}" class="link">결제상세</a><td>
+	        			<td>
+	        				<a href="/order/detail?orderNo=${orderDetailDto.orderDetailOrderNo}" class="link">결제상세</a>
+	        				<a href="/review/write?orderDetailNo=${orderDetailDto.orderDetailNo}" class="link">리뷰작성</a>
+	        				<a href="/refund/insert?refundOrderDetailNo=${orderDetailDto.orderDetailNo}" class="link">환불신청</a>
+	        			</td>	        			
 	        		</tr>
          		</c:forEach>
          	</tbody>
