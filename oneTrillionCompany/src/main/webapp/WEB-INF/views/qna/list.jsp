@@ -41,10 +41,11 @@
 		border: 1px solid #e9e9e9;
 	}
 	
-	.qna-login-msg {
+	.qna-login-msg,
+	.qna-Nolist-msg  {
 		text-align: center;
 		padding: 60px !important;
-		font-size: 30px;
+		font-size: 25px;
 	}
 	
 	.field-column {
@@ -62,6 +63,7 @@
 	</style>
 
 <div class="container w-1000 my-30">
+
 	<%-- 비회원일 때와 회원일 때 다르게 보이도록 처리  --%>
 	<c:choose>
 		<c:when test="${sessionScope.createdUser != null}">
@@ -99,59 +101,70 @@
 	</c:if>
 
 	<%-- 로그인 아이디와 게시글 작성자의 아이디가 일치하는 경우에만 게시글을 출력 --%>
-<c:choose>
-	<c:when test="${sessionScope.createdLevel=='관리자' }">
-	</c:when>
-	<c:when test="${sessionScope.createdUser== null }">
-	</c:when>
-	<c:otherwise>
-	<table class="table table-top">
-		<thead>
-			<tr class="tr-table-top">
-				<th width=10% class="th-table-top">번호</th>
-				<th width=60% class="th-table-top">제목</th>
-				<th width=15% class="th-table-top">작성자</th>
-				<th width=15% class="th-table-top">작성일</th>
-			</tr>
-		</thead>
-		<tbody align="center">
-			<c:forEach var="qnaDto" items="${qnaList}">
-				<c:choose>
-					<c:when test="${sessionScope.createdUser == qnaDto.qnaWriter}">
-						<tr class="tr-table-bottom">
-							<td class="td-table-bottom">${qnaDto.qnaNo}</td>
-							<td class="td-table-bottom"><a
-								href="detail?qnaNo=${qnaDto.qnaNo}" class="qna-title">${qnaDto.qnaTitle}</a>
-								<!--댓글 숫자 출력(0보다 크면) --> 
-								<c:if test="${qnaDto.qnaReply > 0}">
-	                                [${qnaDto.qnaReply}]
-	                            </c:if>
-                            </td>
-								<td class="td-table-bottom">
-									<c:choose>
-										<c:when test="${fn:length(qnaDto.qnaWriter) > 3}">
-											<%-- 작성자의 아이디를 3글자 추출 후 표시 --%>
-											<c:out value="${fn:substring(qnaDto.qnaWriter, 0, 3)}" />
-											<%-- 이후 아이디를 * 처리 --%>
-											<c:out value="***" />
-										</c:when>
-										<c:otherwise>
-											<%-- 아이디의 길이가 3글자 이하인 경우를 처리 --%>
-											<c:out value="${qnaDto.qnaWriter}" />
-										</c:otherwise>
-									</c:choose>
-								</td>
-							<td class="td-table-bottom">${qnaDto.qnaTime}</td>
-						</tr>
-					</c:when>
-				</c:choose>
-			</c:forEach>
-		</tbody>
-	</table>
-	</c:otherwise>
-</c:choose>
-
-
+	<c:choose>
+		<c:when test="${sessionScope.createdLevel=='관리자' }">
+		</c:when>
+		<c:when test="${sessionScope.createdUser== null }">
+		</c:when>
+		
+		<c:otherwise>
+			<table class="table table-top">
+				<thead>
+					<tr class="tr-table-top">
+						<th width=10% class="th-table-top">번호</th>
+						<th width=60% class="th-table-top">제목</th>
+						<th width=15% class="th-table-top">작성자</th>
+						<th width=15% class="th-table-top">작성일</th>
+					</tr>
+				</thead>
+				<tbody align="center">
+						<%-- qnaList가 비어 있거나, 작성자의 게시글이 리스트에 없는 경우를 처리--%>
+							<c:choose>
+								<c:when test="${fn:length(qnaList) == 0 || !fn:contains(qnaList, sessionScope.createdUser)}">
+									<tr>
+										<td class="qna-Nolist-msg" colspan="4">
+											<i class="fa-solid fa-headphones"></i> 문의 내역이 존재하지 않습니다.
+										</td>
+									</tr>
+								</c:when>
+							</c:choose>
+				
+						<%-- qnaList가 생성 된 경우 --%>		
+						<c:forEach var="qnaDto" items="${qnaList}">
+							<c:choose>
+								<c:when test="${sessionScope.createdUser == qnaDto.qnaWriter}">
+									<tr class="tr-table-bottom">
+										<td class="td-table-bottom">${qnaDto.qnaNo}</td>
+										<td class="td-table-bottom">
+											<a href="detail?qnaNo=${qnaDto.qnaNo}" class="qna-title">${qnaDto.qnaTitle}</a>
+												<!--댓글 숫자 출력(0보다 크면) --> 
+												<c:if test="${qnaDto.qnaReply > 0}">
+					                                [${qnaDto.qnaReply}]
+					                            </c:if>
+			                            </td>
+											<td class="td-table-bottom">
+												<c:choose>
+													<c:when test="${fn:length(qnaDto.qnaWriter) > 3}">
+														<%-- 작성자의 아이디를 3글자 추출 후 표시 --%>
+														<c:out value="${fn:substring(qnaDto.qnaWriter, 0, 3)}" />
+														<%-- 이후 아이디를 * 처리 --%>
+														<c:out value="***" />
+													</c:when>
+													<c:otherwise>
+														<%-- 아이디의 길이가 3글자 이하인 경우를 처리 --%>
+														<c:out value="${qnaDto.qnaWriter}" />
+													</c:otherwise>
+												</c:choose>
+											</td>
+										<td class="td-table-bottom">${qnaDto.qnaTime}</td>
+									</tr>
+								</c:when>
+							</c:choose>
+						</c:forEach>
+				</tbody>
+			</table>
+		</c:otherwise>
+	</c:choose>
 
 
 	<%-- 관리자 아이디로 접속 시 문의 리스트를 전부 보여지게 구현  --%>
@@ -183,15 +196,7 @@
 										<c:when test="${qnaDto.qnaWriter == null}">
 	 										탈퇴한 사용자 
 										</c:when>
-										<c:when test="${fn:length(qnaDto.qnaWriter) > 3}">
-											<%-- 작성자의 아이디를 3글자 추출 후 표시 --%>
-											<c:out value="${fn:substring(qnaDto.qnaWriter, 0, 3)}" />
-											<%-- 이후 아이디를 * 처리 --%>
-											<c:out value="***" />
-										</c:when>
 											<c:otherwise>
-												<%-- 아이디의 길이가 3글자 이하인 경우를 처리 --%>
-												<%-- 아이디를 출력합니다. --%>
 												<c:out value="${qnaDto.qnaWriter}" />
 											</c:otherwise>
 									</c:choose>

@@ -41,7 +41,7 @@
     
 
     <form action="update" method="post" id="regi-form">
-       <div class="container w-700 my-30">
+       <div class="container w-800 my-30">
             <div class="row center">
                 <h2>1:1문의 등록</h2>
             </div>
