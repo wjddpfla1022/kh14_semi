@@ -153,13 +153,19 @@
 	<div class="float-box">
 		<a href="list" class="btn btn-positive">회원 검색</a>
 		<a href="update?memberId=${memberDto.memberId}" class="btn btn-positive">회원정보 수정</a>
-		<c:choose>
-			<c:when test="${blockDto.blockType=='차단'}">
-				<a href="clear?memberId=${memberDto.memberId}" class="btn btn-negative float-right">회원 차단 해제</a>
-			</c:when>
-			<c:otherwise>
-				<a href="block?memberId=${memberDto.memberId}" class="btn btn-negative float-right">회원 차단</a>
-			</c:otherwise>
-		</c:choose>
+		
+		<%-- 관리자일경우 회원 차단/해제 버튼을 안보이게 함  --%>
+			<c:choose>
+				<c:when test="${memberDto.memberRank!='관리자'}">
+					<c:choose>
+							<c:when test="${blockDto.blockType=='차단'}">
+								<a href="clear?memberId=${memberDto.memberId}" class="btn btn-negative float-right">회원 차단 해제</a>
+							</c:when>
+								<c:otherwise>
+									<a href="block?memberId=${memberDto.memberId}" class="btn btn-negative float-right">회원 차단</a>
+								</c:otherwise>
+						</c:choose>
+					</c:when>
+			</c:choose>
 	</div>
 </div>
