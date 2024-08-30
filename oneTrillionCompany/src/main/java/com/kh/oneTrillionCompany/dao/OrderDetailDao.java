@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.oneTrillionCompany.dto.OrderDetailDto;
+import com.kh.oneTrillionCompany.exception.TargetNotFoundException;
 import com.kh.oneTrillionCompany.mapper.OrderDetailMapper;
 import com.kh.oneTrillionCompany.vo.CartVO;
 
@@ -54,6 +55,14 @@ public class OrderDetailDao {
 			Object[] data= {orderNo,cartVO.getCartItemNo(),cartVO.getCartItemPrice(),
 					cartVO.getCartItemCnt(),cartVO.getBuyer()};
 			jdbcTemplate.update(sql, data);
+			}
+		}
+		public void checkStatus(List<Integer> list) {//중복 결제를 막는 메서드(상태체크로)
+			for(int i=0; i<list.size(); i++) { 
+				String sql="select order_detail_status from order_detail where order_detail_no = ?";
+				Object[] data= {list.get(i)};
+				if(jdbcTemplate.query(sql, orderDetailMapper, data).equals("결제완료")) 
+					throw new TargetNotFoundException("이미 결제된 상품입니다");
 			}
 		}
 		public void payCompleteStatus(List<Integer>list) {
