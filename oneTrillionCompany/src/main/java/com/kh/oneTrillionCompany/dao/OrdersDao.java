@@ -59,9 +59,9 @@ public class OrdersDao {
 		return jdbcTemplate.query(sql, ordersMapper, data);
 	}
 	//장바구니 -> 주문으로 이동시 필요한 주문 테이블 생성
-	public void insertIntoOrdersTable(List<CartVO>list,int orderNo) {
+	public void insertIntoOrdersTable(List<CartVO>list,int orderNo, String buyer) {
 		long payment=0L;
-		String buyer = list.get(0).getBuyer();
+		buyer = list.get(0).getBuyer();
 		for(int i=0; i<list.size(); i++) {
 			int cnt=list.get(i).getCartItemCnt();
 			int price=list.get(i).getCartItemPrice();
