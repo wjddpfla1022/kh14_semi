@@ -143,11 +143,6 @@
             <a href="#"><img src="http://via.placeholder.com/200.png"><h4>BestItem</h4></a>
             <a href="#"><img src="http://via.placeholder.com/200.png"><h4>BestItem</h4></a>
         </div>
-		<div class="row center">
-			<button class="btn btn-more">
-				더보기<i class="fa-solid fa-caret-down"></i>
-			</button>
-		</div>
 	</div>
 	</div>
 	</div>
@@ -167,11 +162,6 @@
             <a href="#"><img src="http://via.placeholder.com/200.png"><h4>상의</h4></a>
             <a href="#"><img src="http://via.placeholder.com/200.png"><h4>상의</h4></a>
         </div>
-		<div class="row center">
-			<button class="btn btn-more">
-				더보기<i class="fa-solid fa-caret-down"></i>
-			</button>
-		</div>
 	</div>
 </body>
 
