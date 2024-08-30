@@ -316,7 +316,7 @@ a#smallShirts:hover {
 					<span style="font-size: 11px; color: #999;">[필수] 옵션을 선택해 주세요</span>
 				</div>
 				<div class="row">
-					<select name="itemcolor" class="field w-100"
+					<select name="itemColor" class="field w-100"
 						oninput="checkItemType();">
 						<option value="">선택하세요</option>
 						<option value="black">검정</option>
