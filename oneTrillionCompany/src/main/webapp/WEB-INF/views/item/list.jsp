@@ -46,7 +46,7 @@
 		</div>
 		<h3>데이터 개수 : ${itemList.size()}</h3>
 		<div class="row image-align">
-		<c:forEach var= "itemDto" items= "${list}">
+		<c:forEach var= "itemDto" items= "${itemList}">
             <a href="/item/detail2?itemNo=${itemDto.itemNo}">
             <img src = "/item/image?itemNo=${itemDto.itemNo}" width="200px" height="200px">
             <h4>${itemDto.itemName}</h4>
