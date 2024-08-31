@@ -134,7 +134,9 @@
 					var html = $.parseHTML(template);
 					
 					$(html).find(".reply-writer").text(response[i].replyWriter);
-	                $(html).find(".reply-content").text(response[i].replyContent);
+// 	                $(html).find(".reply-content").text(response[i].replyContent);
+					// 줄바꿈 문자를 <br>로 변환하여 표시
+               		$(html).find(".reply-content").html(response[i].replyContent.replace(/\n/g, "<br>"));
 					//시간형식 지정
 					var time = moment(response[i].replyTime, "YYYY-MM-DD HH:mm").format("YYYY-MM-DD dddd HH:mm");
                     $(html).find(".reply-info > .time").text(time);
@@ -169,7 +171,8 @@
 		    
 		    var replyWriter = $(this).parents(".reply-wrapper").find(".reply-writer").text();
 		    $(html).find(".reply-title").text(replyWriter);
-		    var replyContent = $(this).parents(".reply-wrapper").find(".reply-content").text();
+		    var replyContent = $(this).parents(".reply-wrapper").find(".reply-content").html();
+		    replyContent = replyContent.replace(/<br>/g , "\n");
 		    $(html).find(".reply-update-input").val(replyContent);
 		    
 		    var replyNo = $(this).attr("data-reply-no");

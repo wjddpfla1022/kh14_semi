@@ -4,18 +4,12 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
-<div class="row center">
-	<h1>1:1 문의 게시판</h1>
-</div>
-<hr>
-
-	<style>
-	.qna-title {
+<style>
+	.table-title {
 		text-decoration: none;
 		color: gray;
-	}
-	
-	.qna-title:hover {
+	}	
+	.table-title:hover {
 		color: black;
 	}
 	/* tr 테이블 상단 (번호 ,작성일 , 제목 , 작성자) */
@@ -35,19 +29,16 @@
 	.td-table-bottom {
 		padding: 10px !important;
 		font-size: 14px;
-	}
-	
+	}	
 	.table {
 		border: 1px solid #e9e9e9;
-	}
-	
-	.qna-login-msg,
-	.qna-Nolist-msg  {
+	}	
+	.login-msg,
+	.noList-msg  {
 		text-align: center;
 		padding: 60px !important;
 		font-size: 25px;
-	}
-	
+	}	
 	.field-column {
 		padding: 0.5em 0.5em 0.7em 0.5em;
 	}
@@ -55,12 +46,17 @@
 	.table tr {
 		border: 1px solid #e9e9e9;
 		border-bottom: none;
-	}
-	
+	}	
 	.tr-table-top {
 		background-color: #dcdde1;
 	}
-	</style>
+</style>
+
+<div class="row center">
+	<h1>1:1 문의 게시판</h1>
+</div>
+<hr>
+
 
 <div class="container w-1000 my-30">
 
@@ -92,7 +88,7 @@
 			<tbody>
 				<tr>
 					<!-- 테이블 셀의 colspan을 사용하여 메시지를 한 줄로 표시 -->
-					<td class="qna-login-msg" colspan="4">
+					<td class="login-msg" colspan="4">
 						<i class="fa-solid fa-headphones"></i> 로그인 후 이용 가능합니다.
 					</td>
 				</tr>
@@ -122,7 +118,7 @@
 							<c:choose>
 								<c:when test="${fn:length(qnaList) == 0 || !fn:contains(qnaList, sessionScope.createdUser)}">
 									<tr>
-										<td class="qna-Nolist-msg" colspan="4">
+										<td class="noList-msg" colspan="4">
 											<i class="fa-solid fa-headphones"></i> 문의 내역이 존재하지 않습니다.
 										</td>
 									</tr>
@@ -136,7 +132,7 @@
 									<tr class="tr-table-bottom">
 										<td class="td-table-bottom">${qnaDto.qnaNo}</td>
 										<td class="td-table-bottom">
-											<a href="detail?qnaNo=${qnaDto.qnaNo}" class="qna-title">${qnaDto.qnaTitle}</a>
+											<a href="detail?qnaNo=${qnaDto.qnaNo}" class="table-title">${qnaDto.qnaTitle}</a>
 												<!--댓글 숫자 출력(0보다 크면) --> 
 												<c:if test="${qnaDto.qnaReply > 0}">
 					                                [${qnaDto.qnaReply}]
@@ -184,7 +180,7 @@
 						<tr class="tr-table-bottom">
 							<td class="td-table-bottom">${qnaDto.qnaNo}</td>
 							<td class="td-table-bottom">
-								<a href="detail?qnaNo=${qnaDto.qnaNo}" class="qna-title">${qnaDto.qnaTitle}</a>
+								<a href="detail?qnaNo=${qnaDto.qnaNo}" class="table-title">${qnaDto.qnaTitle}</a>
 								<!--댓글 숫자 출력(0보다 크면) -->
 									 <c:if test="${qnaDto.qnaReply >0}">
 										[${qnaDto.qnaReply}]

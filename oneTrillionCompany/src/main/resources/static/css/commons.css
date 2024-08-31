@@ -264,9 +264,9 @@ textarea.field {
 }
 /* 부정 버튼 디자인 */
 .btn.btn-negative {
-    border-color: #e9e9e9;
-    background-color: white;
-    color: red;
+    border-color:#c23616;
+    background-color:#c23616;
+    color: white;
      border-radius: 3px;
 }
 /* 중립 버튼 디자인 */
@@ -330,6 +330,48 @@ textarea.field {
 }
 .table.table-horizontal > tfoot {
     border-top: 1px solid #2d3436;
+}
+.table-title {
+	text-decoration: none;
+	color: gray;
+}	
+.table-title:hover {
+	color: black;
+}
+/* tr 테이블 상단 (번호 ,작성일 , 제목 , 작성자) */
+.tr-table-top {
+	background-color: #f0f0f0 !important;
+}
+/* th 테이블 상단 (번호 ,작성일 , 제목 , 작성자) */
+.th-table-top {
+	padding: 10px !important;
+	font-weight: bolder;
+}
+/* tr 테이블 하단(게시글 , 제목 , 작성자 ,작성일자) */
+.tr-table-bottom {
+	border: 1px solid #e9e9e9;
+}
+/* td 테이블 하단(게시글 , 제목 , 작성자 ,작성일자) */
+.td-table-bottom {
+	padding: 10px !important;
+	font-size: 14px;
+}	
+.table {
+	border: 1px solid #e9e9e9;
+}	
+.login-msg,
+.noList-msg  {
+	text-align: center;
+	padding: 60px !important;
+	font-size: 25px;
+}	
+.field-column {
+	padding: 0.5em 0.5em 0.7em 0.5em;
+}
+/* 테이블 디자인 */
+.table tr {
+	border: 1px solid #e9e9e9;
+	border-bottom: none;
 }
 
 /* 
