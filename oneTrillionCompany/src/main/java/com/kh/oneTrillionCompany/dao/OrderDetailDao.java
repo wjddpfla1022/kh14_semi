@@ -81,5 +81,9 @@ public class OrderDetailDao {
 			List<OrderDetailDto> list = jdbcTemplate.query(sql, orderDetailMapper, data);
 			return list.isEmpty() ? null : list.get(0);
 		}
-
+		public void update(OrderDetailDto orderDetailDto) {
+			String sql = "update order_detail set order_detail_status = ? where order_detail_no = ?";
+			Object[] data= {orderDetailDto.getOrderDetailStatus(), orderDetailDto.getOrderDetailNo()};
+			jdbcTemplate.update(sql, data);
+		}		
 }
