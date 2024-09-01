@@ -22,11 +22,12 @@
 		border-bottom: 1px solid #e9e9e9;
 	}
 	.table-border-center{
-		background-color: transparent;
+		background-color: #fbfafa;
 		border-top: none;
 		border-left: none;
 		border-right: 1px solid #e9e9e9;
 		border-bottom: none;
+		font-size : 14px;
 	}
 	.table-border-side{
 		background-color: transparent;
