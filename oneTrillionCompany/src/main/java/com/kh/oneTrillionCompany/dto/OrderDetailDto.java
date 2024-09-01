@@ -12,4 +12,8 @@ public class OrderDetailDto {
 	private int orderDetailCnt;
 	private String orderDetailStatus;
 	private String orderDetailItemName;
+	
+	public void setOrderDetailStatus(String status) {
+		this.orderDetailStatus = status;
+	}
 }
