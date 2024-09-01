@@ -52,24 +52,26 @@
 	}
 </style>
 
-<div class="row center">
-	<h1>1:1 문의 게시판</h1>
-</div>
-<hr>
+
 
 
 <div class="container w-1000 my-30">
+
+	<div class="row center">
+		<h1>1:1 문의 게시판</h1>
+	</div>
+	<hr>
 
 	<%-- 비회원일 때와 회원일 때 다르게 보이도록 처리  --%>
 	<c:choose>
 		<c:when test="${sessionScope.createdUser != null}">
 			<div class="row right">
-				<a href="write" class="btn regi-qna" style="text-decoration: none">문의 등록</a>
+				<a href="write" class="btn btn-positive" style="text-decoration: none">문의 등록</a>
 			</div>
 		</c:when>
 		<c:otherwise>
 			<div class="row right">
-				<a title="로그인 후 이용하실 수 있습니다" class="btn regi-qna">문의 등록</a>
+				<a title="로그인 후 이용하실 수 있습니다" class="btn btn-positive">문의 등록</a>
 			</div>
 		</c:otherwise>
 	</c:choose>

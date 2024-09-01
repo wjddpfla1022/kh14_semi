@@ -198,11 +198,8 @@ session 수
 						<li class="right-menu"><a style="font-weight: bold;" href="/member/logout">로그아웃</a></li>
 						<li><a style="font-weight: bold;" href="/order/list">주문 / 배송조회</a></li>
 						<li><a style="font-weight: bold;" href="/qna/list">1:1문의</a></li>
-						<li><a style="font-weight: bold;" href="#">커뮤니티</a>
-							<ul>
-								<li><a href="#">항목1</a></li>
-							</ul></li>
-							
+						<li><a style="font-weight: bold;" href="/review/list">상품후기</a></li>
+
 								<!-- 마이페이지 -->
 							<li>
 								<a href="/member/mypage"><i class="fa-solid fa-user"></i></a>
@@ -224,10 +221,7 @@ session 수
 						<li class="right-menu"><a style="font-weight: bold;" href="/member/logout">로그아웃</a></li>
 						<li><a style="font-weight: bold;" href="#">주문 / 배송조회</a></li>
 						<li><a style="font-weight: bold;" href="/qna/list">1:1문의</a></li>
-						<li><a style="font-weight: bold;" href="#">커뮤니티</a>
-							<ul>
-								<li><a href="#">항목1</a></li>
-							</ul></li>
+						<li><a style="font-weight: bold;" href="/review/list">상품후기</a></li>
 							<!-- 마이페이지 -->
 							<li>
 								<a href="/member/mypage"><i class="fa-solid fa-user"></i></a>
@@ -251,6 +245,7 @@ session 수
 						<li><a style="font-weight: bold;" href="#">바로가기</a></li>
 						<li class="right-menu"><a href="/member/logout">로그아웃</a></li>
 						<li><a style="font-weight: bold;" href="#">주문 / 배송조회</a></li>
+						<li><a style="font-weight: bold;" href="/review/list">상품후기</a></li>
 						<li><a href="/member/mypage"><i class="fa-solid fa-user"></i></a></li>
 						<li><a style="font-weight: bold;" href="#">관리자 메뉴</a>
 								<ul>
