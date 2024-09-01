@@ -61,19 +61,34 @@ public class ItemDao {
 		return jdbcTemplate.query(sql, itemMapper, data);
 	}
 	
+//	//상품 카테고리별 리스트 조회
+//	public List<ItemDto> selectListByCate(String column, String keyword){
+//		String sql = "select * from item where item_cate"+ column +"  = ?"; //column은 1, 2, 3으로만 지정
+//		Object[] data = {keyword};
+//		return jdbcTemplate.query(sql, itemMapper, data);
+//	}
+	
 	//상품 카테고리별 리스트 조회
-	public List<ItemDto> selectListByCate(String column, String keyword){
-		String sql = "select * from item where item_cate"+ column +"  = ?"; //column은 1, 2, 3으로만 지정
-		Object[] data = {keyword};
-		return jdbcTemplate.query(sql, itemMapper, data);
-	}
+		public List<ItemDto> selectListByCatePaging(ItemPageVO pageVO){
+			
+			String column = "item_cate" + pageVO.getColumn();
+			String sql = "select * from ("
+		               + "select rownum as rn, TMP.* from ("
+		               + "select * from item where instr(" + column + ", ?) > 0 "
+		               + "order by item_no asc"
+		               + ") TMP "
+		               + ") where rn between ? and ?";
+			
+			Object[] data = {pageVO.getKeyword(), pageVO.getBeginRow(), pageVO.getEndRow()};
+			
+			return jdbcTemplate.query(sql, itemMapper, data);
+		}
 	
 	//상품 조회
 	public List<ItemDto> selectList(){
 		String sql = "select * from item order by item_no asc";
 		return jdbcTemplate.query(sql, itemMapper);
 	}
-	
 	
 	
 	//상품 수정
