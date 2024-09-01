@@ -69,11 +69,11 @@ public class OrderController {
 	}
 //	@Transactional //중요한 절차이고 db를 거치는 횟수가 많아서 rollback이 가능하도록
 	@PostMapping("/pay")
-	public String pay(@RequestParam("list[0].itemNo") List<Integer> itemNos,
-		    @RequestParam("list[0].itemPrice") List<Integer> itemPrices,
-		    @RequestParam("list[0].cnt") List<Integer> cnts,
-		    @RequestParam("list[0].buyer") List<String> buyers,
-		    @RequestParam("list[0].orderNo") List<Integer> orderNos, @RequestParam int orderNo,
+	public String pay(@RequestParam("itemNo") List<Integer> itemNos,
+		    @RequestParam("itemPrice") List<Integer> itemPrices,
+		    @RequestParam("cnt") List<Integer> cnts,
+		    @RequestParam("buyer") List<String> buyers,
+		    @RequestParam("orderNo") List<Integer> orderNos, @RequestParam int orderNo,
 			HttpSession session) throws Exception {
 		List<OrderVO> list = new ArrayList<>();
 	    for (int i = 0; i < itemNos.size(); i++) {

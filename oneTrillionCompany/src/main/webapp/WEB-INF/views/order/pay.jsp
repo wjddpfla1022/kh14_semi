@@ -234,20 +234,20 @@
 										varStatus="status">
 										<tr>
 											<td class="center"><input type="text"
-												name="list[${status.index}].itemNo"
+												name="itemNo"
 												value="${orderDetail.orderDetailItemNo}" readonly>번
 											</td>
 											<td class="center"><input type="text"
-												name="list[${status.index}].itemPrice"
+												name="itemPrice"
 												value="${orderDetail.orderDetailPrice}" readonly>원</td>
 											<td class="center"><input type="text"
-												name="list[${status.index}].cnt"
+												name="cnt"
 												value="${orderDetail.orderDetailCnt}" readonly>개</td>
 											<td class="center"><input type="hidden"
-												name="list[${status.index}].buyer"
+												name="buyer"
 												value="${memberDto.memberId}" readonly></td>
 											<td class="center"><input type="hidden"
-												name="list[${status.index}].orderNo" value="${orderNo}"
+												name="orderNo" value="${orderNo}"
 												readonly></td>
 										</tr>
 									</c:forEach>

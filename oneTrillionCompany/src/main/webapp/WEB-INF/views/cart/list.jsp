@@ -276,10 +276,9 @@
 	
 	<!-- 결과가 있을때  -->
 	<div class="row cart-item-cnt">
-		<h3>담긴 상품(${cartItemCnt})</h3>
+		<h3>담긴 상품(${cartCnt})</h3>
 	</div>
 	<!-- 장바구니 목록 -->
-	<form action="list" method="post">
 		<table border="1" width="1200">
 			<thead>
 				<tr>
@@ -299,7 +298,7 @@
 			
 			<!-- cartList 반복문 -->
 			<tbody class="center">
-			<c:forEach var="cart" items="${cartList}" varStatus="status">
+			<c:forEach var="cart" items="${cartItemVOList}" varStatus="status">
 				<tr>
 					<td>
 						<span class="cartCnt-data">${cart.cartNo}</span><!-- 장바구니 수량을 el로 받아 제이쿼리에 적용 -->
@@ -307,20 +306,17 @@
 						<input type="hidden" name="cartList[${status.index}].cartItemNo" value="${cart.cartItemNo}">
 					</td>
 					<!--itemList 반복문 -->
-					<c:forEach var="item" items="${itemList}">
-			            <c:if test="${item.itemNo == cart.cartItemNo}">
+					<!--  -->
 					<td>
 						<!-- itemNo 제이쿼리에서 쓰기 -->
-						<span class="hidden">${item.itemNo}</span>
-						<a href="#"><img class="shoppingmal" src = "/item/image?itemNo=${item.itemNo}" width="50px"></a> <!-- 임시 이미지 -->
+						<span class="hidden">${cart.cartItemNo}</span>
+						<a href="#"><img class="shoppingmal" src = "/item/image?itemNo=${cart.cartItemNo}" width="50px"></a> <!-- 임시 이미지 -->
 					</td>
-			                <td>${item.itemName}</td> 
-			                <td><input type="text" name="cartList[${status.index}].cartItemPrice" value="${item.itemPrice}" readonly> 원<span class="itemCnt-data">${item.itemCnt}</span></td><!-- 재고값을 el로 받아 제이쿼리에 적용 -->
-			                <td>${item.itemColor}</td>
-			                <span class="hidden">${item.itemPrice}</span>
-			                <td>${item.itemPrice}원 <span class="itemCnt-data">${item.itemCnt}</span></td><!-- 재고값을 el로 받아 제이쿼리에 적용 -->
-			            </c:if>
-			        </c:forEach>
+			                <td>${cart.itemName}</td> 
+			                <td>${cart.itemColor}</td>
+			                <td><input type="text" name="cartList[${status.index}].cartItemPrice" value="${cart.itemPrice}" class="field" readonly> 원<span class="itemCnt-data">${cart.cartCnt}</span></td><!-- 재고값을 el로 받아 제이쿼리에 적용 -->
+			                <span class="hidden">${cart.itemPrice}</span>
+			                <td>${cart.cartCnt}개 <span class="itemCnt-data">${cart.cartCnt}</span></td><!-- 재고값을 el로 받아 제이쿼리에 적용 -->
 					<td>
 						<span>
 							<input type="text"  name="cartList[${status.index}].cartItemCnt"  value="${cart.cartCnt}" readonly size="2">
@@ -336,6 +332,7 @@
 					</td>
 				</tr>
 			</c:forEach>
+			
 		</tbody>
 			
 		<tfoot class="right">
@@ -352,10 +349,16 @@
 			<button type="button" class="btn btn-deleteAll float-right"><i class="fa-solid fa-trash-can"></i> 장바구니 비우기</button>
 			<button type="button" class="btn btn-selected-checkBox float-right">선택상품 삭제하기</button>
 			<button type="button" class="btn float-left selected-order">선택상품 주문하기</button>
+	<form action="list" method="post">
+    <c:forEach var="cart" items="${cartItemVOList}" varStatus="status">
+        <input type="hidden" name="cartItemNo" value="${cart.cartItemNo}">
+        <input type="hidden" name="cartItemCnt" value="${cart.cartCnt}" readonly size="2">
+        <input type="hidden" name="buyer" value="${sessionScope.createdUser}">
+        <input type="hidden" name="cartItemPrice" value="${cart.itemPrice}" readonly>
+    </c:forEach>
 			<button type="submit"  class="btn float-left">전체 주문하기</button>
+    </form>
 	</div>
-	</form>	
-
 	<!-- 장바구니 주문 미리보기 -->
 	<div class="row cart-payment-Title center mt-50">
 		주문 요약서
