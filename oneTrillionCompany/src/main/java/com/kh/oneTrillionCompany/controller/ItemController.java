@@ -40,7 +40,7 @@ public class ItemController {
 		itemPageVO.setCount(count);
 		model.addAttribute("itemPageVO", itemPageVO);
 		
-		return "/WEB-INF/views/item/list.jsp";
+		return "/WEB-INF/views/item/list2.jsp";
 	}
 	
 	@RequestMapping("/list/cate")
@@ -48,7 +48,7 @@ public class ItemController {
 			) {
 		
 		model.addAttribute("itemList", itemDao.selectListByCatePaging(itemPageVO));// 조회결과
-		int count = itemDao.countByPaging(itemPageVO);
+		int count = itemDao.countByPagingCate(itemPageVO);
 		itemPageVO.setCount(count);
 		model.addAttribute("itemPageVO", itemPageVO);
 		

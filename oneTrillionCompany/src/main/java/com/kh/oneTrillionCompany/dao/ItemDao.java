@@ -224,6 +224,16 @@ public class ItemDao {
 	        return jdbcTemplate.queryForObject(sql, Integer.class);
 	    }
 	}
+	public int countByPagingCate(ItemPageVO itemPageVO) {
+	    String sql;
+	    if (itemPageVO.isSearch()) {
+	        sql = "select count(*) from item where instr(" + itemPageVO.getColumn() + ", ?) > 0";
+	        return jdbcTemplate.queryForObject(sql, Integer.class, itemPageVO.getKeyword());
+	    } else {
+	        sql = "select count(*) from item";
+	        return jdbcTemplate.queryForObject(sql, Integer.class);
+	    }
+	}
 	public int countByPaging(PageVO pageVO) {
 	    String sql;
 	    if (pageVO.isSearch()) {
