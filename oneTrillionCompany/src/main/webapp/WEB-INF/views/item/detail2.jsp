@@ -327,6 +327,7 @@ a#smallShirts:hover {
 						<option value="blue">파랑</option>
 						<option value="brown">브라운</option>
 						<option value="pink">분홍</option>
+						<option value="white">흰색</option>
 					</select>
 				</div>
 				

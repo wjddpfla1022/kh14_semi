@@ -56,25 +56,11 @@
         </c:forEach>
 
         </div>
-        <script>
-        $(document).ready(function() {
-            $(window).endlessScroll({
-                inflowPixels: 300,
-                callback: function() {
-                    var $img = $('#images li:nth-last-child(5)').clone();
-                    $('#images').append($img);
-                }
-            });
-        });
-</script>
             <div class="row center">
-<!--                 <button class="btn btn-more">더보기<i class="fa-solid fa-caret-down"></i></button> -->
+            <jsp:include page= "/WEB-INF/views/template/itemNavigator.jsp"/>
             </div>
         </div>
     </div>
-</div>
-		</form>
-	</div>
 </body>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
