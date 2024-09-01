@@ -17,7 +17,7 @@ import com.kh.oneTrillionCompany.dao.ReviewDao;
 import com.kh.oneTrillionCompany.dto.ItemDto;
 import com.kh.oneTrillionCompany.dto.ItemInfoDto;
 import com.kh.oneTrillionCompany.dto.ReviewDto;
-import com.kh.oneTrillionCompany.vo.PageVO;
+import com.kh.oneTrillionCompany.vo.ItemPageVO;
 
 @Controller
 @RequestMapping("/item")
@@ -32,20 +32,17 @@ public class ItemController {
 	private ReviewDao reviewDao;
 	
 	@RequestMapping("/list")
-	public String list(@ModelAttribute("pageVO") PageVO pageVO, Model model,
-									@RequestParam(required = false) String keyword) {
-		boolean isSearch = keyword != null;
+	public String list(@ModelAttribute("itemPageVO") ItemPageVO itemPageVO, Model model) {
 		
-		model.addAttribute("itemList", itemDao.selectList());
+//		List<ItemDto> list = isSearch ? itemDao.selectList(column, keyword);
+		model.addAttribute("itemList", itemDao.selectListByPaging(itemPageVO));
+		int count = itemDao.countByPaging(itemPageVO);
+		itemPageVO.setCount(count);
+		model.addAttribute("itemPageVO", itemPageVO);
 		
 		return "/WEB-INF/views/item/list.jsp";
 	}
-//	private boolean checkSearch(String keyword) {
-//		if(keyword != null) return true;
-//		
-//		return false;
-//	}
-//	
+
 	@RequestMapping("/list/cate")
 	public String listCate(Model model,
 			@RequestParam(required = false) String column, 

@@ -399,7 +399,7 @@ session 수
 	 <div class="modal">
             <div class="modal-body">
                 <div class="row right" style="margin-top : 5px;"><button class="btn btn-negative btn-close-modal"><i class="fa-solid fa-xmark"></i></button></div>
-            	
+            	<h4 style="margin-bottom: 10px;">상품명 검색</h4>
 	<form action="/item/list"  method="get">
                 <input type="hidden" name="column" value="item_name">
                 <input type="text" name="keyword" class="field">

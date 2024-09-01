@@ -5,12 +5,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.oneTrillionCompany.dto.ItemDto;
 import com.kh.oneTrillionCompany.exception.TargetNotFoundException;
 import com.kh.oneTrillionCompany.mapper.ItemMapper;
+import com.kh.oneTrillionCompany.vo.ItemPageVO;
 import com.kh.oneTrillionCompany.vo.PageVO;
 
 @Repository
@@ -58,7 +57,7 @@ public class ItemDao {
 	public List<ItemDto> selectList(String column, String keyword){
 		String sql="select * from item where instr("+ column +", ?)>0 "
 				+ "order by item_no asc";
-		Object[] data= {column, keyword};
+		Object[] data= {keyword};
 		return jdbcTemplate.query(sql, itemMapper, data);
 	}
 	
@@ -120,8 +119,7 @@ public class ItemDao {
 		if(!isEnough) throw new TargetNotFoundException("재고가 부족합니다");
 		return isEnough;
 	}
-	
-	//페이징
+	//페이징 (관리자 전용)
 	public List<ItemDto> selectListByPaging(PageVO pageVO) {
 	    if(pageVO.isSearch() == true) {//검색이라면
 	        String sql = "select * from ("
@@ -161,6 +159,56 @@ public class ItemDao {
 	    }
 	}
 	
+	//페이징 (회원 전용)
+	public List<ItemDto> selectListByPaging(ItemPageVO pageVO) {
+	    if(pageVO.isSearch() == true) {//검색이라면
+	        String sql = "select * from ("
+	                            + "select rownum as rn, TMP.* from ("
+	                                + "select "
+	                                    + "item_no, item_name, item_price, item_sale_price, "
+	                                    + "item_date, item_cnt, item_size, "
+	                                    + "item_cate1, item_cate2, item_cate3, "
+	                                    + "item_discount_rate, item_color "        
+	                                + "from item "
+	                                + "where instr(" + pageVO.getColumn() + ", ?) > 0 "
+	                                + "order by item_no asc"
+	                            + ")TMP"
+	                    + ") where rn between ? and ?";
+	        Object[] data = {
+	                pageVO.getKeyword(), 
+	                pageVO.getBeginRow(), 
+	                pageVO.getEndRow() 
+	                };
+	                return jdbcTemplate.query(sql, itemMapper, data);
+	        }
+	    
+	    else{//목록이라면
+	    	String sql = "SELECT * FROM ("
+	                + "    SELECT ROWNUM AS rn, TMP.* FROM ("
+	                + "        SELECT "
+	                + "            item_no, item_name, item_price, item_sale_price, "
+	                + "            item_date, item_cnt, item_size, "
+	                + "            item_cate1, item_cate2, item_cate3, "
+	                + "            item_discount_rate, item_color "
+	                + "        FROM item "
+	                + "        ORDER BY item_no ASC"
+	                + "    ) TMP"
+	                + ") WHERE rn BETWEEN ? AND ?";
+	        Object[] data = {pageVO.getBeginRow(), pageVO.getEndRow()};
+	        return jdbcTemplate.query(sql, itemMapper, data);
+	    }
+	}
+	
+	public int countByPaging(ItemPageVO pageVO) {
+	    String sql;
+	    if (pageVO.isSearch()) {
+	        sql = "select count(*) from item where instr(" + pageVO.getColumn() + ", ?) > 0";
+	        return jdbcTemplate.queryForObject(sql, Integer.class, pageVO.getKeyword());
+	    } else {
+	        sql = "select count(*) from item";
+	        return jdbcTemplate.queryForObject(sql, Integer.class);
+	    }
+	}
 	public int countByPaging(PageVO pageVO) {
 	    String sql;
 	    if (pageVO.isSearch()) {
