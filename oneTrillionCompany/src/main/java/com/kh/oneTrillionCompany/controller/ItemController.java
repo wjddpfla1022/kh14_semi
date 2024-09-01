@@ -40,21 +40,34 @@ public class ItemController {
 		itemPageVO.setCount(count);
 		model.addAttribute("itemPageVO", itemPageVO);
 		
-		return "/WEB-INF/views/item/list.jsp";
+		return "/WEB-INF/views/item/list2.jsp";
 	}
-
+	
 	@RequestMapping("/list/cate")
-	public String listCate(Model model,
-			@RequestParam(required = false) String column, 
-			@RequestParam(required = false) String keyword) {
-		boolean isSearch = column != null && keyword != null;
-
-		List<ItemDto> list = isSearch ? itemDao.selectListByCate(column, keyword) : itemDao.selectList();
-		model.addAttribute("column", column);
-		model.addAttribute("keyword", keyword);// 검색어
-		model.addAttribute("itemList", list);// 조회결과
+	public String listCate(Model model, @ModelAttribute("itemPageVO") ItemPageVO itemPageVO
+			) {
+		
+		model.addAttribute("itemList", itemDao.selectListByCatePaging(itemPageVO));// 조회결과
+		int count = itemDao.countByPagingCate(itemPageVO);
+		itemPageVO.setCount(count);
+		model.addAttribute("itemPageVO", itemPageVO);
+		
 		return "/WEB-INF/views/item/list.jsp";
 	}
+
+//	@RequestMapping("/list/cate")
+//	public String listCate(Model model,
+//			@RequestParam(required = false) String column, 
+//			@RequestParam(required = false) String keyword) {
+//		boolean isSearch = column != null && keyword != null;
+//
+//		List<ItemDto> list = isSearch ? itemDao.selectListByCate(column, keyword) : itemDao.selectList();
+//		model.addAttribute("column", column);
+//		model.addAttribute("keyword", keyword);// 검색어
+//		model.addAttribute("itemList", list);// 조회결과
+//		return "/WEB-INF/views/item/list.jsp";
+//	}
+	
 
 	@RequestMapping("/detail")
 	public String detail(@RequestParam int itemNo, Model model) {

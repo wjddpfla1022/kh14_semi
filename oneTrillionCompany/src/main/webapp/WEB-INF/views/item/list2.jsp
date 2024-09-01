@@ -4,6 +4,7 @@
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
+<!-- 전체 메뉴용 -->
 <style>
         .btn.btn-more{
             background-color: rgb(196, 227, 255);
@@ -45,7 +46,8 @@
         <div class="row center">
 		</div>
 		<h3>데이터 개수 : ${itemList.size()}</h3>
-		<div class="row image-align">
+		
+		<div class="row image-align" id="images">
 		<c:forEach var= "itemDto" items= "${itemList}">
             <a href="/item/detail?itemNo=${itemDto.itemNo}">
             <img src = "/item/image?itemNo=${itemDto.itemNo}" width="200px" height="200px">
@@ -56,9 +58,11 @@
 
         </div>
             <div class="row center">
-<!--                 <button class="btn btn-more">더보기<i class="fa-solid fa-caret-down"></i></button> -->
+            
+            <jsp:include page= "/WEB-INF/views/template/itemNavigator.jsp"/>
             </div>
         </div>
     </div>
 </body>
-</html>
+
+<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

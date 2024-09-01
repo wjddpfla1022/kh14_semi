@@ -4,6 +4,7 @@
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
+<!-- 카테고리용 -->
 <style>
         .btn.btn-more{
             background-color: rgb(196, 227, 255);
@@ -57,7 +58,8 @@
 
         </div>
             <div class="row center">
-            <jsp:include page= "/WEB-INF/views/template/itemNavigator.jsp"/>
+            
+            <jsp:include page= "/WEB-INF/views/template/itemNavigator2.jsp"/>
             </div>
         </div>
     </div>
