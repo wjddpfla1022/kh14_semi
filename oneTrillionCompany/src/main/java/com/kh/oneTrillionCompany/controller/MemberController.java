@@ -16,6 +16,7 @@ import com.kh.oneTrillionCompany.configuration.CustomCertProperties;
 import com.kh.oneTrillionCompany.dao.BlockDao;
 import com.kh.oneTrillionCompany.dao.CertDao;
 import com.kh.oneTrillionCompany.dao.MemberDao;
+import com.kh.oneTrillionCompany.dto.BlockDto;
 import com.kh.oneTrillionCompany.dto.CertDto;
 import com.kh.oneTrillionCompany.dto.MemberDto;
 import com.kh.oneTrillionCompany.exception.TargetNotFoundException;
@@ -45,18 +46,24 @@ public class MemberController {
 			@RequestParam(required = false) String remember, //아이디 저장하기
 			HttpSession session, HttpServletResponse response) {
 		MemberDto memberDto = memberDao.selectOne(memberId);
-		boolean isValid = memberDao.selectOne(memberId)!=null;
-		if(isValid) {
-			session.setAttribute("createdUser", memberId);
-			session.setAttribute("createdLevel", memberDto.getMemberRank());
-			memberDao.updateMemberLogin(memberId);
-			return "redirect:/";
-		}
-		else {
-			return "redirect:login?error";
-			
-		}
+		if(memberDto == null) return "redirect:login?error";
 		
+		boolean isNull = memberDto == null || memberDto.getMemberId() == null || memberDto.getMemberPw() == null;
+		if(isNull) return "redirect:login?error";
+		
+		
+		boolean isValid = memberPw.equals(memberDto.getMemberPw());
+		if(isValid == false) return "redirect:login?error";
+		
+		BlockDto blockDto = blockDao.selectLastOne(memberId);
+		boolean isBlock = blockDto != null && blockDto.getBlockType().equals("차단");
+		if(isBlock) return "redirect:block";
+		
+		session.setAttribute("createdUser", memberId);
+		session.setAttribute("createdLevel", memberDto.getMemberRank());
+		memberDao.updateMemberLogin(memberId);
+		
+		return "redirect:/";
 		
 	}
 	@GetMapping("/join")
@@ -170,5 +177,11 @@ public class MemberController {
 		@RequestMapping("/leaveFinish")
 		public String leaveFinish() {
 			return "WEB-INF/views/member/leaveFinish.jsp";
+		}
+		
+		@RequestMapping("/block")
+		public String block() {
+			
+			return "/WEB-INF/views/member/block.jsp";
 		}
 }

@@ -28,6 +28,11 @@
 			<a href="/member/join" class="btn btn-neutral">회원가입</a>
 		</div>
 	</div>
-</form> 
+</form>
+<div class="row center"> 
+<c:if test= "${param.error != null}">
+	<h3 style = "color:red">아이디 또는 비밀번호가 잘못되었습니다.</h3>
+</c:if>
+</div>
 </body>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
