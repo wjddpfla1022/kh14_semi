@@ -70,7 +70,7 @@ $(function() {
 		<div class="row w-100 left">
 			<label>아이디</label>
 
-			<input type="text" name="memberId" class="w-100 field" value="${cookie.saveId.value}"> 			
+			<input type="text" name="memberId" class="w-100 field"> 			
 			<div class="success-feedback"></div>
 			<div class="fail-feedback">아이디를 입력해주세요</div>
 
@@ -88,13 +88,13 @@ $(function() {
 		</div>
 		
 			<%--아이디 쿠키 만들기 체크박스--%>
-		<div class="row left">
-			<label>
-				<input type="checkbox" name="remember"
-				<c:if test="${cookie.saveId != null}">checked</c:if>>
-					<span>아이디 저장</span>
-			</label>
-		</div>
+<!-- 		<div class="row left"> -->
+<!-- 			<label> -->
+<!-- 				<input type="checkbox" name="remember" -->
+<%-- 				<c:if test="${cookie.saveId != null}">checked</c:if>> --%>
+<!-- 					<span>아이디 저장</span> -->
+<!-- 			</label> -->
+<!-- 		</div> -->
 		
 		<div class="row">
 			<button type="submit" class="btn btn-positive btn-submit">로그인</button>
