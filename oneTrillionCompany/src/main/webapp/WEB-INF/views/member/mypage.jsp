@@ -38,6 +38,13 @@
 	}
 </style>
 
+<script type="text/javascript">
+function window01() {
+  
+    alert("정말로 탈퇴하시겠습니까?");
+};
+</script>
+
 <div class="container w-700 my-50">
 	<div class = "row center">
 		<h1>${memberDto.memberId} 님의 개인 정보</h1>
@@ -176,7 +183,7 @@
 	<div class="flex-box flex-core mt-20 mb-30">
 		<a href="password" class = "btn btn-positive" style="margin-right:5px;">비밀번호 변경</a>
 		<a href="change" class = "btn btn-positive" style="margin-right:5px;">개인정보 변경</a>
-		<a href="#" class = "btn btn-negative member-delete">회원 탈퇴</a>
+		<a href="leaveFinish" class = "btn btn-negative member-delete" onclick="window01();">회원 탈퇴</a>
 	</div>
 
 		<%--  관리자가 아닐 경우에만 차단이력을 출력 --%> 

@@ -193,23 +193,33 @@ public class MemberController {
 			memberDao.updateMember(inputDto);
 			return "redirect:mypage";
 		}
-		@GetMapping("leave")
-		public String leave(HttpSession session,Model model) {
-			String memberId = (String) session.getAttribute("createdUser");
-			model.addAttribute("memberId",memberId);
-			return "/WEB-INF/views/member/leave.jsp";
-			}
-		@PostMapping("/leave")
-		public String leave(HttpSession session,@RequestParam String leaveId) {
-			
+//		회원 탈퇴
+//		@GetMapping("leave")
+//		public String leave() {
+//			return "/WEB-INF/views/member/leave.jsp";
+//			}
+//		
+//		@PostMapping("/leave")
+//		public String leave(HttpSession session,@RequestParam String memberPw) {
+//			
+//			String memberId = (String) session.getAttribute("createdUser");
+//			
+//			
+//			session.removeAttribute("createdUser");
+//			session.removeAttribute("createdLevel");
+//			
+//			return "redirect:leaveFinish";
+//		}
+		
+		@RequestMapping("/leaveFinish")
+		public String leaveFinish(HttpSession session) {
 			String memberId = (String) session.getAttribute("createdUser");
 			memberDao.delete(memberId);
-			return "redirect:leaveFinish";
+			session.removeAttribute("createdUser");
+			session.removeAttribute("createdLevel");
+			return "/WEB-INF/views/member/leaveFinish.jsp";
 		}
-		@RequestMapping("/leaveFinish")
-		public String leaveFinish() {
-			return "WEB-INF/views/member/leaveFinish.jsp";
-		}
+		
 		
 		@RequestMapping("/block")
 		public String block() {
