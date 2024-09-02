@@ -151,7 +151,7 @@
 
 	<!-- 개인정보 변경 버튼 -->
 	<div class="flex-box flex-core mt-20 mb-30">
-		<a href="resetPw?memberId=${memberDto.memberId}" class = "btn btn-positive" style="margin-right:5px;">비밀번호 변경</a>
+		<a href="password" class = "btn btn-positive" style="margin-right:5px;">비밀번호 변경</a>
 		<a href="change" class = "btn btn-positive" style="margin-right:5px;">개인정보 변경</a>
 		<a href="#" class = "btn btn-negative member-delete">회원 탈퇴</a>
 	</div>

@@ -15,12 +15,22 @@
 		</div>
 		<div class="row w-100 left">
 			<label>아이디</label>
-			<input type="text" name="memberId" class="w-100 field"> 
+			<input type="text" name="memberId" class="w-100 field" value="${cookie.saveId.value}"> 			
 		</div>
 		<div class="row w-100 left">
 			<label>비밀번호</label>
 			<input type="password" name="memberPw" class="w-100 field"> 
 		</div>
+		
+			<%--아이디 쿠키 만들기 체크박스--%>
+		<div class="row left">
+			<label>
+				<input type="checkbox" name="remember"
+				<c:if test="${cookie.saveId != null}">checked</c:if>>
+					<span>아이디 저장</span>
+			</label>
+		</div>
+		
 		<div class="row">
 			<button type="submit" class="btn btn-positive">로그인</button>
 		</div>
