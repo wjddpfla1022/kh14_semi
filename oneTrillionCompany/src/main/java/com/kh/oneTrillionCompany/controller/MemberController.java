@@ -16,6 +16,7 @@ import com.kh.oneTrillionCompany.configuration.CustomCertProperties;
 import com.kh.oneTrillionCompany.dao.BlockDao;
 import com.kh.oneTrillionCompany.dao.CertDao;
 import com.kh.oneTrillionCompany.dao.MemberDao;
+import com.kh.oneTrillionCompany.dto.BlockDto;
 import com.kh.oneTrillionCompany.dto.CertDto;
 import com.kh.oneTrillionCompany.dto.MemberDto;
 import com.kh.oneTrillionCompany.exception.TargetNotFoundException;
@@ -40,25 +41,31 @@ public class MemberController {
 		return "/WEB-INF/views/member/login.jsp";
 	}
 	@PostMapping("/login")
-	public String login(@RequestParam String memberId,
-			@RequestParam String memberPw, 
-			@RequestParam(required = false) String remember, //아이디 저장하기
-			HttpSession session, HttpServletResponse response) {
-		MemberDto memberDto = memberDao.selectOne(memberId);
-		boolean isValid = memberDao.selectOne(memberId)!=null;
-		if(isValid) {
-			session.setAttribute("createdUser", memberId);
-			session.setAttribute("createdLevel", memberDto.getMemberRank());
-			memberDao.updateMemberLogin(memberId);
-			return "redirect:/";
-		}
-		else {
-			return "redirect:login?error";
-			
-		}
-		
-		
-	}
+    public String login(@RequestParam String memberId,
+            @RequestParam String memberPw, 
+            @RequestParam(required = false) String remember, //아이디 저장하기
+            HttpSession session, HttpServletResponse response) {
+        MemberDto memberDto = memberDao.selectOne(memberId);
+        if(memberDto == null) return "redirect:login?error";
+
+        boolean isNull = memberDto == null || memberDto.getMemberId() == null || memberDto.getMemberPw() == null;
+        if(isNull) return "redirect:login?error";
+
+
+        boolean isValid = memberPw.equals(memberDto.getMemberPw());
+        if(isValid == false) return "redirect:login?error";
+
+        BlockDto blockDto = blockDao.selectLastOne(memberId);
+        boolean isBlock = blockDto != null && blockDto.getBlockType().equals("차단");
+        if(isBlock) return "redirect:block";
+
+        session.setAttribute("createdUser", memberId);
+        session.setAttribute("createdLevel", memberDto.getMemberRank());
+        memberDao.updateMemberLogin(memberId);
+
+        return "redirect:/";
+
+    }	
 	@GetMapping("/join")
 	public String join() {
 		return "/WEB-INF/views/member/join.jsp";
@@ -88,10 +95,46 @@ public class MemberController {
 	public String mypage(HttpSession session, Model model) {
 		String createdUser = (String) session.getAttribute("createdUser");
 		MemberDto memberDto = memberDao.selectOne(createdUser);
+		if(memberDto.getMemberBirth()==null) {} 
+		else 
+		memberDto.setMemberBirth(memberDto.getMemberBirth().substring(0,10));
 		model.addAttribute("memberDto", memberDto);
 		model.addAttribute("blockList", blockDao.selectBlockHistory(createdUser));	//차단 내역 확인
 		return "/WEB-INF/views/member/mypage.jsp";
 	}
+	//비밀번호 변경
+	@GetMapping("/password")
+	public String password() {
+		return "/WEB-INF/views/member/password.jsp";
+	}
+	
+	@PostMapping("/password")
+	public String password(@RequestParam String currentPw, 
+										@RequestParam String changePw,
+										HttpSession session) {
+		//아이디 추출
+		String memberId = (String)session.getAttribute("createdUser");
+		//현재 사용자의 정보를 추출
+		MemberDto memberDto = memberDao.selectOne(memberId);
+		//비밀번호 비교
+		boolean isValid = memberDto.getMemberPw().equals(currentPw);
+		if(isValid == false) return "redirect:password?error";
+		//비밀번호 변경
+		memberDao.updateMemberPw(memberId, changePw);
+		//(+추가) 만약 비밀번호 변경 시 로그아웃 처리를 하려면 이곳에서!!!
+		//session.removeAttribute("createdUser");
+		//완료 페이지로 추방
+		return "redirect:passwordFinish";
+	}
+	
+	@RequestMapping("/passwordFinish")
+	public String passwordFinish() {
+		return "redirect:login";
+	}
+	
+	
+	
+	
 	//비밀번호 재설정 페이지
 		@GetMapping("/resetPw")
 		public String resetPw(@ModelAttribute CertDto certDto
@@ -145,10 +188,6 @@ public class MemberController {
 									@ModelAttribute MemberDto inputDto) {
 			//기존 정보를 조회
 			String memberId = (String)session.getAttribute("createdUser");
-			MemberDto findDto = memberDao.selectOne(memberId);
-			//비밀번호 검사
-			boolean isValid = inputDto.getMemberPw().equals(findDto.getMemberPw());
-			if(isValid == false) return "redirect:change?error";
 			//변경처리
 			inputDto.setMemberId(memberId);//아이디 추가
 			memberDao.updateMember(inputDto);
@@ -170,5 +209,11 @@ public class MemberController {
 		@RequestMapping("/leaveFinish")
 		public String leaveFinish() {
 			return "WEB-INF/views/member/leaveFinish.jsp";
+		}
+		
+		@RequestMapping("/block")
+		public String block() {
+			
+			return "/WEB-INF/views/member/block.jsp";
 		}
 }

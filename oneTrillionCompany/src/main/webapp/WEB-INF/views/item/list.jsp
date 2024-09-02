@@ -59,7 +59,7 @@
         </div>
             <div class="row center">
             
-            <jsp:include page= "/WEB-INF/views/template/itemNavigator2.jsp"/>
+            <jsp:include page= "/WEB-INF/views/template/itemNavigator2.jsp"></jsp:include>
             </div>
         </div>
     </div>

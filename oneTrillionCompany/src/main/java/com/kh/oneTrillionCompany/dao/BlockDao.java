@@ -40,7 +40,8 @@ public class BlockDao {
 		
 		//마지막 상태 확인
 		public BlockDto selectLastOne(String blockMemberId) {
-			String sql = "select * from block where block_no = (	select max(block_no) from block where block_member_id = ?)";
+			String sql = "select * from block where block_no = ("
+								+ "select max(block_no) from block where block_member_id = ?)";
 			Object[] data = {blockMemberId};
 			List<BlockDto> list = jdbcTemplate.query(sql, blockMapper, data);
 			return list.isEmpty() ? null : list.get(0);

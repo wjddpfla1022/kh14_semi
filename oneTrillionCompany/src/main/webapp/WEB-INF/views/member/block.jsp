@@ -1,16 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>Error</title>
-</head>
-<body>
-<div class="container w-1200" style="min-height:400px">
-    <h2> ${errorMessage}</h2>
-</div>
-</body>
-</html>
+    <div class="container w-1000">
+    <h1>차단된 사용자입니다.</h1>
+    <p>
+    	고객센터에 문의해주세요.
+    </p>
+    </div>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

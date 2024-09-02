@@ -5,6 +5,18 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <script src="/js/checkbox.js"></script>
 
+<script type="text/javascript">
+	$(function(){
+		$(".btn-item-delete").click(function(e){
+			e.preventDefault();
+			var deleteItem = window.confirm("정말로 삭제 하시겠습니까?");
+			if(deleteItem) { 
+				window.location.href = $(this).attr("href"); 
+			}
+		});
+	});
+</script>
+
 <div class="container w-1200">
 	<div class="row center">
 		<h1>상품 검색</h1>
@@ -78,7 +90,7 @@
 	<form action="deleteAll" method="post">
 <c:if test= "${sessionScope.createdLevel == '관리자' }">
 <div class="row right">
-	<button type="submit" class="btn btn-negative">체크된 항목 삭제</button>
+	<button type="submit" class="btn btn-negative btn-item-delete">체크된 항목 삭제</button>
 </div>
 </c:if>
 		<table class="table table-border table-hover">
@@ -283,7 +295,7 @@
 								<td><a href="update?itemNo=${itemDto.itemNo}"
 									class="btn btn-positive">수정</a></td>
 								<td><a href="delete?itemNo=${itemDto.itemNo}"
-									class="btn btn-negative">삭제</a></td>
+									class="btn btn-negative btn-item-delete">삭제</a></td>
 							</tr>
 						</c:forEach>
 					</c:otherwise>
@@ -291,7 +303,7 @@
 			</tbody>
 		</table>
 </form>
-<jsp:include page= "/WEB-INF/views/template/navigator.jsp"/>
+<jsp:include page= "/WEB-INF/views/template/navigator.jsp"></jsp:include>
 
 	</div>
 	<div class="row right">

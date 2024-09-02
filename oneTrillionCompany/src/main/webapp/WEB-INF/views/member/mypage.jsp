@@ -45,6 +45,19 @@
 	
 	<div class = "row center"> 
 		<table class="table table-border-top">
+		
+		<tr  class="table-border-middle">
+			<th class="table-border-center">
+				<div class="row left ps-30">
+					<span>아이디</span>
+				</div>
+			</th>
+			<td>
+				<div class="row center">
+					<span>	${memberDto.memberId}</span>
+				</div>
+			</td>		
+		</tr>		
 		<tr  class="table-border-middle">
 			<th class="table-border-center">
 				<div class="row left ps-30">
@@ -85,6 +98,16 @@
 			</th>
 			<td>
 				<span>${memberDto.memberBirth}</span>
+			</td>
+		</tr>
+		<tr class="table-border-middle">
+			<th class="table-border-center">
+				<div class="row left ps-30">
+					<span>연락처</span>
+				</div>				
+			</th>
+			<td>
+				<span>${memberDto.memberContact}</span>
 			</td>
 		</tr>
 		<tr class="table-border-middle">
@@ -151,7 +174,7 @@
 
 	<!-- 개인정보 변경 버튼 -->
 	<div class="flex-box flex-core mt-20 mb-30">
-		<a href="resetPw?memberId=${memberDto.memberId}" class = "btn btn-positive" style="margin-right:5px;">비밀번호 변경</a>
+		<a href="password" class = "btn btn-positive" style="margin-right:5px;">비밀번호 변경</a>
 		<a href="change" class = "btn btn-positive" style="margin-right:5px;">개인정보 변경</a>
 		<a href="#" class = "btn btn-negative member-delete">회원 탈퇴</a>
 	</div>

@@ -29,9 +29,8 @@
 		<div class="row center">
 			<h1>환불 신청</h1>
 		</div>
-		환불 유형 선택창
 		<div class="row">
-			<select class="row field w-100" name="">
+			<select class="row field w-100" name="refundType">
 				<option value="">환불 사유를 선택해주세요</option>
 				<option value="단순 변심">단순 변심</option>
 				<option value="상품 불량">상품 불량</option>
@@ -40,8 +39,9 @@
 				<option value="배송 지연">배송 지연</option>
 			</select>
 		</div>
-		<div class="row refund-write">
-			<input type="text" class="field" value="${refundDto.refundOrderDetailNo}" name="refundOrderDetailNo">
+		<div class="row refund-write">		
+			<input type="hidden" class="field" value="${orderDetailDto.orderDetailNo}" name="refundOrderDetailNo">
+			<input type="hidden" class="field" value="${orderDetailDto.orderDetailStatus}" name="orderDetailStatus">
 			<textarea placeholder="내용을 입력하세요" name="refundMemo"></textarea>
 		</div>
 		<div class="row right">

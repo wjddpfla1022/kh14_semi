@@ -21,9 +21,9 @@ public class RefundDao {
 	
 	//환불 등록(신청)
 	public void insert(RefundDto refundDto) {
-		String sql = "insert into refund(refund_order_detail_no , refund_memo , refund_date)"
-				+ "values(? ,? ,sysdate)";
-		Object[] data = {refundDto.getRefundOrderDetailNo() , refundDto.getRefundMemo()};
+		String sql = "insert into refund(refund_order_detail_no , refund_memo , refund_date, refund_type)"
+				+ "values(? ,? ,sysdate, ?)";
+		Object[] data = {refundDto.getRefundOrderDetailNo() , refundDto.getRefundMemo(), refundDto.getRefundType()};
 		jdbcTemplate.update(sql, data);
 	}
 

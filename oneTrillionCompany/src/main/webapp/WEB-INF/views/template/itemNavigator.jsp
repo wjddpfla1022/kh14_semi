@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
     
   <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-  
+<!--   전체 아이템 네비게이터 -->
   <style>
         /* 페이지 네비게이터 디자인 */
        .pagenation{

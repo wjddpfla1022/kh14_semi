@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
     
   <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-  
+<!--   아이템 카테고리용 네비게이터 -->
   <style>
         /* 페이지 네비게이터 디자인 */
        .pagenation{
@@ -34,7 +34,13 @@
 				<c:if test="${itemPageVO.hasPrev()}">
     <a href="cate?column=${itemPageVO.column}&keyword=${itemPageVO.keyword}&page=${itemPageVO.getPrevBlock()}">Prev</a>
 </c:if>
-
+<%-- count = ${itemPageVO.getCount()} --%>
+<%-- size = ${itemPageVO.getSize()} --%>
+<%-- start = ${itemPageVO.getStartBlock()} --%>
+<%-- finish = ${itemPageVO.getFinishBlock()} --%>
+<%-- last = ${itemPageVO.getLastBlock()} --%>
+<%-- next = ${itemPageVO.getNextBlock()} --%>
+<%-- n = ${n} --%>
 <c:forEach var="n" begin="${itemPageVO.getStartBlock()}" end="${itemPageVO.getFinishBlock()}" step="1">
     <c:choose>
         <c:when test="${itemPageVO.page == n}">

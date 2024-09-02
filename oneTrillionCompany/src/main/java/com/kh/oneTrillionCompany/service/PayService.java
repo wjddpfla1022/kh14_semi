@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.kh.oneTrillionCompany.dao.CartDao;
 import com.kh.oneTrillionCompany.dao.ItemDao;
 import com.kh.oneTrillionCompany.dao.MemberDao;
 import com.kh.oneTrillionCompany.dao.OrderDetailDao;
@@ -28,6 +29,8 @@ public class PayService {
 	private OrderDetailDao orderDetailDao;
 	@Autowired
 	private ItemDao itemDao;
+	@Autowired
+	private CartDao cartDao;
 	
 	public String pay(List<OrderVO> list,  int orderNo,
 			HttpSession session)  throws Exception  {
@@ -46,8 +49,9 @@ public class PayService {
 			detailNoList.add(detailList.get(i).getOrderDetailNo());
 			//재고 차감
 			itemDao.deductItem(detailList.get(i).getOrderDetailCnt(),detailList.get(i).getOrderDetailItemNo());
+			//장바구니 차감
+			cartDao.delete(i);
 		}
-		System.out.println("okay");
 		orderDetailDao.payCompleteStatus(detailNoList);
 		return "redirect:payFinish?orderNo="+orderNo;
 	}
