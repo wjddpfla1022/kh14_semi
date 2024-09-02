@@ -251,6 +251,11 @@
 												readonly></td>
 										</tr>
 									</c:forEach>
+									<c:forEach var="connectionOCDto" items="${connectionList}">
+										<input type="hidden" name="cartNo" value="${connectionOCDto.cartNo}">
+										<input type="hidden" name="cartNoByConnection" value="${connectionOCDto.cartNo}">
+										<input type="hidden" name="cntByConnection" value="${connectionOCDto.cntPayment}">
+									</c:forEach>
 								</tbody>
 							</table>
 						</div>

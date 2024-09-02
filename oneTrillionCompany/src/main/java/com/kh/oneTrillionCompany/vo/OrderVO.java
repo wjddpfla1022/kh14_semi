@@ -9,4 +9,5 @@ public class OrderVO {
 	private String buyer;
 	private int cnt;
 	private int orderNo;
+	private int cartNo;
 }

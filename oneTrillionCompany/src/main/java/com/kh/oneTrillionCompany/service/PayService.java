@@ -35,6 +35,7 @@ public class PayService {
 	public String pay(List<OrderVO> list,  int orderNo,
 			HttpSession session)  throws Exception  {
 		int payment=ordersDao.selectOne(orderNo).getOrderPrice();
+		//세션 - 주문 아이디 검사
 		String memberId=(String) session.getAttribute("createdUser");
 		boolean sessionVaild=list.get(0).getBuyer().equals(memberId); //세션 유효성 검사
 		if(list.size()==0&&!sessionVaild) {
@@ -50,7 +51,15 @@ public class PayService {
 			//재고 차감
 			itemDao.deductItem(detailList.get(i).getOrderDetailCnt(),detailList.get(i).getOrderDetailItemNo());
 			//장바구니 차감
-			cartDao.delete(i);
+			int cartNo=list.get(i).getCartNo();
+			if(cartDao.selectCnt(cartNo)==detailList.get(i).getOrderDetailCnt())
+				//장바구니 수량 = 결제수량이면 삭제
+				cartDao.delete(cartNo);
+			else if(cartDao.selectCnt(cartNo)>detailList.get(i).getOrderDetailCnt())
+				//다르면 갯수 업데이트
+				cartDao.updateCartCnt(detailList.get(i).getOrderDetailItemName(),list.get(i).getCartNo(),list.get(i).getCnt());
+			else
+				throw new TargetNotFoundException();
 		}
 		orderDetailDao.payCompleteStatus(detailNoList);
 		return "redirect:payFinish?orderNo="+orderNo;

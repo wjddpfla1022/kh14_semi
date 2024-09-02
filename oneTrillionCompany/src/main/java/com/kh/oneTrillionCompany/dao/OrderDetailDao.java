@@ -61,11 +61,12 @@ public class OrderDetailDao {
 			for(int i=0; i<list.size(); i++) { 
 				String sql="select order_detail_status from order_detail where order_detail_no = ?";
 				Object[] data= {list.get(i)};
-				if(jdbcTemplate.query(sql, orderDetailMapper, data).equals("결제완료")) 
+				String status=jdbcTemplate.query(sql, orderDetailMapper, data).get(0).getOrderDetailStatus();
+				if(!(status).equals("결제준비")) 
 					throw new TargetNotFoundException("이미 결제된 상품입니다");
 			}
 		}
-		public void payCompleteStatus(List<Integer>list) {
+		public void payCompleteStatus(List<Integer>list) {//결제 완료시 결제상세의 상태변경("결제완료"로)
 			for(int i=0; i<list.size(); i++) {
 				int detailNo=list.get(i);
 				String sql="update order_detail set "
