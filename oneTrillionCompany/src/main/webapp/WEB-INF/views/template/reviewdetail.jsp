@@ -8,6 +8,7 @@
 <link rel="stylesheet" type="text/css" href="/css/commons.css">
 
 <style>
+
 /*프로그레스바(progressbar)디자인*/
 .progressbar>.guage {
 	background: rgb(4, 1, 56);
