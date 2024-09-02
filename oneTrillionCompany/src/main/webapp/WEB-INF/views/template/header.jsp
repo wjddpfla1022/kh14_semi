@@ -110,7 +110,7 @@ session 수
             top: 15%;
 
             width: 360px;
-            height: 160px;
+            height: 200px;
 
             padding: 20px;
 
