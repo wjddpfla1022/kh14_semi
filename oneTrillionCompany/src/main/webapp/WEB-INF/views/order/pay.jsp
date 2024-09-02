@@ -17,11 +17,13 @@
 <style>
 .orderpage {
 	position: relative;
-	display: flex;
+	display: block;
 	flex-direction: column;
 	min-width: 1152px;
 	min-height: 100%;
 	background-color: #f3f5f7;
+	margin-left: auto !important;
+    margin-right: auto !important;
 }
 
 .flex-right {
@@ -117,8 +119,7 @@
 	<div class="orderpage w-600 my-10 mx-30 float-box">
 		<div class="ordersHeader row w-100">
 			<div class="logo flex-left mx-10">
-				<img src="https://picsum.photos/70/70"
-					style="width: 50px; height: 50px;">
+				<a href="/"><img src="https://ifh.cc/g/SbA93J.png"style="width: 10%;"></a>
 			</div>
 			<div class="center float-center title">주문/결제</div>
 		</div>
