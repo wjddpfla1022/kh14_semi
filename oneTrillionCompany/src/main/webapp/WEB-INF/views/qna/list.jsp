@@ -116,16 +116,26 @@
 					</tr>
 				</thead>
 				<tbody align="center">
-						<%-- qnaList가 비어 있거나, 작성자의 게시글이 리스트에 없는 경우를 처리--%>
-							<c:choose>
-								<c:when test="${fn:length(qnaList) == 0 || !fn:contains(qnaList, sessionScope.createdUser)}">
-									<tr>
-										<td class="noList-msg" colspan="4">
-											<i class="fa-solid fa-headphones"></i> 문의 내역이 존재하지 않습니다.
-										</td>
-									</tr>
-								</c:when>
-							</c:choose>
+					<c:choose>
+					    <%-- 검색 결과가 없거나, 작성자의 게시글이 리스트에 없는 경우를 처리 --%> 
+					    <c:when test="${fn:length(qnaList) == 0}">
+					        <tr>
+					            <td class="noList-msg" colspan="4">
+					               검색 결과가 존재하지 않습니다.
+					            </td>
+					        </tr>
+					    </c:when>
+					    <c:otherwise>
+					        <%-- 작성자의 게시글이 리스트에 없는 경우를 처리 --%> 
+					        <c:if test="${!fn:contains(qnaList, sessionScope.createdUser)}">
+					            <tr>
+					                <td class="noList-msg" colspan="4">
+					                    <i class="fa-solid fa-headphones"></i> 문의 내역이 존재하지 않습니다.
+					                </td>
+					            </tr>
+					        </c:if>
+					    </c:otherwise>
+					</c:choose>
 				
 						<%-- qnaList가 생성 된 경우 --%>		
 						<c:forEach var="qnaDto" items="${qnaList}">
