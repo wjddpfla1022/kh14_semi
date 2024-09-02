@@ -13,10 +13,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.oneTrillionCompany.dao.CartDao;
+import com.kh.oneTrillionCompany.dao.ConnectionOCDao;
 import com.kh.oneTrillionCompany.dao.ItemDao;
 import com.kh.oneTrillionCompany.dao.OrderDetailDao;
 import com.kh.oneTrillionCompany.dao.OrdersDao;
 import com.kh.oneTrillionCompany.dto.CartDto;
+import com.kh.oneTrillionCompany.dto.ConnectionOCDto;
 import com.kh.oneTrillionCompany.dto.ItemDto;
 import com.kh.oneTrillionCompany.service.AttachService;
 import com.kh.oneTrillionCompany.vo.CartItemVO;
@@ -39,6 +41,8 @@ public class CartController {
 	
 	@Autowired
 	private AttachService attachService;
+	@Autowired
+	private ConnectionOCDao connectionOCDao;
 
 	//장바구니 목록
  
@@ -94,8 +98,16 @@ public class CartController {
 			 @RequestParam("cartItemNo") List<Integer> cartItemNoList,
 	            @RequestParam("cartItemCnt") List<Integer> cartItemCntList,
 	            @RequestParam("buyer") List<String> buyerList,
-	            @RequestParam("cartItemPrice") List<Integer> cartItemPriceList
+	            @RequestParam("cartItemPrice") List<Integer> cartItemPriceList,
+	            @RequestParam("cartNo") List<Integer> cartNoList,
+	            HttpSession session
 	    ) {
+		System.out.println(cartNoList);
+		String memberId=(String) session.getAttribute("createdUser");
+		List<ConnectionOCDto> connectionList = connectionOCDao.selectListBySession(memberId);
+		//이전 결제정보 제거
+		if(connectionList!=null) connectionOCDao.deleteAll(memberId);
+		
 		List<CartVO> list=new ArrayList<>();
 	        for (int i = 0; i < cartItemNoList.size(); i++) {
 	            CartVO cartVO = new CartVO();
@@ -104,9 +116,16 @@ public class CartController {
 	            cartVO.setCartItemNo(cartItemNoList.get(i));
 	            cartVO.setCartItemPrice(cartItemPriceList.get(i));
 	            list.add(cartVO);
+	            ConnectionOCDto connectionDto=new  ConnectionOCDto();
+	            System.out.println("cartNo : "+cartNoList.size());
+	            connectionDto.setCartNo(cartNoList.get(i));
+	            connectionDto.setBuyer(memberId);
+	            System.out.println("cartItemCnt : "+ cartItemCntList.size());
+	            connectionDto.setCntPayment(cartItemCntList.get(i));
+	            connectionOCDao.insert(connectionDto);
 	        }
 	    int orderNo = ordersDao.sequence();
-	    ordersDao.insertIntoOrdersTable(list, orderNo);
+	    ordersDao.insertIntoOrdersTable(list, orderNo); 
 	    orderDetailDao.insertByCartVOList(list, orderNo);
 	    for(int i=0; i<cartItemNoList.size(); i++)
 	    	cartDao.delete(cartItemNoList.get(i));

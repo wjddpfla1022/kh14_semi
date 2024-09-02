@@ -79,7 +79,6 @@
 	        				<a href="/review/write?orderDetailNo=${orderDetailDto.orderDetailNo}" class="link">리뷰작성</a>
 	        				<a href="/refund/insert?refundOrderDetailNo=${orderDetailDto.orderDetailNo}" class="link">환불신청</a>
 	        			</td>	        			
-	        		</tr>
          		</c:forEach>
          	</tbody>
          </table>
@@ -109,6 +108,12 @@
          		</c:forEach>
          	</tbody>
          </table>
+         <!-- 장바구니 제거될 수량 정보 -->
+         <c:forEach var="connectionOCDto" items="${connectionList}">
+         	<input type="hidden" name="cartNoByConnection" value="${connectionOCDto.cartNo}">
+         	<input type="hidden" name="buyerByConnection" value="${connectionOCDto.buyer}">
+         	<input type="hidden" name="cntByConnection" value="${connectionOCDto.cntPayment}">
+         </c:forEach>
       </div>
     </div>
 </body>

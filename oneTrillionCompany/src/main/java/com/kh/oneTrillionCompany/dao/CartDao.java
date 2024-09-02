@@ -75,7 +75,15 @@ public class CartDao {
 		List<CartDto> list = jdbcTemplate.query(sql, cartMapper, data);
 		return list.isEmpty() ? null : list.get(0);
 	}
-	
+	//카트번호로 수량 조회(결제)
+	public int selectCnt(int cartNo) {
+		System.out.println(cartNo);
+		String sql="select * from cart where cart_no=?";
+		Object[] data= {cartNo};
+		List<CartDto> list =jdbcTemplate.query(sql, cartMapper,data);
+		int result = list.get(0).getCartCnt();
+		return result;
+	}
 	//장바구니 검색
 	public List<CartDto> selectList(String column, String keyword) {
 		String sql = "select * from cart "
@@ -99,7 +107,12 @@ public class CartDao {
 							cartDto.getCartBuyer() };
 		return jdbcTemplate.update(sql,data) > 0;
 	}
-
+	//장바구니 수량 업데이트(결제시)
+	public boolean updateCartCnt(String buyer,int cartNo, int itemCnt) {
+		String sql = "update cart set cart_cnt=cart_cnt-? where cart_no=? and cart_buyer=?";
+		Object[] data= {itemCnt,cartNo,buyer};
+		return jdbcTemplate.update(sql, data)>0;
+	}
 	//장바구니 총 금액
 	public Integer sumCartTotalPrice(String memberId) {
 		String sql = "select sum(cart_cnt*item_price) from "

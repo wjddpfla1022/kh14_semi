@@ -213,14 +213,14 @@
 	        	},
 	        	success:function(response){
 	        		console.log('장바구니 업데이트 성공'); //나중에 지우기
-	        		updateCartTotalPrice(); //수량을 업데이트 하면서 같이 ajax통신
+	        		updatecartTotalPrice(); //수량을 업데이트 하면서 같이 ajax통신
 	        	}
 	        });
         });
         
         //수량 변경 시-ajax통신 
         //-상품 총구매금액 - ajax통신
-        function updateCartTotalPrice() {
+        function updatecartTotalPrice() {
 	        $.ajax({
 	        	url: "/rest/cart/cartTotalPriceUpdate",
 	        	method: 'post',
@@ -300,7 +300,7 @@
 				<tr>
 					<td>
 						<span class="cartCnt-data">${cart.cartNo}</span><!-- 장바구니 수량을 el로 받아 제이쿼리에 적용 -->
-						<input type="checkbox" class="check-item" name="cartNo" value="${cart.cartNo}">
+						<input type="checkbox" class="check-item" name="cartNos" value="${cart.cartNo}">
 						<input type="hidden" name="cartList[${status.index}].cartItemNo" value="${cart.cartItemNo}">
 					</td>
 					<!--itemList 반복문 -->
@@ -319,6 +319,7 @@
 						<span>
 							<input type="text"  name="cartList[${status.index}].cartItemCnt" class="cartCntInput" value="${cart.cartCnt}" size="2">
 							<input type="hidden" name="cartList[${status.index}].buyer" value="${sessionScope.createdUser}">
+							<input type="hidden" name="cartList[${status.index}].cartNo" value="${cart.cartNo}">
 							<button type="button" class="btn-cnt btn-up"><i class="fa-solid fa-angle-up Icon_carCnt"></i></button>
 							<button type="button" class="btn-cnt btn-down"><i class="fa-solid fa-angle-down Icon_carCnt"></i></button>
 						</span>
@@ -353,6 +354,7 @@
         <input type="hidden" name="cartItemCnt" value="${cart.cartCnt}" readonly size="2">
         <input type="hidden" name="buyer" value="${sessionScope.createdUser}">
         <input type="hidden" name="cartItemPrice" value="${cart.itemPrice}" readonly>
+        <input type="hidden" name="cartNo" value="${cart.cartNo}">
     </c:forEach>
 			<button type="submit"  class="btn float-left">전체 주문하기</button>
     </form>
