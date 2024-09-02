@@ -3,6 +3,7 @@ package com.kh.oneTrillionCompany.controller;
 import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -45,14 +46,17 @@ public class MemberController {
             @RequestParam String memberPw, 
             @RequestParam(required = false) String remember, //아이디 저장하기
             HttpSession session, HttpServletResponse response) {
-        MemberDto memberDto = memberDao.selectOne(memberId);
+        MemberDto memberDto = memberDao.selectOneWithPassword(memberId, memberPw);
         if(memberDto == null) return "redirect:login?error";
 
         boolean isNull = memberDto == null || memberDto.getMemberId() == null || memberDto.getMemberPw() == null;
         if(isNull) return "redirect:login?error";
-
-
-        boolean isValid = memberPw.equals(memberDto.getMemberPw());
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        String encrypt = memberDto.getMemberPw();
+        String input = memberPw;
+        
+        boolean isValid = encoder.matches(input, encrypt);
+        //boolean isValid = memberPw.equals(memberDto.getMemberPw());
         if(isValid == false) return "redirect:login?error";
 
         BlockDto blockDto = blockDao.selectLastOne(memberId);
