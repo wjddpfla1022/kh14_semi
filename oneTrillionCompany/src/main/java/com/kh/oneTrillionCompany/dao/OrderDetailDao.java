@@ -86,4 +86,10 @@ public class OrderDetailDao {
 			Object[] data= {orderDetailDto.getOrderDetailStatus(), orderDetailDto.getOrderDetailNo()};
 			jdbcTemplate.update(sql, data);
 		}		
+		//특정 회원의 주문 환불완료상태 목록 조회(아이디로조회)
+		public List<OrderDetailDto> selectListByOrderDetailRefund(String orderMemberId){
+			String sql = "select * from order_detail where order_detail_buyer = ? and order_detail_status ='환불완료' order by order_detail_no desc";
+			Object[] data = {orderMemberId};
+			return jdbcTemplate.query(sql, orderDetailMapper, data);
+		}
 }
