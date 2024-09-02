@@ -94,6 +94,7 @@ public class OrderController {
 		    @RequestParam("cartNoByConnection") List<Integer> cartNoList,
 		    @RequestParam("cntByConnection") List<Integer> cntList, 
 		    @RequestParam int orderNo,
+		    @RequestParam int earn,
 			HttpSession session) throws Exception {
 		String memberId=(String) session.getAttribute("createdUser");
 		List<OrderVO> list = new ArrayList<>();
@@ -107,7 +108,7 @@ public class OrderController {
 	        order.setCartNo(cartNos.get(i));
 	        list.add(order);
 	    }
-	    payService.pay(list,orderNo, session);
+	    payService.pay(list,orderNo, earn, session);
 	    connectionOCDao.deleteAll(memberId);
 		return "redirect:payFinish?orderNo="+orderNo;
 	}

@@ -197,8 +197,9 @@
 							<div class="container">
 								<div class="flex-box column-2">
 									<div class="row">구매적립</div>
-									<div class="row flex-right pay-coin" name="earn" value="${Math.round(totalPrice/100)*3}">${Math.round(totalPrice/100)*3}
+									<div class="row flex-right pay-coin">${Math.round(totalPrice/100)*3}
 										원</div>
+										<input type="hidden"  name="earn" value="${Math.round(totalPrice/100)*3}">
 								</div>
 								<div class="flex-box column-2">
 									<div class="row">리뷰적립</div>

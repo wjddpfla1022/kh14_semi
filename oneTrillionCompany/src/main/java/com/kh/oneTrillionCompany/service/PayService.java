@@ -32,7 +32,7 @@ public class PayService {
 	@Autowired
 	private CartDao cartDao;
 	
-	public String pay(List<OrderVO> list,  int orderNo,
+	public String pay(List<OrderVO> list,  int orderNo, int earn,
 			HttpSession session)  throws Exception  {
 		int payment=ordersDao.selectOne(orderNo).getOrderPrice();
 		//세션 - 주문 아이디 검사
@@ -41,6 +41,8 @@ public class PayService {
 		if(list.size()==0&&!sessionVaild) {
 			throw new TargetNotFoundException("장바구니를 확인해주세요");
 		}
+		//즉시적립
+		memberDao.chargePoint(memberId, earn);
 		//결제
 		memberDao.payment(memberId, payment);
 		//주문서 생성(detail)
