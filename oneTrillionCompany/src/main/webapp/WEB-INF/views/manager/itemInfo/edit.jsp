@@ -10,8 +10,8 @@
 
 <!-- 자바스크립트 작성 영역 -->
   <script type="text/javascript">
-  var boardContent = "${infoDto.infoContent}";
-  console.log(boardContent);
+//   var boardContent = "${infoDto.infoContent}";
+//   console.log(boardContent);
     $(function () {
       // $(선택자).summernote({옵션객체});
       $("[name=infoContent]").summernote({
@@ -57,7 +57,7 @@
         },
       });
 //       $("[name=infoContent]").summernote("code", "${infoDto.infoContent}");
-      $("[name=infoContent]").summernote("code", "${infoDto.infoContent}");
+//       $("[name=infoContent]").summernote("code", "${infoDto.infoContent}");
       
       if ($("[name=infoContent]").summernote("isEmpty")) {
         $("[name=infoContent]").summernote("code", "")
@@ -91,7 +91,7 @@
 			<input type="hidden" name="infoItemNo" value="${itemNo}" >
 			
 			<div class="row">
-            	<textarea name="infoContent" class="field w-100" draggable="true"></textarea>    
+            	<textarea name="infoContent" class="field w-100" draggable="true">${infoDto.infoContent}</textarea>    
         	</div>
         	<div class="row">
             	<button type="submit" class="btn btn-positive w-100">작성하기</button>
