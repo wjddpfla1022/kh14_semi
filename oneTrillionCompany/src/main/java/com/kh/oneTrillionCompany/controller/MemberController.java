@@ -1,8 +1,6 @@
 package com.kh.oneTrillionCompany.controller;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,7 +21,6 @@ import com.kh.oneTrillionCompany.dto.CertDto;
 import com.kh.oneTrillionCompany.dto.MemberDto;
 import com.kh.oneTrillionCompany.exception.TargetNotFoundException;
 
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
@@ -44,57 +41,31 @@ public class MemberController {
 		return "/WEB-INF/views/member/login.jsp";
 	}
 	@PostMapping("/login")
-	public String login(@RequestParam String memberId,
-			@RequestParam String memberPw, 
-			@RequestParam(required = false) String remember, //아이디 저장하기
-			HttpSession session, HttpServletResponse response) {
-		MemberDto memberDto = memberDao.selectOne(memberId);
+    public String login(@RequestParam String memberId,
+            @RequestParam String memberPw, 
+            @RequestParam(required = false) String remember, //아이디 저장하기
+            HttpSession session, HttpServletResponse response) {
+        MemberDto memberDto = memberDao.selectOne(memberId);
+        if(memberDto == null) return "redirect:login?error";
 
-		boolean isValid = memberDao.selectOne(memberId)!=null;
-		if(isValid) {
-			session.setAttribute("createdUser", memberId);
-			session.setAttribute("createdLevel", memberDto.getMemberRank());
-			memberDao.updateMemberLogin(memberId);
-			//아이디 저장
-			if(remember != null) {
-				Cookie ck = new Cookie("saveId", memberId);//쿠키생성
-				ck.setMaxAge(4*7*24*60*60);
-				response.addCookie(ck);
-			}
-			else {
-				Cookie ck = new Cookie("saveId", memberId);//쿠키생겅
-				ck.setMaxAge(0);
-				response.addCookie(ck);
-			}
-			//--------//
-			return "redirect:/";
-		}
-		else {
-			return "redirect:login?error";
-			
-		}
+        boolean isNull = memberDto == null || memberDto.getMemberId() == null || memberDto.getMemberPw() == null;
+        if(isNull) return "redirect:login?error";
 
-		if(memberDto == null) return "redirect:login?error";
-		
-		boolean isNull = memberDto == null || memberDto.getMemberId() == null || memberDto.getMemberPw() == null;
-		if(isNull) return "redirect:login?error";
-		
-		
-		boolean isValid = memberPw.equals(memberDto.getMemberPw());
-		if(isValid == false) return "redirect:login?error";
 
-		
-		BlockDto blockDto = blockDao.selectLastOne(memberId);
-		boolean isBlock = blockDto != null && blockDto.getBlockType().equals("차단");
-		if(isBlock) return "redirect:block";
-		
-		session.setAttribute("createdUser", memberId);
-		session.setAttribute("createdLevel", memberDto.getMemberRank());
-		memberDao.updateMemberLogin(memberId);
-		 
-		return "redirect:/";
-		
-	}
+        boolean isValid = memberPw.equals(memberDto.getMemberPw());
+        if(isValid == false) return "redirect:login?error";
+
+        BlockDto blockDto = blockDao.selectLastOne(memberId);
+        boolean isBlock = blockDto != null && blockDto.getBlockType().equals("차단");
+        if(isBlock) return "redirect:block";
+
+        session.setAttribute("createdUser", memberId);
+        session.setAttribute("createdLevel", memberDto.getMemberRank());
+        memberDao.updateMemberLogin(memberId);
+
+        return "redirect:/";
+
+    }	
 	@GetMapping("/join")
 	public String join() {
 		return "/WEB-INF/views/member/join.jsp";
