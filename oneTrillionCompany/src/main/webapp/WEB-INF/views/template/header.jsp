@@ -107,7 +107,7 @@ session 수
 
         .modal-body{
             position: absolute;
-            top: 30%;
+            top: 15%;
 
             width: 360px;
             height: 160px;
