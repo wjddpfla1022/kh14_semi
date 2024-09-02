@@ -9,7 +9,7 @@
 </head>
 <body>
 <div class="container w-1200" style="min-height:400px">
-    <p>${errorMessage}</p> 
+    <h2> ${errorMessage}</h2>
 </div>
 </body>
 </html>
