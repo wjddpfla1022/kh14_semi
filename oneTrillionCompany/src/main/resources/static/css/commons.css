@@ -639,34 +639,39 @@ textarea.field {
       }
 
       /*사이드바 디자인*/
-      #ck-sidebar {
-        display: none;
-      }
-      #ck-sidebar + .sidebar {
-        position: fixed;
-        top: 0;
-        left: 0;
-        bottom: 0;
-        width: 200px;
-        z-index: 9998;
-        background-color: #a29bfe;
-        transition: transform 0.2s ease-out;
-      }
-      #ck-sidebar:checked + .sidebar {
-        /* left: 200px; */
-        /* margin-left: -200px; */
-        transform: translate(-100%, 0);
-      }
+/*       #ck-sidebar { */
+/*         display: none; */
+/*       } */
+      
+      
+      
+/*       #ck-sidebar + .sidebar { */
+/*         position: fixed; */
+/*         top: 0; */
+/*         left: 0; */
+/*         bottom: 0; */
+/*         width: 200px; */
+/*         z-index: 9998; */
+/*         background-color: #a29bfe; */
 
-      .sidebar-toggle {
-        position: fixed;
-        top: 20px;
-        left: 20px;
-        z-index: 9999;
-        cursor: pointer;
-        box-shadow: 0 0 1px 1px #2d3436;
-        padding: 0.5em 0.75em;
-      }
+/*         transition: transform 0.2s ease-out; */
+        
+/*       } */
+/*       #ck-sidebar:checked + .sidebar { */
+/*         left: 200px; */
+/*         margin-left: -200px; */
+/*         transform: translate(-100%, 0); */
+/*       } */
+
+/*       .sidebar-toggle { */
+/*         position: fixed; */
+/*         top: 20px; */
+/*         left: 20px; */
+/*         z-index: 9999; */
+/*         cursor: pointer; */
+/*         box-shadow: 0 0 1px 1px #2d3436; */
+/*         padding: 0.5em 0.75em; */
+/*       } */
       
         /*
             입력창 피드백 디자인
