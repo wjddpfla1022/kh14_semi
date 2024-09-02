@@ -45,14 +45,15 @@ public class CartRestController {
 		return cartTotalPrice;
 	}
 	
-	//장바구니 등록
+	//장바구니 등록 추가 사이즈 추가함
 	@PostMapping("/insertCart")
 	public void insertCart(HttpSession session,
 							@RequestParam String itemName, @RequestParam String itemColor, 
-							@RequestParam Integer itemSalePrice, @RequestParam int cartCnt,@RequestParam Integer attachNo ) {
+							@RequestParam int itemSalePrice, @RequestParam int cartCnt,
+							@RequestParam int attachNo, @RequestParam String itemSize) {
 		String cartBuyer = (String)session.getAttribute("createdUser");
-		cartDao.itemInsertCart(itemName, itemColor, cartBuyer, itemSalePrice != null ? 
-										itemSalePrice : 0, cartCnt, attachNo != null ? attachNo : 0);
+		cartDao.itemInsertCart(itemName, itemColor, cartBuyer,itemSalePrice, 
+										cartCnt, attachNo, itemSize);
 	}
 	
 	//장바구니 한개 제거

@@ -60,7 +60,6 @@ public class CartDao {
 		};
 		return jdbcTemplate.update(sql,data) > 0;	
 	}
-//	public boolean updateCart()
 	
 	//장바구니 목록
 	public List<CartDto> selectList(String memberId) {
@@ -117,9 +116,9 @@ public class CartDao {
 	}
 	
 	//컬러와 상품명으로 아이템 번호를 찾는다
-	public Integer findItemNo(String itemName, String itemColor) {
-		String sql = "select item_no from item where item_name=? and item_color=?";
-		Object[] data = {itemName, itemColor};
+	public Integer findItemNo(String itemName, String itemColor, String itemSize) {
+		String sql = "select item_no from item where item_name=? and item_color=? and item_size=?";
+		Object[] data = {itemName, itemColor, itemSize};
 		 try {
 	         return jdbcTemplate.queryForObject(sql, Integer.class, data);
 		 } catch (Exception e) {
@@ -129,8 +128,8 @@ public class CartDao {
 	
 	//상품을 장바구니에 등록하는 메소드
 	public void itemInsertCart(String itemName, String itemColor,String cartBuyer, 
-											int itemSalePrice, int cartCnt, int attachNo) {
-		Integer itemNo = findItemNo(itemName, itemColor);
+											int itemSalePrice, int cartCnt, int attachNo, String itemSize) {
+		Integer itemNo = findItemNo(itemName, itemColor, itemSize);
 		Integer cartTotalPrice = sumCartTotalPrice(cartBuyer);
 
 		//장바구니 총합계에 새로운 아이템이 추가될때마다 가격을 증가시킨다
