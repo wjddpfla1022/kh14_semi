@@ -82,15 +82,40 @@ a#smallShirts:hover {
 		url("https://sitem.ssgcdn.com/06/09/87/item/1000183870906_i1_750.jpg");
 }
 
+/* 사이즈 스타일 추가 */
+.size-radio {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 36px;
+	width: 36px;
+	border: 1px solid #ccc;
+	position: relative;
+	margin-bottom: 10px;
+	border-radius: 10px;
+	cursor: pointer;
+	margin-right: 10px;
+	padding: 0px;
+	margin-top:10px
+
+}
+/* 사이즈 클릭시 색깔변경 */
+.click{
+	background-color:#F2F2F2;
+}
+.size-text{
+	font-size:15px;
+	line-height: 22px;
+	color: #000;
+	text-align: center;
+}
+
+
 /* 사용자가 선택한 옵션 창 - 숨기기*/
-.hidden, .isColor {
+.hidden {
 	display: none;
 }
 
-/* 재고, 수량을 숨김 */
-.itemCnt-data {
-	display: none !important;
-}
 </style>
 
 <!--jquery cdn-->
@@ -119,10 +144,6 @@ a#smallShirts:hover {
 		//상세 페이지 표시 제어
 		$(".btn-toggle").click(function() {
 			$(".target").slideToggle();
-		});
-		
-		$(".btn-review-toggle").click(function() {
-			$(".review-target").slideToggle();
 		});
 
 		/*에러나서 잠시 막아뒀습니다*/
@@ -164,6 +185,15 @@ a#smallShirts:hover {
 		function checkForm() {
 			return itemTypeValid;
 		}
+		
+		//사이즈 버튼 클릭 시 색 변경
+		$(document).ready(function(){
+			$('.size-radio').click(function(){
+				$(this).toggleClass('click');
+				
+				$('.size-radio').not(this).removeClass('click');
+			});
+		});
 
 		//수량 증가 및 감소
 		//기본 1로 설정
@@ -198,11 +228,24 @@ a#smallShirts:hover {
 		$(function() {
 			//전역변수
 			var itemColorValue = "";
+			var itemSizeValue= "";
 			//장바구니에 담기 -비동기
 			$("[name=itemColor]").change(function() {
 				itemColorValue = $(this).val();
 			});
+			//사이즈 선택시
+			$(".size-radio").click(function(){
+				itemSizeValue = $(this).find(".size-text").text();
+			});
 			$(".btn-add-cart").click(function() {
+				if(!itemColorValue) {
+					alert("색상을 선택해주세요.");
+					return;
+				}
+				if(!itemSizeValue){
+					alert("사이즈를 선택해주세요.");
+					return;
+				}
 				var itemNameValue = $(".itemName").text().trim();//공백제거
 				var cartCntValue = $("[name=cartCnt]").val();
 				var itemSalePriceValue = $(".itemSalePrice").text();
@@ -211,13 +254,14 @@ a#smallShirts:hover {
 				console.log(itemSalePriceValue);
 				console.log(itemColorValue);
 				console.log(attachNoValue);
-
+				console.log(itemSizeValue);
 				$.ajax({
 					url : "/rest/cart/insertCart",
 					method : 'post',
 					data : {
 						itemName : itemNameValue,
 						itemColor : itemColorValue,
+						itemSize: itemSizeValue,
 						itemSalePrice : itemSalePriceValue,
 						cartCnt : cartCntValue,
 						attachNo : attachNoValue
@@ -226,7 +270,7 @@ a#smallShirts:hover {
 						alert("장바구니에 등록 되었습니다");
 					},
 					error : function(response) {
-						alert("필수 옵션을 선택해주세요");
+						alert("품절된 색상입니다");
 					}
 				});
 			});
@@ -242,7 +286,7 @@ a#smallShirts:hover {
 					<img class="shoppingmal" src="/item/image?itemNo=${itemDto.itemNo}"
 						width="100%">
 					<!-- attachNo값 가져오기* -->
-					<span class="attachNo-data">${attachNo}</span>
+					<span class="attachNo-data hidden">${attachNo}</span>
 				</div>
 				<div class="row smallImages">
 					<img id="smallShirts"
@@ -261,10 +305,10 @@ a#smallShirts:hover {
 			<div class="row flex-box column-2">
 				<div class="left">
 					<!-- 상품원가* -->
-					<span class="itemPrice"><del style="color: #999;">${itemDto.itemPrice}</del></span>
+					<span class="itemPrice"><del style="color: #999;">${itemDto.itemSalePrice}</del></span>
 					<!-- 상품판매가* -->
 					<span class="itemSalePrice" style="padding-left: 5px;"><b
-						style="font-weight: bolder;">${itemDto.itemSalePrice}</b></span>
+						style="font-weight: bolder;">${itemDto.itemPrice}</b></span>
 				</div>
 				<div class="right">
 					<!-- 상품할인비율* -->
@@ -314,18 +358,13 @@ a#smallShirts:hover {
 				<hr>
 
 				<div class="row center">
-					<div style="font-size: 15px; font-weight: bolder;"><i class="fa-solid fa-palette"></i>
-					<b style="color: red; font-weight: bolder; font-size: 14px">C</b>
-					<b style="color: orange; font-weight: bolder; font-size: 14px">O</b>
-					<b style="color: yellow; font-weight: bolder; font-size: 14px">L</b>
-					<b style="color: green; font-weight: bolder; font-size: 14px">O</b>
-					<b style="color: blue; font-weight: bolder; font-size: 14px">R</b></div>
+					<div style="font-size: 15px;" class="left">색상</div>
 				</div>
 				<div class="left">
 					<span style="font-size: 11px; color: #999;">[필수] 옵션을 선택해 주세요</span>
 				</div>
 				<div class="row">
-					<select name="itemColor" class="field w-100" style="border-radius: 20px;"
+					<select name="itemColor" class="field w-100"
 						oninput="checkItemType();">
 						<option value="">선택하세요</option>
 						<option value="black">검정</option>
@@ -340,12 +379,39 @@ a#smallShirts:hover {
 					</select>
 				</div>
 				
+				<div class="row center">
+					<div style="font-size: 15px; mt: 8px" class="left">사이즈</div>
+				</div>
+				<div class="left">
+					<span style="font-size: 11px; color: #999;">[필수] 옵션을 선택해 주세요</span>
+				</div>
+				<!-- 사이즈 추가 -->
+				<div class="size-content-group">
+					<div class="size-content flex-box">
+						<div class="size-radio">
+							<div class="size-text">S</div>
+						</div>
+						<div class="size-radio">
+								<div class="size-text">M</div>
+						</div>
+						<div class="size-radio">
+								<div class="size-text">L</div>
+						</div>
+						<div class="size-radio">
+								<div class="size-text">XL</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="row center">
+					<div style="font-size: 15px; mt: 8px" class="left">수량</div>
+				</div>
 				   <!-- 수량 선택추가* -->
 	                        <div class="left my-0">
 	                        	<span class="input_cartCnt">
-									<input  type="text"  name="cartCnt" size="2" style="border-radius: 30px"><span class="itemCnt-data">${itemDto.itemCnt}</span>
-									<button type="button" class="btn-cnt btn-up" style="background-color: white; border-color: white;"><i class="fa-solid fa-angle-up Icon_carCnt"></i></button>
-									<button type="button" class="btn-cnt btn-down" style="background-color: white; border-color: white;"><i class="fa-solid fa-angle-down Icon_carCnt"></i></button>
+									<input type="text"  name="cartCnt" size="2"><span class="itemCnt-data hidden">${itemDto.itemCnt}</span>
+									<button type="button" class="btn-cnt btn-up"><i class="fa-solid fa-angle-up Icon_carCnt"></i></button>
+									<button type="button" class="btn-cnt btn-down"><i class="fa-solid fa-angle-down Icon_carCnt"></i></button>
 								</span>
 	                        </div>
 	                     </div>
@@ -363,40 +429,35 @@ a#smallShirts:hover {
 							(60,000원 이상 구매 시 무료)</b>
 					</p>
 				</div>
-		</div>
-			</div>
-	
-				<div class="row flex-box column-2">
-					<div class="left">
-					</div>
-					<div class="right">
-						<button type="submit" class="btn w-100"
+
+				<div class="row">
+					<button type="submit" class="btn w-100"
 						style="color: white; background-color: black;">구매하기</button>
-						<!-- 장바구니버튼 -->
-						<button type="button" class="btn w-100 btn-add-cart"
+					<!-- 장바구니버튼 -->
+					<button type="button" class="btn w-100 btn-add-cart"
 						style="color: white; background-color: black;">장바구니</button>
-					</div>
-				</div>		
-				
+				</div>
 			</div>
+
+		</div>
 
 
 
 
 	<div class="row center">
 	<div class="row flex-box column-2">
-		<div class="row center">
-				<h3 style="font-weight: bolder;">REVIEW ( ${list.size()} )</h3>
+		<div class="center">
+			<h3 style="font-weight: bolder;">REVIEW ( ${list.size()} )</h3>
 		</div>
 
-		<div class="row center">
-		<button type="button" class="btn btn-review-toggle"  style="font-weight: bolder; border-color: white; background-color: white; margin-top: 9px;">상품 리뷰 <i class="fa-solid fa-sort-down"></i></button>		
-			</div>		
+		<div class="center">
+			<a
+				href="/review/list?column=review_item_no&keyword=${itemDto.itemNo}"
+				class="btn" style="font-weight: bolder; border-color: white; background-color: white">상품 리뷰 <i class="fa-solid fa-sort-down"></i></a>
 		</div>
-		
-	<div class="row center">
-		<h3 class="review-target"><jsp:include page="/WEB-INF/views/template/reviewdetail.jsp"></jsp:include></h3>		
-	</div>	
+	</div>
+	</div>
+
 <hr>
 <div class="left">
 	<div class="test-score2" data-max="5" data-rate="3"></div>
@@ -411,6 +472,7 @@ a#smallShirts:hover {
 </div>
 	</div>
 </body>
+
 
 <jsp:include page="/WEB-INF/views/template/size.jsp"></jsp:include>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

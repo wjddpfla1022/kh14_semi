@@ -14,4 +14,5 @@ public class CartItemVO {
 	private String itemColor;
 	private int itemPrice;
 	private int itemStock;
+	private String itemSize;
 }
