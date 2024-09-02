@@ -178,12 +178,10 @@ public class CartDao {
         return jdbcTemplate.update(sql.toString(), data) > 0;
 	}
 		
-	
-
 	//품절 유무를 위해 아이템 컬러를 뽑는다 -> itemDao로 옮기기
 	public List<String> selectItemColors(String itemName) {
 		String sql = "select item_color from item where item_name=?";
 		return jdbcTemplate.queryForList(sql, String.class, itemName);
 	}
-
+	
 }

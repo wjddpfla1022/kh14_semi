@@ -3,6 +3,7 @@ package com.kh.oneTrillionCompany.restcontroller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.kh.oneTrillionCompany.dao.CartDao;
 import com.kh.oneTrillionCompany.dto.CartDto;
-import com.kh.oneTrillionCompany.service.AttachService;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -46,15 +46,15 @@ public class CartRestController {
 	}
 	
 	//장바구니 등록 추가 사이즈 추가함
-	@PostMapping("/insertCart")
-	public void insertCart(HttpSession session,
-							@RequestParam String itemName, @RequestParam String itemColor, 
-							@RequestParam int itemSalePrice, @RequestParam int cartCnt,
-							@RequestParam int attachNo, @RequestParam String itemSize) {
-		String cartBuyer = (String)session.getAttribute("createdUser");
-		cartDao.itemInsertCart(itemName, itemColor, cartBuyer,itemSalePrice, 
-										cartCnt, attachNo, itemSize);
-	}
+		@PostMapping("/insertCart")
+		public void insertCart(HttpSession session,
+								@RequestParam String itemName, @RequestParam String itemColor, 
+								@RequestParam int itemSalePrice, @RequestParam int cartCnt,
+								@RequestParam int attachNo, @RequestParam String itemSize) {
+			String cartBuyer = (String)session.getAttribute("createdUser");
+			cartDao.itemInsertCart(itemName, itemColor, cartBuyer,itemSalePrice, 
+											cartCnt, attachNo, itemSize);
+		}
 	
 	//장바구니 한개 제거
 	@PostMapping("/delete")

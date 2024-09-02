@@ -64,6 +64,8 @@ public class CartController {
 				    String itemColor = itemDto.getItemColor();
 				    int itemPrice = itemDto.getItemPrice();
 				    int itemStock=itemDto.getItemCnt();
+				    //사이즈 추가
+				    String itemSize=itemDto.getItemSize();
 				    
 				    // CartItemVO 객체 생성 및 정보 설정
 				    CartItemVO cartItemVO = new CartItemVO();
@@ -77,7 +79,9 @@ public class CartController {
 				    cartItemVO.setItemColor(itemColor);
 				    cartItemVO.setItemPrice(itemPrice);
 				    cartItemVO.setItemStock(itemStock);
-
+				    //사이즈 추가
+				    cartItemVO.setItemSize(itemSize);
+				    
 				    // 리스트에 추가
 				    cartItemVOList.add(cartItemVO);
 					

@@ -95,7 +95,7 @@
          });
 		$(".check-item").click(function(){
 			//체크된 체크박스 개수
-			var checked_length = $(".check-item").prop("checked").length;
+			var checked_length = $(".check-item:checked").length;
 			//전체 체크박수 개수
 			var checkbox_length = $(".check-item").length;
 			
@@ -130,11 +130,16 @@
 		
 		//선택한 항목을 삭제
 		$(".btn-selected-checkBox").click(function(){
-			var carNoList = [];
+			var cartNoList = [];
 				$(".check-item:checked").each(function() {
-					carNoList.push($(this).val());
+					cartNoList.push($(this).val());
             });
-			
+				
+		 	if(cartNoList.length == 0) {
+		 		alert("상품을 선택 해주세요");
+		 		return;
+		 	}
+		 	
 			//삭제 알림창
 			var choice = confirm("선택한 항목을 삭제하시겠습니까?");
             if (!choice) {
@@ -144,7 +149,7 @@
 		        	url: "/rest/cart/checkDelete",
 		        	method: 'post',
 		        	data:{
-		        		cartNo: carNoList,
+		        		cartNo: cartNoList,
 		        	},
 		        	success:function(response){
 		        		location.reload();
@@ -264,7 +269,7 @@
 
 <!-- 장바구니가 비어있다면(회원, 비회원)  -->
 <c:choose>
-	<c:when test="${cartList.isEmpty()}">
+	<c:when test="${cartItemVOList.isEmpty()}">
 		<!-- 결과가 없을때  -->
 		<div class="row center">
 			<i class="fas fa-thin fa-cart-shopping fa-2x"></i><p>장바구니가 비어있습니다</p>
@@ -285,7 +290,7 @@
 					</th>
 					<th>이미지</th>
 					<th>상품정보</th>
-					<th>색상</th>
+					<th>색상/사이즈</th>
 					<!-- 사이즈추가 -->
 					<th>가격</th>
 					<th>수량</th>
@@ -311,13 +316,13 @@
 						<a href="#"><img class="shoppingmal" src = "/item/image?itemNo=${cart.cartItemNo}" width="50px"></a> <!-- 임시 이미지 -->
 					</td>
 			                <td>${cart.itemName}</td> 
-			                <td>${cart.itemColor}</td>
+			                <td>${cart.itemColor} / ${cart.itemSize}</td>
 			                <td><input type="text" name="cartList[${status.index}].cartItemPrice" value="${cart.itemPrice}" class="field" readonly> 원
 			                <span class="hidden">${cart.itemPrice}</span>
 			                <span class="hidden itemCnt-data">${cart.itemStock}</span></td><!-- 재고값을 el로 받아 제이쿼리에 적용 -->
 					<td>
 						<span>
-							<input type="text"  name="cartList[${status.index}].cartItemCnt" class="cartCntInput" value="${cart.cartCnt}" size="2">
+							<input type="text"  name="cartList[${status.index}].cartItemCnt" class="cartCntInput" value="${cart.cartCnt}" size="2" readonly>
 							<input type="hidden" name="cartList[${status.index}].buyer" value="${sessionScope.createdUser}">
 							<input type="hidden" name="cartList[${status.index}].cartNo" value="${cart.cartNo}">
 							<button type="button" class="btn-cnt btn-up"><i class="fa-solid fa-angle-up Icon_carCnt"></i></button>
