@@ -1,6 +1,8 @@
 package com.kh.oneTrillionCompany.controller;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -88,6 +90,9 @@ public class MemberController {
 	public String mypage(HttpSession session, Model model) {
 		String createdUser = (String) session.getAttribute("createdUser");
 		MemberDto memberDto = memberDao.selectOne(createdUser);
+		if(memberDto.getMemberBirth()==null) {} 
+		else 
+		memberDto.setMemberBirth(memberDto.getMemberBirth().substring(0,10));
 		model.addAttribute("memberDto", memberDto);
 		model.addAttribute("blockList", blockDao.selectBlockHistory(createdUser));	//차단 내역 확인
 		return "/WEB-INF/views/member/mypage.jsp";
@@ -145,10 +150,6 @@ public class MemberController {
 									@ModelAttribute MemberDto inputDto) {
 			//기존 정보를 조회
 			String memberId = (String)session.getAttribute("createdUser");
-			MemberDto findDto = memberDao.selectOne(memberId);
-			//비밀번호 검사
-			boolean isValid = inputDto.getMemberPw().equals(findDto.getMemberPw());
-			if(isValid == false) return "redirect:change?error";
 			//변경처리
 			inputDto.setMemberId(memberId);//아이디 추가
 			memberDao.updateMember(inputDto);

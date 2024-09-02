@@ -45,6 +45,19 @@
 	
 	<div class = "row center"> 
 		<table class="table table-border-top">
+		
+		<tr  class="table-border-middle">
+			<th class="table-border-center">
+				<div class="row left ps-30">
+					<span>아이디</span>
+				</div>
+			</th>
+			<td>
+				<div class="row center">
+					<span>	${memberDto.memberId}</span>
+				</div>
+			</td>		
+		</tr>		
 		<tr  class="table-border-middle">
 			<th class="table-border-center">
 				<div class="row left ps-30">
@@ -85,6 +98,16 @@
 			</th>
 			<td>
 				<span>${memberDto.memberBirth}</span>
+			</td>
+		</tr>
+		<tr class="table-border-middle">
+			<th class="table-border-center">
+				<div class="row left ps-30">
+					<span>연락처</span>
+				</div>				
+			</th>
+			<td>
+				<span>${memberDto.memberContact}</span>
 			</td>
 		</tr>
 		<tr class="table-border-middle">
