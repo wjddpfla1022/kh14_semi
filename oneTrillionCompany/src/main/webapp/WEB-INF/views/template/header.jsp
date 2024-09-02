@@ -172,12 +172,12 @@ session 수
 			<div class="row">
 				<ul class="menu top-menu">
 					<!-- 구분선 -->
-					<li><a style="font-weight: bold;" href="#">고객센터</a></li>
+				<!--	<li><a style="font-weight: bold;" href="#">고객센터</a></li> -->
 					<li><a style="font-weight: bold;" href="localhost:8080" id="favorite"><i class="fa-solid fa-bookmark"></i>즐겨찾기</a></li>
 					<li class="right-menu"><a href="/member/login" style="font-weight:bolder;">로그인</a></li>
 					<li><a style="font-weight: bold;" href="/member/join" style="font-weight:bolder;">회원가입</a></li>
 					<li><a style="font-weight: bold;" href="/qna/list">1:1문의</a></li>
-					<li><a style="font-weight: bold;" href="#">커뮤니티</a>
+					<!-- <li><a style="font-weight: bold;" href="#">커뮤니티</a> -->
 						<ul>
 							<li><a href="#">항목1</a></li>
 						</ul></li>
@@ -193,7 +193,7 @@ session 수
 				<div class="row">
 					<ul class="menu top-menu">
 						<!-- 구분선 -->
-						<li><a style="font-weight: bold;" href="#">고객센터</a></li>
+	
 						<li><a href="localhost:8080" id="favorite">즐겨찾기</a></li>
 						<li class="right-menu"><a style="font-weight: bold;" href="/member/logout">로그아웃</a></li>
 						<li><a style="font-weight: bold;" href="/order/list">주문 / 배송조회</a></li>
@@ -216,7 +216,6 @@ session 수
 				<div class="row">
 					<ul class="menu top-menu">
 						<!-- 구분선 -->
-						<li><a style="font-weight: bold;" href="#">고객센터</a></li>
 						<li><a style="font-weight: bold;" href="localhost:8080" id="favorite">즐겨찾기</a></li>
 						<li class="right-menu"><a style="font-weight: bold;" href="/member/logout">로그아웃</a></li>
 						<li><a style="font-weight: bold;" href="#">주문 / 배송조회</a></li>
@@ -240,11 +239,10 @@ session 수
 				<div class="row">
 					<ul class="menu top-menu">
 						<!-- 구분선 -->
-						<li><a style="font-weight: bold;" href="#">고객센터</a></li>
 						<li><a style="font-weight: bold;" href="localhost:8080" id="favorite">즐겨찾기</a></li>
 						<li><a style="font-weight: bold;" href="#">바로가기</a></li>
 						<li class="right-menu"><a href="/member/logout">로그아웃</a></li>
-						<li><a style="font-weight: bold;" href="#">주문 / 배송조회</a></li>
+					<!--<li><a style="font-weight: bold;" href="#">주문 / 배송조회</a></li>  -->	
 						<li><a style="font-weight: bold;" href="/review/list">상품후기</a></li>
 						<li><a href="/member/mypage"><i class="fa-solid fa-user"></i></a></li>
 						<li><a style="font-weight: bold;" href="#">관리자 메뉴</a>
@@ -365,20 +363,6 @@ session 수
 				<!-- 구분선 -->
 				<li class="right-menu">
         			<button class="btn btn-open-modal btn-positive"><i class="fa-solid fa-magnifying-glass"></i></button></li>
-				<li class="right-menu"><a href="#">문의</a>
-					<ul>
-						<li><a href="#">항목1</a>
-							<ul>
-								<li><a href="#">상세항목1</a></li>
-							</ul>
-						</li>
-						<li><a href="#">항목2</a>
-							<ul>
-								<li><a href="#">상세항목1</a></li>
-							</ul>
-						</li>
-					</ul>
-				</li>
 				
 				<!-- 구분선 -->
 			</ul>

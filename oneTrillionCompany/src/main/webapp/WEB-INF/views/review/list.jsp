@@ -61,9 +61,9 @@
 		<%-- 비회원일 때와 회원일 때 다르게 보이도록 처리  --%>
 	<c:choose>
 		<c:when test="${sessionScope.createdUser != null}">
-			<div class="row right mt-30">
+<!--	<div class="row right mt-30">
 				<a href="write" class="btn btn-positive" style="text-decoration: none">리뷰 등록</a>
-			</div>
+			</div>  -->
 		</c:when>
 		<c:otherwise>
 			<div class="row right">
