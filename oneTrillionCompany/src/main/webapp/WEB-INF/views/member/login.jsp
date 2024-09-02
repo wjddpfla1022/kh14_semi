@@ -69,9 +69,11 @@ $(function() {
 		</div>
 		<div class="row w-100 left">
 			<label>아이디</label>
-			<input type="text" name="memberId" class="w-100 field"> 
+
+			<input type="text" name="memberId" class="w-100 field" value="${cookie.saveId.value}"> 			
 			<div class="success-feedback"></div>
 			<div class="fail-feedback">아이디를 입력해주세요</div>
+
 		</div>
 		<div class="row w-100 left">
 			<label>비밀번호</label>
@@ -84,6 +86,16 @@ $(function() {
 				<h3 style = "color:red">아이디 또는 비밀번호가 잘못되었습니다.</h3>
 			</c:if>
 		</div>
+		
+			<%--아이디 쿠키 만들기 체크박스--%>
+		<div class="row left">
+			<label>
+				<input type="checkbox" name="remember"
+				<c:if test="${cookie.saveId != null}">checked</c:if>>
+					<span>아이디 저장</span>
+			</label>
+		</div>
+		
 		<div class="row">
 			<button type="submit" class="btn btn-positive btn-submit">로그인</button>
 			<div class="fail-feedback"></div>
