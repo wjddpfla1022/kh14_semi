@@ -144,8 +144,7 @@
 							<div class="float-box p-10 mx-30">
 								<div class="row">${memberDto.memberName}</div>
 								<div class="row">
-									${memberDto.memberContact} <input type="checkbox"> 안심번호
-									사용
+									${memberDto.memberContact}
 								</div>
 								<div class="area-address">
 									<c:choose>
@@ -159,10 +158,8 @@
 
 								</div>
 								<hr>
-								<div class="row">
-									<input class="field" type="checkbox"> 배송메모 개별 입력
-								</div>
-								<div class="row">
+								<div> 배송메모  </div>
+								<div >
 									<div class="container request-detail">
 										<select class="field w-100" name="order_memo">
 											<option value="선택 안 함">선택 안 함</option>
@@ -225,7 +222,7 @@
 							<table class="order-detail-table">
 								<thead>
 									<tr>
-										<th class="center" style="width: 25%"></th>
+										<th class="center my-10" style="width: 25%;"></th>
 										<th class="center" style="width: 50%"></th>
 										<th class="center" style="width: 25%"></th>
 										<th></th>
