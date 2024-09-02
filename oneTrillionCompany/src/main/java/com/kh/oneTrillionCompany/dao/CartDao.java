@@ -60,6 +60,7 @@ public class CartDao {
 		};
 		return jdbcTemplate.update(sql,data) > 0;	
 	}
+//	public boolean updateCart()
 	
 	//장바구니 목록
 	public List<CartDto> selectList(String memberId) {
