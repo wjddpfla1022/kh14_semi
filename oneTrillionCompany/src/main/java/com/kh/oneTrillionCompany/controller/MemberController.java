@@ -132,6 +132,7 @@ public class MemberController {
 		return "redirect:passwordFinish";
 	}
 	
+	
 	@RequestMapping("/passwordFinish")
 	public String passwordFinish() {
 		return "redirect:login";
