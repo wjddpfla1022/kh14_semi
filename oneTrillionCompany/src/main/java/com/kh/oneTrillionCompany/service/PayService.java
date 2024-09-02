@@ -34,8 +34,9 @@ public class PayService {
 		int payment=ordersDao.selectOne(orderNo).getOrderPrice();
 		String memberId=(String) session.getAttribute("createdUser");
 		boolean sessionVaild=list.get(0).getBuyer().equals(memberId); //세션 유효성 검사
-		if(list.size()==0&&!sessionVaild) 
+		if(list.size()==0&&!sessionVaild) {
 			throw new TargetNotFoundException("장바구니를 확인해주세요");
+		}
 		//결제
 		memberDao.payment(memberId, payment);
 		//주문서 생성(detail)
@@ -46,6 +47,7 @@ public class PayService {
 			//재고 차감
 			itemDao.deductItem(detailList.get(i).getOrderDetailCnt(),detailList.get(i).getOrderDetailItemNo());
 		}
+		System.out.println("okay");
 		orderDetailDao.payCompleteStatus(detailNoList);
 		return "redirect:payFinish?orderNo="+orderNo;
 	}

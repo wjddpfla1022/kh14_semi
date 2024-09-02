@@ -131,7 +131,10 @@ public class ItemDao {
 				+ "where item_no = ? and item_cnt >= ?";
 		Object[] data= {cnt,itemNo, cnt};
 		boolean isEnough=jdbcTemplate.update(sql, data)>0;
-		if(!isEnough) throw new TargetNotFoundException("재고가 부족합니다");
+		if(!isEnough) {
+			System.out.println("재고부족!");
+			throw new TargetNotFoundException("재고가 부족합니다");
+		}
 		return isEnough;
 	}
 	//페이징 (관리자 전용)
