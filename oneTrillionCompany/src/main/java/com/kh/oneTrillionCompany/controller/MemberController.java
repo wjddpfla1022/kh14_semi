@@ -91,7 +91,7 @@ public class MemberController {
 		session.setAttribute("createdUser", memberId);
 		session.setAttribute("createdLevel", memberDto.getMemberRank());
 		memberDao.updateMemberLogin(memberId);
-		
+		 
 		return "redirect:/";
 		
 	}
