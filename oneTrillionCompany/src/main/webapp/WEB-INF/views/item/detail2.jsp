@@ -325,8 +325,7 @@ a#smallShirts:hover {
 			</div>
 
 			<hr>
-
-
+			
 			<div class="row mb-30">
 				<div class="row flex-box column-2">
 					<div class="left">
@@ -356,15 +355,21 @@ a#smallShirts:hover {
 					</div>
 				</div>
 				<hr>
-
+				
 				<div class="row center">
-					<div style="font-size: 15px;" class="left">색상</div>
+					<div style="font-size: 15px; font-weight: bolder;"><i class="fa-solid fa-palette"></i>
+					<b style="color: red; font-weight: bolder; font-size: 14px">C</b>
+					<b style="color: orange; font-weight: bolder; font-size: 14px">O</b>
+					<b style="color: yellow; font-weight: bolder; font-size: 14px">L</b>
+					<b style="color: green; font-weight: bolder; font-size: 14px">O</b>
+					<b style="color: blue; font-weight: bolder; font-size: 14px">R</b></div>
 				</div>
+				
 				<div class="left">
 					<span style="font-size: 11px; color: #999;">[필수] 옵션을 선택해 주세요</span>
 				</div>
 				<div class="row">
-					<select name="itemColor" class="field w-100"
+					<select name="itemColor" class="field w-100" style="border-radius: 20px;"
 						oninput="checkItemType();">
 						<option value="">선택하세요</option>
 						<option value="black">검정</option>
@@ -409,9 +414,9 @@ a#smallShirts:hover {
 				   <!-- 수량 선택추가* -->
 	                        <div class="left my-0">
 	                        	<span class="input_cartCnt">
-									<input type="text"  name="cartCnt" size="2"><span class="itemCnt-data hidden">${itemDto.itemCnt}</span>
-									<button type="button" class="btn-cnt btn-up"><i class="fa-solid fa-angle-up Icon_carCnt"></i></button>
-									<button type="button" class="btn-cnt btn-down"><i class="fa-solid fa-angle-down Icon_carCnt"></i></button>
+									<input type="text"  name="cartCnt" size="2" style="border-radius: 30px"><span class="itemCnt-data hidden">${itemDto.itemCnt}</span>
+									<button type="button" class="btn-cnt btn-up" style="background-color: white; border-color: white;"><i class="fa-solid fa-angle-up Icon_carCnt"></i></button>
+									<button type="button" class="btn-cnt btn-down" style="background-color: white; border-color: white;"><i class="fa-solid fa-angle-down Icon_carCnt"></i></button>
 								</span>
 	                        </div>
 	                     </div>
