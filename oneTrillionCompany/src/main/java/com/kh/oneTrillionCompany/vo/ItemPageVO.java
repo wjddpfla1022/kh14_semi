@@ -11,7 +11,7 @@ public class ItemPageVO {
 	private int page=1;	//페이지 번호
 	private int size=16;	//1페이지의 크기
 	private int count;	//총 데이터 개수
-	private int blockSIze=10;		//한 블럭 구역의 크기
+	private int blockSize=10;		//한 블럭 구역의 크기
 	
 	//계산 메소드(가상의 Getter 메소드) 추가
 	public boolean isSearch() {
@@ -27,7 +27,7 @@ public class ItemPageVO {
 	
 	//네비게이터를 위한 메소드
 	public int getStartBlock() {
-		return (this.page-1) / this.blockSIze * this.blockSIze + 1;
+		return (this.page-1) / this.blockSize * this.blockSize + 1;
 	}
 	public boolean isFirst() {
 		return this.getStartBlock() <= 1;
@@ -41,8 +41,14 @@ public class ItemPageVO {
 	public int getLastBlock(){	//마지막 블록 번호
 		return (this.count -1) / this.size +1;
 	}
+//	// 마지막 블록 계산 수정
+//	public int getLastBlock() {
+//	    int totalBlocks = (int) Math.ceil((double) this.count / this.size);
+//	    return totalBlocks;
+//	}
+	
 	public int getFinishBlock() {	//표시할 마지막 블록 번호
-		int finishBlock = this.getStartBlock() + this.blockSIze -1;
+		int finishBlock = this.getStartBlock() + this.blockSize -1;
 		return Math.min(finishBlock, this.getLastBlock());
 	}
 	public boolean isLast() {		//마지막 페이지 구역인가요?
