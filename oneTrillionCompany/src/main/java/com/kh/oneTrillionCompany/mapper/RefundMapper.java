@@ -17,6 +17,7 @@ public class RefundMapper implements RowMapper<RefundDto> {
 		refundDto.setRefundOrderDetailNo(rs.getInt("refund_order_detail_no"));
 		refundDto.setRefundMemo(rs.getString("refund_memo"));
 		refundDto.setRefundDate(rs.getDate("refund_Date"));
+		refundDto.setRefundType(rs.getString("refund_type"));
 		
 		return refundDto;
 	}
