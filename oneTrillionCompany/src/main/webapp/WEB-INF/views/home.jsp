@@ -44,26 +44,39 @@ body {
 	height: 2000px;
 }
 
-.sideBann {
-	position: absolute;
-}
+    .sideBann {
+      position: relative;
+      transform: translateY(-200px);
+    }
 
-   .sidebar-toggle {
-        top: 330px !important;
-        left: 10px !important;
-        box-shadow: 0 0 0px 0px #2d3436 !important;
-      }
-         #ck-sidebar + .sidebar {
-        background-color: white !important;
-   
-      }
+    .sidebar {
+      transform: translateX(-220px); /* 기본적으로 오른쪽으로 200px 이동 */
+      transition: transform 0.2s ease-out; /* 애니메이션 효과 */
+      position: absolute; /* 사이드바를 부모 요소에 상대적으로 위치시키기 */
+      width: 250px; /* 사이드바의 너비 */
+      height: 100vh; /* 사이드바의 높이 */
+      background-color: #333; /* 사이드바 배경색 */
+      color: white; /* 사이드바 글자 색 */
+    }
+
+    #ck-sidebar:checked + .sidebar {
+      transform: translateX(0); /* 체크된 경우 위치를 원래로 복원 */
+    }
+
+    /* 사이드바를 열고 닫는 토글 버튼 스타일링 */
+    .sidebar-toggle {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      cursor: pointer;
+    }
 </style>
 
 <script type="text/javascript">
 	$(function() {
 		// 기본 위치(top)값
 		var floatPosition = parseInt($(".sideBann").css('top'));
-
+		
 		// scroll 인식
 		$(window).scroll(function() {
 
@@ -116,47 +129,43 @@ body {
 </head>
 <body>
 
-<!-- 보는 시점에 사이드바 배치 -->
-	<div class="sideBann">
-	<!--사이드바 배치-->
-	<label for="ck-sidebar" class="sidebar-toggle"> 
-	<i class="fa-solid fa-angle-right fa-2x"></i>
-	</label>
-	<input type="checkbox" id="ck-sidebar">
-	
-	<div class="sidebar">
-		<div class="row mt-50">
-		<img src="http://via.placeholder.com/250.png" width="100%">
-		</div>
-	
-		<div class="row center">
-			<b style="box-shadow: 0 0 1px 0;">ONE 공지</b><b style="box-shadow: 0 0 1px 0">ONE 공지</b><br>
-			<b style="box-shadow: 0 0 1px 0">ONE 공지</b><b style="box-shadow: 0 0 1px 0">ONE 공지</b>
-		</div><hr>
-		
-		<div class="row">
-		<span style="font-weight:bolder; font-size: 12px">무통장 안내</span><br><br>
-		<span style="font-weight:bolder; font-size: 12px">국민은행 <b style="font-size: 11px; color: #999;">000000-00-000000</b></span><br>
-		<span style="font-weight:bolder; font-size: 12px">예금주 <b style="font-size: 11px; color: #999;">주식회사 패션홀릭</b></span><br><br>
-		<span class="field field-underline" style="font-size: 11px; color: #999;">* 입금 시 입금자명과 금액을</span><br>
-		<span class="field field-underline" style="font-size: 11px; color: #999;">꼭 확인해주세요.</span><br>
-		<span style="font-size: 11px; color: #999;">무통장 입금 자동확인까지</span><br>
-		<span style="font-size: 11px; color: #999;">30분 정도 소요 됩니다.</span><br>
-		</div><br><br><hr>
-	
-	<div class="row">
-		<span>고객센터</span>
-	</div>
-	<div class="row">
-		<span style="font-weight: bolder;">010-1234-5678</span>
-	</div>
-	<div class="row">
-		<span style="font-size: 11px">월요일 - 금요일 09:30 - 18:30</span><br>
-		<span style="font-size: 11px">점심시간 11:30 - 12:30</span>
-	</div> 
-	
-	</div>
-</div>
+<div class="sideBann">
+    <!-- 사이드바를 제어하는 체크박스 -->
+    <input type="checkbox" id="ck-sidebar" style="display: none;">
+
+    <!-- 사이드바 -->
+    <div class="sidebar">
+      <label for="ck-sidebar" class="sidebar-toggle"> 
+        <i class="fa-solid fa-angle-right fa-2x"></i>
+      </label>
+      <div class="row mt-50">
+        <img src="http://via.placeholder.com/250.png" width="100%">
+      </div>
+      <div class="row center">
+        <b style="box-shadow: 0 0 1px 0;">ONE 공지</b><b style="box-shadow: 0 0 1px 0">ONE 공지</b><br>
+        <b style="box-shadow: 0 0 1px 0">ONE 공지</b><b style="box-shadow: 0 0 1px 0">ONE 공지</b>
+      </div><hr>
+      <div class="row">
+        <span style="font-weight:bolder; font-size: 12px">무통장 안내</span><br><br>
+        <span style="font-weight:bolder; font-size: 12px">국민은행 <b style="font-size: 11px; color: #999;">000000-00-000000</b></span><br>
+        <span style="font-weight:bolder; font-size: 12px">예금주 <b style="font-size: 11px; color: #999;">주식회사 패션홀릭</b></span><br><br>
+        <span class="field field-underline" style="font-size: 11px; color: #999;">* 입금 시 입금자명과 금액을</span><br>
+        <span class="field field-underline" style="font-size: 11px; color: #999;">꼭 확인해주세요.</span><br>
+        <span style="font-size: 11px; color: #999;">무통장 입금 자동확인까지</span><br>
+        <span style="font-size: 11px; color: #999;">30분 정도 소요 됩니다.</span><br>
+      </div><br><br><hr>
+      <div class="row">
+        <span>고객센터</span>
+      </div>
+      <div class="row">
+        <span style="font-weight: bolder;">010-1234-5678</span>
+      </div>
+      <div class="row">
+        <span style="font-size: 11px">월요일 - 금요일 09:30 - 18:30</span><br>
+        <span style="font-size: 11px">점심시간 11:30 - 12:30</span>
+      </div> 
+    </div>
+  </div>
 
 	<div class="container w-600 my-50">
 		<div class="row center">
