@@ -14,37 +14,70 @@
 <!-- 자바스크립트 작성 영역 -->
 
 <style>
-        .btn.btn-more{
-            background-color: rgb(196, 227, 255);
-            font-size: 16px;
-            padding: 1.5em;
-            padding-left: 3em;
-            padding-right: 3em;
-            padding-bottom: 2.5em;
-            margin-bottom: 3px;
-            border: none;
-        }
+.btn.btn-more {
+	background-color: rgb(196, 227, 255);
+	font-size: 16px;
+	padding: 1.5em;
+	padding-left: 3em;
+	padding-right: 3em;
+	padding-bottom: 2.5em;
+	margin-bottom: 3px;
+	border: none;
+}
 
-        .image-align {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 50px;
-                        
-        }
-        .image-align > a {
-            text-decoration: none;
-            color: black;
-            
-        }
+.image-align {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 50px;
+}
 
-        a > h4{
-            margin: 0.3em;
-        }
-        
-     </style>
+.image-align>a {
+	text-decoration: none;
+	color: black;
+}
+
+a>h4 {
+	margin: 0.3em;
+}
+
+body {
+	height: 2000px;
+}
+
+.sideBann {
+	position: absolute;
+}
+
+   .sidebar-toggle {
+        top: 330px !important;
+        left: 10px !important;
+        box-shadow: 0 0 0px 0px #2d3436 !important;
+      }
+         #ck-sidebar + .sidebar {
+        background-color: white !important;
+   
+      }
+</style>
 
 <script type="text/javascript">
 	$(function() {
+		// 기본 위치(top)값
+		var floatPosition = parseInt($(".sideBann").css('top'));
+
+		// scroll 인식
+		$(window).scroll(function() {
+
+			// 현재 스크롤 위치
+			var currentTop = $(window).scrollTop();
+			var bannerTop = currentTop + floatPosition + "px";
+
+			//이동 애니메이션
+			$(".sideBann").stop().animate({
+				"top" : bannerTop
+			}, 0);
+
+		});
+
 		// var swiper = new Swiper(선택자, 옵션객체);
 		var swiper = new Swiper('.swiper', {
 
@@ -82,6 +115,49 @@
 </script>
 </head>
 <body>
+
+<!-- 보는 시점에 사이드바 배치 -->
+	<div class="sideBann">
+	<!--사이드바 배치-->
+	<label for="ck-sidebar" class="sidebar-toggle"> 
+	<i class="fa-solid fa-angle-right fa-2x"></i>
+	</label>
+	<input type="checkbox" id="ck-sidebar">
+	
+	<div class="sidebar">
+		<div class="row mt-50">
+		<img src="http://via.placeholder.com/250.png" width="100%">
+		</div>
+	
+		<div class="row center">
+			<b style="box-shadow: 0 0 1px 0;">ONE 공지</b><b style="box-shadow: 0 0 1px 0">ONE 공지</b><br>
+			<b style="box-shadow: 0 0 1px 0">ONE 공지</b><b style="box-shadow: 0 0 1px 0">ONE 공지</b>
+		</div><hr>
+		
+		<div class="row">
+		<span style="font-weight:bolder; font-size: 12px">무통장 안내</span><br><br>
+		<span style="font-weight:bolder; font-size: 12px">국민은행 <b style="font-size: 11px; color: #999;">000000-00-000000</b></span><br>
+		<span style="font-weight:bolder; font-size: 12px">예금주 <b style="font-size: 11px; color: #999;">주식회사 패션홀릭</b></span><br><br>
+		<span class="field field-underline" style="font-size: 11px; color: #999;">* 입금 시 입금자명과 금액을</span><br>
+		<span class="field field-underline" style="font-size: 11px; color: #999;">꼭 확인해주세요.</span><br>
+		<span style="font-size: 11px; color: #999;">무통장 입금 자동확인까지</span><br>
+		<span style="font-size: 11px; color: #999;">30분 정도 소요 됩니다.</span><br>
+		</div><br><br><hr>
+	
+	<div class="row">
+		<span>고객센터</span>
+	</div>
+	<div class="row">
+		<span style="font-weight: bolder;">010-1234-5678</span>
+	</div>
+	<div class="row">
+		<span style="font-size: 11px">월요일 - 금요일 09:30 - 18:30</span><br>
+		<span style="font-size: 11px">점심시간 11:30 - 12:30</span>
+	</div> 
+	
+	</div>
+</div>
+
 	<div class="container w-600 my-50">
 		<div class="row center">
 			<h1 class="mt-30 mb-50">이달의 상품</h1>
@@ -133,16 +209,25 @@
 			<h2>Best Item</h2>
 		</div>
 		<div class="row image-align">
-            <a href="#"><img src="http://via.placeholder.com/200.png"><h4>BestItem</h4></h4></a>
-            <a href="#"><img src="http://via.placeholder.com/200.png"><h4>BestItem</h4></a>
-            <a href="#"><img src="http://via.placeholder.com/200.png"><h4>BestItem</h4></a>
-            <a href="#"><img src="http://via.placeholder.com/200.png"><h4>BestItem</h4></a>
-            <a href="#"><img src="http://via.placeholder.com/200.png"><h4>BestItem</h4></a>
-            <a href="#"><img src="http://via.placeholder.com/200.png"><h4>BestItem</h4></a>
-            <a href="#"><img src="http://via.placeholder.com/200.png"><h4>BestItem</h4></a>
-            <a href="#"><img src="http://via.placeholder.com/200.png"><h4>BestItem</h4></a>
-            <a href="#"><img src="http://via.placeholder.com/200.png"><h4>BestItem</h4></a>
-        </div>
+			<a href="#"><img src="http://via.placeholder.com/200.png">
+			<h4>BestItem</h4>
+				</h4></a> <a href="#"><img src="http://via.placeholder.com/200.png">
+			<h4>BestItem</h4></a> <a href="#"><img
+				src="http://via.placeholder.com/200.png">
+			<h4>BestItem</h4></a> <a href="#"><img
+				src="http://via.placeholder.com/200.png">
+			<h4>BestItem</h4></a> <a href="#"><img
+				src="http://via.placeholder.com/200.png">
+			<h4>BestItem</h4></a> <a href="#"><img
+				src="http://via.placeholder.com/200.png">
+			<h4>BestItem</h4></a> <a href="#"><img
+				src="http://via.placeholder.com/200.png">
+			<h4>BestItem</h4></a> <a href="#"><img
+				src="http://via.placeholder.com/200.png">
+			<h4>BestItem</h4></a> <a href="#"><img
+				src="http://via.placeholder.com/200.png">
+			<h4>BestItem</h4></a>
+		</div>
 	</div>
 	</div>
 	</div>
@@ -152,16 +237,25 @@
 			<h2>상의 Best</h2>
 		</div>
 		<div class="row image-align">
-            <a href="#"><img src="http://via.placeholder.com/200.png"><h4>상의</h4></a>
-            <a href="#"><img src="http://via.placeholder.com/200.png"><h4>상의</h4></a>
-            <a href="#"><img src="http://via.placeholder.com/200.png"><h4>상의</h4></a>
-            <a href="#"><img src="http://via.placeholder.com/200.png"><h4>상의</h4></a>
-            <a href="#"><img src="http://via.placeholder.com/200.png"><h4>상의</h4></a>
-            <a href="#"><img src="http://via.placeholder.com/200.png"><h4>상의</h4></a>
-            <a href="#"><img src="http://via.placeholder.com/200.png"><h4>상의</h4></a>
-            <a href="#"><img src="http://via.placeholder.com/200.png"><h4>상의</h4></a>
-            <a href="#"><img src="http://via.placeholder.com/200.png"><h4>상의</h4></a>
-        </div>
+			<a href="#"><img src="http://via.placeholder.com/200.png">
+			<h4>상의</h4></a> <a href="#"><img
+				src="http://via.placeholder.com/200.png">
+			<h4>상의</h4></a> <a href="#"><img
+				src="http://via.placeholder.com/200.png">
+			<h4>상의</h4></a> <a href="#"><img
+				src="http://via.placeholder.com/200.png">
+			<h4>상의</h4></a> <a href="#"><img
+				src="http://via.placeholder.com/200.png">
+			<h4>상의</h4></a> <a href="#"><img
+				src="http://via.placeholder.com/200.png">
+			<h4>상의</h4></a> <a href="#"><img
+				src="http://via.placeholder.com/200.png">
+			<h4>상의</h4></a> <a href="#"><img
+				src="http://via.placeholder.com/200.png">
+			<h4>상의</h4></a> <a href="#"><img
+				src="http://via.placeholder.com/200.png">
+			<h4>상의</h4></a>
+		</div>
 	</div>
 </body>
 

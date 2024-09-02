@@ -120,6 +120,10 @@ a#smallShirts:hover {
 		$(".btn-toggle").click(function() {
 			$(".target").slideToggle();
 		});
+		
+		$(".btn-review-toggle").click(function() {
+			$(".review-target").slideToggle();
+		});
 
 		/*에러나서 잠시 막아뒀습니다*/
 		/* //별점
@@ -310,13 +314,18 @@ a#smallShirts:hover {
 				<hr>
 
 				<div class="row center">
-					<div style="font-size: 15px;">색상</div>
+					<div style="font-size: 15px; font-weight: bolder;"><i class="fa-solid fa-palette"></i>
+					<b style="color: red; font-weight: bolder; font-size: 14px">C</b>
+					<b style="color: orange; font-weight: bolder; font-size: 14px">O</b>
+					<b style="color: yellow; font-weight: bolder; font-size: 14px">L</b>
+					<b style="color: green; font-weight: bolder; font-size: 14px">O</b>
+					<b style="color: blue; font-weight: bolder; font-size: 14px">R</b></div>
 				</div>
 				<div class="left">
 					<span style="font-size: 11px; color: #999;">[필수] 옵션을 선택해 주세요</span>
 				</div>
 				<div class="row">
-					<select name="itemColor" class="field w-100"
+					<select name="itemColor" class="field w-100" style="border-radius: 20px;"
 						oninput="checkItemType();">
 						<option value="">선택하세요</option>
 						<option value="black">검정</option>
@@ -334,9 +343,9 @@ a#smallShirts:hover {
 				   <!-- 수량 선택추가* -->
 	                        <div class="left my-0">
 	                        	<span class="input_cartCnt">
-									<input type="text"  name="cartCnt" size="2"><span class="itemCnt-data">${itemDto.itemCnt}</span>
-									<button type="button" class="btn-cnt btn-up"><i class="fa-solid fa-angle-up Icon_carCnt"></i></button>
-									<button type="button" class="btn-cnt btn-down"><i class="fa-solid fa-angle-down Icon_carCnt"></i></button>
+									<input  type="text"  name="cartCnt" size="2" style="border-radius: 30px"><span class="itemCnt-data">${itemDto.itemCnt}</span>
+									<button type="button" class="btn-cnt btn-up" style="background-color: white; border-color: white;"><i class="fa-solid fa-angle-up Icon_carCnt"></i></button>
+									<button type="button" class="btn-cnt btn-down" style="background-color: white; border-color: white;"><i class="fa-solid fa-angle-down Icon_carCnt"></i></button>
 								</span>
 	                        </div>
 	                     </div>
@@ -354,35 +363,40 @@ a#smallShirts:hover {
 							(60,000원 이상 구매 시 무료)</b>
 					</p>
 				</div>
-
-				<div class="row">
-					<button type="submit" class="btn w-100"
-						style="color: white; background-color: black;">구매하기</button>
-					<!-- 장바구니버튼 -->
-					<button type="button" class="btn w-100 btn-add-cart"
-						style="color: white; background-color: black;">장바구니</button>
-				</div>
-			</div>
-
 		</div>
+			</div>
+	
+				<div class="row flex-box column-2">
+					<div class="left">
+					</div>
+					<div class="right">
+						<button type="submit" class="btn w-100"
+						style="color: white; background-color: black;">구매하기</button>
+						<!-- 장바구니버튼 -->
+						<button type="button" class="btn w-100 btn-add-cart"
+						style="color: white; background-color: black;">장바구니</button>
+					</div>
+				</div>		
+				
+			</div>
 
 
 
 
 	<div class="row center">
 	<div class="row flex-box column-2">
-		<div class="center">
-			<h3 style="font-weight: bolder;">REVIEW ( ${list.size()} )</h3>
+		<div class="row center">
+				<h3 style="font-weight: bolder;">REVIEW ( ${list.size()} )</h3>
 		</div>
 
-		<div class="center">
-			<a
-				href="/review/list?column=review_item_no&keyword=${itemDto.itemNo}"
-				class="btn" style="font-weight: bolder; border-color: white; background-color: white">상품 리뷰 <i class="fa-solid fa-sort-down"></i></a>
+		<div class="row center">
+		<button type="button" class="btn btn-review-toggle"  style="font-weight: bolder; border-color: white; background-color: white; margin-top: 9px;">상품 리뷰 <i class="fa-solid fa-sort-down"></i></button>		
+			</div>		
 		</div>
-	</div>
-	</div>
-
+		
+	<div class="row center">
+		<h3 class="review-target"><jsp:include page="/WEB-INF/views/template/reviewdetail.jsp"></jsp:include></h3>		
+	</div>	
 <hr>
 <div class="left">
 	<div class="test-score2" data-max="5" data-rate="3"></div>
@@ -397,7 +411,6 @@ a#smallShirts:hover {
 </div>
 	</div>
 </body>
-
 
 <jsp:include page="/WEB-INF/views/template/size.jsp"></jsp:include>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
