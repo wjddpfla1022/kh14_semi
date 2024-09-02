@@ -48,9 +48,6 @@
 	.hidden{
 		display: none !important; 
 	}
-	.itemCnt-data{ 		
-		display: none !important; 
-	}
 	.cartCnt-data{
 		display: none !important;
 	}
@@ -178,11 +175,12 @@
         $(".btn-up, .btn-down").click(function() {
             // 현재 버튼이 속한 행의 수량 및 재고 값 가져오기
             var row = $(this).closest('tr'); // 현재 버튼이 속한 행 
-   			var cartCntInput = row.find("[name=cartCntInput]"); // 현재 행의 수량 입력 필드
+   			var cartCntInput = row.find(".cartCntInput"); // 현재 행의 수량 입력 필드
             var cartCntValue = parseInt(cartCntInput.val(), 10); //cartCnt 값이 들어감
             var itemCntValue = parseInt(row.find(".itemCnt-data").text(), 10); //재고
-
-
+			
+            console.log(cartCntInput.val()+" - "+itemCntValue);
+	
             // 버튼에 따른 수량 조절
             if ($(this).hasClass('btn-up')) { 
             	// 장바구니 최대 수량(재고기준)
@@ -232,7 +230,7 @@
 	        });
         }
         
-      //장바구니에서 주문으로 order list 저장 통신 - 우선 1개만 구현
+ /*      //장바구니에서 주문으로 order list 저장 통신 - 우선 1개만 구현
     	$,(".btn-order").click(function()){
     		 //장바구니에서 주문 목록으로 넘어갈 VO 생성
     		var list = [];
@@ -255,7 +253,7 @@
     				console.log("성공")
     			}
     		});
-    	});
+    	}); */
 	});
 	
 </script>
@@ -276,7 +274,7 @@
 	
 	<!-- 결과가 있을때  -->
 	<div class="row cart-item-cnt">
-		<h3>담긴 상품(${cartCnt})</h3>
+		<h3>담긴 상품(${cartItemCnt})</h3>
 	</div>
 	<!-- 장바구니 목록 -->
 		<table border="1" width="1200">
@@ -314,12 +312,12 @@
 					</td>
 			                <td>${cart.itemName}</td> 
 			                <td>${cart.itemColor}</td>
-			                <td><input type="text" name="cartList[${status.index}].cartItemPrice" value="${cart.itemPrice}" class="field" readonly> 원<span class="itemCnt-data">${cart.cartCnt}</span></td><!-- 재고값을 el로 받아 제이쿼리에 적용 -->
+			                <td><input type="text" name="cartList[${status.index}].cartItemPrice" value="${cart.itemPrice}" class="field" readonly> 원
 			                <span class="hidden">${cart.itemPrice}</span>
-			                <td>${cart.cartCnt}개 <span class="itemCnt-data">${cart.cartCnt}</span></td><!-- 재고값을 el로 받아 제이쿼리에 적용 -->
+			                <span class="hidden itemCnt-data">${cart.itemStock}</span></td><!-- 재고값을 el로 받아 제이쿼리에 적용 -->
 					<td>
 						<span>
-							<input type="text"  name="cartList[${status.index}].cartItemCnt"  value="${cart.cartCnt}" readonly size="2">
+							<input type="text"  name="cartList[${status.index}].cartItemCnt" class="cartCntInput" value="${cart.cartCnt}" size="2">
 							<input type="hidden" name="cartList[${status.index}].buyer" value="${sessionScope.createdUser}">
 							<button type="button" class="btn-cnt btn-up"><i class="fa-solid fa-angle-up Icon_carCnt"></i></button>
 							<button type="button" class="btn-cnt btn-down"><i class="fa-solid fa-angle-down Icon_carCnt"></i></button>
