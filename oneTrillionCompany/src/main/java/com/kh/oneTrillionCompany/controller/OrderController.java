@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.oneTrillionCompany.dao.ConnectionOCDao;
+import com.kh.oneTrillionCompany.dao.ItemDao;
 import com.kh.oneTrillionCompany.dao.MemberDao;
 import com.kh.oneTrillionCompany.dao.OrderDetailDao;
 import com.kh.oneTrillionCompany.dao.OrdersDao;
@@ -38,6 +39,8 @@ public class OrderController {
 	private PayService payService;
 	@Autowired
 	private ConnectionOCDao connectionOCDao;
+	@Autowired
+	private ItemDao itemDao;
 	
 	@GetMapping("/pay")
 	public String pay(Model model,HttpSession session) {
@@ -53,6 +56,13 @@ public class OrderController {
 		//결제 세부목록 보내기
 		int orderNo=ordersDao.selectOne(memberId).getOrderNo();
 		List<OrderDetailDto> detailList=orderDetailDao.selectListByOrderDetail(memberId,orderNo);
+		for(int i=0; i<detailList.size(); i++) {
+			OrderDetailDto orderDetailDto=detailList.get(i);
+			int itemNo=detailList.get(i).getOrderDetailItemNo();
+			String orderDetailItemName=itemDao.selectOne(itemNo).getItemName();
+			orderDetailDto.setOrderDetailItemName(orderDetailItemName);
+			detailList.set(i, orderDetailDto);
+		}
 		model.addAttribute("orderDetailList",detailList);
 		//사진 번호 보내기
 		
