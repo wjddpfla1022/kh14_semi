@@ -89,7 +89,16 @@
 						<c:forEach var="reviewDto" items="${list}">
 							<tr class="tr-table-bottom">
 								<td class="td-table-bottom">${reviewDto.reviewItemNo}</td>
-								<td class="td-table-bottom">${reviewDto.reviewWriter}</td>
+								<td class="td-table-bottom">
+								
+<%-- 								<c:choose> --%>
+<%-- 									<c:when test="${reviewDto.reviewWriter == null }"> --%>
+<!-- 										탈퇴한 사용자 -->
+<%-- 									</c:when> --%>
+<%-- 									<c:otherwise>${reviewDto.reviewWriter}</c:otherwise>								 --%>
+<%-- 								</c:choose> --%>
+								${reviewDto.reviewWriterString}
+								</td>
 								<td class="td-table-bottom">
 								<a href="detail?reviewNo=${reviewDto.reviewNo}" class="table-title">${reviewDto.reviewContent}</a>
 								</td>
@@ -110,6 +119,7 @@
 		<div class="row center mt-30">
 			<select name="column" class="field-column">
 				<option value="review_writer"<c:if test="${param.column=='review_writer'}">selected</c:if>>아이디</option>
+				
 				<option value="review_item_no"<c:if test="${param.column=='review_item_no'}">selected</c:if>>상품번호</option>
 				<option value="review_score"<c:if test="${param.column=='review_score'}">selected</c:if>>별점</option>
 			</select>
