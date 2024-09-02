@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 import com.kh.oneTrillionCompany.dto.MemberDto;
@@ -29,8 +30,15 @@ public class MemberDao {
 	@Autowired
 	private StatusVOMapper statusVOMapper;
 	
+	@Autowired
+	private PasswordEncoder encoder;
+	
 	//회원 가입
 	public void insert(MemberDto memberDto) {
+		String rawPw = memberDto.getMemberPw();
+		String encPw = encoder.encode(rawPw);
+		memberDto.setMemberPw(encPw);
+		
 		String sql = "insert into member("
 				+ "member_id, member_pw, member_name, member_nickname, member_birth, "//은수형 저주한다
 				+ " member_email, member_point, "
@@ -56,6 +64,18 @@ public class MemberDao {
 		Object[] data = {memberId};
 		List<MemberDto> list = jdbcTemplate.query(sql, memberMapper, data);
 		return list.isEmpty() ? null : list.get(0);
+	}
+	
+	// 로그인 전용 상세조회
+	public MemberDto selectOneWithPassword(String memberId, String memberPw) {
+		String sql = "select * from member where member_id = ?";
+		Object[] data = {memberId};
+		List<MemberDto> list = jdbcTemplate.query(sql, memberMapper, data);
+		if(list.isEmpty()) return null;
+		
+		MemberDto memberDto = list.get(0);
+		boolean isValid = encoder.matches(memberPw, memberDto.getMemberPw());
+		return isValid ? memberDto : null;
 	}
 	
 	
