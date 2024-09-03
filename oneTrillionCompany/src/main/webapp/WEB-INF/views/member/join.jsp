@@ -32,7 +32,7 @@ $(function(){
         memberEmailCheckValid : false,//이메일 인증검사
         memberContactValid : true , //선택항목
         memberBirthValid : true , //선택항목
-        memberAddressValid : true , //선택항목
+        memberAddressValid : false , //필수항목
         ok : function(){
             return this.memberIdValid && this.memberIdCheckValid
                 && this.memberPwValid && this.memberPwCheckValid 
@@ -253,13 +253,9 @@ $(function(){
         var memberAddress1 = $("[name=memberAddress1]").val();
         var memberAddress2 = $("[name=memberAddress2]").val();
 
-        var isEmpty = memberPost.length == 0 
-                            && memberAddress1.length == 0 
-                            && memberAddress2.length == 0;
-        var isFill = memberPost.length > 0
-                            && memberAddress1.length > 0
-                            && memberAddress2.length > 0;
-        var isValid = isEmpty || isFill;
+        var isValid = memberPost.length > 0
+        && memberAddress1.length > 0
+        && memberAddress2.length > 0;
         $("[name=memberPost],[name=memberAddress1],[name=memberAddress2]")
                     .removeClass("success fail")
                     .addClass(isValid ? "success" : "fail");
@@ -445,7 +441,7 @@ $(function(){
             <%-- 주소 설정 --%>
             <div class="page">
                     <div class="row">
-                    	<label class="title">주소(선택)</label>
+                    	<label class="title">주소<i class="fa-solid fa-asterisk red"></i></label>
                         <div class="row">
                             <input type="text" class="field w-33 mb-0" name="memberPost" placeholder="우편번호" readonly>
                             <button type="button" class="btn btn-neutral btn-find-address"><i class="fa-solid fa-magnifying-glass"></i></button>
@@ -458,7 +454,7 @@ $(function(){
                         </div>
                         <div class="row">
                             <input type="text" class="field w-100" name="memberAddress2" placeholder="상세주소">
-	                        <div class="fail-feedback">주소는 비워두거나 모두 입력해야 합니다.</div>
+	                        <div class="fail-feedback">주소는 필수 입력사항 입니다</div>
                         </div>
                     </div>
             </div>
