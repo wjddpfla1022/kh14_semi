@@ -17,6 +17,7 @@ import com.kh.oneTrillionCompany.dao.ReviewDao;
 import com.kh.oneTrillionCompany.dto.ItemDto;
 import com.kh.oneTrillionCompany.dto.ItemInfoDto;
 import com.kh.oneTrillionCompany.dto.ReviewDto;
+import com.kh.oneTrillionCompany.service.ItemService;
 import com.kh.oneTrillionCompany.vo.ItemPageVO;
 
 @Controller
@@ -68,6 +69,8 @@ public class ItemController {
 //		return "/WEB-INF/views/item/list.jsp";
 //	}
 	
+	@Autowired
+	ItemService itemService;
 
 	@RequestMapping("/detail")
 	public String detail(@RequestParam int itemNo, Model model) {
@@ -75,10 +78,15 @@ public class ItemController {
 		ItemInfoDto infoDto = infoDao.selectOne(itemNo);
 		List<ReviewDto> list=reviewDao.selectList();
 		//if(infoDto == null) throw new TargetNotFoundException("존재하지 않는 글 번호");
+		
+//		int itemColorCnt = itemService.selectItemCntByNameColor(itemNo);
+		
 		model.addAttribute("list",list);
 		model.addAttribute("itemDto", itemDto);
 	    model.addAttribute("infoDto", infoDto);
 	    model.addAttribute("itemNo", itemNo);
+//	    model.addAttribute("itemColorCnt", itemColorCnt);
+	    
 	    //품절시 버튼 비활성화-장바구니
 	    model.addAttribute("colorList", itemDao.selectItemColors(itemNo));
 		model.addAttribute("attachNo", itemDao.findImage(itemNo));

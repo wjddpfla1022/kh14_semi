@@ -258,4 +258,13 @@ public class ItemDao {
 		Object[] data = {itemName};
 		return jdbcTemplate.queryForList(sql, String.class, data);
 	}
+	
+//	//아이템 수량을 이름과 색깔로 뽑아내기
+//	public int selectItemCntByNameColor(int itemNo, String itemColor){
+//		String itemName = findItemName(itemNo);
+//		String sql = "select item_cnt from item where item_name = ? and item_color = ?";
+//		Object[] data= {itemName, itemColor};
+//		
+//		return jdbcTemplate.queryForObject(sql, Integer.class, data);
+//	}
 }
