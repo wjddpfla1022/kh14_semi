@@ -45,6 +45,7 @@ public class CartRestController {
 		return cartTotalPrice;
 	}
 	
+	//장바구니 등록 추가 사이즈 추가함
 	@PostMapping("/insertCart")
 	public ResponseEntity<String> insertCart(HttpSession session,
 							@RequestParam String itemName, @RequestParam String itemColor, 

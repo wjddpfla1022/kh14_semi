@@ -223,7 +223,8 @@ a#smallShirts:hover {
 			//값을 다시 input에 넣기
 			cartCntInput.val(cartCntValue);
 		});
-
+		
+		//장바구니 ajax 통신*
 		$(function() {
 			//전역변수
 			var itemColorValue = "";
@@ -309,12 +310,12 @@ a#smallShirts:hover {
 					<span class="itemSalePrice" style="padding-left: 5px;"><b
 						style="font-weight: bolder;">${itemDto.itemPrice}</b></span>
 				</div>
-				<div class="right">
+			<%-- 	<div class="right">
 					<!-- 상품할인비율* -->
 					<span style="color: red;"><fmt:formatNumber
 							value="${itemDto.itemDiscountRate * 100}" type="number"
 							maxFractionDigits="0" />%</span> <span>(할인)</span>
-				</div>
+				</div> --%>
 			</div>
 			<div class="row mt-30 mb-20">
 				<div class="left">
@@ -322,7 +323,7 @@ a#smallShirts:hover {
 						입기 좋은 캐주얼 셔츠</span>
 				</div>
 			</div>
-
+				
 			<hr>
 			
 			<div class="row mb-30">
@@ -347,8 +348,7 @@ a#smallShirts:hover {
 							<h4 class="target left">
 								<span style="font-size: 14px; font-weight: bolder; color: black">${itemDto.itemPrice}</span><br>
 								<span style="font-size: 14px; font-weight: bolder;">${itemDto.itemSalePrice}</span><br>
-								<span style="font-size: 14px; font-weight: bolder;">2,500원
-									(60,000원 이상 구매 시 무료)</span><br>
+								<span style="font-size: 14px; font-weight: bolder;">무료배송</span><br>
 							</h4>
 						</div>
 					</div>
@@ -435,8 +435,8 @@ a#smallShirts:hover {
 				</div>
 
 				<div class="row">
-					<button type="submit" class="btn w-100"
-						style="color: white; background-color: black;">구매하기</button>
+				<!-- 	<button type="submit" class="btn w-100"
+						style="color: white; background-color: black;">구매하기</button> -->
 					<!-- 장바구니버튼 -->
 					<button type="button" class="btn w-100 btn-add-cart"
 						style="color: white; background-color: black;">장바구니</button>

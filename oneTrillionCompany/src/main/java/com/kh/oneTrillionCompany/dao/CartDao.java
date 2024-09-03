@@ -191,5 +191,4 @@ public class CartDao {
 		Integer count = jdbcTemplate.queryForObject(sql, new Object[]{itemNo, cartBuyer}, Integer.class);
 		return count != null && count > 0;
 	}
-	
 }
