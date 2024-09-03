@@ -124,18 +124,22 @@ public class MemberController {
 	public String password(@RequestParam String currentPw, 
 										@RequestParam String changePw,
 										HttpSession session) {
+//		//현재 비밀번호
+//		String encodedPw=encoder.encode(currentPw);
+//		//바뀐 비밀번호
+//		String encodedPw2=encoder.encode(changePw);
 		//아이디 추출
 		String memberId = (String)session.getAttribute("createdUser");
 		//현재 사용자의 정보를 추출
 		MemberDto memberDto = memberDao.selectOne(memberId);
 		//비밀번호 비교
-//		String encCurrentPw = encoder.encode(currentPw);
-		String encChangePw = encoder.encode(changePw);
-		boolean isValid = encoder.matches(currentPw, memberDto.getMemberPw());
-//		boolean isValid = memberDto.getMemberPw().equals(currentPw);
+
+		boolean isValid = encoder.matches(currentPw,memberDto.getMemberPw());
 		if(isValid == false) return "redirect:password?error";
 		//비밀번호 변경
-		memberDao.updateMemberPw(memberId, encChangePw);
+		
+		memberDao.updateMemberPw(memberId, changePw);
+
 		//(+추가) 만약 비밀번호 변경 시 로그아웃 처리를 하려면 이곳에서!!!
 		session.removeAttribute("createdUser");
 		//완료 페이지로 추방
