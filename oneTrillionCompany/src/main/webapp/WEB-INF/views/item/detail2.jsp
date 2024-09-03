@@ -304,18 +304,18 @@ a#smallShirts:hover {
 <div class="container w-1200 my-50">
 <!-- 모달 구조 -->
     <div class="full screen-wrapper flex-core" style="display: none;">
-        <div class="container w-450 my-50 p-20" style="height:200px;background-color: white;">
+        <div class="container w-450 my-50 p-20" style="height:200px;background-color: white; border-radius: 10px;">
             <div class="row center my-30" style="font-weight:bold; font-size:20px">
                 장바구니에 상품을 담았습니다
             </div>
-            <div class="row gray" style="font-size:12px">
+            <div class="row center" style="font-size:12px">
                 장바구니로 이동하시겠습니까?
             </div>
             <div class="flex-box column-2">
                 <div class="row">
-                    <button type="button" class="btn btn-cart w-100 link">장바구니로 이동</button>
+                  <button type="button" class="btn btn-cart w-100 link">장바구니로 이동</button>
                 </div>
-                <div class="row">
+                <div class="row me-20">
                     <button type="button" class="btn btn-keep w-100">계속 쇼핑하기</button>
                 </div>
             </div>
@@ -407,6 +407,9 @@ a#smallShirts:hover {
 					<b style="color: blue; font-weight: bolder; font-size: 14px">R</b></div>
 				</div>
 				
+				<div class="row center">
+					<div style="font-size: 15px; mt: 8px" class="left">색상</div>
+				</div>
 				<div class="left">
 					<span style="font-size: 11px; color: #999;">[필수] 옵션을 선택해 주세요</span>
 				</div>
@@ -414,15 +417,10 @@ a#smallShirts:hover {
 					<select name="itemColor" class="field w-100" style="border-radius: 20px;"
 						oninput="checkItemType();">
 						<option value="">선택하세요</option>
-						<option value="black">검정</option>
-						<option value="red">빨강</option>
-						<option value="orange">주황</option>
-						<option value="yellow">노랑</option>
-						<option value="green">초록</option>
-						<option value="blue">파랑</option>
+						<option value="black">블랙</option>
+						<option value="white">화이트</option>
+						<option value="blue">블루</option>
 						<option value="brown">브라운</option>
-						<option value="pink">분홍</option>
-						<option value="white">흰색</option>
 					</select>
 				</div>
 				

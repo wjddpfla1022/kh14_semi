@@ -47,13 +47,14 @@ public class ReviewController {
 	@PostMapping("/write")
 	public String write(@ModelAttribute ReviewDto reviewDto, HttpSession session,
 			@RequestParam MultipartFile attach) throws IllegalStateException, IOException {
-		
+		System.out.println(attach);
 		//세션에서 아이디 추출
 		String createdUser = (String)session.getAttribute("createdUser");
 		reviewDto.setReviewWriter(createdUser);
 		
 		//시퀀스 번호 생성
 		int reviewseq = reviewDao.sequence();
+
 		
 		//등록할 정보에 번호 첨부
 		reviewDto.setReviewNo(reviewseq);
@@ -98,12 +99,14 @@ public class ReviewController {
 		if(result==false) throw new TargetNotFoundException("존재하지 않는 글번호"); 
 		return "redirect:list";
 	}
+	
 	//이미지 제공 페이지
     @RequestMapping("/image")
     public String image(@RequestParam int reviewNo) {
         try {
-            Integer attachNo = reviewDao.findImage(reviewNo);
-            return"redirect:/attach/download?attachNo="+attachNo;
+            int attachNo = reviewDao.findImage(reviewNo);
+            return"redirect:/attach/download?attachNo=" + attachNo;
+           
 
         } catch (Exception e) {
             return "redirect:https://placehold.co/150";

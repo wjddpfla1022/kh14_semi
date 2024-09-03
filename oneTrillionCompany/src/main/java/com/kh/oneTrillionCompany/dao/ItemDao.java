@@ -94,13 +94,11 @@ public class ItemDao {
 	//상품 수정
 	public boolean update(ItemDto itemDto) {
 		String sql="update item set item_name=?, item_price=?,"
-				+ "item_sale_price=?, item_cnt=?, item_size=?, item_cate1=?,"
-				+ "item_cate2=?, item_cate3=?, item_discount_rate=?, item_color=? "
+				+ "item_sale_price=?, item_cnt=?"
 				+ "where item_no=?";
 		Object[] data= {itemDto.getItemName(), itemDto.getItemPrice(),
 						itemDto.getItemSalePrice(), itemDto.getItemCnt(),
-						itemDto.getItemSize(), itemDto.getItemCate1(), itemDto.getItemCate2(),
-						itemDto.getItemCate3(), itemDto.getItemDiscountRate(), itemDto.getItemColor(), itemDto.getItemNo()};
+						 itemDto.getItemNo()};
 		return jdbcTemplate.update(sql, data)>0;
 	}
 	//상품삭제
@@ -260,4 +258,13 @@ public class ItemDao {
 		Object[] data = {itemName};
 		return jdbcTemplate.queryForList(sql, String.class, data);
 	}
+	
+//	//아이템 수량을 이름과 색깔로 뽑아내기
+//	public int selectItemCntByNameColor(int itemNo, String itemColor){
+//		String itemName = findItemName(itemNo);
+//		String sql = "select item_cnt from item where item_name = ? and item_color = ?";
+//		Object[] data= {itemName, itemColor};
+//		
+//		return jdbcTemplate.queryForObject(sql, Integer.class, data);
+//	}
 }
