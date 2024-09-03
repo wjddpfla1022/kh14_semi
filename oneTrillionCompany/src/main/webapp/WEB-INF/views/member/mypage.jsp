@@ -39,10 +39,16 @@
 </style>
 
 <script type="text/javascript">
-function window01() {
-  
-    alert("정말로 탈퇴하시겠습니까?");
-};
+	$(function(){
+		$(".member-delete").click(function(e){
+			e.preventDefault();
+			var out = window.confirm("탈퇴하시겠습니까?");
+            if (out) {
+                $("#checkForm").submit();
+            }
+			// 취소 버튼을 누를 경우 동작X
+		});
+	});
 </script>
 
 <div class="container w-700 my-50">
@@ -180,11 +186,13 @@ function window01() {
 	</div>
 
 	<!-- 개인정보 변경 버튼 -->
-	<div class="flex-box flex-core mt-20 mb-30">
-		<a href="password" class = "btn btn-positive" style="margin-right:5px;">비밀번호 변경</a>
-		<a href="change" class = "btn btn-positive" style="margin-right:5px;">개인정보 변경</a>
-		<a href="leaveFinish" class = "btn btn-negative member-delete" onclick="window01();">회원 탈퇴</a>
-	</div>
+	<form action="/member/leaveFinish" method ="post" Id="checkForm">
+		<div class="flex-box flex-core mt-20 mb-30">
+			<a href="password" class = "btn btn-positive" style="margin-right:5px;">비밀번호 변경</a>
+			<a href="change" class = "btn btn-positive" style="margin-right:5px;">개인정보 변경</a>
+			<button type="submit"  class = "btn btn-negative member-delete" >회원 탈퇴</button>
+		</div>
+	</form>
 
 		<%--  관리자가 아닐 경우에만 차단이력을 출력 --%> 
 		<c:choose>

@@ -150,21 +150,8 @@
 					                                [${qnaDto.qnaReply}]
 					                            </c:if>
 			                            </td>
-											<td class="td-table-bottom">
-												<c:choose>
-													<c:when test="${fn:length(qnaDto.qnaWriter) > 3}">
-														<%-- 작성자의 아이디를 3글자 추출 후 표시 --%>
-														<c:out value="${fn:substring(qnaDto.qnaWriter, 0, 3)}" />
-														<%-- 이후 아이디를 * 처리 --%>
-														<c:out value="***" />
-													</c:when>
-													<c:otherwise>
-														<%-- 아이디의 길이가 3글자 이하인 경우를 처리 --%>
-														<c:out value="${qnaDto.qnaWriter}" />
-													</c:otherwise>
-												</c:choose>
-											</td>
-										<td class="td-table-bottom">${qnaDto.qnaTime}</td>
+											<td class="td-table-bottom">${qnaDto.qnaWriter}</td>
+											<td class="td-table-bottom">${qnaDto.qnaTime}</td>
 									</tr>
 								</c:when>
 							</c:choose>
