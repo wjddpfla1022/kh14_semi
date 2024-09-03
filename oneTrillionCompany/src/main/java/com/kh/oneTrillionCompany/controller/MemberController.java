@@ -106,6 +106,7 @@ public class MemberController {
 		model.addAttribute("blockList", blockDao.selectBlockHistory(createdUser));	//차단 내역 확인
 		return "/WEB-INF/views/member/mypage.jsp";
 	}
+	
 	//비밀번호 변경
 	@GetMapping("/password")
 	public String password() {
@@ -126,7 +127,7 @@ public class MemberController {
 		//비밀번호 변경
 		memberDao.updateMemberPw(memberId, changePw);
 		//(+추가) 만약 비밀번호 변경 시 로그아웃 처리를 하려면 이곳에서!!!
-		//session.removeAttribute("createdUser");
+		session.removeAttribute("createdUser");
 		//완료 페이지로 추방
 		return "redirect:passwordFinish";
 	}

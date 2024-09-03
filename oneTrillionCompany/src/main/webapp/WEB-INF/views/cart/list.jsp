@@ -103,7 +103,7 @@ td {
 		});
 		$(".check-item").click(function() {
 			//체크된 체크박스 개수
-			var checked_length = $(".check-item").prop("checked").length;
+			var checked_length = $(".check-item:checked").length;
 			//전체 체크박수 개수
 			var checkbox_length = $(".check-item").length;
 
@@ -137,6 +137,7 @@ td {
 					});
 				});
 
+
 		//선택한 항목을 삭제
 		$(".btn-selected-checkBox").click(function() {
 			var carNoList = [];
@@ -159,6 +160,7 @@ td {
 					location.reload();
 				}
 			});
+
 		});
 
 		//장바구니 비우기 - 전체 삭제
@@ -265,6 +267,7 @@ td {
 	});
 </script>
 <div class="container w-1200 my-50">
+
 	<div class="row center mb-50 cart-title">장바구니</div>
 
 	<!-- 장바구니가 비어있다면(회원, 비회원)  -->
@@ -429,6 +432,7 @@ td {
 			</table>
 		</c:otherwise>
 	</c:choose>
+
 </div>
 
 
