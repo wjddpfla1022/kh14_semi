@@ -62,28 +62,7 @@ public class EmailService {
 		certDao.insert(certDto);
 		return true;
 	}
-	//임시 비밀번호 발급 및 메일 전송
-	public void sendTempPw(String memberId, String memberEmail) throws IOException, MessagingException {
-		//임시 비밀번호 발급
-		String tempPassword=randomService.generateString(12);
-		memberDao.updateMemberPw(memberId, tempPassword);
-		
-		//이메일 템플릿 불러와 정보 설정 후 발송
-		ClassPathResource resource = new ClassPathResource("templates/tempPw.html");
-		File target = resource.getFile();
-		Document document = Jsoup.parse(target);
-		Element element = document.getElementById("temp-pw");
-		element.text(tempPassword);
-		
-		//마임메세지 발송
-		MimeMessage message = sender.createMimeMessage();
-		MimeMessageHelper helper = new MimeMessageHelper(message, false, "UTF-8");
-		helper.setTo(memberEmail);
-		helper.setSubject("[kh정보교육원] 임시 비밀번호 안내");
-		helper.setText(document.toString(),true);
-		
-		sender.send(message);
-	}
+
 
 	//비밀번호 재설정 메일 발송 기능
 	public void sendResetPw(String memberId, String memberEmail) throws IOException, MessagingException {
@@ -97,10 +76,10 @@ public class EmailService {
 		
 		//돌아올 링크 주소를 생성하는 코드
 		String certNumber = randomService.generateNumber(6);
+		certDao.delete(memberEmail);
 		CertDto certDto=new CertDto();
 		certDto.setCertEmail(memberEmail);
 		certDto.setCertNumber(certNumber);
-		certDao.delete(memberEmail);
 		certDao.insert(certDto);
 		
 		//- 접속 주소 생성 : 도구를 이용하여 현재 실행중인 주소를 자동으로 읽어오도록 처리
@@ -120,7 +99,7 @@ public class EmailService {
 		MimeMessage message = sender.createMimeMessage();
 		MimeMessageHelper helper = new MimeMessageHelper(message, false, "UTF-8");
 		helper.setTo(memberEmail);
-		helper.setSubject("[kh정보교육원]비밀번호 재설정 안내");
+		helper.setSubject("[일조쇼핑몰]비밀번호 재설정 안내");
 		helper.setText(document.toString(), true);
 		
 		//전송
