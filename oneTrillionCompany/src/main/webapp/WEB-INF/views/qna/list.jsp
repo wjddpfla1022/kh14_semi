@@ -82,7 +82,7 @@
 
 	<%-- 비회원일 경우 로그인 후 이용 메시지를 출력  --%>
 	<c:if test="${sessionScope.createdUser == null}">
-		<table class="table table-top">
+		<table class="table table-top mt-30">
 			<thead>
 				<tr class="tr-table-top">
 					<th width="10%" class="th-table-top">번호</th>
@@ -110,7 +110,7 @@
 		</c:when>
 		
 		<c:otherwise>
-			<table class="table table-top">
+			<table class="table table-top mt-30">
 				<thead>
 					<tr class="tr-table-top">
 						<th width=10% class="th-table-top">번호</th>
@@ -169,7 +169,7 @@
 	<%-- 관리자 아이디로 접속 시 문의 리스트를 전부 보여지게 구현  --%>
 	<c:choose>
 		<c:when test="${sessionScope.createdLevel == '관리자'}">
-			<table class="table table-top">
+			<table class="table table-top mt-30">
 				<thead>
 					<tr class="tr-table-top">
 						<th width=10% class="th-table-top">번호</th>
