@@ -64,6 +64,9 @@
 
 	<%-- 비회원일 때와 회원일 때 다르게 보이도록 처리  --%>
 	<c:choose>
+		<c:when test="${sessionScope.createdLevel == '관리자'}">
+			
+		</c:when>
 		<c:when test="${sessionScope.createdUser != null}">
 			<div class="row right">
 				<a href="write" class="btn btn-positive" style="text-decoration: none">문의 등록</a>
@@ -75,6 +78,7 @@
 			</div>
 		</c:otherwise>
 	</c:choose>
+	
 
 	<%-- 비회원일 경우 로그인 후 이용 메시지를 출력  --%>
 	<c:if test="${sessionScope.createdUser == null}">
