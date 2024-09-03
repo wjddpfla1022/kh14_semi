@@ -99,9 +99,15 @@
 	<div class="row center">
 		<form action="deleteAll" method="post">
 			<c:if test="${sessionScope.createdLevel == '관리자' }">
-				<div class="row right">
-					<button type="submit" class="btn btn-negative btn-item-delete">체크된
-						항목 삭제</button>
+				<div class="float-box">
+					<div class="float-right">
+						<button type="submit" class="btn btn-negative btn-item-delete">
+							체크된 항목 삭제
+						</button>
+					</div>
+					<div class="float-left">
+						<a href="/manager/item/insert" class="btn btn-positive" style="margin-right: 1em;">상품 추가</a>
+					</div>
 				</div>
 			</c:if>
 			<table  class="table table-top mt-30 table-hover">
@@ -322,11 +328,8 @@
 		<jsp:include page="/WEB-INF/views/template/navigator.jsp"></jsp:include>
 
 	</div>
-	<div class="row right">
-		<a href="/manager/item/insert" class="link link-animation"><h3
-				style="margin-right: 1em;">상품 추가</h3></a>
-	</div>
-
-
+<!-- 	<div class="row right"> -->
+<!-- 		<a href="/manager/item/insert" class="link link-animation" style="margin-right: 1em;">상품 추가</a> -->
+<!-- 	</div> -->
 </div>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

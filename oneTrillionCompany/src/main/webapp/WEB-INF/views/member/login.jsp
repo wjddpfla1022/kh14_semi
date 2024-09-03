@@ -51,12 +51,10 @@
 		
 		<div class="row">
 			<button type="submit" class="btn btn-positive btn-submit">로그인</button>
-		</div>
-		<div class="row">
 			<a href="/member/join" class="btn btn-neutral">회원가입</a>
 		</div>
 		<div class="row">
-			<a href="findPw">비밀번호 찾기</a>
+			<a href="findPw" class="link link-animation">비밀번호 찾기</a>
 		</div>
 	</div>
 </form>
