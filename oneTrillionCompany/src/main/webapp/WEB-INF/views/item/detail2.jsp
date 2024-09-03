@@ -223,62 +223,104 @@ a#smallShirts:hover {
 			//값을 다시 input에 넣기
 			cartCntInput.val(cartCntValue);
 		});
+
+		//전역변수
+		var itemColorValue = "";
+		var itemSizeValue= "";
 		
-		//장바구니 ajax 통신*
-		$(function() {
-			//전역변수
-			var itemColorValue = "";
-			var itemSizeValue= "";
-			//장바구니에 담기 -비동기
-			$("[name=itemColor]").change(function() {
-				itemColorValue = $(this).val();
-			});
-			//사이즈 선택시
-			$(".size-radio").click(function(){
-				itemSizeValue = $(this).find(".size-text").text();
-			});
-			$(".btn-add-cart").click(function() {
-				if(!itemColorValue) {
-					alert("색상을 선택해주세요.");
-					return;
-				}
-				if(!itemSizeValue){
-					alert("사이즈를 선택해주세요.");
-					return;
-				}
-				var itemNameValue = $(".itemName").text().trim();//공백제거
-				var cartCntValue = $("[name=cartCnt]").val();
-				var itemSalePriceValue = $(".itemSalePrice").text();
-				var attachNoValue = $(".attachNo-data").text();
-				console.log(itemNameValue); //개발 끝나고 삭제*
-				console.log(itemSalePriceValue);
-				console.log(itemColorValue);
-				console.log(attachNoValue);
-				console.log(itemSizeValue);
-				$.ajax({
-					url : "/rest/cart/insertCart",
-					method : 'post',
-					data : {
-						itemName : itemNameValue,
-						itemColor : itemColorValue,
-						itemSize: itemSizeValue,
-						itemSalePrice : itemSalePriceValue,
-						cartCnt : cartCntValue,
-						attachNo : attachNoValue
-					},
-					success : function(response) {
-						alert(response);
-					},
-					error: function() {
-						alert("품절된 상품입니다")
-					}
-				});
-			});
+		$("[name=itemColor]").change(function() {
+			itemColorValue = $(this).val();
 		});
+		//사이즈 선택시
+		$(".size-radio").click(function(){
+			itemSizeValue = $(this).find(".size-text").text();
+		});
+		 $(".btn-add-cart").click(function() {
+		        if (!itemColorValue) {
+		            alert("색상을 선택해주세요.");
+		            return;
+		        }
+		        if (!itemSizeValue) {
+		            alert("사이즈를 선택해주세요.");
+		            return;
+		        }
+
+		        var itemNameValue = $(".itemName").text().trim(); // 공백 제거
+		        var cartCntValue = $("[name=cartCnt]").val();
+		        var itemSalePriceValue = $(".itemSalePrice").text();
+		        var attachNoValue = $(".attachNo-data").text();
+
+		        $.ajax({
+		            url: "/rest/cart/insertCart",
+		            method: 'post',
+		            data: {
+		                itemName: itemNameValue,
+		                itemColor: itemColorValue,
+		                itemSize: itemSizeValue,
+		                itemSalePrice: itemSalePriceValue,
+		                cartCnt: cartCntValue,
+		                attachNo: attachNoValue
+		            },
+		            success: function(response) {
+		                // 장바구니에 성공적으로 담았을 때 모달을 띄운다
+		                $('.screen-wrapper').fadeIn();
+		            },
+		            error: function() {
+		                alert("품절된 상품입니다");
+		            }
+		        });
+		    });
+
+		    // 모달에서 "계속 쇼핑하기" 버튼 클릭 시 모달 닫기
+		    $('.btn-keep').click(function() {
+		        $('.screen-wrapper').fadeOut();
+		    });
+
+		    // 모달에서 "장바구니로 이동" 버튼 클릭 시 장바구니 페이지로 이동
+		    $('.btn-cart').click(function() {
+		        window.location.href = "/cart"; // 장바구니 페이지 URL
+		    });
 	});
 </script>
+<style>
+        /* 
+            화면 가림 장치
+        */
+        .screen-wrapper{
+            /* opacity:0.5;
+            background-color: black; */
+            background-color: rgba(0,0,0,0.1);
 
+            position:fixed;
+            top:0px;
+            bottom:0px;
+            left:0px;
+            right:0px;
+            z-index:99;
+        }
+    </style>
+    
 <div class="container w-1200 my-50">
+<!-- 모달 구조 -->
+    <div class="full screen-wrapper flex-core" style="display: none;">
+        <div class="container w-350 my-50 p-20" style="background-color: white;">
+            <div class="row center my-30" style="font-weight:bold; font-size:20px">
+                장바구니에 상품을 담았습니다
+            </div>
+            <div class="row gray" style="font-size:12px">
+                장바구니로 이동하시겠습니까?
+            </div>
+            <div class="flex-box column-2">
+                <div class="row">
+                    <button type="button" class="btn btn-cart w-100"><a href="/cart/list">장바구니로 이동</a></button>
+                </div>
+                <div class="row">
+                    <button type="button" class="btn btn-keep w-100">계속 쇼핑하기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 모달 끝 -->
 	<div class="flex-box column-2">
 		<div class="left">
 			<div id="bigImage">
@@ -310,12 +352,12 @@ a#smallShirts:hover {
 					<span class="itemSalePrice" style="padding-left: 5px;"><b
 						style="font-weight: bolder;">${itemDto.itemPrice}</b></span>
 				</div>
-			<%-- 	<div class="right">
+				<div class="right">
 					<!-- 상품할인비율* -->
 					<span style="color: red;"><fmt:formatNumber
 							value="${itemDto.itemDiscountRate * 100}" type="number"
 							maxFractionDigits="0" />%</span> <span>(할인)</span>
-				</div> --%>
+				</div>
 			</div>
 			<div class="row mt-30 mb-20">
 				<div class="left">
@@ -323,7 +365,7 @@ a#smallShirts:hover {
 						입기 좋은 캐주얼 셔츠</span>
 				</div>
 			</div>
-				
+
 			<hr>
 			
 			<div class="row mb-30">
@@ -348,7 +390,8 @@ a#smallShirts:hover {
 							<h4 class="target left">
 								<span style="font-size: 14px; font-weight: bolder; color: black">${itemDto.itemPrice}</span><br>
 								<span style="font-size: 14px; font-weight: bolder;">${itemDto.itemSalePrice}</span><br>
-								<span style="font-size: 14px; font-weight: bolder;">무료배송</span><br>
+								<span style="font-size: 14px; font-weight: bolder;">2,500원
+									(60,000원 이상 구매 시 무료)</span><br>
 							</h4>
 						</div>
 					</div>
@@ -435,8 +478,8 @@ a#smallShirts:hover {
 				</div>
 
 				<div class="row">
-				<!-- 	<button type="submit" class="btn w-100"
-						style="color: white; background-color: black;">구매하기</button> -->
+<!-- 					<button type="submit" class="btn w-100 btn-buy" -->
+<!-- 						style="color: white; background-color: black;">구매하기</button> -->
 					<!-- 장바구니버튼 -->
 					<button type="button" class="btn w-100 btn-add-cart"
 						style="color: white; background-color: black;">장바구니</button>
