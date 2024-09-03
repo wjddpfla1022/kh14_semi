@@ -40,8 +40,11 @@
 		margin-bottom : -16px;
 		justify-content: space-between;
 	}
-
 </style>
+
+<script>
+	
+</script>
 	<form action="change" method="post" autocomplete="off">
 		<div class="container w-700 my-50">
 			<div class = "flex-box text-line">
@@ -77,7 +80,7 @@
 						</div>
 					</th>
 					<td class="nickname-line">		
-						<input type="text" name="memberNickname" value="${memberDto.memberNickname}"  size="30">
+						<input type="text" name="memberNickname" value="${memberDto.memberNickname}"  size="30" required>
 						<p style="font-size : 12px;">(한글,숫자 2~10자)</p>
 					</td>
 				</tr>
@@ -91,7 +94,7 @@
 						</div>				
 					</th>
 					<td class="input-box-table">				
-						<input type="text" name="memberEmail" value="${memberDto.memberEmail}"  size="30">
+						<input type="text" name="memberEmail" value="${memberDto.memberEmail}"  size="30" required>
 					</td>
 				</tr>
 				<%--  이름 입력 창 --%>
@@ -104,7 +107,7 @@
 						</div>
 					</th>
 					<td class="input-box-table">
-							<input type="text" name="memberName" value="${memberDto.memberName}"  size="30" readonly>
+							<input type="text" name="memberName" value="${memberDto.memberName}"  size="30" readonly required>
 					</td>		
 				</tr>		
 				<%--  연락처 입력 창 --%>
@@ -133,22 +136,22 @@
 				<tr class="table-border-middle">
 					<th class="table-border-center">
 						<div class="row left ps-30">
-							주소
+							주소 <i class="fa-solid fa-asterisk red"></i>
 						</div>				
 					</th>
 						<c:choose>
 							<c:when test="${memberDto.memberPost==null && memberDto.memberAddress1==null && memberDto.memberAddress2==null}">
 								<td class="input-box-table">
-										<input type="text" name="memberPost" value="${memberDto.memberPost}" size="6" style="margin-bottom:0.5em;"> <br>
-										<input type="text" name="memberAddress1" value="${memberDto.memberAddress1}" size="60" style="margin-bottom:0.5em;"> <br>
-										<input type="text" name="memberAddress2" value="${memberDto.memberAddress2}" size="60">
+										<input type="text" name="memberPost" value="${memberDto.memberPost}" size="6" style="margin-bottom:0.5em;" required> <br>
+										<input type="text" name="memberAddress1" value="${memberDto.memberAddress1}" size="60" style="margin-bottom:0.5em;" required> <br>
+										<input type="text" name="memberAddress2" value="${memberDto.memberAddress2}" size="60" required>
 								</td>
 							</c:when>
 							<c:otherwise>
 								<td class="input-box-table">
-										<input type="text" name="memberPost" value="${memberDto.memberPost}" size="6"> <br>
-										<input type="text" name="memberAddress1" value="${memberDto.memberAddress1}" size="60"> <br>
-										<input type="text" name="memberAddress2" value="${memberDto.memberAddress2}" size="60">
+										<input type="text" name="memberPost" value="${memberDto.memberPost}" size="6" required> <br>
+										<input type="text" name="memberAddress1" value="${memberDto.memberAddress1}" size="60" required> <br>
+										<input type="text" name="memberAddress2" value="${memberDto.memberAddress2}" size="60" required>
 								</td>
 							</c:otherwise>						
 						</c:choose>				
