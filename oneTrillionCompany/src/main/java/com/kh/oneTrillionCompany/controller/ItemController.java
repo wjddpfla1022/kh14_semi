@@ -36,6 +36,9 @@ public class ItemController {
 	public String list(@ModelAttribute("itemPageVO") ItemPageVO itemPageVO, Model model) {
 		
 //		List<ItemDto> list = isSearch ? itemDao.selectList(column, keyword);
+		String keyword=itemPageVO.getKeyword();
+		keyword = keyword.replaceAll(" ", "");
+		itemPageVO.setKeyword(keyword);
 		model.addAttribute("itemList", itemDao.selectListByPaging(itemPageVO));
 		int count = itemDao.countByPaging(itemPageVO);
 		itemPageVO.setCount(count);
@@ -47,7 +50,9 @@ public class ItemController {
 	@RequestMapping("/list/cate")
 	public String listCate(Model model, @ModelAttribute("itemPageVO") ItemPageVO itemPageVO
 			) {
-		
+		String keyword=itemPageVO.getKeyword();
+		keyword = keyword.replaceAll(" ", "");
+		itemPageVO.setKeyword(keyword);
 		model.addAttribute("itemList", itemDao.selectListByCatePaging(itemPageVO));// 조회결과
 		int count = itemDao.countByPagingCate(itemPageVO);
 		itemPageVO.setCount(count);

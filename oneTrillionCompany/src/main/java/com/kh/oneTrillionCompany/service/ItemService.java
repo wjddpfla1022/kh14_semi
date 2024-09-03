@@ -14,14 +14,14 @@ public class ItemService {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
-	 public List<Integer> selectItemCntByNameColor(int itemNo) {
+	 public int selectItemCntByNameColor(int itemNo) {
 	        String itemName = findItemName(itemNo); // itemName을 가져오는 메서드
 	        String itemColor = findItemColor(itemNo);
 	        String sql = "SELECT item_cnt FROM item WHERE item_name = ? AND item_color = ? limit 1";
 	        Object[] data = { itemName, itemColor };
+	        List<Integer> list= jdbcTemplate.queryForList(sql, int.class, data);
 	        
-	        
-	        return jdbcTemplate.queryForList(sql, int.class, data);
+	        return 0;
 	    }
 	 	
 	 	private String findItemColor(int itemNo) {

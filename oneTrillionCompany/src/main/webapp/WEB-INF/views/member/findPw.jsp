@@ -3,7 +3,7 @@
     
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
     
-<div class="container w-500 my-50">
+<div class="container w-350 my-50">
 	<div class= "row center">
 		<h1>비밀번호 찾기</h1>
 	</div>
