@@ -37,9 +37,11 @@ public class ItemController {
 				@RequestParam (required = false) String sorting,Model model) {
 		
 		String keyword=itemPageVO.getKeyword();
-		keyword = keyword.replaceAll(" ", "");
-		itemPageVO.setKeyword(keyword);
-		if(sorting.equals(null))
+		if(keyword!=null) {
+			keyword = keyword.replaceAll(" ", "");
+			itemPageVO.setKeyword(keyword);
+		}
+		if(sorting==null)
 			model.addAttribute("itemList",itemDao.selectListByPaging(itemPageVO));
 		else
 			model.addAttribute("itemList",itemDao.selectListByPaging(itemPageVO,sorting));
@@ -51,12 +53,17 @@ public class ItemController {
 	}
 	
 	@RequestMapping("/list/cate")
-	public String listCate(Model model, @ModelAttribute("itemPageVO") ItemPageVO itemPageVO
-			) {
+	public String listCate(Model model, @ModelAttribute("itemPageVO") ItemPageVO itemPageVO,
+			@RequestParam(required = false) String sorting) {
 		String keyword=itemPageVO.getKeyword();
-		keyword = keyword.replaceAll(" ", "");
-		itemPageVO.setKeyword(keyword);
-		model.addAttribute("itemList", itemDao.selectListByCatePaging(itemPageVO));// 조회결과
+		if(keyword!=null) {
+			keyword = keyword.replaceAll(" ", "");
+			itemPageVO.setKeyword(keyword);
+		}
+		if(sorting==null)
+			model.addAttribute("itemList", itemDao.selectListByCatePaging(itemPageVO));
+		else
+			model.addAttribute("itemList", itemDao.selectListByCatePaging(itemPageVO,sorting));// 조회결과
 		int count = itemDao.countByPagingCate(itemPageVO);
 		itemPageVO.setCount(count);
 		model.addAttribute("itemPageVO", itemPageVO);
