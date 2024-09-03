@@ -57,8 +57,7 @@ public class ReviewDao {
 	
 	//연결기능
 	public void connect(int reviewNo, int attachNo) {
-		String sql = "insert into review_image(review_no, attach_no) "
-				+ "values(?, ?)";
+		String sql = "insert into review_image(review_no, attach_no) values(?, ?)";
 		Object[]data = {reviewNo, attachNo};
 		jdbcTemplate.update(sql, data);
 				
@@ -90,19 +89,17 @@ public class ReviewDao {
 		Object[] data= {reviewWriter};
 		return jdbcTemplate.query(sql, reviewMapper, data);
 	}
+	
+	
 	//이미지 번호 찾기 기능
-    public Integer findImage(int reviewNo) {
-        String sql = "select attach from review_image review=?";
+    public int findImage(int reviewNo) {
+        String sql = "select attach_no from review_image where review_no=?";
         Object[]data = {reviewNo};
-        return jdbcTemplate.queryForObject(sql, Integer.class, data);
+        System.out.println("reviewNo : "+reviewNo +"attachNo : "+jdbcTemplate.queryForObject(sql, int.class, data));
+        return jdbcTemplate.queryForObject(sql, int.class, data);
     }
 	
 	
 	
 
 }
-
-
-
-	
-	
