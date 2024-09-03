@@ -154,19 +154,19 @@
 <!-- 					</a> -->
 <!-- 			</div> -->
 			<div class=custom-menu>
-					<a href="/qna/list?column=qna_writer&keyword=${memberDto.memberId}">
+					<a href="/qna/list?column=qna_writer&keyword=${memberDto.memberId}&exactMatch=true">
 						<span id="top-location">Q&A</span>
 						<span id="bottom-location">문의내역 조회</span>
 					</a>
 			</div>			
 			<div class=custom-menu>
-					<a href="/review/list?column=review_writer&keyword=${memberDto.memberId}">
+					<a href="/review/list?column=review_writer&keyword=${memberDto.memberId}&exactMatch=true">
 						<span id="top-location">Review</span>
 						<span id="bottom-location">리뷰내역 조회</span>
 					</a>
 			</div>			
 			<div class=custom-last-menu>
-					<a href="/manager/member/blockList?column=block_member_id&keyword=${memberDto.memberId}">
+					<a href="/manager/member/blockList?column=block_member_id&keyword=${memberDto.memberId}&exactMatch=true">
 						<span id="top-location">Block</span>
 						<span id="bottom-location">차단내역 조회</span>
 					</a>
