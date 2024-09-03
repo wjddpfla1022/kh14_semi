@@ -46,8 +46,6 @@ public class PayService {
 		if(list.size()==0||!sessionVaild) {
 			throw new TargetNotFoundException("장바구니를 확인해주세요");
 		}
-		//즉시적립
-		memberDao.chargePoint(memberId, reward);
 		//결제
 		memberDao.payment(memberId, payment);
 		//주문서 생성(detail)
@@ -78,6 +76,8 @@ public class PayService {
 			//판매량 기록
 			itemDao.salesCounting(orderDetailItemNo,orderDetailCnt);
 		}
+		//즉시적립
+		memberDao.chargePoint(memberId, reward);
 		//주문서 메모 추가
 		ordersDao.updateMemo(orderMemo, orderNo);
 		orderDetailDao.payCompleteStatus(detailNoList);
