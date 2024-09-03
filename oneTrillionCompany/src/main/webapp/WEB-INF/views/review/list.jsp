@@ -46,6 +46,17 @@
     .tr-table-top {
         background-color: #dcdde1;
     }
+    .text-ellipsis {
+    display: inline-block; /* 블록 요소로 설정하여 너비 제한 */
+    max-width: 200px; /* 필요한 최대 너비를 설정하세요 */
+    overflow: hidden; /* 넘치는 텍스트를 숨깁니다 */
+    white-space: nowrap; /* 텍스트 줄바꿈을 막습니다 */
+    text-overflow: ellipsis; /* 넘치는 텍스트를 "..."으로 표시합니다 */
+    vertical-align: middle; /* 세로 정렬을 위해 추가 (선택 사항) */
+}
+   
+    
+   
 </style>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -115,8 +126,8 @@
                                     <tr class="tr-table-bottom">
                                         <td class="td-table-bottom">${reviewDto.reviewItemNo}</td>
                                         <td class="td-table-bottom">
-                                            <a href="detail?reviewNo=${reviewDto.reviewNo}" class="table-title">${reviewDto.reviewContent}</a>
-                                        </td>
+   									 <a href="detail?reviewNo=${reviewDto.reviewNo}" class="table-title text-ellipsis">${reviewDto.reviewContent}</a>
+										</td>
                                         <td class="td-table-bottom">
                                             <c:choose>
                                                 <c:when test="${reviewDto.reviewWriter == null}">탈퇴한 사용자</c:when>
@@ -173,8 +184,8 @@
                                     <tr class="tr-table-bottom">
                                         <td class="td-table-bottom">${reviewDto.reviewItemNo}</td>
                                         <td class="td-table-bottom">
-                                            <a href="detail?reviewNo=${reviewDto.reviewNo}" class="table-title">${reviewDto.reviewContent}</a>
-                                        </td>
+    									<a href="detail?reviewNo=${reviewDto.reviewNo}" class="table-title text-ellipsis">${reviewDto.reviewContent}</a>
+										</td>
                                         <td class="td-table-bottom">${reviewDto.reviewWriterString}</td>
                                         <td class="td-table-bottom">
                                             <div class="test-score" data-rate="${reviewDto.reviewScore}"></div>
