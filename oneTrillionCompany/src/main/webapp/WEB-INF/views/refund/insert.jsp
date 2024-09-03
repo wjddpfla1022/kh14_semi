@@ -16,6 +16,19 @@
 	$(function(){
 		$(".btn-refund").click(function(e){
 			e.preventDefault();
+			// 환불 사유 선택이 되지 않은 경우 확인 메세지
+            var refundType = $("select[name='refundType']").val();
+            if(refundType === ""){
+                window.alert("환불 사유를 선택해주세요.");
+                return;
+            }
+            
+            // 환불 메모 입력이 되지 않은 경우 확인 메세지
+            var refundMemo = $("textarea[name='refundMemo']").val().trim();
+            if(refundMemo === ""){
+                window.alert("내용을 입력하세요.");
+                return;
+            }
 			var refund = window.confirm("등록하시겠습니까?");
 			if(refund){
 				$("#refund-form").submit();
