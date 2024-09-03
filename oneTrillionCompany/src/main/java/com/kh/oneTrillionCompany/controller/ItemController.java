@@ -33,13 +33,16 @@ public class ItemController {
 	private ReviewDao reviewDao;
 	
 	@RequestMapping("/list")
-	public String list(@ModelAttribute("itemPageVO") ItemPageVO itemPageVO, Model model) {
+	public String list(@ModelAttribute("itemPageVO") ItemPageVO itemPageVO,
+				@RequestParam (required = false) String sorting,Model model) {
 		
-//		List<ItemDto> list = isSearch ? itemDao.selectList(column, keyword);
 		String keyword=itemPageVO.getKeyword();
 		keyword = keyword.replaceAll(" ", "");
 		itemPageVO.setKeyword(keyword);
-		model.addAttribute("itemList", itemDao.selectListByPaging(itemPageVO));
+		if(sorting.equals(null))
+			model.addAttribute("itemList",itemDao.selectListByPaging(itemPageVO));
+		else
+			model.addAttribute("itemList",itemDao.selectListByPaging(itemPageVO,sorting));
 		int count = itemDao.countByPaging(itemPageVO);
 		itemPageVO.setCount(count);
 		model.addAttribute("itemPageVO", itemPageVO);
