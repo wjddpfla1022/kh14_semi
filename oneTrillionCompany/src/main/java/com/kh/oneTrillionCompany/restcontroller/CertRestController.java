@@ -3,6 +3,7 @@ package com.kh.oneTrillionCompany.restcontroller;
 import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +17,7 @@ import com.kh.oneTrillionCompany.service.EmailService;
 
 import jakarta.mail.MessagingException;
 
-
+@CrossOrigin(origins = {"http://127.0.0.1:5500"})
 @RestController
 @RequestMapping("/rest/cert")
 public class CertRestController {

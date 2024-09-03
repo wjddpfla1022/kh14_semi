@@ -81,8 +81,9 @@ public class MemberDao {
 	
 	//회원 수정(비밀번호)
 	public boolean updateMemberPw(String memberId, String memberPw) {
+		String encPw = encoder.encode(memberPw);
 		String sql = "update member set member_pw = ? where member_id = ?";
-		Object[] data = {memberPw, memberId};
+		Object[] data = {encPw, memberId};
 		return jdbcTemplate.update(sql, data) > 0;
 	}
 	

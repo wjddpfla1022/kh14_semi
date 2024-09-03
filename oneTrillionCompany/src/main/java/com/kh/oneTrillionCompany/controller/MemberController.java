@@ -21,7 +21,9 @@ import com.kh.oneTrillionCompany.dto.BlockDto;
 import com.kh.oneTrillionCompany.dto.CertDto;
 import com.kh.oneTrillionCompany.dto.MemberDto;
 import com.kh.oneTrillionCompany.exception.TargetNotFoundException;
+import com.kh.oneTrillionCompany.service.EmailService;
 
+import jakarta.mail.MessagingException;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
@@ -36,6 +38,8 @@ public class MemberController {
 	private CertDao certDao;
 	@Autowired
 	private CustomCertProperties customCertProperties;
+	@Autowired
+	private EmailService emailService;
 	
 	@GetMapping("/login")
 	public String login() {
@@ -138,6 +142,25 @@ public class MemberController {
 		return "redirect:login";
 	}
 	
+	//비밀번호 찾기
+	@GetMapping("/findPw")
+	public String findPw() {
+		return "/WEB-INF/views/member/findPw.jsp";
+	}
+	@PostMapping("/findPw")
+	public String findPw(@RequestParam String memberId, 
+											@RequestParam String memberEmail) throws IOException, MessagingException {
+		MemberDto memberDto = memberDao.selectOne(memberId);
+		if(memberDto == null) return "redirect:findPw:error";
+		if(!memberEmail.equals(memberDto.getMemberEmail())) return "redirect:findPw:error";
+		emailService.sendResetPw(memberId, memberEmail);
+		return "redirect:findPwFinish";
+	}
+	@RequestMapping("/findPwFinish")
+	public String findPwFinish() {
+		
+		return "/WEB-INF/views/member/findPwFinish.jsp";
+	}
 	
 	
 	
