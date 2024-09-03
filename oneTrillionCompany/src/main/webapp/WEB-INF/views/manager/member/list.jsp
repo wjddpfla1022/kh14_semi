@@ -52,30 +52,15 @@
 	}
 	</style>
 	
-<div class="container w-1200">
+<div class="container w-1000">
 	<div class="row center">
 		<h1>회원 검색</h1>
 	</div>
+	
 <!-- 	<div class="row right">	 -->
 <%-- 		<h3>데이터개수 : ${list.size()}</h3> --%>
 <!-- 	</div> -->
-	<!-- 검색창 -->
-	<form action="list" method="get" autocomplete="off"  >
-		<div class="row center">
-			<select name="column" class="field-column" >
-				<option value="" >선택</option>
-				<option value="member_id" <c:if test="${param.column=='member_id'}">selected</c:if>>아이디</option>
-				<option value="member_nickname" <c:if test="${param.column=='member_nickname'}">selected</c:if>>닉네임</option>
-				<option value="member_rank" <c:if test="${param.column=='member_rank'}">selected</c:if>>등급</option>
-			</select>
-		<input class="field" type="text" name="keyword" value="${param.keyword}" class="field" >	
-			<button class="btn btn-positive" type="submit">
-				<i class="fa-solid fa-magnifying-glass"></i>
-				검색
-			</button>
-		</div>
-	</form>
-	
+	<hr>
 	<!-- 검색 결과 -->
 	<div class="row center mt-30">
 		<c:choose>
@@ -122,6 +107,22 @@
 			</c:otherwise>
 		</c:choose>
 	</div>
+	<!-- 검색창 -->
+	<form action="list" method="get" autocomplete="off" class="mt-20">
+		<div class="row center">
+			<select name="column" class="field-column" >
+				<option value="" >선택</option>
+				<option value="member_id" <c:if test="${param.column=='member_id'}">selected</c:if>>아이디</option>
+				<option value="member_nickname" <c:if test="${param.column=='member_nickname'}">selected</c:if>>닉네임</option>
+				<option value="member_rank" <c:if test="${param.column=='member_rank'}">selected</c:if>>등급</option>
+			</select>
+		<input class="field" type="text" name="keyword" value="${param.keyword}" class="field" >	
+			<button class="btn btn-positive" type="submit">
+				<i class="fa-solid fa-magnifying-glass"></i>
+				검색
+			</button>
+		</div>
+	</form>
 </div>
 
 <jsp:include page="/WEB-INF/views/template/navigator.jsp"/>
