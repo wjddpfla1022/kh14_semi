@@ -278,7 +278,7 @@ a#smallShirts:hover {
 
 		    // 모달에서 "장바구니로 이동" 버튼 클릭 시 장바구니 페이지로 이동
 		    $('.btn-cart').click(function() {
-		        window.location.href = "/cart"; // 장바구니 페이지 URL
+		        window.location.href = "/cart/list"; // 장바구니 페이지 URL
 		    });
 	});
 </script>
@@ -298,23 +298,24 @@ a#smallShirts:hover {
             right:0px;
             z-index:99;
         }
+        .btn
     </style>
     
 <div class="container w-1200 my-50">
 <!-- 모달 구조 -->
     <div class="full screen-wrapper flex-core" style="display: none;">
-        <div class="container w-450 my-50 p-20" style="height:200px;background-color: white;">
+        <div class="container w-450 my-50 p-20" style="height:200px;background-color: white; border-radius: 10px;">
             <div class="row center my-30" style="font-weight:bold; font-size:20px">
                 장바구니에 상품을 담았습니다
             </div>
-            <div class="row gray" style="font-size:12px">
+            <div class="row center" style="font-size:12px">
                 장바구니로 이동하시겠습니까?
             </div>
             <div class="flex-box column-2">
                 <div class="row">
-                    <button type="button" class="btn btn-cart w-100"><a href="/cart/list" class=" link">장바구니로 이동</a></button>
+                  <button type="button" class="btn btn-cart w-100 link">장바구니로 이동</button>
                 </div>
-                <div class="row">
+                <div class="row me-20">
                     <button type="button" class="btn btn-keep w-100">계속 쇼핑하기</button>
                 </div>
             </div>

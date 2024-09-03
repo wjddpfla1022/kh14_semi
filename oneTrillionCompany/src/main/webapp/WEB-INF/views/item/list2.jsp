@@ -45,8 +45,10 @@
 			 <div class="container w-1000">
         <div class="row center">
 		</div>
-		<h3>데이터 개수 : ${itemList.size()}</h3>
-		
+<%-- 		<h3>데이터 개수 : ${itemList.size()}</h3> --%>
+		<c:if test="${itemList.size()} == 0" >
+			asdf
+		</c:if>
 		<div class="row image-align" id="images">
 		<c:forEach var= "itemDto" items= "${itemList}">
             <a href="/item/detail?itemNo=${itemDto.itemNo}">

@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.kh.oneTrillionCompany.dao.ItemDao;
 import com.kh.oneTrillionCompany.exception.TargetNotFoundException;
 import com.kh.oneTrillionCompany.service.AttachService;
+import com.kh.oneTrillionCompany.service.ItemService;
 
 @CrossOrigin(origins= { "http://127.0.0.1:5500" })
 @RestController
@@ -23,6 +25,9 @@ public class ItemRestController {
 	
 	@Autowired
 	private ItemDao itemDao;
+	
+	@Autowired
+	private ItemService itemService;
 	
 	@Autowired
 	private AttachService attachService;
@@ -48,6 +53,9 @@ public class ItemRestController {
 		}
 		return results;
 	}
-	
+//	 @GetMapping("/item/count")
+//	    public int getItemCount(@RequestParam("itemNo") int itemNo, @RequestParam("itemColor") String itemColor) {
+//	        return itemService.selectItemCntByNameColor(itemNo, itemColor);
+//	    }
 	
 }

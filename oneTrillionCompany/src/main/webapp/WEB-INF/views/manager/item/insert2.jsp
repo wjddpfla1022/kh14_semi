@@ -68,13 +68,8 @@
             	<select name="itemColor" class="field" style="width: 10em;">
             		<option value="">선택없음</option>
             		<option value="black">검정</option>
-            		<option value="red">빨강</option>
-            		<option value="orange">주황</option>
-            		<option value="yellow">노랑</option>
-            		<option value="green">초록</option>
             		<option value="blue">파랑</option>
             		<option value="brown">브라운</option>
-            		<option value=" pink">분홍</option>
             		<option value="white">흰색</option>
             	</select>
             </div>

@@ -27,12 +27,14 @@
 	<div class="row center">
 		<h1>상품 검색</h1>
 	</div>
+
 	<!-- 	<div class="row right"> -->
 	<%-- 		<h3>데이터개수 : ${itemList.size()}</h3> --%>
 	<%-- 		${pageVO} --%>
 	<%-- 		${pageVO.getColumn()} --%>
 	<%-- 		${pageVO.isSearch()} --%>
 	<!-- 	</div> -->
+
 	<!-- 검색창 -->
 	<div class="row center">
 		<form action="list" method="get" autocomplete="off">
