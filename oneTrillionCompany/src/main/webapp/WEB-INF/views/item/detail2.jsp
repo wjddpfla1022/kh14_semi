@@ -303,7 +303,7 @@ a#smallShirts:hover {
 <div class="container w-1200 my-50">
 <!-- 모달 구조 -->
     <div class="full screen-wrapper flex-core" style="display: none;">
-        <div class="container w-350 my-50 p-20" style="background-color: white;">
+        <div class="container w-450 my-50 p-20" style="height:200px;background-color: white;">
             <div class="row center my-30" style="font-weight:bold; font-size:20px">
                 장바구니에 상품을 담았습니다
             </div>
@@ -312,7 +312,7 @@ a#smallShirts:hover {
             </div>
             <div class="flex-box column-2">
                 <div class="row">
-                    <button type="button" class="btn btn-cart w-100"><a href="/cart/list">장바구니로 이동</a></button>
+                    <button type="button" class="btn btn-cart w-100"><a href="/cart/list" class=" link">장바구니로 이동</a></button>
                 </div>
                 <div class="row">
                     <button type="button" class="btn btn-keep w-100">계속 쇼핑하기</button>
