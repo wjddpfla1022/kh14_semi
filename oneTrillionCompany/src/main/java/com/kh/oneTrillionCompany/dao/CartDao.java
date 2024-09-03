@@ -77,7 +77,6 @@ public class CartDao {
 	}
 	//카트번호로 수량 조회(결제)
 	public int selectCnt(int cartNo) {
-		System.out.println(cartNo);
 		String sql="select * from cart where cart_no=?";
 		Object[] data= {cartNo};
 		List<CartDto> list =jdbcTemplate.query(sql, cartMapper,data);
@@ -178,12 +177,10 @@ public class CartDao {
         return jdbcTemplate.update(sql.toString(), data) > 0;
 	}
 		
-	
-
 	//품절 유무를 위해 아이템 컬러를 뽑는다 -> itemDao로 옮기기
 	public List<String> selectItemColors(String itemName) {
 		String sql = "select item_color from item where item_name=?";
 		return jdbcTemplate.queryForList(sql, String.class, itemName);
 	}
-
+	
 }

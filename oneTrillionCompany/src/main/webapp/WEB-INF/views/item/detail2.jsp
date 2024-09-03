@@ -270,8 +270,9 @@ a#smallShirts:hover {
 						alert("장바구니에 등록 되었습니다");
 					},
 					error : function(response) {
-						alert("품절된 색상입니다");
+						alert("품절된 상품입니다");
 					}
+					
 				});
 			});
 		});

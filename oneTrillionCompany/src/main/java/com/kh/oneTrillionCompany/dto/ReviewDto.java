@@ -9,4 +9,11 @@ public class ReviewDto {
 	private String reviewWriter;
 	private String reviewContent;
 	private int reviewScore;
+	
+	//메소드 추가
+	public String getReviewWriterString() {
+		if(reviewWriter == null)
+			return "탈퇴한 사용자";
+		return reviewWriter;
+	}
 }
