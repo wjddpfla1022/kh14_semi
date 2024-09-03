@@ -77,7 +77,6 @@ public class CartDao {
 	}
 	//카트번호로 수량 조회(결제)
 	public int selectCnt(int cartNo) {
-		System.out.println(cartNo);
 		String sql="select * from cart where cart_no=?";
 		Object[] data= {cartNo};
 		List<CartDto> list =jdbcTemplate.query(sql, cartMapper,data);
