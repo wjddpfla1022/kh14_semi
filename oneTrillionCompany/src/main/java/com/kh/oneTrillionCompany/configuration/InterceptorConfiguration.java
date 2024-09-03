@@ -28,39 +28,28 @@ public class InterceptorConfiguration implements WebMvcConfigurer {
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		
-		registry.addInterceptor(testInterceptor).addPathPatterns("/item/**");
-		//회원 권한 검사 인터셉터
-		registry.addInterceptor(memberInterceptor)
-						.addPathPatterns( //멤버권한 승인
-								"/item/**" //상품 페이지
-								
-							)
-						.excludePathPatterns( //멤버권한 차단
-								"/manager/**", //관리자 페이지
-								"/join/", //회원가입
-								"/member/login/", //로그인 화면
-								"/member/leaveFinish"
-								
-							);
-		
-		//관리자 검사 인터셉터 설정
-		registry.addInterceptor(managerInterceptor)
-						.addPathPatterns(
-								"/manager/**" //모든 관리자 페이지
-								
-							)
-						.excludePathPatterns(
-								"/member/join*", //회원가입
-								"/member/login", //로그인 화면
-								"/member/leaveFinish"
-							);
-		
-		//장바구니 주인 검사 인터셉터
-		registry.addInterceptor(cartBuyerInterceptor)
-						.addPathPatterns(
-						"/cart/**"
-				
-				);
-		
+//		registry.addInterceptor(testInterceptor).addPathPatterns();
+//		//회원 권한 검사 인터셉터
+//		registry.addInterceptor(memberInterceptor)
+//						.addPathPatterns( //멤버권한 승인
+//								
+//							)
+//						.excludePathPatterns( //멤버권한 차단
+//								
+//							);
+//		
+//		//관리자 검사 인터셉터 설정
+//		registry.addInterceptor(managerInterceptor)
+//						.addPathPatterns(
+//							)
+//						.excludePathPatterns(
+//							);
+//		
+//		//장바구니 주인 검사 인터셉터
+//		registry.addInterceptor(cartBuyerInterceptor)
+//						.addPathPatterns(
+//								
+//				);
+//		
 	}
 }

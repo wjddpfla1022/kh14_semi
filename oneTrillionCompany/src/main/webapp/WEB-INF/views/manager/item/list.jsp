@@ -8,7 +8,6 @@
 <script type="text/javascript">
 	$(function(){
 		$(".btn-item-delete").click(function(e){
-			e.preventDefault();
 			var deleteItem = window.confirm("정말로 삭제 하시겠습니까?");
 			if(deleteItem) { 
 				window.location.href = $(this).attr("href"); 
