@@ -81,6 +81,7 @@ public class ItemController {
 	public String detail(@RequestParam int itemNo, Model model) {
 		ItemDto itemDto = itemDao.selectOne(itemNo);
 		ItemInfoDto infoDto = infoDao.selectOne(itemNo);
+		List<ReviewDto >reviewList = reviewDao.selectListByItemNo(itemNo);
 		List<ReviewDto> list=reviewDao.selectList();
 		//if(infoDto == null) throw new TargetNotFoundException("존재하지 않는 글 번호");
 		
@@ -89,9 +90,10 @@ public class ItemController {
 		model.addAttribute("list",list);
 		model.addAttribute("itemDto", itemDto);
 	    model.addAttribute("infoDto", infoDto);
+	    model.addAttribute("reviewList", reviewList);
 	    model.addAttribute("itemNo", itemNo);
 //	    model.addAttribute("itemColorCnt", itemColorCnt);
-	    
+	    System.out.println(reviewList);
 	    //품절시 버튼 비활성화-장바구니
 	    model.addAttribute("colorList", itemDao.selectItemColors(itemNo));
 		model.addAttribute("attachNo", itemDao.findImage(itemNo));

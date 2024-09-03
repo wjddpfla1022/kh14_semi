@@ -492,16 +492,29 @@ a#smallShirts:hover {
 	<div class="row center">
 	<div class="row flex-box column-2">
 		<div class="center">
-			<h3 style="font-weight: bolder;">REVIEW ( ${list.size()} )</h3>
+			<h3 style="font-weight: bolder;">REVIEW (${reviewList.size()} )</h3>
 		</div>
+		
+<%-- 		<c:forEach var= "reviewDto" items= "${}"> --%>
+		
+<%-- 		</c:forEach> --%>
 
 		<div class="center">
 			<a
 				href="/review/list?column=review_item_no&keyword=${itemDto.itemNo}"
 				class="btn" style="font-weight: bolder; border-color: white; background-color: white">상품 리뷰 <i class="fa-solid fa-sort-down"></i></a>
 		</div>
+	
 	</div>
+	<c:forEach var="dto" items="${reviewList}">
+	<div class="row flex-box column-2">
+		<div class="row">
+			${dto.reviewWriter}
+			${dto.reviewContent}
+			${dto.reviewScore}
+		</div>
 	</div>
+	</c:forEach>
 
 <hr>
 <div class="left">
