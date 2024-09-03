@@ -13,6 +13,7 @@ import com.kh.oneTrillionCompany.dao.MemberDao;
 import com.kh.oneTrillionCompany.dao.OrderDetailDao;
 import com.kh.oneTrillionCompany.dao.OrdersDao;
 import com.kh.oneTrillionCompany.dto.OrderDetailDto;
+import com.kh.oneTrillionCompany.dto.OrdersDto;
 import com.kh.oneTrillionCompany.exception.TargetNotFoundException;
 import com.kh.oneTrillionCompany.vo.OrderVO;
 
@@ -35,8 +36,9 @@ public class PayService {
 
 	public void pay(List<OrderVO> list,  int orderNo, int reward,
 
-			HttpSession session)  throws Exception  {
-		int payment=ordersDao.selectOne(orderNo).getOrderPrice();
+			HttpSession session,String orderMemo)  throws Exception  {
+		OrdersDto ordersDto=ordersDao.selectOne(orderNo);
+		int payment=ordersDto.getOrderPrice();
 		//세션 - 주문 아이디 검사
 		String memberId=(String) session.getAttribute("createdUser");
 		String buyer1=list.get(0).getBuyer();
@@ -62,7 +64,7 @@ public class PayService {
 			int cartNo=list.get(i).getCartNo();
 //			if(cartDao.selectCnt(cartNo)==orderDetailCnt)
 				//장바구니 수량 = 결제수량이면 삭제
-				cartDao.delete(cartNo);
+			cartDao.delete(cartNo);
 //			else if(cartDao.selectCnt(cartNo)>orderDetailCnt) {
 //				//다르면 갯수 업데이트
 //				String buyer = detailList.get(i).getOrderDetailItemName();
@@ -74,6 +76,8 @@ public class PayService {
 //				throw new TargetNotFoundException("장바구니 수량을 확인해주세요");
 //			}
 		}
+		//주문서 메모 추가
+		ordersDao.updateMemo(orderMemo, orderNo);
 		orderDetailDao.payCompleteStatus(detailNoList);
 	}
 }

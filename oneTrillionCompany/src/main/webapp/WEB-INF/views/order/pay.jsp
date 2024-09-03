@@ -10,7 +10,7 @@
 
 <!-- my css -->
 <link rel="stylesheet" type="text/css" href="/css/commons.css">
-<link rel="stylesheet" type="text/css" href="/css/test.css">
+<!-- <link rel="stylesheet" type="text/css" href="/css/test.css"> -->
 <!--  font awesome cdn -->
 <link rel="stylesheet" type="text/css"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
@@ -72,14 +72,48 @@
 }
 
 .container-grid {
+	margin-left: 30px;
+	display: grid;
+ 	grid-template-columns: 550px 580px;
+  	grid-template-rows: 400px 500px;  
+	row-gap: 10px;
+	column-gap: 20px;
+	width: 100%;
+	height:1500px;
+}
+
+.container2 {
+	margin-top: 20px;
+	padding: 20px 16px;
+	border-radius: 12px;
+	background-color: white;
+	position: absolute;
+	position: fixed;
+}
+
+.container2-left {
+	width: 500px;
+}
+
+.container2-grid {
 	display: grid;
 	grid-template-columns: 550px 600px;
 	grid-template-rows: 400px 600px;
 	row-gap: 10px;
 	column-gap: 20px;
 	width: 100%;
+	height:100%;
 }
+
+.title4 {
+	font-size: 28px;
+	position: absolute;
+	position: fixed;
+}
+
+.itme2 {
 	
+}
 </style>
 <!-- jquery cdn -->
 <script
@@ -87,7 +121,7 @@
 <!-- 자바스크립트 코드 작성 영역 -->
 <script type="text/javascript">
 	$(function() {
-		$("select[name='order_memo']")
+		$("select[name='orderMemo']")
 				.change(
 						function() {
 							var selectedValue = $(this).val();
@@ -112,12 +146,21 @@
 						});
 
 		// 페이지 로드 시 선택된 값에 따른 초기 설정
-		$("select[name='order_memo']").trigger('change');
+		$("select[name='orderMemo']").trigger('change');
 	});
 </script>
+
+<script type="text/javascript">
+	$(function() {
+		$('.item1').hide();
+		$('.item2').show();
+	});
+</script>
+
+
 </head>
 <body>
-	<div class="orderpage w-600 my-10 mx-30 float-box">
+	<div class="orderpage w-600 my-10 mx-30 float-box" style="height:100%">
 		<div class="ordersHeader row w-100">
 			<div class="logo flex-left mx-10">
 				<a href="/"><img src="https://ifh.cc/g/SbA93J.png"
@@ -125,6 +168,8 @@
 			</div>
 			<div class="center float-center title">주문/결제</div>
 		</div>
+
+
 		<div class="row flex-box">
 			<div class="flex-right px-50">
 				장바구니 >
@@ -135,14 +180,13 @@
 		<form action="pay" method="post">
 			<div class="container-grid">
 				<div class="item">
-					<label class="row title">배송지</label>
 					<div class="flex-box w-100">
 						<div class="container container-left my-20">
+							<label class="row title">배송지</label>
+							<hr>
 							<div class="float-box p-10 mx-30">
 								<div class="row">${memberDto.memberName}</div>
-								<div class="row">
-									${memberDto.memberContact}
-								</div>
+								<div class="row">${memberDto.memberContact}</div>
 								<div class="area-address">
 									<c:choose>
 										<c:when test="${memberDto.memberAddress1!=null}">
@@ -152,13 +196,12 @@
 								주소를 변경해주세요
 							</c:otherwise>
 									</c:choose>
-
 								</div>
 								<hr>
-								<div> 배송메모  </div>
-								<div >
+								<div>배송메모</div>
+								<div>
 									<div class="container request-detail">
-										<select class="field w-100" name="order_memo">
+										<select class="field w-100" name="orderMemo">
 											<option value="선택 안 함">선택 안 함</option>
 											<option value="직접 입력하기">직접 입력하기</option>
 											<option value="부재시 문앞에 두고 가주세요">부재시 문앞에 두고 가주세요</option>
@@ -176,11 +219,35 @@
 						</div>
 					</div>
 				</div>
-				<div class="item">
+
+
+
+
+				<div class="item1">
 					<!-- 					<div class="container" style="width: 450px; height: 100%"> -->
-					<div class="title">결제상세</div>
+					<div class="title">더미</div>
 					<div class="container w-500">
 						<div class="row w-100">
+							<div class="flex-box column-2 w-100" style="font-size: 18px">
+							</div>
+						</div>
+					</div>
+					<!-- 					</div> -->
+				</div>
+
+
+
+
+
+
+
+				<!-- 유석-->
+				<div class="item2">
+					<!-- 					<div class="container" style="width: 450px; height: 100%"> -->
+					<div class="container2 w-500">
+						<div class="row w-100">
+							<div class="title row">결제상세</div>
+							<hr>
 							<div class="flex-box column-2 w-100" style="font-size: 18px">
 								<div class="row">포인트 결제</div>
 								<div class="row right green flex-right">
@@ -189,14 +256,16 @@
 							</div>
 							<div class="flex-box column-2">
 								<div class="row title">적립 혜택</div>
-								<div class="row green flex-right">최대 ${Math.round(totalPrice/100)*3+cnt*150} 원</div>
+								<div class="row green flex-right">최대
+									${Math.round(totalPrice/100)*3+cnt*150} 원</div>
 							</div>
 							<div class="container">
 								<div class="flex-box column-2">
 									<div class="row">구매적립</div>
 									<div class="row flex-right pay-coin">${Math.round(totalPrice/100)*3}
 										원</div>
-										<input type="hidden"  name="reward" value="${Math.round(totalPrice/100)*3}">
+									<input type="hidden" name="reward"
+										value="${Math.round(totalPrice/100)*3}">
 								</div>
 								<div class="flex-box column-2">
 									<div class="row">리뷰적립</div>
@@ -205,19 +274,25 @@
 								<div class="row gray">동일상품의 상품 적립은 1회로 제한</div>
 							</div>
 							<div class="flex-box column-2">
-								<div class="center" style="padding:0.4em 0 0 0">결제금액 : ${totalPrice}</div>
+								<div class="center" style="padding: 0.4em 0 0 0">결제금액 :
+									${totalPrice}</div>
 								<button type="submit" class="btn btn-positive w-33">결제하기</button>
 							</div>
 						</div>
 					</div>
 					<!-- 					</div> -->
 				</div>
+
+
+
+				<!--여기까지-->
 				<!-- 주문 상품 목록 출력 -->
 				<div class="order-item">
-					<div class="row title">주문상품</div>
 					<div class="item">
 						<div class="container container-left my-20">
+							<div class="row title">주문상품</div>
 							<table class="order-detail-table">
+								<hr>
 								<thead>
 									<tr>
 										<th class="center my-10" style="width: 60%;"></th>
@@ -233,16 +308,16 @@
 										<tr>
 											<td><input type="text" name="itemName"
 												value="${orderDetail.orderDetailItemName}" readonly
-												style="text-align: center; width: 100%; border: none; background-color: transparent;outline:none; font-size:20px;">
-												<input type="hidden" name="itemNo" value="${orderDetail.orderDetailItemNo}">
-											</td>
+												style="text-align: center; width: 100%; border: none; background-color: transparent; outline: none; font-size: 20px;">
+												<input type="hidden" name="itemNo"
+												value="${orderDetail.orderDetailItemNo}"></td>
 											<td class="center"><input type="text" name="itemPrice"
 												value="${orderDetail.orderDetailPrice}" readonly
-												style="text-align: center; width: 100%; border: none; background-color: transparent;outline:none; font-size:20px;">
+												style="text-align: center; width: 100%; border: none; background-color: transparent; outline: none; font-size: 20px;">
 											</td>
 											<td class="center"><input type="text" name="cnt"
 												value="${orderDetail.orderDetailCnt}" readonly
-												style="text-align: center; width: 50%; border: none; background-color: transparent;outline:none; font-size:20px;">
+												style="text-align: center; width: 50%; border: none; background-color: transparent; outline: none; font-size: 20px;">
 											</td>
 											<td class="center"><input type="hidden" name="buyer"
 												value="${memberDto.memberId}" readonly></td>
