@@ -124,7 +124,8 @@ SELECT * FROM orders;
 CREATE TABLE refund (
 	refund_order_detail_no	number	references ORDER_detail(ORDER_detail_no) on delete cascade	NOT NULL,
 	refund_memo	varchar2(300)		NOT NULL,
-	refund_date	date	default sysdate 	NOT NULL
+	refund_date	date	default sysdate 	NOT NULL,
+	refund_type varchar2(30) not null
 );
 SELECT * FROM refund;
 
