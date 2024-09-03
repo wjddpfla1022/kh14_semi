@@ -40,7 +40,7 @@ public class ItemDao {
 						itemDto.getItemSalePrice(), 
 						itemDto.getItemCnt(), itemDto.getItemSize(), 
 						itemDto.getItemCate1(), itemDto.getItemCate2(), 
-						itemDto.getItemCate3(), itemDto.getItemDiscountRate(), itemDto.getItemColor()
+						itemDto.getItemCate3(), 0, itemDto.getItemColor()
 						};
 		jdbcTemplate.update(sql, data);
 	}
@@ -214,6 +214,161 @@ public class ItemDao {
 	        return jdbcTemplate.query(sql, itemMapper, data);
 	    }
 	}
+	//페이징 (회원 전용) //판매량순(sales) 가격비싼순(priceDesc) 가격싼순(priceAsc) 최신등록순(latest)
+		public List<ItemDto> selectListByPaging(ItemPageVO pageVO,String sorting) {
+			if(sorting.equals("sales")) {//판매량순
+			    if(pageVO.isSearch() == true) {//검색이라면
+			        String sql = "select * from ("
+			                            + "select rownum as rn, TMP.* from ("
+			                                + "select "
+			                                    + "item_no, item_name, item_price, item_sale_price, "
+			                                    + "item_date, item_cnt, item_size, "
+			                                    + "item_cate1, item_cate2, item_cate3, "
+			                                    + "item_discount_rate, item_color "        
+			                                + "from item "
+			                                + "where instr(" + pageVO.getColumn() + ", ?) > 0 "
+			                                + "order by item_discount_rate desc"
+			                            + ")TMP"
+			                    + ") where rn between ? and ?";
+			        Object[] data = {
+			                pageVO.getKeyword(), 
+			                pageVO.getBeginRow(), 
+			                pageVO.getEndRow() 
+			                };
+			                return jdbcTemplate.query(sql, itemMapper, data);
+			        }
+			    
+			    else{//목록이라면
+			    	String sql = "SELECT * FROM ("
+			                + "    SELECT ROWNUM AS rn, TMP.* FROM ("
+			                + "        SELECT "
+			                + "            item_no, item_name, item_price, item_sale_price, "
+			                + "            item_date, item_cnt, item_size, "
+			                + "            item_cate1, item_cate2, item_cate3, "
+			                + "            item_discount_rate, item_color "
+			                + "        FROM item "
+			                + "        ORDER BY item_discount_rate desc"
+			                + "    ) TMP"
+			                + ") WHERE rn BETWEEN ? AND ?";
+			        Object[] data = {pageVO.getBeginRow(), pageVO.getEndRow()};
+			        return jdbcTemplate.query(sql, itemMapper, data);
+			    }
+			}
+			else if(sorting.equals("priceAsc")) {//가격 싼 순서대로
+				if(pageVO.isSearch() == true) {//검색이라면
+			        String sql = "select * from ("
+			                            + "select rownum as rn, TMP.* from ("
+			                                + "select "
+			                                    + "item_no, item_name, item_price, item_sale_price, "
+			                                    + "item_date, item_cnt, item_size, "
+			                                    + "item_cate1, item_cate2, item_cate3, "
+			                                    + "item_discount_rate, item_color "        
+			                                + "from item "
+			                                + "where instr(" + pageVO.getColumn() + ", ?) > 0 "
+			                                + "order by item_price asc"
+			                            + ")TMP"
+			                    + ") where rn between ? and ?";
+			        Object[] data = {
+			                pageVO.getKeyword(), 
+			                pageVO.getBeginRow(), 
+			                pageVO.getEndRow() 
+			                };
+			                return jdbcTemplate.query(sql, itemMapper, data);
+			        }
+			    
+			    else{//목록이라면
+			    	String sql = "SELECT * FROM ("
+			                + "    SELECT ROWNUM AS rn, TMP.* FROM ("
+			                + "        SELECT "
+			                + "            item_no, item_name, item_price, item_sale_price, "
+			                + "            item_date, item_cnt, item_size, "
+			                + "            item_cate1, item_cate2, item_cate3, "
+			                + "            item_discount_rate, item_color "
+			                + "        FROM item "
+			                + "        ORDER BY item_price ASC"
+			                + "    ) TMP"
+			                + ") WHERE rn BETWEEN ? AND ?";
+			        Object[] data = {pageVO.getBeginRow(), pageVO.getEndRow()};
+			        return jdbcTemplate.query(sql, itemMapper, data);
+			    }
+			}
+			else if(sorting.equals("priceDesc")) {//가격 비싼 순서대로
+				if(pageVO.isSearch() == true) {//검색이라면
+			        String sql = "select * from ("
+			                            + "select rownum as rn, TMP.* from ("
+			                                + "select "
+			                                    + "item_no, item_name, item_price, item_sale_price, "
+			                                    + "item_date, item_cnt, item_size, "
+			                                    + "item_cate1, item_cate2, item_cate3, "
+			                                    + "item_discount_rate, item_color "        
+			                                + "from item "
+			                                + "where instr(" + pageVO.getColumn() + ", ?) > 0 "
+			                                + "order by item_price desc"
+			                            + ")TMP"
+			                    + ") where rn between ? and ?";
+			        Object[] data = {
+			                pageVO.getKeyword(), 
+			                pageVO.getBeginRow(), 
+			                pageVO.getEndRow() 
+			                };
+			                return jdbcTemplate.query(sql, itemMapper, data);
+			        }
+			    
+			    else{//목록이라면
+			    	String sql = "SELECT * FROM ("
+			                + "    SELECT ROWNUM AS rn, TMP.* FROM ("
+			                + "        SELECT "
+			                + "            item_no, item_name, item_price, item_sale_price, "
+			                + "            item_date, item_cnt, item_size, "
+			                + "            item_cate1, item_cate2, item_cate3, "
+			                + "            item_discount_rate, item_color "
+			                + "        FROM item "
+			                + "        ORDER BY item_price desc"
+			                + "    ) TMP"
+			                + ") WHERE rn BETWEEN ? AND ?";
+			        Object[] data = {pageVO.getBeginRow(), pageVO.getEndRow()};
+			        return jdbcTemplate.query(sql, itemMapper, data);
+			    }
+			}
+			else {//최신등록순
+				if(pageVO.isSearch() == true) {//검색이라면
+			        String sql = "select * from ("
+			                            + "select rownum as rn, TMP.* from ("
+			                                + "select "
+			                                    + "item_no, item_name, item_price, item_sale_price, "
+			                                    + "item_date, item_cnt, item_size, "
+			                                    + "item_cate1, item_cate2, item_cate3, "
+			                                    + "item_discount_rate, item_color "        
+			                                + "from item "
+			                                + "where instr(" + pageVO.getColumn() + ", ?) > 0 "
+			                                + "order by item_no asc"
+			                            + ")TMP"
+			                    + ") where rn between ? and ?";
+			        Object[] data = {
+			                pageVO.getKeyword(), 
+			                pageVO.getBeginRow(), 
+			                pageVO.getEndRow() 
+			                };
+			                return jdbcTemplate.query(sql, itemMapper, data);
+			        }
+			    
+			    else{//목록이라면
+			    	String sql = "SELECT * FROM ("
+			                + "    SELECT ROWNUM AS rn, TMP.* FROM ("
+			                + "        SELECT "
+			                + "            item_no, item_name, item_price, item_sale_price, "
+			                + "            item_date, item_cnt, item_size, "
+			                + "            item_cate1, item_cate2, item_cate3, "
+			                + "            item_discount_rate, item_color "
+			                + "        FROM item "
+			                + "        ORDER BY item_no ASC"
+			                + "    ) TMP"
+			                + ") WHERE rn BETWEEN ? AND ?";
+			        Object[] data = {pageVO.getBeginRow(), pageVO.getEndRow()};
+			        return jdbcTemplate.query(sql, itemMapper, data);
+			    }
+			}
+		}
 	
 	public int countByPaging(ItemPageVO pageVO) {
 	    String sql;
@@ -267,4 +422,10 @@ public class ItemDao {
 //		
 //		return jdbcTemplate.queryForObject(sql, Integer.class, data);
 //	}
+	//판매량 기록
+	public void salesCounting(int itemNo,int sales) {
+		String sql="update item set item_discount_rate = item_discount_rate+? where item_no =?";
+		Object[] data= {sales,itemNo};
+		jdbcTemplate.update(sql,data);
+	}
 }

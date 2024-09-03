@@ -75,6 +75,8 @@ public class PayService {
 //				System.out.println("결제 수량 : "+orderDetailCnt);
 //				throw new TargetNotFoundException("장바구니 수량을 확인해주세요");
 //			}
+			//판매량 기록
+			itemDao.salesCounting(orderDetailItemNo,orderDetailCnt);
 		}
 		//주문서 메모 추가
 		ordersDao.updateMemo(orderMemo, orderNo);

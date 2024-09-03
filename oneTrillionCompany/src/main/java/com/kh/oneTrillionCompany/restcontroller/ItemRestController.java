@@ -6,7 +6,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.oneTrillionCompany.dao.ItemDao;
+import com.kh.oneTrillionCompany.dto.ItemDto;
 import com.kh.oneTrillionCompany.exception.TargetNotFoundException;
 import com.kh.oneTrillionCompany.service.AttachService;
 import com.kh.oneTrillionCompany.service.ItemService;
+import com.kh.oneTrillionCompany.vo.ItemPageVO;
 
 @CrossOrigin(origins= { "http://127.0.0.1:5500" })
 @RestController
@@ -57,5 +59,10 @@ public class ItemRestController {
 //	    public int getItemCount(@RequestParam("itemNo") int itemNo, @RequestParam("itemColor") String itemColor) {
 //	        return itemService.selectItemCntByNameColor(itemNo, itemColor);
 //	    }
-	
+	@PostMapping("/list")
+	public List<ItemDto> list(@RequestParam String sorting,
+							@ModelAttribute ItemPageVO itemPageVO ){
+		List<ItemDto> itemList=itemDao.selectListByPaging(itemPageVO, sorting);
+		return itemList;
+	}
 }
