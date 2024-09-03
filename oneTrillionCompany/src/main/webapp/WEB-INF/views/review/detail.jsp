@@ -16,6 +16,9 @@
         	font-size : 20px;
         	font-weight: 200 !important;
         	padding : 10px 20px;
+	        word-wrap: break-word; /* 긴 단어를 줄바꿈 */
+	        overflow-wrap: break-word; /* 박스 범위를 넘는 단어 줄바꿈 */
+	        white-space: normal; /* 기본 줄바꿈 설정 */
         	
         }
         .image-location {
@@ -24,6 +27,9 @@
         }
         .writer-box {
         	font-size : 20px;
+        }
+        .reviewContantBox {
+        	hite-space: pre-wrap;
         }
     </style>
 
@@ -41,7 +47,6 @@
                     sendable: false // 전송 불가
                 },
                 display: {
-                    showNumber: true, // 숫자 표시
                     placeLimit: 1, // 소수점 자리수
                     textColor: "#0984e3" // 텍스트 색상
                 },
@@ -59,32 +64,36 @@
 		           	<div class="center">
 		                <img src="/review/image?reviewNo=${reviewDto.reviewNo}" width="400" height="400">
 		            </div>
+
 				        <div class="row center">
+				        	<%-- 리뷰 별점 표시  --%>
+				            <div class="left">
+				                <div class="test-score" data-rate="${reviewDto.reviewScore}"></div>
+				            </div>
 				        	<%-- 작성자를 표시(3글자만 표시 후 나머지 아이디는 * 표시)  --%>
-				            <div class="left writer-box">
+				            <div class="left writer-box mt-30">
 								<c:choose>
 									<c:when test="${fn:length(reviewDto.reviewWriter) > 3}">
 										<%-- 작성자의 아이디를 3글자 추출 후 표시 --%>
 										<c:out value="${fn:substring(reviewDto.reviewWriter, 0, 3)}" />
 										<%-- 이후 아이디를 * 처리 --%>
 										<c:out value="***" />
+										<span>님의 리뷰입니다.</span>
 									</c:when>
 									<c:otherwise>
 										<%-- 아이디의 길이가 3글자 이하인 경우를 처리 --%>
 										<c:out value="${reviewDto.reviewWriterString}" />
+										<span>님의 리뷰입니다.</span>
 									</c:otherwise>
 								</c:choose>				
 				            </div>
 				            <%-- 리뷰 내용 표시  --%>
 				            <div class="row">
 					            <div class="content-box left">
-					                <div class="">${reviewDto.reviewContent}</div>
+					                <pre class="reviewContentBox">${reviewDto.reviewContent}</pre>
 					            </div>
 				            </div>
-				            <%-- 리뷰 별점 표시  --%>
-				            <div class="left">
-				                <div class="test-score" data-rate="${reviewDto.reviewScore}"></div>
-				            </div>
+
 			        </div>
 		        </div>
 		    </div>
