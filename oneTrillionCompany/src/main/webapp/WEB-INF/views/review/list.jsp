@@ -122,15 +122,15 @@
                                                 <c:when test="${reviewDto.reviewWriter == null}">탈퇴한 사용자</c:when>
                                                 	<c:otherwise>
 														<c:choose>
-															<c:when test="${fn:length(qnaDto.qnaWriter) > 3}">
+															<c:when test="${fn:length(reviewDto.reviewWriter) > 3}">
 																<%-- 작성자의 아이디를 3글자 추출 후 표시 --%>
-																<c:out value="${fn:substring(qnaDto.qnaWriter, 0, 3)}" />
+																<c:out value="${fn:substring(reviewDto.reviewWriter, 0, 3)}" />
 																<%-- 이후 아이디를 * 처리 --%>
 																<c:out value="***" />
 															</c:when>
 															<c:otherwise>
 																<%-- 아이디의 길이가 3글자 이하인 경우를 처리 --%>
-																<c:out value="${qnaDto.qnaWriter}" />
+																<c:out value="${reviewDto.reviewWriter}" />
 															</c:otherwise>
 														</c:choose>
                                                 	</c:otherwise>
@@ -154,8 +154,8 @@
                     <thead>
                         <tr class="tr-table-top">
                             <td width=10%>상품번호</td>
-                            <td width=10%>아이디</td>
                             <td width=60%>리뷰내용</td>
+                            <td width=10%>아이디</td>
                             <td width=10%>별점</td>
                         </tr>
                     </thead>
@@ -172,10 +172,10 @@
                                 <c:forEach var="reviewDto" items="${list}">
                                     <tr class="tr-table-bottom">
                                         <td class="td-table-bottom">${reviewDto.reviewItemNo}</td>
-                                        <td class="td-table-bottom">${reviewDto.reviewWriterString}</td>
                                         <td class="td-table-bottom">
                                             <a href="detail?reviewNo=${reviewDto.reviewNo}" class="table-title">${reviewDto.reviewContent}</a>
                                         </td>
+                                        <td class="td-table-bottom">${reviewDto.reviewWriterString}</td>
                                         <td class="td-table-bottom">
                                             <div class="test-score" data-rate="${reviewDto.reviewScore}"></div>
                                         </td>
