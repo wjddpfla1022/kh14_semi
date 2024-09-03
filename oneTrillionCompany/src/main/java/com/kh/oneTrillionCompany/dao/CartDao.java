@@ -184,4 +184,13 @@ public class CartDao {
 		return jdbcTemplate.queryForList(sql, String.class, itemName);
 	}
 	
+	//장바구니에 이미 같은 상품이 있는지 조회하기
+	public boolean findCartItem(String itemName, String itemColor, String itemSize, String cartBuyer) {
+		Integer itemNo = findItemNo(itemName, itemColor, itemSize);
+		String sql= "select count(*) from cart where cart_item_no=? and cart_buyer=?";
+		Object[] data = {itemNo, cartBuyer};
+		Integer count = jdbcTemplate.queryForObject(sql, new Object[]{itemNo, cartBuyer}, Integer.class);
+		return count != null && count > 0;
+	}
+	
 }

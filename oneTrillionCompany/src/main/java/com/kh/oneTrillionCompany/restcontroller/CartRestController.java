@@ -45,16 +45,25 @@ public class CartRestController {
 		return cartTotalPrice;
 	}
 	
-	//장바구니 등록 추가 사이즈 추가함
-		@PostMapping("/insertCart")
-		public void insertCart(HttpSession session,
-								@RequestParam String itemName, @RequestParam String itemColor, 
-								@RequestParam int itemSalePrice, @RequestParam int cartCnt,
-								@RequestParam int attachNo, @RequestParam String itemSize) {
-			String cartBuyer = (String)session.getAttribute("createdUser");
+	@PostMapping("/insertCart")
+	public ResponseEntity<String> insertCart(HttpSession session,
+							@RequestParam String itemName, @RequestParam String itemColor, 
+							@RequestParam int itemSalePrice, @RequestParam int cartCnt,
+							@RequestParam int attachNo, @RequestParam String itemSize) {
+		String cartBuyer = (String)session.getAttribute("createdUser");
+		
+		//장바구니 항목 조회
+		boolean  isExistCartItem = cartDao. findCartItem(itemName, itemColor, itemSize, cartBuyer);
+		
+		if(isExistCartItem) {
+			return ResponseEntity.ok("이미 장바구니에 등록된 상품입니다.");
+		}
+		else {
 			cartDao.itemInsertCart(itemName, itemColor, cartBuyer,itemSalePrice, 
 											cartCnt, attachNo, itemSize);
+			return ResponseEntity.ok("장바구니에 등록되었습니다.");
 		}
+	}
 	
 	//장바구니 한개 제거
 	@PostMapping("/delete")

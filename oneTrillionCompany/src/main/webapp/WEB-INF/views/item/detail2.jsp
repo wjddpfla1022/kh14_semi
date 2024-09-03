@@ -224,7 +224,6 @@ a#smallShirts:hover {
 			cartCntInput.val(cartCntValue);
 		});
 
-		//장바구니 ajax 통신*
 		$(function() {
 			//전역변수
 			var itemColorValue = "";
@@ -267,12 +266,11 @@ a#smallShirts:hover {
 						attachNo : attachNoValue
 					},
 					success : function(response) {
-						alert("장바구니에 등록 되었습니다");
+						alert(response);
 					},
-					error : function(response) {
-						alert("품절된 상품입니다");
+					error: function() {
+						alert("품절된 상품입니다")
 					}
-					
 				});
 			});
 		});
