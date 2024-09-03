@@ -147,12 +147,12 @@
 		</table>
 	</div>
 	<div class="flex-box row">
-			<div class=custom-menu>
-					<a href="#">
-						<span id="top-location">Order</span>
-						<span id="bottom-location">주문내역 조회</span>
-					</a>
-			</div>
+<!-- 			<div class=custom-menu> -->
+<!-- 					<a href="#"> -->
+<!-- 						<span id="top-location">Order</span> -->
+<!-- 						<span id="bottom-location">주문내역 조회</span> -->
+<!-- 					</a> -->
+<!-- 			</div> -->
 			<div class=custom-menu>
 					<a href="/qna/list?column=qna_writer&keyword=${memberDto.memberId}">
 						<span id="top-location">Q&A</span>
