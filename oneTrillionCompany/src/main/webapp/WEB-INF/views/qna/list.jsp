@@ -52,9 +52,6 @@
 	}
 </style>
 
-
-
-
 <div class="container w-1000 my-30">
 
 	<div class="row center">
@@ -207,7 +204,6 @@
 			</table>
 		</c:when>
 	</c:choose>
-
 </div>
 
 
@@ -221,7 +217,7 @@
 				<c:if test="${param.column == 'qna_writer'}">selected</c:if>>작성자</option>
 		</select> <input type="text" name="keyword" placeholder="검색어"
 			value="${param.keyword}" class="field">
-		<button type="submit" class="btn btn-neutral">
+		<button type="submit" class="btn btn-positive">
 			<i class="fa-solid fa-magnifying-glass"></i> 검색
 		</button>
 	</div>
