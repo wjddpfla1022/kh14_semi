@@ -45,8 +45,12 @@
 			 <div class="container w-1000">
         <div class="row center">
 		</div>
-		<h3>데이터 개수 : ${itemList.size()}</h3>
-		
+<%-- 		<h3>데이터 개수 : ${itemList.size()}</h3> --%>
+		<c:choose>
+    <c:when test="${empty itemList || itemList.size() == 0}">
+		<h3>해당 카테고리에 상품이 존재하지 않습니다.</h3>
+    </c:when>
+    <c:otherwise>
 		<div class="row image-align" id="images">
 		<c:forEach var= "itemDto" items= "${itemList}">
             <a href="/item/detail?itemNo=${itemDto.itemNo}">
@@ -61,6 +65,8 @@
             
             <jsp:include page= "/WEB-INF/views/template/itemNavigator2.jsp"></jsp:include>
             </div>
+    </c:otherwise>
+</c:choose>
         </div>
     </div>
 </body>
