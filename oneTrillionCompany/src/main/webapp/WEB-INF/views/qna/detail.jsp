@@ -301,12 +301,16 @@
 					<i class="fa-solid fa-list"></i> 목록
 				</a>
 		        <div>
-		            <a href="update?qnaNo=${qnaDto.qnaNo}" class="btn btn-update">
-		            	<i class="fa-solid fa-pen-to-square"></i> 수정
-		            </a>
-		            <button type="button" class="btn btn-delete">
-		            	<i class="fa-solid fa-trash"></i> 삭제
-		            </button>
+		        	<c:if test="${sessionScope.createdUser == qnaDto.qnaWriter}">
+			            <a href="update?qnaNo=${qnaDto.qnaNo}" class="btn btn-update">
+			            	<i class="fa-solid fa-pen-to-square"></i> 수정
+			            </a>
+		            </c:if>
+		            <c:if test="${sessionScope.createdUser == qnaDto.qnaWriter || sessionScope.createdLevel == '관리자'}">
+			            <button type="button" class="btn btn-delete">
+			            	<i class="fa-solid fa-trash"></i> 삭제
+			            </button>
+		            </c:if>
 		        </div>
 			</div>
 		</div>
@@ -315,13 +319,14 @@
 			<div class="row reply-list-wrapper">
 			</div>
 		<hr>
-		
-		<div class="row">
-			<textarea class="field w-100 reply-input"></textarea>
-			<button type="button" class="btn btn-positive reply-add-btn">
-				<i class="fa-solid fa-pen-to-square"></i> 댓글 작성
-			</button>
-		</div>
+		<c:if test="${sessionScope.createdLevel =='관리자'}">
+			<div class="row">
+				<textarea class="field w-100 reply-input"></textarea>
+				<button type="button" class="btn btn-positive reply-add-btn">
+					<i class="fa-solid fa-pen-to-square"></i> 댓글 작성
+				</button>
+			</div>
+		</c:if>
 	</div>
 </form>
 
