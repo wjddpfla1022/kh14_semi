@@ -95,6 +95,7 @@ public class OrderController {
 		    @RequestParam("cntByConnection") List<Integer> cntList, 
 		    @RequestParam int orderNo,
 		    @RequestParam int reward,
+		    @RequestParam String orderMemo,
 			HttpSession session) throws Exception {
 		String memberId=(String) session.getAttribute("createdUser");
 		List<OrderVO> list = new ArrayList<>();
@@ -108,7 +109,7 @@ public class OrderController {
 	        order.setCartNo(cartNos.get(i));
 	        list.add(order);
 	    }
-	    payService.pay(list,orderNo, reward, session);
+	    payService.pay(list,orderNo, reward, session,orderMemo);
 	    connectionOCDao.deleteAll(memberId);
 		return "redirect:payFinish?orderNo="+orderNo;
 	}
@@ -125,9 +126,10 @@ public class OrderController {
 			@RequestParam int orderNo) {
 		String memberId=(String) session.getAttribute("createdUser");
 		OrdersDto ordersDto = ordersDao.selectOne(orderNo);
-		model.addAttribute("ordersDto",ordersDto);
 		System.out.println(ordersDto);
+		model.addAttribute("ordersDto",ordersDto);
 		List<OrderDetailDto> list=orderDetailDao.selectListByOrderDetail(memberId, orderNo);
+		List<OrdersDto> orderList=ordersDao.selectListByOrder(memberId);
 		model.addAttribute("detailList",list);
 		return "/WEB-INF/views/order/detail.jsp";
 	}
@@ -137,8 +139,6 @@ public class OrderController {
 		
 		List<OrderDetailDto>detailList=orderDetailDao.selectListByOrderDetailComplete(memberId);
 		List<OrderDetailDto>refundList=orderDetailDao.selectListByOrderDetailRefund(memberId);
-		for(int i=0; i<detailList.size(); i++) {
-		}
 		model.addAttribute("memberId",memberId);
 		model.addAttribute("detailList",detailList);
 		model.addAttribute("refundList",refundList);

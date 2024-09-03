@@ -8,6 +8,7 @@ public class CartVO {
 	    private int cartItemCnt;
 	    private String buyer;
 	    private int cartItemPrice;
+	    private String cartItemName;
 
 //	    // Getters and Setters
 //	    public int getCartItemNo() {

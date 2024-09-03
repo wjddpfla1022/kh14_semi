@@ -25,6 +25,7 @@ public class OrdersDao {
 		String sql="select * from orders where order_no=?";
 		Object[] data = {ordersNo};
 		List<OrdersDto> list = jdbcTemplate.query(sql, ordersMapper, data);
+		System.out.println(list.get(0));
 		return list.isEmpty()?null:list.get(0);
 	}
 	//주문서 한개 검색(멤버 아이디로)
@@ -77,6 +78,12 @@ public class OrdersDao {
 	public int sequence() {
 		String sql="select order_seq.nextval from dual";
 		return jdbcTemplate.queryForObject(sql, int.class);
+	}
+	//결제시 메모를 남기는 메서드
+	public void updateMemo(String memo,int orderNo) {
+		String sql="update orders set order_memo = ? where order_no = ?";
+		Object[] data= {memo, orderNo};
+		jdbcTemplate.update(sql, data);
 	}
 
 

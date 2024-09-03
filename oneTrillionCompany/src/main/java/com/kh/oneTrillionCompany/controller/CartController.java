@@ -119,12 +119,12 @@ public class CartController {
 	            cartVO.setCartItemCnt(cartItemCntList.get(i));
 	            cartVO.setCartItemNo(cartItemNoList.get(i));
 	            cartVO.setCartItemPrice(cartItemPriceList.get(i));
+	            String itemName=itemDao.selectOne(cartItemNoList.get(i)).getItemName();
+	            cartVO.setCartItemName(itemName);
 	            list.add(cartVO);
 	            ConnectionOCDto connectionDto=new  ConnectionOCDto();
-	            System.out.println("cartNo : "+cartNoList.size());
 	            connectionDto.setCartNo(cartNoList.get(i));
 	            connectionDto.setBuyer(memberId);
-	            System.out.println("cartItemCnt : "+ cartItemCntList.size());
 	            connectionDto.setCntPayment(cartItemCntList.get(i));
 	            connectionOCDao.insert(connectionDto);
 	        }
