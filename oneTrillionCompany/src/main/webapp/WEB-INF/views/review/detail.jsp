@@ -57,7 +57,7 @@
 		    <div class="container w-1200">
 			    <div class="flex-box image-location">
 		           	<div class="center">
-		                <img src="image?reviewNo=${reviewDto.reviewNo}" width="400" height="400">
+		                <img src="/review/image?reviewNo=${reviewDto.reviewNo}" width="400" height="400">
 		            </div>
 				        <div class="row center">
 				        	<%-- 작성자를 표시(3글자만 표시 후 나머지 아이디는 * 표시)  --%>
