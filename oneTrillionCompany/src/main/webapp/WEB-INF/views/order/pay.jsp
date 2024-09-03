@@ -138,9 +138,6 @@
 					<label class="row title">배송지</label>
 					<div class="flex-box w-100">
 						<div class="container container-left my-20">
-							<div class="flex-right title2">
-								<button type="button" class="btn">변경</button>
-							</div>
 							<div class="float-box p-10 mx-30">
 								<div class="row">${memberDto.memberName}</div>
 								<div class="row">
