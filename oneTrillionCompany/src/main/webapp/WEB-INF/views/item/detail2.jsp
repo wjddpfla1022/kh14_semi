@@ -352,12 +352,12 @@ a#smallShirts:hover {
 					<span class="itemSalePrice" style="padding-left: 5px;"><b
 						style="font-weight: bolder;">${itemDto.itemPrice}</b></span>
 				</div>
-				<div class="right">
+				<%-- <div class="right">
 					<!-- 상품할인비율* -->
 					<span style="color: red;"><fmt:formatNumber
 							value="${itemDto.itemDiscountRate * 100}" type="number"
 							maxFractionDigits="0" />%</span> <span>(할인)</span>
-				</div>
+				</div> --%>
 			</div>
 			<div class="row mt-30 mb-20">
 				<div class="left">
@@ -390,8 +390,7 @@ a#smallShirts:hover {
 							<h4 class="target left">
 								<span style="font-size: 14px; font-weight: bolder; color: black">${itemDto.itemPrice}</span><br>
 								<span style="font-size: 14px; font-weight: bolder;">${itemDto.itemSalePrice}</span><br>
-								<span style="font-size: 14px; font-weight: bolder;">2,500원
-									(60,000원 이상 구매 시 무료)</span><br>
+								<span style="font-size: 14px; font-weight: bolder;">무료배송</span><br>
 							</h4>
 						</div>
 					</div>
