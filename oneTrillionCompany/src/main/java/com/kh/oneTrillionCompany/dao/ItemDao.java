@@ -94,13 +94,11 @@ public class ItemDao {
 	//상품 수정
 	public boolean update(ItemDto itemDto) {
 		String sql="update item set item_name=?, item_price=?,"
-				+ "item_sale_price=?, item_cnt=?, item_size=?, item_cate1=?,"
-				+ "item_cate2=?, item_cate3=?, item_discount_rate=?, item_color=? "
+				+ "item_sale_price=?, item_cnt=?"
 				+ "where item_no=?";
 		Object[] data= {itemDto.getItemName(), itemDto.getItemPrice(),
 						itemDto.getItemSalePrice(), itemDto.getItemCnt(),
-						itemDto.getItemSize(), itemDto.getItemCate1(), itemDto.getItemCate2(),
-						itemDto.getItemCate3(), itemDto.getItemDiscountRate(), itemDto.getItemColor(), itemDto.getItemNo()};
+						 itemDto.getItemNo()};
 		return jdbcTemplate.update(sql, data)>0;
 	}
 	//상품삭제
