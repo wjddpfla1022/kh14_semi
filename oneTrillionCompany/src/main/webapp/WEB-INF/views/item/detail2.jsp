@@ -312,8 +312,8 @@ a#smallShirts:hover {
                 장바구니로 이동하시겠습니까?
             </div>
             <div class="flex-box column-2">
-                <div class="row">
-                  <button type="button" class="btn btn-cart w-100 link">장바구니로 이동</button>
+                <div class="row ms-20">
+                  <button type="button" class="btn btn-cart w-100 link" style="background-color: black; color:white;">장바구니로 이동</button>
                 </div>
                 <div class="row me-20">
                     <button type="button" class="btn btn-keep w-100">계속 쇼핑하기</button>
