@@ -42,8 +42,8 @@ public class MemberController {
 		return "/WEB-INF/views/member/login.jsp";
 	}
 	@PostMapping("/login")
-    public String login(@RequestParam String memberId,
-            @RequestParam String memberPw, 
+    public String login(@RequestParam(required = false) String memberId,
+            @RequestParam(required = false) String memberPw, 
             @RequestParam(required = false) String remember, //아이디 저장하기
             HttpSession session, HttpServletResponse response) {
         MemberDto memberDto = memberDao.selectOneWithPassword(memberId, memberPw);
