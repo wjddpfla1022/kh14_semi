@@ -406,6 +406,9 @@ a#smallShirts:hover {
 					<b style="color: blue; font-weight: bolder; font-size: 14px">R</b></div>
 				</div>
 				
+				<div class="row center">
+					<div style="font-size: 15px; mt: 8px" class="left">색상</div>
+				</div>
 				<div class="left">
 					<span style="font-size: 11px; color: #999;">[필수] 옵션을 선택해 주세요</span>
 				</div>
@@ -413,15 +416,10 @@ a#smallShirts:hover {
 					<select name="itemColor" class="field w-100" style="border-radius: 20px;"
 						oninput="checkItemType();">
 						<option value="">선택하세요</option>
-						<option value="black">검정</option>
-						<option value="red">빨강</option>
-						<option value="orange">주황</option>
-						<option value="yellow">노랑</option>
-						<option value="green">초록</option>
-						<option value="blue">파랑</option>
+						<option value="black">블랙</option>
+						<option value="white">화이트</option>
+						<option value="blue">블루</option>
 						<option value="brown">브라운</option>
-						<option value="pink">분홍</option>
-						<option value="white">흰색</option>
 					</select>
 				</div>
 				
