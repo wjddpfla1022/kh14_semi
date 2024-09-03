@@ -60,16 +60,19 @@ public class PayService {
 			itemDao.deductItem(orderDetailCnt,orderDetailItemNo);
 			//장바구니 차감
 			int cartNo=list.get(i).getCartNo();
-			if(cartDao.selectCnt(cartNo)==orderDetailCnt)
+//			if(cartDao.selectCnt(cartNo)==orderDetailCnt)
 				//장바구니 수량 = 결제수량이면 삭제
 				cartDao.delete(cartNo);
-			else if(cartDao.selectCnt(cartNo)>orderDetailCnt) {
-				//다르면 갯수 업데이트
-				String buyer = detailList.get(i).getOrderDetailItemName();
-				cartDao.updateCartCnt(buyer,cartNo,orderDetailCnt);//list.get(i).getCnt()
-			}
-			else
-				throw new TargetNotFoundException("장바구니 수량을 확인해주세요");
+//			else if(cartDao.selectCnt(cartNo)>orderDetailCnt) {
+//				//다르면 갯수 업데이트
+//				String buyer = detailList.get(i).getOrderDetailItemName();
+//				cartDao.updateCartCnt(buyer,cartNo,orderDetailCnt);//list.get(i).getCnt()
+//			}
+//			else {
+//				System.out.println("장바구니 수량 : "+cartDao.selectCnt(cartNo));
+//				System.out.println("결제 수량 : "+orderDetailCnt);
+//				throw new TargetNotFoundException("장바구니 수량을 확인해주세요");
+//			}
 		}
 		orderDetailDao.payCompleteStatus(detailNoList);
 	}
