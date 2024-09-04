@@ -85,7 +85,7 @@
             </div>
             <div class="row right">
                 <button type="button" class="btn btn-positive btn-regi">등록</button>
-                <a href="/qna/list" class="btn">취소</a>
+                <a href="/qna/list" class="btn btn-neutral">취소</a>
             </div>
         </div>
     </form>
