@@ -89,20 +89,10 @@
     </div>
     <hr>
 
-    <c:choose>
-        <c:when test="${sessionScope.createdUser != null}"></c:when>
-        <c:otherwise>
-            <div class="row right">
-                <a title="로그인 후 이용하실 수 있습니다" class="btn btn-positive">리뷰 등록</a>
-            </div>
-        </c:otherwise>
-    </c:choose>
 	<%-- 회원일 경우  --%>
     <div class="row center mt-30">
         <c:choose>
-            <c:when test="${sessionScope.createdLevel =='관리자' }"></c:when>
-            <c:when test="${sessionScope.createdUser == null }"></c:when>
-            <c:otherwise>
+            <c:when test="${sessionScope.createdUser == null || sessionScope.createdLevel !='관리자'}">
                 <table class="table table-top">
                     <thead>
                         <tr class="tr-table-top">
@@ -156,7 +146,7 @@
                         </c:choose>
                     </tbody>
                 </table>
-            </c:otherwise>
+            </c:when>
         </c:choose>
 		<%-- 관리자일 경우  --%>
         <c:choose>

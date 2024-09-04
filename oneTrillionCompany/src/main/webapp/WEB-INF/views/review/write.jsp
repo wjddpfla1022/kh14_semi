@@ -161,8 +161,12 @@
             <input type="hidden" name="reviewItemNo" class="w-100" value="${orderDetailDto.orderDetailItemNo}" readonly>
         </div>
         
+        <div class="row" style="color:red">
+        	<h4> 상품과 무관한 사진을 첨부한 리뷰는 통보없이 삭제 됩니다.</h4>
+        </div>
+        
 		<%-- 이미지 관련 설정 --%>
-        <div class="image-upload mt-30">
+        <div class="image-upload ">
             <div class="buttonBox">
                 <label class="choiceImage" for="attachFile">
                		 <i class="fa-solid fa-camera-retro"></i>사진 첨부
@@ -176,7 +180,7 @@
             </div>
         </div>
         <%-- 버튼란 --%>
-        <div class="row right mt-30">
+        <div class="row right">
             <button type="submit" class="btn btn-positive review-regi">작성하기</button>
         </div>
     </div>
