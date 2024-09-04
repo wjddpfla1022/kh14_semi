@@ -231,6 +231,13 @@ public class MemberController {
 			memberDao.updateMember(inputDto);
 			return "redirect:mypage";
 		}
+		@GetMapping("/point")
+		public String point(HttpSession session,Model model) {
+			String memberId = (String) session.getAttribute("createdUser");
+			MemberDto memberDto = memberDao.selectOne(memberId);
+			model.addAttribute("memberDto", memberDto);
+			return "/WEB-INF/views/member/point.jsp";
+		}
 //		회원 탈퇴
 //		@GetMapping("leave")
 //		public String leave() {
