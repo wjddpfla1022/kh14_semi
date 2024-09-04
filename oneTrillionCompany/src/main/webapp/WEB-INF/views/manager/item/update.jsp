@@ -3,9 +3,16 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
     
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include> 
-    
-    
-    <div class="container w-600 center">
+    <!-- 정렬 -->
+    <style>
+    .item-update-line label{
+    	display: inline-block;
+    	width: 55px;
+    	text-align: right;
+    }
+    </style>
+     
+    <div class="container w-600 center item-update-line">
         <div class="row center">
             <h2>상품수정</h2>
         </div>
