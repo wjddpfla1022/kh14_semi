@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 <!-- font awesome icon cdn -->
@@ -82,6 +83,17 @@ td {
 
 .displayNone {
 	display: none;
+}
+/* 장바구니 input 수정*/
+.cartItemPriceInput{
+	text-align:center;
+	border:none;
+	font-weight:bold;
+	color:#141414;
+}
+/*주문 요약서*/
+.order-summary{
+	font-size:20px;
 }
 </style>
 
@@ -286,10 +298,11 @@ td {
 
 			<!-- 결과가 있을때  -->
 			<div class="row cart-item-cnt">
-				<h3>담긴 상품(${cartItemCnt})</h3>
+				<h3 style="font-weight:bold;" class="mb-0">담긴 상품(${cartItemCnt})</h3>
+				<hr style="width:9%; border:1px solid" class="ms-0">
 			</div>
 			<!-- 장바구니 목록 -->
-			<div style="min-height: 300px">
+			<div style="min-height: 300px" class="mt-10">
 				<table border="1" width="1200">
 					<thead>
 						<tr>
@@ -317,15 +330,15 @@ td {
 								<!--  -->
 								<td>
 									<!-- itemNo 제이쿼리에서 쓰기 --> <span class="hidden">${cart.cartItemNo}</span>
-									<a href="#"><img class="shoppingmal"
-										src="/item/image?itemNo=${cart.cartItemNo}" width="50px"></a>
+									<a href="#"><img class="shoppingmal" style="margin-top:4px;'"
+										src="/item/image?itemNo=${cart.cartItemNo}" width="80px"></a>
 									<!-- 임시 이미지 -->
 								</td>
 								<td>${cart.itemName}</td>
 								<td>${cart.itemColor} / ${cart.itemSize}</td>
 								<td><input type="text"
 									name="cartList[${status.index}].cartItemPrice"
-									value="${cart.itemPrice}" class="field" readonly> 원 <span
+									value="<fmt:formatNumber value="${cart.itemPrice}" pattern="#,###"/>원" class="field cartItemPriceInput" readonly><span
 									class="hidden">${cart.itemPrice}</span> <span
 									class="hidden itemCnt-data">${cart.itemStock}</span></td>
 								<!-- 재고값을 el로 받아 제이쿼리에 적용 -->
@@ -357,7 +370,7 @@ td {
 					<tfoot class="right">
 						<tr>
 							<c:if test="${cartTotalPrice!=0}">
-								<td colspan="10">상품구매금액: <span class="cart-total-price">${cartTotalPrice}</span>원
+								<td colspan="10">상품구매금액: <span class="cart-total-price"><fmt:formatNumber value="${cartTotalPrice}" pattern="#,###"/></span>원
 								</td>
 							</c:if>
 						</tr>
@@ -367,10 +380,10 @@ td {
 
 			<!-- 버튼 -->
 			<div class="float-box">
-				<button type="button" class="btn btn-deleteAll float-right">
+				<button type="button" class="btn btn-deleteAll float-right btn-negative">
 					<i class="fa-solid fa-trash-can"></i> 장바구니 비우기
 				</button>
-				<button type="button" class="btn btn-selected-checkBox float-right">선택상품
+				<button type="button" class="btn btn-selected-checkBox float-right btn-negative" style="margin-right:5px;">선택상품
 					삭제하기</button>
 			<!-- 	<button type="button" class="btn float-left selected-order">선택상품
 					주문하기</button> -->
@@ -385,7 +398,7 @@ td {
 							value="${cart.itemPrice}" readonly>
 						<input type="hidden" name="cartNo" value="${cart.cartNo}">
 					</c:forEach>
-					<button type="submit" class="btn float-left">전체 주문하기</button>
+					<button type="submit" class="btn float-left btn-positive">전체 주문하기</button>
 				</form>
 			</div>
 			<!-- 장바구니 주문 미리보기 -->
@@ -409,22 +422,22 @@ td {
 					<tr>
 						<td>
 							<div class="row">
-								<strong> <span class="cart-total-price"> <!-- 배송비 가격 미포 -->
-										${cartTotalPrice}
-								</span> 원
+								<strong> <span class="cart-total-price order-summary"> <!-- 배송비 가격 미포 -->
+										<fmt:formatNumber value="${cartTotalPrice}" pattern="#,###"/>원
+								</span>
 								</strong>
 							</div>
 						</td>
 						<td>
 							<div class="row">
-								<strong> <span> 무료 배송 </span>
+								<strong> <span class="order-summary""> 무료배송 </span>
 								</strong>
 							</div>
 						</td>
 						<td>
 							<div class="row">
-								<strong> <span class="cart-total-price">
-										${cartTotalPrice} </span>
+								<strong> <span class="cart-total-price order-summary"" style="font-weight:bold;">
+										<fmt:formatNumber value="${cartTotalPrice}" pattern="#,###"/>원</span>
 								</strong>
 							</div>
 						</td>
