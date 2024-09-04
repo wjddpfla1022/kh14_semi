@@ -32,7 +32,7 @@
             
 					<%-- 이전 버튼은 첫번째 구간이 아닐 때(pageVO 참고) 일때 나온다  --%>
 				<c:if test="${itemPageVO.hasPrev()}">
-					<a href="list?page=${itemPageVO.getPrevBlock()}" ></a>
+					<a href="list?page=${itemPageVO.getPrevBlock()}&sorting=${itemPageVO.sorting}" ></a>
 				</c:if>
 				
 				<%-- startBlock 부터 finishBlock과 lastBlock 중 작은값까지 반복문으로 링크 출력 --%>
@@ -42,14 +42,14 @@
 								<a class="on">${n}</a>
 							</c:when>
 								<c:otherwise>
-									<a href="list?page=${n}">${n}</a>
+									<a href="list?page=${n}&sorting=${itemPageVO.sorting}">${n}</a>
 								</c:otherwise>
 						</c:choose>
 				</c:forEach>
 				
 				<%-- 다음 버튼은 마지막 구간이 아닐 떄 (finishBlock < lastBlock) 일때 나온다 --%>
 				<c:if test="${itemPageVO.hasNext()}">
-					<a href="list?page=${itemPageVO.getNextBlock()}" >
+					<a href="list?page=${itemPageVO.getNextBlock()}&sorting=${itemPageVO.sorting}" >
 							<i class="fa-solid fa-chevron-right"></i>
 					</a>
 				</c:if>

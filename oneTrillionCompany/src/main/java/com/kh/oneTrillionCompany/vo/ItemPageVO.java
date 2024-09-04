@@ -12,6 +12,7 @@ public class ItemPageVO {
 	private int size=16;	//1페이지의 크기
 	private int count;	//총 데이터 개수
 	private int blockSize=10;		//한 블럭 구역의 크기
+	private String sorting;
 	
 	//계산 메소드(가상의 Getter 메소드) 추가
 	public boolean isSearch() {
@@ -59,6 +60,9 @@ public class ItemPageVO {
 	}
 	public int getNextBlock() {	//다음 구역 이동시 나올 번호
 		return this.getFinishBlock() + 1;
+	}
+	public boolean hasSorting() {
+		return this.sorting!=null;
 	}
 }
 

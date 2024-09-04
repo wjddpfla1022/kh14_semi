@@ -56,6 +56,7 @@ public class ItemController {
 	public String listCate(Model model, @ModelAttribute("itemPageVO") ItemPageVO itemPageVO,
 			@RequestParam(required = false) String sorting) {
 		String keyword=itemPageVO.getKeyword();
+		itemPageVO.setSorting(sorting);
 		if(keyword!=null) {
 			keyword = keyword.replaceAll(" ", "");
 			itemPageVO.setKeyword(keyword);
