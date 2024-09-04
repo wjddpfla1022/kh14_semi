@@ -191,3 +191,6 @@
 			 </div>
 		</form>
 	</body>
+
+	
+	<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
