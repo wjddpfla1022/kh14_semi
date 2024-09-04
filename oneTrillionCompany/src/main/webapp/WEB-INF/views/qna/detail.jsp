@@ -297,17 +297,17 @@
 			</table>
 			<!-- 수정/삭제 버튼  -->
 			<div class= " flex-box ">
-				<a href="/qna/list"  class="btn btn-list">
+				<a href="/qna/list"  class="btn btn-list btn-positive">
 					<i class="fa-solid fa-list"></i> 목록
 				</a>
 		        <div>
 		        	<c:if test="${sessionScope.createdUser == qnaDto.qnaWriter}">
-			            <a href="update?qnaNo=${qnaDto.qnaNo}" class="btn btn-update">
+			            <a href="update?qnaNo=${qnaDto.qnaNo}" class="btn btn-update btn-positive">
 			            	<i class="fa-solid fa-pen-to-square"></i> 수정
 			            </a>
 		            </c:if>
 		            <c:if test="${sessionScope.createdUser == qnaDto.qnaWriter || sessionScope.createdLevel == '관리자'}">
-			            <button type="button" class="btn btn-delete">
+			            <button type="button" class="btn btn-delete btn-negative">
 			            	<i class="fa-solid fa-trash"></i> 삭제
 			            </button>
 		            </c:if>
