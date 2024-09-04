@@ -159,7 +159,7 @@
 				</div>
 				</td>
 				<td>
-					<span>${memberDto.memberPoint}<i class="fa-solid fa-coins"></i></span>
+					<span>${memberDto.memberPoint} <i class="fa-solid fa-coins"></i></span>
 				</td>
 			</tr>
 			<tr class="table-border-middle">
@@ -188,6 +188,7 @@
 	<!-- 개인정보 변경 버튼 -->
 	<form action="/member/leaveFinish" method ="post" Id="checkForm">
 		<div class="flex-box flex-core mt-20 mb-30">
+			<a href="point" class = "btn btn-positive" style="margin-right:5px;">포인트 충전하기</a>
 			<a href="password" class = "btn btn-positive" style="margin-right:5px;">비밀번호 변경</a>
 			<a href="change" class = "btn btn-positive" style="margin-right:5px;">개인정보 변경</a>
 			<button type="submit"  class = "btn btn-negative member-delete" >회원 탈퇴</button>

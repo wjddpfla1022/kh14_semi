@@ -221,7 +221,7 @@ public class MemberDao {
 		Object[] data= {point,memberId,point};
 		boolean result=jdbcTemplate.update(sql, data)>0;
 		if(!result) {
-			throw new TargetNotFoundException("포인트가 부족합니다\n 충전 후 다시 결제해주세요");
+			throw new TargetNotFoundException("포인트가 부족합니다<br><br> 충전 후 다시 결제해주세요");
 		}
 		return result;
 	}
