@@ -86,6 +86,7 @@
 <div class="container w-1000 my-30">
     <div class="row center">
         <h1>REVIEW</h1>
+        
     </div>
     <hr>
 
@@ -96,9 +97,9 @@
                 <table class="table table-top">
                     <thead>
                         <tr class="tr-table-top">
-                            <td width=10%>상품번호</td>
-                            <td width=60%>리뷰내용</td>
-                            <td width=10%>아이디</td>
+                            <td width=23%>상품이름</td>
+                            <td width=53%>리뷰내용</td>
+                            <td width=14%>아이디</td>
                             <td width=10%>별점</td>
                         </tr>
                     </thead>
@@ -114,7 +115,7 @@
                             <c:otherwise>
                                 <c:forEach var="reviewDto" items="${list}">
                                     <tr class="tr-table-bottom">
-                                        <td class="td-table-bottom">${reviewDto.reviewItemNo}</td>
+                                        <td class="td-table-bottom">${reviewDto.reviewItemName}</td>
                                         <td class="td-table-bottom">
    									 <a href="detail?reviewNo=${reviewDto.reviewNo}" class="table-title text-ellipsis">${reviewDto.reviewContent}</a>
 										</td>
@@ -130,7 +131,7 @@
 																<c:out value="***" />
 															</c:when>
 															<c:otherwise>
-																<%-- 아이디의 길이가 3글자 이하인 경우를 처리 --%>
+																<%-- 아이디의 길이가 3글자z 이하인 경우를 처리 --%>
 																<c:out value="${reviewDto.reviewWriter}" />
 															</c:otherwise>
 														</c:choose>
@@ -172,7 +173,7 @@
                             <c:otherwise>
                                 <c:forEach var="reviewDto" items="${list}">
                                     <tr class="tr-table-bottom">
-                                        <td class="td-table-bottom">${reviewDto.reviewItemNo}</td>
+                                        <td class="td-table-bottom">${orderDetailDto.orderDetailItemName}</td>
                                         <td class="td-table-bottom">
     									<a href="detail?reviewNo=${reviewDto.reviewNo}" class="table-title text-ellipsis">${reviewDto.reviewContent}</a>
 										</td>
@@ -205,5 +206,4 @@
         </div>
     </form>
 </div>
-
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
