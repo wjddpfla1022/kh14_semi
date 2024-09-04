@@ -9,6 +9,7 @@ public class ReviewDto {
 	private String reviewWriter;
 	private String reviewContent;
 	private int reviewScore;
+	private String reviewItemName;
 	
 	//메소드 추가
 	public String getReviewWriterString() {

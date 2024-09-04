@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.kh.oneTrillionCompany.dao.ItemDao;
 import com.kh.oneTrillionCompany.dao.OrderDetailDao;
 import com.kh.oneTrillionCompany.dao.ReviewDao;
 import com.kh.oneTrillionCompany.dto.OrderDetailDto;
@@ -33,6 +34,8 @@ public class ReviewController {
 	private OrderDetailDao orderDetailDao;
 	@Autowired
 	private AttachService attachService;
+	@Autowired
+	private ItemDao itemDao;
 	
 	//리뷰 글 등록 페이지
 	@GetMapping("/write")
@@ -47,7 +50,6 @@ public class ReviewController {
 	@PostMapping("/write")
 	public String write(@ModelAttribute ReviewDto reviewDto, HttpSession session,
 			@RequestParam MultipartFile attach) throws IllegalStateException, IOException {
-		System.out.println(attach);
 		//세션에서 아이디 추출
 		String createdUser = (String)session.getAttribute("createdUser");
 		reviewDto.setReviewWriter(createdUser);
@@ -83,12 +85,22 @@ public class ReviewController {
 	
 	//리뷰 목록,검색
 	@RequestMapping("/list")
-	public String list(@RequestParam(required = false) String column, @RequestParam(required = false) String keyword, Model model) {
+	public String list(
+					   @RequestParam(required = false) String column,
+					   @RequestParam(required = false) String keyword,
+					   Model model) {
 		boolean isSearch = column != null && keyword != null;
 		List<ReviewDto> list = isSearch ? reviewDao.selectList(column, keyword) : reviewDao.selectList();
+		for(int i=0; i<list.size(); i++) {
+			String itemName=itemDao.selectOne(list.get(i).getReviewItemNo()).getItemName();
+			ReviewDto reviewDto=list.get(i);
+			reviewDto.setReviewItemName(itemName);
+			list.set(i, reviewDto);
+		}
 		model.addAttribute("list", list);
 		model.addAttribute("column", column);
 		model.addAttribute("keyword", keyword);
+		
 		return "/WEB-INF/views/review/list.jsp";
 	}
 	

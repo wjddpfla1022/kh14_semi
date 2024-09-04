@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.oneTrillionCompany.dto.OrdersDto;
+import com.kh.oneTrillionCompany.dto.ReviewDto;
 import com.kh.oneTrillionCompany.mapper.OrdersMapper;
 import com.kh.oneTrillionCompany.vo.CartVO;
 
@@ -59,6 +60,9 @@ public class OrdersDao {
 		Object[] data = {orderMemberId};
 		return jdbcTemplate.query(sql, ordersMapper, data);
 	}
+	
+	
+	
 	//장바구니 -> 주문으로 이동시 필요한 주문 테이블 생성
 	public void insertIntoOrdersTable(List<CartVO>list,int orderNo) {
 		long payment=0L;

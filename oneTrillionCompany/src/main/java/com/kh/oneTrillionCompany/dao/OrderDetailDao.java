@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.oneTrillionCompany.dto.OrderDetailDto;
+import com.kh.oneTrillionCompany.dto.ReviewDto;
 import com.kh.oneTrillionCompany.exception.TargetNotFoundException;
 import com.kh.oneTrillionCompany.mapper.OrderDetailMapper;
 import com.kh.oneTrillionCompany.vo.CartVO;
@@ -83,6 +84,14 @@ public class OrderDetailDao {
 			List<OrderDetailDto> list = jdbcTemplate.query(sql, orderDetailMapper, data);
 			return list.isEmpty() ? null : list.get(0);
 		}
+		
+		public OrderDetailDto selectOneItemName(String orderDetailItemName) {
+			String sql = "select * from order_detail where order_detail_item_name = ?";
+			Object[] data= {orderDetailItemName};
+			List<OrderDetailDto> list = jdbcTemplate.query(sql, orderDetailMapper, data);
+			return list.isEmpty() ? null : list.get(0);
+		}
+		
 		public void update(OrderDetailDto orderDetailDto) {
 			String sql = "update order_detail set order_detail_status = ? where order_detail_no = ?";
 			Object[] data= {orderDetailDto.getOrderDetailStatus(), orderDetailDto.getOrderDetailNo()};
@@ -94,4 +103,13 @@ public class OrderDetailDao {
 			Object[] data = {orderMemberId};
 			return jdbcTemplate.query(sql, orderDetailMapper, data);
 		}
+		
+		public List<OrderDetailDto> selectListByItemNo(int itemNo){
+			String sql = "select * from order_detail where order_detail_item_no = ?";
+			Object[] data = {itemNo};
+			List<OrderDetailDto> list = jdbcTemplate.query(sql, orderDetailMapper, data);
+			return list.isEmpty() ? null : list;
+		}
+
+		
 }
