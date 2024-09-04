@@ -30,10 +30,47 @@
 	a > h4{
 	    margin: 0.3em;
 	}
-</style>		
+
+
+   .image-align {
+       display: flex;
+       flex-wrap: wrap;
+       gap: 50px;
+                   
+   }
+   .image-align > a {
+       text-decoration: none;
+       color: black;
+       
+   }
+
+   a > h4{
+       margin: 0.3em;
+   }
+</style>
+
+  <div class="container w-1200 my-50">
+	<div class="row center">
+		<h1>상품 목록 페이지</h1><!-- 나중에 삭제 할곳  -->
+		<div class="row right px-30">
+			<div class="btn btn-neutral link"><a href="/item/list?sorting=sales" class="link">판매량순</a></div>
+			<div class="btn btn-neutral link"><a href="/item/list?sorting=priceDesc" class="link">높은가격순</a></div>
+			<div class="btn btn-neutral link"><a href="/item/list?sorting=priceAsc" class="link">낮은가격순</a></div>
+			<div class="btn btn-neutral link"><a href="/item/list?sorting=latest" class="link">최신등록순</a></div>
+		</div>
+	</div>
+</div>
+		
+	<div class="row center">
+		<!-- 검색창 -->
+			 <div class="container w-1000">
+        <div class="row center">
+		</div>
+<%-- 		<h3>데이터 개수 : ${itemList.size()}</h3> --%>
 
 	<!-- 검색창 -->
 	<div class="container w-1000">
+
 		<div class="row image-align" id="images">
 			<c:forEach var= "itemDto" items= "${itemList}">
 				<a href="/item/detail?itemNo=${itemDto.itemNo}">
