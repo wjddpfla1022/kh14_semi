@@ -88,8 +88,8 @@
 			<div class="row">
             	<textarea name="infoContent" class="field w-100" draggable="true"></textarea>    
         	</div>
-        	<div class="row">
-            	<button type="submit" class="btn btn-positive w-100">작성하기</button>
+        	<div class="row" style="text-align: center">
+            	<button type="submit" class="btn btn-positive w-30">작성하기</button>
         	</div>
 		</form>
 	</div>

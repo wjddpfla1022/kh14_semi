@@ -41,7 +41,7 @@
 	            <input type="hidden" id="idValue" name="blockMemberId" value="${param.memberId}">
 	            <textarea name="blockMemo" placeholder="차단 사유를 입력하세요" rows="10" cols="60"></textarea>
 	            <div>
-	                <button type="button" class="btn member_block">차단</button>
+	                <button type="button" class="btn member_block btn-negative">차단</button>
 	            </div>
             </div>
         </div>

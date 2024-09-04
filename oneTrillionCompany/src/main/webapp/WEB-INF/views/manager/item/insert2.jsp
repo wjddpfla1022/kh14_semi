@@ -2,9 +2,18 @@
     pageEncoding="UTF-8"%>
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include> 
+     <style>
+    .item-insert-line label{
+    	display: inline-block;
+    	width: 94px;
+    	text-align: right;
+    }
+    .category-line{
+    	margin-left:53px;
+    }
+    </style>
     
-    
-    <div class="container w-600 center">
+    <div class="container w-600 center item-insert-line">
         <div class="row center">
             <h2>상품등록</h2>
         </div>
@@ -52,10 +61,10 @@
             <option value="77">아우터</option>
         </select>
         </div>
-        <select name="itemCate2" id="cate2-select" class="field w-20" style="font-size: 12px;">
+        <select name="itemCate2" id="cate2-select" class="field w-20 category-line" style="font-size: 12px;">
             <option value="">하위 카테고리 선택</option>
         </select>
-        <select name="itemCate3" id="cate3-select" class="field w-20" style="font-size: 12px;">
+        <select name="itemCate3" id="cate3-select" class="field w-20 category-line ms-0" style="font-size: 12px;">
             <option value="">세부 카테고리 선택</option>
         </select>
     </div>
@@ -64,10 +73,10 @@
             	<label>색상</label>
             	<select name="itemColor" class="field w-33" >
             		<option value="">선택없음</option>
-            		<option value="black">검정</option>
-            		<option value="blue">파랑</option>
+            		<option value="black">블랙</option>
+            		<option value="blue">블루</option>
             		<option value="brown">브라운</option>
-            		<option value="white">흰색</option>
+            		<option value="white">화이트</option>
             	</select>
             </div>
         <div class="right">
