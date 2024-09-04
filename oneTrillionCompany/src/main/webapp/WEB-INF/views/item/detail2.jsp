@@ -2,11 +2,28 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 <!-- 장바구니 테스트 페이지 구현 완료 후 상세로 옮기기 -->
 
 <style>
+/* .test-score { */
+/* 	font-size: 25px; /* 별점 크기 조정 */
+* /
+	/* } */ 
+
+.content-box {
+	width: 600px;
+	background-color: #f6f7f8;
+	font-size: 20px;
+	font-weight: 200 !important;
+	padding: 10px 20px;
+	word-wrap: break-word; /* 긴 단어를 줄바꿈 */
+	overflow-wrap: break-word; /* 박스 범위를 넘는 단어 줄바꿈 */
+	white-space: normal; /* 기본 줄바꿈 설정 */
+}
+
 .price {
 	font-size: 13px;
 	color: #999;
@@ -65,21 +82,11 @@
 		url("https://d2u3dcdbebyaiu.cloudfront.net/uploads/atch_img/197/d72693912bf2868da3e848dc5b779d4a_res.jpeg");
 }
 
-.shoppingmal:hover {
-	background-image:
-		url("https://sitem.ssgcdn.com/06/09/87/item/1000183870906_i1_750.jpg");
-}
-
 #smallShirts {
 	width: 100px;
 	height: 100px;
 	padding: 0 5px;
 	cursor: pointer;
-}
-
-a#smallShirts:hover {
-	background-image:
-		url("https://sitem.ssgcdn.com/06/09/87/item/1000183870906_i1_750.jpg");
 }
 
 /* 사이즈 스타일 추가 */
@@ -96,84 +103,71 @@ a#smallShirts:hover {
 	cursor: pointer;
 	margin-right: 10px;
 	padding: 0px;
-	margin-top:10px
-
+	margin-top: 10px
 }
 /* 사이즈 클릭시 색깔변경 */
-.click{
-	background-color:#F2F2F2;
+.click {
+	background-color: #F2F2F2;
 }
-.size-text{
-	font-size:15px;
+
+.size-text {
+	font-size: 15px;
 	line-height: 22px;
 	color: #000;
 	text-align: center;
 }
 
-
 /* 사용자가 선택한 옵션 창 - 숨기기*/
 .hidden {
 	display: none;
 }
-
 </style>
 
 <!--jquery cdn-->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script
-	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<script
-	src="https://cdn.jsdelivr.net/gh/hiphop5782/score@latest/score.js"></script>
+	src="/js/score.js"></script>
+<script type="text/javascript">
+    $(function() {
+        $(".score").score({
+            starColor: "orange", // 별 색상
+            editable: false, // 점수 변경 불가
+            integerOnly: true, // 정수만 허용
+            send: {
+                sendable: false // 전송 불가
+            },
+            display: {
+                placeLimit: 1, // 소수점 자리수
+                textColor: "#0984e3" // 텍스트 색상
+            },
+            point: {
+                max: 5 // 최대 점수
+                // rate는 data-rate 속성으로 설정됩니다.
+            }
+        });
+    });
+</script>
+<!-- 자바스크립트 코드 작성 영역 -->
+
 
 <script type="text/javascript">
 	$(function() {
-		//버튼에 사진 투명도 조절
-		//     $(".btn-opacity").on("click", function(){
-		//         $(".image-style").removeClass("img-show");
-		//         $(".image-style").addClass("img-opacity");
-		//     });
-		//     $(".btn-show").on("click", function(){
-		//         $(".image-style").removeClass("img-opacity");
-		//         $(".image-style").addClass("img-show");
-		//     });
+		
+		// 페이지 로드 시 .target 요소를 숨긴다.
+		$(".target").hide();
 
-		//사진 이동 구현
-
-		//버튼 색 조절
-
-		//상세 페이지 표시 제어
+		// 버튼 클릭 시 .target 요소를 토글한다.
 		$(".btn-toggle").click(function() {
 			$(".target").slideToggle();
 		});
+		
+		$(".target1").hide();
 
-		/*에러나서 잠시 막아뒀습니다*/
-		/* //별점
-		$(".test-score2").score({
-		        editable:true,
-		        display:{
-		            showNumber:true,
-		            placeLimit:2
-		        }
-		 });
-		 */
+		// 버튼 클릭 시 .target 요소를 토글한다.
+		$(".btn-toggle1").click(function() {
+			$(".target1").slideToggle();
+		});
 
-		//일단 보류-품절 시 버튼 비활성화
-		//     //버튼 활성화 조건
-		//     $(function(){
-		//     	//db에 있는 상품 컬러 값을 가져옴
-		// 		var isColorValue = $(".isColor").text();
-		//     	//버튼 컬러를 가져옴
-		//     	$(".btn-show").each(function(){
-		// 		    var btn_colorDataValue = $(this).data("color");
-		// 		    var btnColor = $(this);
-		// 		    console.log(btn_colorDataValue);
-		//     	});
-		//     	var btn_colorDataValue = $(".btn-show");
-		// 		if(isColorValue != btn_colorDataValue) {
-		// 		   		btn_colorDataValue.css("display", "none");
-		// 		}
-		//     });
-		 
 		var itemTypeValid = false;
 
 		function checkItemType() {
@@ -185,12 +179,12 @@ a#smallShirts:hover {
 		function checkForm() {
 			return itemTypeValid;
 		}
-		
+
 		//사이즈 버튼 클릭 시 색 변경
-		$(document).ready(function(){
-			$('.size-radio').click(function(){
+		$(document).ready(function() {
+			$('.size-radio').click(function() {
 				$(this).toggleClass('click');
-				
+
 				$('.size-radio').not(this).removeClass('click');
 			});
 		});
@@ -226,102 +220,102 @@ a#smallShirts:hover {
 
 		//전역변수
 		var itemColorValue = "";
-		var itemSizeValue= "";
-		
+		var itemSizeValue = "";
+
 		$("[name=itemColor]").change(function() {
 			itemColorValue = $(this).val();
 		});
 		//사이즈 선택시
-		$(".size-radio").click(function(){
+		$(".size-radio").click(function() {
 			itemSizeValue = $(this).find(".size-text").text();
 		});
-		 $(".btn-add-cart").click(function() {
-		        if (!itemColorValue) {
-		            alert("색상을 선택해주세요.");
-		            return;
-		        }
-		        if (!itemSizeValue) {
-		            alert("사이즈를 선택해주세요.");
-		            return;
-		        }
+		$(".btn-add-cart").click(function() {
+			if (!itemColorValue) {
+				alert("색상을 선택해주세요.");
+				return;
+			}
+			if (!itemSizeValue) {
+				alert("사이즈를 선택해주세요.");
+				return;
+			}
 
-		        var itemNameValue = $(".itemName").text().trim(); // 공백 제거
-		        var cartCntValue = $("[name=cartCnt]").val();
-		        var itemSalePriceValue = $(".itemSalePrice").text();
-		        var attachNoValue = $(".attachNo-data").text();
+			var itemNameValue = $(".itemName").text().trim(); // 공백 제거
+			var cartCntValue = $("[name=cartCnt]").val();
+			var itemSalePriceValue = $(".itemSalePrice").text();
+			var attachNoValue = $(".attachNo-data").text();
 
-		        $.ajax({
-		            url: "/rest/cart/insertCart",
-		            method: 'post',
-		            data: {
-		                itemName: itemNameValue,
-		                itemColor: itemColorValue,
-		                itemSize: itemSizeValue,
-		                itemSalePrice: itemSalePriceValue,
-		                cartCnt: cartCntValue,
-		                attachNo: attachNoValue
-		            },
-		            success: function(response) {
-		                // 장바구니에 성공적으로 담았을 때 모달을 띄운다
-		                $('.screen-wrapper').fadeIn();
-		            },
-		            error: function() {
-		                alert("품절된 상품입니다");
-		            }
-		        });
-		    });
+			$.ajax({
+				url : "/rest/cart/insertCart",
+				method : 'post',
+				data : {
+					itemName : itemNameValue,
+					itemColor : itemColorValue,
+					itemSize : itemSizeValue,
+					itemSalePrice : itemSalePriceValue,
+					cartCnt : cartCntValue,
+					attachNo : attachNoValue
+				},
+				success : function(response) {
+					// 장바구니에 성공적으로 담았을 때 모달을 띄운다
+					$('.screen-wrapper').fadeIn();
+				},
+				error : function() {
+					alert("품절된 상품입니다");
+				}
+			});
+		});
 
-		    // 모달에서 "계속 쇼핑하기" 버튼 클릭 시 모달 닫기
-		    $('.btn-keep').click(function() {
-		        $('.screen-wrapper').fadeOut();
-		    });
+		// 모달에서 "계속 쇼핑하기" 버튼 클릭 시 모달 닫기
+		$('.btn-keep').click(function() {
+			$('.screen-wrapper').fadeOut();
+		});
 
-		    // 모달에서 "장바구니로 이동" 버튼 클릭 시 장바구니 페이지로 이동
-		    $('.btn-cart').click(function() {
-		        window.location.href = "/cart/list"; // 장바구니 페이지 URL
-		    });
+		// 모달에서 "장바구니로 이동" 버튼 클릭 시 장바구니 페이지로 이동
+		$('.btn-cart').click(function() {
+			window.location.href = "/cart/list"; // 장바구니 페이지 URL
+		});
 	});
 </script>
+
 <style>
-        /* 
+/* 
             화면 가림 장치
         */
-        .screen-wrapper{
-            /* opacity:0.5;
+.screen-wrapper {
+	/* opacity:0.5;
             background-color: black; */
-            background-color: rgba(0,0,0,0.1);
+	background-color: rgba(0, 0, 0, 0.1);
+	position: fixed;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	z-index: 99;
+}
+.btn
+</style>
 
-            position:fixed;
-            top:0px;
-            bottom:0px;
-            left:0px;
-            right:0px;
-            z-index:99;
-        }
-        .btn
-    </style>
-    
 <div class="container w-1200 my-50">
-<!-- 모달 구조 -->
-    <div class="full screen-wrapper flex-core" style="display: none;">
-        <div class="container w-450 my-50 p-20" style="height:200px;background-color: white; border-radius: 10px;">
-            <div class="row center my-30" style="font-weight:bold; font-size:20px">
-                장바구니에 상품을 담았습니다
-            </div>
-            <div class="row center" style="font-size:12px">
-                장바구니로 이동하시겠습니까?
-            </div>
-            <div class="flex-box column-2">
-                <div class="row ms-20">
-                  <button type="button" class="btn btn-cart w-100 link" style="background-color: black; color:white;">장바구니로 이동</button>
-                </div>
-                <div class="row me-20">
-                    <button type="button" class="btn btn-keep w-100">계속 쇼핑하기</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- 모달 끝 -->
+	<!-- 모달 구조 -->
+	<div class="full screen-wrapper flex-core" style="display: none;">
+		<div class="container w-450 my-50 p-20"
+			style="height: 200px; background-color: white; border-radius: 10px;">
+			<div class="row center my-30"
+				style="font-weight: bold; font-size: 20px">장바구니에 상품을 담았습니다</div>
+			<div class="row center" style="font-size: 12px">장바구니로 이동하시겠습니까?
+			</div>
+			<div class="flex-box column-2">
+				<div class="row ms-20">
+					<button type="button" class="btn btn-cart w-100 link"
+						style="background-color: black; color: white;">장바구니로 이동</button>
+				</div>
+				<div class="row me-20">
+					<button type="button" class="btn btn-keep w-100">계속 쇼핑하기</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 모달 끝 -->
 	<div class="flex-box column-2">
 		<div class="left">
 			<div id="bigImage">
@@ -331,11 +325,7 @@ a#smallShirts:hover {
 					<!-- attachNo값 가져오기* -->
 					<span class="attachNo-data hidden">${attachNo}</span>
 				</div>
-				<div class="row smallImages">
-					<img id="smallShirts"
-						src="https://sitem.ssgcdn.com/06/09/87/item/1000183870906_i1_750.jpg"
-						width="100%">
-				</div>
+
 			</div>
 		</div>
 
@@ -360,15 +350,10 @@ a#smallShirts:hover {
 							maxFractionDigits="0" />%</span> <span>(할인)</span>
 				</div> --%>
 			</div>
-			<div class="row mt-30 mb-20">
-				<div class="left">
-					<span style="font-size: 13px; color: #999;">미니 라벨 포인트, 데일리로
-						입기 좋은 캐주얼 셔츠</span>
-				</div>
-			</div>
+			
 
 			<hr>
-			
+
 			<div class="row mb-30">
 				<div class="row flex-box column-2">
 					<div class="left">
@@ -397,25 +382,25 @@ a#smallShirts:hover {
 					</div>
 				</div>
 				<hr>
-				
+
 				<div class="row center">
-					<div style="font-size: 15px; font-weight: bolder;"><i class="fa-solid fa-palette"></i>
-					<b style="color: red; font-weight: bolder; font-size: 14px">C</b>
-					<b style="color: orange; font-weight: bolder; font-size: 14px">O</b>
-					<b style="color: yellow; font-weight: bolder; font-size: 14px">L</b>
-					<b style="color: green; font-weight: bolder; font-size: 14px">O</b>
-					<b style="color: blue; font-weight: bolder; font-size: 14px">R</b></div>
+					<div style="font-size: 15px; font-weight: bolder;">
+						<i class="fa-solid fa-palette"></i> <b
+							style="font-weight: bolder; font-size: 14px">C</b> <b
+							style="font-weight: bolder; font-size: 14px">O</b>
+						<b style="font-weight: bolder; font-size: 14px">L</b>
+						<b style="font-weight: bolder; font-size: 14px">O</b>
+						<b style="font-weight: bolder; font-size: 14px">R</b>
+					</div>
 				</div>
-				
-				<div class="row center">
-					<div style="font-size: 15px; mt: 8px" class="left">색상</div>
-				</div>
+
+				<div class="row center"></div>
 				<div class="left">
 					<span style="font-size: 11px; color: #999;">[필수] 옵션을 선택해 주세요</span>
 				</div>
 				<div class="row">
-					<select name="itemColor" class="field w-100" style="border-radius: 20px;"
-						oninput="checkItemType();">
+					<select name="itemColor" class="field w-100"
+						style="border-radius: 20px;" oninput="checkItemType();">
 						<option value="">선택하세요</option>
 						<option value="black">블랙</option>
 						<option value="white">화이트</option>
@@ -423,9 +408,9 @@ a#smallShirts:hover {
 						<option value="brown">브라운</option>
 					</select>
 				</div>
-				
+
 				<div class="row center">
-					<div style="font-size: 15px; mt: 8px" class="left">사이즈</div>
+					<span><i class="fa-solid fa-tape"></i>Size</span>
 				</div>
 				<div class="left">
 					<span style="font-size: 11px; color: #999;">[필수] 옵션을 선택해 주세요</span>
@@ -437,98 +422,124 @@ a#smallShirts:hover {
 							<div class="size-text">S</div>
 						</div>
 						<div class="size-radio">
-								<div class="size-text">M</div>
+							<div class="size-text">M</div>
 						</div>
 						<div class="size-radio">
-								<div class="size-text">L</div>
+							<div class="size-text">L</div>
 						</div>
 						<div class="size-radio">
-								<div class="size-text">XL</div>
+							<div class="size-text">XL</div>
 						</div>
 					</div>
 				</div>
-				
+
 				<div class="row center">
 					<div style="font-size: 15px; mt: 8px" class="left">수량</div>
 				</div>
-				   <!-- 수량 선택추가* -->
-	                        <div class="left my-0">
-	                        	<span class="input_cartCnt">
-									<input type="text"  name="cartCnt" size="2" style="border-radius: 30px"><span class="itemCnt-data hidden">${itemDto.itemCnt}</span>
-									<button type="button" class="btn-cnt btn-up" style="background-color: white; border-color: white;"><i class="fa-solid fa-angle-up Icon_carCnt"></i></button>
-									<button type="button" class="btn-cnt btn-down" style="background-color: white; border-color: white;"><i class="fa-solid fa-angle-down Icon_carCnt"></i></button>
-								</span>
-	                        </div>
-	                     </div>
-				
-				<div class="left">
-					<p style="font-size: 11px; color: #999;">
-						<i class="fa-regular fa-circle-exclamation"></i>최소주문수량 1개 이상입니다
-					</p>
-					<p style="font-size: 11px; color: #999;">
-						<i class="fa-regular fa-circle-exclamation"></i>옵션선택 박스를 선택하시면 아래에
-						상품이 추가됩니다.
-					</p>
-					<p style="font-size: 11px; color: #999;">
-						<i class="fa-regular fa-circle-exclamation"></i>배송비<b>2,500원
-							(60,000원 이상 구매 시 무료)</b>
-					</p>
-				</div>
-
-				<div class="row">
-<!-- 					<button type="submit" class="btn w-100 btn-buy" -->
-<!-- 						style="color: white; background-color: black;">구매하기</button> -->
-					<!-- 장바구니버튼 -->
-					<button type="button" class="btn w-100 btn-add-cart"
-						style="color: white; background-color: black;">장바구니</button>
+				<!-- 수량 선택추가* -->
+				<div class="left my-0">
+					<span class="input_cartCnt"> <input type="text"
+						name="cartCnt" size="2" style="border-radius: 30px"><span
+						class="itemCnt-data hidden">${itemDto.itemCnt}</span>
+						<button type="button" class="btn-cnt btn-up"
+							style="background-color: white; border-color: white;">
+							<i class="fa-solid fa-angle-up Icon_carCnt"></i>
+						</button>
+						<button type="button" class="btn-cnt btn-down"
+							style="background-color: white; border-color: white;">
+							<i class="fa-solid fa-angle-down Icon_carCnt"></i>
+						</button>
+					</span>
 				</div>
 			</div>
 
+			<div class="left">
+				<p style="font-size: 11px; color: #999;">
+					<i class="fa-regular fa-circle-exclamation"></i>최소주문수량 1개 이상입니다
+				</p>
+				<p style="font-size: 11px; color: #999;">
+					<i class="fa-regular fa-circle-exclamation"></i>옵션선택 박스를 선택하시면 아래에
+					상품이 추가됩니다.
+				</p>
+				<p style="font-size: 11px; color: #999;">
+					<i class="fa-regular fa-circle-exclamation"></i>배송비<b>무료 </b>
+				</p>
+			</div>
+
+			<div class="row">
+
+				<!-- 장바구니버튼 -->
+				<button type="button" class="btn w-100 btn-add-cart"
+					style="color: white; background-color: black;">장바구니</button>
+			</div>
 		</div>
 
+	</div>
+</div>
 
 
 
-	<div class="row center">
+<div class="row center">
 	<div class="row flex-box column-2">
 		<div class="center">
-			<h3 style="font-weight: bolder;">REVIEW (${reviewList.size()} )</h3>
+			<h3 style="font-weight: bolder;">REVIEW ( ${reviewList.size()} )</h3>
 		</div>
+			
+			
 		
-<%-- 		<c:forEach var= "reviewDto" items= "${}"> --%>
-		
-<%-- 		</c:forEach> --%>
-
 		<div class="center">
-			<a
-				href="/review/list?column=review_item_no&keyword=${itemDto.itemNo}"
-				class="btn" style="font-weight: bolder; border-color: white; background-color: white">상품 리뷰 <i class="fa-solid fa-sort-down"></i></a>
+			<button type="button" class="btn btn-toggle1"
+				style="margin-top: 10px; font-weight: bolder; border-color: white; background-color: white";>
+				상품 리뷰 <i class="fa-solid fa-sort-down"></i>
+			</button>
 		</div>
-	
 	</div>
+
+
 	<c:forEach var="dto" items="${reviewList}">
-	<div class="row flex-box column-2">
-		<div class="row">
-			${dto.reviewWriter}
-			${dto.reviewContent}
-			${dto.reviewScore}
+		<div class="container w-700 my-50">
+			<div class="row target1">
+
+				<div class="left">
+					<div class="score"  data-max="5" data-rate="${dto.reviewScore}" style="margin-right: 5px; margin-bottom: 8px;"></div>
+
+					<c:choose>
+						<c:when test="${dto.reviewWriter == null}">탈퇴한 사용자</c:when>
+						<c:otherwise>
+							<c:choose>
+								<c:when test="${fn:length(dto.reviewWriter) > 3}">
+									<%-- 작성자의 아이디를 3글자 추출 후 표시 --%>
+									<c:out value="${fn:substring(dto.reviewWriter, 0, 3)}" />
+									<%-- 이후 아이디를 * 처리 --%>
+									<c:out value="***" />
+								</c:when>
+								<c:otherwise>
+									<%-- 아이디의 길이가 3글자 이하인 경우를 처리 --%>
+									<c:out value="${dto.reviewWriter}" />
+								</c:otherwise>
+							</c:choose>
+						</c:otherwise>
+					</c:choose>
+				</div>
+
+				<div class="left">
+					<div
+						style="height: 170px; background-color: white; box-shadow: 0 0 2px #999; border-radius: 15px">
+						${dto.reviewContent}</div>
+				</div>
+
+			</div>
 		</div>
-	</div>
 	</c:forEach>
 
-<hr>
-<div class="left">
-	<div class="test-score2" data-max="5" data-rate="3"></div>
-</div>
-
-<div class="container w-1000">
-	<%-- 	<h3>정보 번호 : ${infoDto.infoNo}</h3> --%>
-	<%-- 	<h3>상품 번호 : ${infoDto.infoItemNo}</h3> --%>
-	<div class="row center">
-		<h3>${infoDto.infoContent}</h3>
+	<div class="container w-1000">
+		<%-- 	<h3>정보 번호 : ${infoDto.infoNo}</h3> --%>
+		<%-- 	<h3>상품 번호 : ${infoDto.infoItemNo}</h3> --%>
+		<div class="row center">
+			<h3>${infoDto.infoContent}</h3>
+		</div>
 	</div>
 </div>
-	</div>
 </body>
 
 

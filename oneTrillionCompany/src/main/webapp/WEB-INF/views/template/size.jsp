@@ -25,16 +25,16 @@
         
     </style>
 
-    <!--score jquery plugin-->
-    <script src="https://cdn.jsdelivr.net/gh/hiphop5782/score@latest/score.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/hiphop5782/score@latest/score.min.js"></script>
+<!--     score jquery plugin -->
+<!--     <script src="https://cdn.jsdelivr.net/gh/hiphop5782/score@latest/score.js"></script> -->
+<!--     <script src="https://cdn.jsdelivr.net/gh/hiphop5782/score@latest/score.min.js"></script> -->
 
-    <!--jquery cdn-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-     <script src="checkbox.js"></script>
-     <script src="confirm-link.js"></script>
-     <script src="multipage.js"></script>
-     <script src="chart.js"></script>
+<!--     jquery cdn -->
+<!--     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script> -->
+<!--      <script src="checkbox.js"></script> -->
+<!--      <script src="confirm-link.js"></script> -->
+<!--      <script src="multipage.js"></script> -->
+<!--      <script src="chart.js"></script> -->
 
     
     <!-- 자바스크립트 코드 작성 영역 -->
