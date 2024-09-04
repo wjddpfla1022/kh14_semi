@@ -30,25 +30,24 @@
 	a > h4{
 	    margin: 0.3em;
 	}
+
+
+   .image-align {
+       display: flex;
+       flex-wrap: wrap;
+       gap: 50px;
+                   
+   }
+   .image-align > a {
+       text-decoration: none;
+       color: black;
+       
+   }
+
+   a > h4{
+       margin: 0.3em;
+   }
 </style>
-
-
-        .image-align {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 50px;
-                        
-        }
-        .image-align > a {
-            text-decoration: none;
-            color: black;
-            
-        }
-
-        a > h4{
-            margin: 0.3em;
-        }
-     </style>
 
   <div class="container w-1200 my-50">
 	<div class="row center">
