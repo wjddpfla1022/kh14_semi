@@ -8,6 +8,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 import com.kh.oneTrillionCompany.dto.MemberDto;
+import com.kh.oneTrillionCompany.exception.TargetNotFoundException;
 import com.kh.oneTrillionCompany.mapper.MemberBlockMapper;
 import com.kh.oneTrillionCompany.mapper.MemberMapper;
 import com.kh.oneTrillionCompany.mapper.StatusVOMapper;
@@ -218,7 +219,11 @@ public class MemberDao {
 		String sql = "update member set member_point = member_point - ? "
 				+ "where member_id=? and member_point>=?";
 		Object[] data= {point,memberId,point};
-		return jdbcTemplate.update(sql, data)>0;
+		boolean result=jdbcTemplate.update(sql, data)>0;
+		if(!result) {
+			throw new TargetNotFoundException("포인트가 부족합니다\n 충전 후 다시 결제해주세요");
+		}
+		return result;
 	}
 	//포인트 충전 메서드
 	public boolean chargePoint(String memberId, int point) {
