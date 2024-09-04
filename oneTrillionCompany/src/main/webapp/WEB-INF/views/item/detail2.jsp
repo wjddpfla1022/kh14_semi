@@ -305,12 +305,12 @@
 			<div class="row center" style="font-size: 12px">장바구니로 이동하시겠습니까?
 			</div>
 			<div class="flex-box column-2">
-				<div class="row ms-20">
-					<button type="button" class="btn btn-cart w-100 link"
-						style="background-color: black; color: white;">장바구니로 이동</button>
+				<div class="row ms-30">
+					<button type="button" class="btn btn-cart w-100 link btn-positive"
+						>장바구니로 이동</button>
 				</div>
-				<div class="row me-20">
-					<button type="button" class="btn btn-keep w-100">계속 쇼핑하기</button>
+				<div class="row me-30">
+					<button type="button" class="btn btn-keep w-100 btn-neutral">계속 쇼핑하기</button>
 				</div>
 			</div>
 		</div>
