@@ -33,14 +33,14 @@ public class ItemDao {
 		String sql="insert into item( "
 				+ "item_no, item_name, "
 				+ "item_price, item_sale_price, item_date,"
-				+ "item_cnt, item_size, item_cate1, item_cate2, item_cate3, item_discount_rate, item_color"
-				+ ") values(?, ?, ?, ?, sysdate, ?, ?, ?, ?, ?, ?, ?)";
+				+ "item_cnt, item_size, item_cate1, item_cate2, item_cate3, item_discount_rate, item_color, item_main"
+				+ ") values(?, ?, ?, ?, sysdate, ?, ?, ?, ?, ?, ?, ?, ?)";
 		Object[] data= {itemDto.getItemNo(),
 						itemDto.getItemName(), itemDto.getItemPrice(), 
 						itemDto.getItemSalePrice(), 
 						itemDto.getItemCnt(), itemDto.getItemSize(), 
 						itemDto.getItemCate1(), itemDto.getItemCate2(), 
-						itemDto.getItemCate3(), 0, itemDto.getItemColor()
+						itemDto.getItemCate3(), 0, itemDto.getItemColor(), itemDto.getItemMain()
 						};
 		jdbcTemplate.update(sql, data);
 	}
@@ -197,7 +197,7 @@ public class ItemDao {
 	                                    + "item_no, item_name, item_price, item_sale_price, "
 	                                    + "item_date, item_cnt, item_size, "
 	                                    + "item_cate1, item_cate2, item_cate3, "
-	                                    + "item_discount_rate, item_color "        
+	                                    + "item_discount_rate, item_color, item_main "        
 	                                + "from item "
 	                                + "where instr(" + pageVO.getColumn() + ", ?) > 0 "
 	                                + "order by item_no asc"
@@ -218,7 +218,7 @@ public class ItemDao {
 	                + "            item_no, item_name, item_price, item_sale_price, "
 	                + "            item_date, item_cnt, item_size, "
 	                + "            item_cate1, item_cate2, item_cate3, "
-	                + "            item_discount_rate, item_color "
+	                + "            item_discount_rate, item_color, item_main "
 	                + "        FROM item "
 	                + "        ORDER BY item_no ASC"
 	                + "    ) TMP"
@@ -237,7 +237,7 @@ public class ItemDao {
 	                                    + "item_no, item_name, item_price, item_sale_price, "
 	                                    + "item_date, item_cnt, item_size, "
 	                                    + "item_cate1, item_cate2, item_cate3, "
-	                                    + "item_discount_rate, item_color "        
+	                                    + "item_discount_rate, item_color, item_main "        
 	                                + "from item "
 	                                + "where instr(" + pageVO.getColumn() + ", ?) > 0 "
 	                                + "order by item_no asc"
@@ -258,7 +258,7 @@ public class ItemDao {
 	                + "            item_no, item_name, item_price, item_sale_price, "
 	                + "            item_date, item_cnt, item_size, "
 	                + "            item_cate1, item_cate2, item_cate3, "
-	                + "            item_discount_rate, item_color "
+	                + "            item_discount_rate, item_color, item_main "
 	                + "        FROM item "
 	                + "        ORDER BY item_no ASC"
 	                + "    ) TMP"
@@ -277,7 +277,7 @@ public class ItemDao {
 			                                    + "item_no, item_name, item_price, item_sale_price, "
 			                                    + "item_date, item_cnt, item_size, "
 			                                    + "item_cate1, item_cate2, item_cate3, "
-			                                    + "item_discount_rate, item_color "        
+			                                    + "item_discount_rate, item_color, item_main "        
 			                                + "from item "
 			                                + "where instr(" + pageVO.getColumn() + ", ?) > 0 "
 			                                + "order by item_discount_rate desc"
@@ -298,7 +298,7 @@ public class ItemDao {
 			                + "            item_no, item_name, item_price, item_sale_price, "
 			                + "            item_date, item_cnt, item_size, "
 			                + "            item_cate1, item_cate2, item_cate3, "
-			                + "            item_discount_rate, item_color "
+			                + "            item_discount_rate, item_color, item_main "
 			                + "        FROM item "
 			                + "        ORDER BY item_discount_rate desc"
 			                + "    ) TMP"
@@ -315,7 +315,7 @@ public class ItemDao {
 			                                    + "item_no, item_name, item_price, item_sale_price, "
 			                                    + "item_date, item_cnt, item_size, "
 			                                    + "item_cate1, item_cate2, item_cate3, "
-			                                    + "item_discount_rate, item_color "        
+			                                    + "item_discount_rate, item_color, item_main "        
 			                                + "from item "
 			                                + "where instr(" + pageVO.getColumn() + ", ?) > 0 "
 			                                + "order by item_price asc"
@@ -336,7 +336,7 @@ public class ItemDao {
 			                + "            item_no, item_name, item_price, item_sale_price, "
 			                + "            item_date, item_cnt, item_size, "
 			                + "            item_cate1, item_cate2, item_cate3, "
-			                + "            item_discount_rate, item_color "
+			                + "            item_discount_rate, item_color, item_main "
 			                + "        FROM item "
 			                + "        ORDER BY item_price ASC"
 			                + "    ) TMP"
@@ -353,7 +353,7 @@ public class ItemDao {
 			                                    + "item_no, item_name, item_price, item_sale_price, "
 			                                    + "item_date, item_cnt, item_size, "
 			                                    + "item_cate1, item_cate2, item_cate3, "
-			                                    + "item_discount_rate, item_color "        
+			                                    + "item_discount_rate, item_color, item_main "        
 			                                + "from item "
 			                                + "where instr(" + pageVO.getColumn() + ", ?) > 0 "
 			                                + "order by item_price desc"
@@ -374,7 +374,7 @@ public class ItemDao {
 			                + "            item_no, item_name, item_price, item_sale_price, "
 			                + "            item_date, item_cnt, item_size, "
 			                + "            item_cate1, item_cate2, item_cate3, "
-			                + "            item_discount_rate, item_color "
+			                + "            item_discount_rate, item_color, item_main "
 			                + "        FROM item "
 			                + "        ORDER BY item_price desc"
 			                + "    ) TMP"
@@ -391,7 +391,7 @@ public class ItemDao {
 			                                    + "item_no, item_name, item_price, item_sale_price, "
 			                                    + "item_date, item_cnt, item_size, "
 			                                    + "item_cate1, item_cate2, item_cate3, "
-			                                    + "item_discount_rate, item_color "        
+			                                    + "item_discount_rate, item_color, item_main "        
 			                                + "from item "
 			                                + "where instr(" + pageVO.getColumn() + ", ?) > 0 "
 			                                + "order by item_no asc"
@@ -412,7 +412,7 @@ public class ItemDao {
 			                + "            item_no, item_name, item_price, item_sale_price, "
 			                + "            item_date, item_cnt, item_size, "
 			                + "            item_cate1, item_cate2, item_cate3, "
-			                + "            item_discount_rate, item_color "
+			                + "            item_discount_rate, item_color, item_main "
 			                + "        FROM item "
 			                + "        ORDER BY item_no ASC"
 			                + "    ) TMP"
