@@ -21,6 +21,15 @@
 			}
 		});
 	});
+	$(function() {
+	    $(".confirm-link").click(function(e) {
+	        e.preventDefault(); // 기본 동작(폼 제출)을 막음
+	        var confirmation = window.confirm("선택한 항목을 삭제하시겠습니까?"); // 안내 메시지 표시
+	        if (confirmation) {
+	            $(this).closest('form').submit(); // 확인을 누르면 폼을 제출
+	        }
+	    });
+	});
 </script>
 
 <div class="container w-1200">
@@ -101,9 +110,7 @@
 			<c:if test="${sessionScope.createdLevel == '관리자' }">
 				<div class="float-box">
 					<div class="float-right">
-						<button type="submit" class="btn btn-negative btn-item-delete">
-							체크된 항목 삭제
-						</button>
+						<button type="button" class="btn btn-negative confirm-link">체크된 항목 삭제</button>
 					</div>
 					<div class="float-left">
 						<a href="/manager/item/insert" class="btn btn-positive" style="margin-right: 1em;">상품 추가</a>
