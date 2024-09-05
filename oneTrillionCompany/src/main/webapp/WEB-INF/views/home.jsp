@@ -189,7 +189,7 @@ body {
 							<a href="/item/detail?itemNo=${item.itemNo}"><img
 								src="/item/image?itemNo=${item.itemNo}" style="width:200px; height:245px;"></a>
 							<div class="row center">${item.itemName}</div>
-							<div class="row center">${item.itemSalePrice}</div>
+							<div class="row center">${item.itemSalePrice}원</div>
 						</div>
 					</c:forEach>
 				</div>
@@ -216,7 +216,7 @@ body {
 				<a href="/item/detail?itemNo=${item.itemNo}">
 					<img src="/item/image?itemNo=${item.itemNo}" style="width:200px; height:245px;">
 					<div class="name">${item.itemName}(${item.itemColor})</div>
-					<div class="price"><span class="gray" style="text-decoration : line-through"> ${item.itemPrice} </span> ${item.itemSalePrice}</div>
+					<div class="price"><span class="gray" style="text-decoration : line-through"> ${item.itemPrice}원 </span> ${item.itemSalePrice}원</div>
 				</a>
 			</c:forEach>
 		</div>
@@ -231,7 +231,7 @@ body {
 				<a href="/item/detail?itemNo=${item.itemNo}">
 					<img src="/item/image?itemNo=${item.itemNo}" style="width:200px; height:245px;">
 					<div class="name">${item.itemName}(${item.itemColor})</div>
-					<div class="price"><span class="gray" style="text-decoration : line-through"> ${item.itemPrice} </span> ${item.itemSalePrice}</div>
+					<div class="price"><span class="gray" style="text-decoration : line-through"> ${item.itemPrice}원 </span> ${item.itemSalePrice}원</div>
 				</a>
 			</c:forEach> 
 		</div>
@@ -246,7 +246,7 @@ body {
 				<a href="/item/detail?itemNo=${item.itemNo}">
 					<img src="/item/image?itemNo=${item.itemNo}" style="width:200px; height:245px;">
 					<div class="name">${item.itemName}(${item.itemColor})</div>
-					<div class="price"><span class="gray" style="text-decoration : line-through"> ${item.itemPrice} </span> ${item.itemSalePrice}</div>
+					<div class="price"><span class="gray" style="text-decoration : line-through"> ${item.itemPrice}원 </span> ${item.itemSalePrice}원</div>
 				</a>
 			</c:forEach> 
 		</div>
@@ -260,7 +260,7 @@ body {
 				<a href="/item/detail?itemNo=${item.itemNo}">
 					<img src="/item/image?itemNo=${item.itemNo}" style="width:200px; height:245px;">
 					<div class="name">${item.itemName}(${item.itemColor})</div>
-					<div class="price"><span class="gray" style="text-decoration : line-through"> ${item.itemPrice} </span> ${item.itemSalePrice}</div>
+					<div class="price"><span class="gray" style="text-decoration : line-through"> ${item.itemPrice}원 </span> ${item.itemSalePrice}원</div>
 				</a>
 			</c:forEach> 
 		</div>
@@ -275,7 +275,7 @@ body {
 				<a href="/item/detail?itemNo=${item.itemNo}"><img
 					src="/item/image?itemNo=${item.itemNo}" style="width:200px; height:245px;">
 					<div class="name">${item.itemName}(${item.itemColor})</div>
-					<div class="price"><span class="gray" style="text-decoration : line-through"> ${item.itemPrice} </span> ${item.itemSalePrice}</div>
+					<div class="price"><span class="gray" style="text-decoration : line-through"> ${item.itemPrice}원 </span> ${item.itemSalePrice}원</div>
 				</a>
 			</c:forEach> 
 		</div>
