@@ -84,7 +84,7 @@ font-size:12px
 				<div class="row image-align left" id="images">
 					<c:forEach var= "item" items= "${itemList}">
             			<a href="/item/detail?itemNo=${item.itemNo}">
-	           				 <img src = "/item/image?itemNo=${item.itemNo}" width="200px" height="260px">
+	           				 <img src = "/item/image?itemNo=${item.itemNo}" width="200px" height="240px">
 	           				 <div class="name">${item.itemName}(${item.itemColor})</div>
 							 <div class="price"><span class="gray" style="text-decoration : line-through"> ${item.itemPrice}원 </span> ${item.itemSalePrice}원</div>
 

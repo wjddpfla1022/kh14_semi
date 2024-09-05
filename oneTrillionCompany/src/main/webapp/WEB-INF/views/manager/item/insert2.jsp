@@ -128,20 +128,6 @@
                 { value: "17", text: "반팔셔츠" },
                 { value: "19", text: "긴팔셔츠" }
             ],
-            30: [
-                { value: "30", text: "스트레이트핏" },
-                { value: "31", text: "테이퍼드핏" },
-                { value: "32", text: "와이드핏" }
-            ],
-            31: [
-                { value: "35", text: "스트레이트핏" },
-                { value: "36", text: "테이퍼드핏" },
-                { value: "37", text: "와이드핏" }
-            ],
-            32: [
-                { value: "38", text: "트레이닝" },
-                { value: "39", text: "조거" }
-            ],
             33: [
                 { value: "33", text: "일반 반바지" },
                 { value: "34", text: "데님 반바지" }
