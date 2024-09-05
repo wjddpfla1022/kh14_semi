@@ -177,25 +177,25 @@ body {
 				<div class="swiper-wrapper">
 					<!-- Slides -->
 					<div class="swiper-slide">
-						<a href="#"><img src="http://via.placeholder.com/300.png"></a>
+						<a href="#"><img src="https://placehold.co/600x400"></a>
 					</div>
 					<div class="swiper-slide">
-						<a href="#"><img src="http://via.placeholder.com/300.png"></a>
+						<a href="#"><img src="https://placehold.co/600x400"></a>
 					</div>
 					<div class="swiper-slide">
-						<a href="#"><img src="http://via.placeholder.com/300.png"></a>
+						<a href="#"><img src="https://placehold.co/600x400"></a>
 					</div>
 					<div class="swiper-slide">
-						<a href="#"><img src="http://via.placeholder.com/300.png"></a>
+						<a href="#"><img src="https://placehold.co/600x400"></a>
 					</div>
 					<div class="swiper-slide">
-						<a href="#"><img src="http://via.placeholder.com/300.png"></a>
+						<a href="#"><img src="https://placehold.co/600x400"></a>
 					</div>
 					<div class="swiper-slide">
-						<a href="#"><img src="http://via.placeholder.com/300.png"></a>
+						<a href="#"><img src="https://placehold.co/600x400"></a>
 					</div>
 					<div class="swiper-slide">
-						<a href="#"><img src="http://via.placeholder.com/300.png"></a>
+						<a href="#"><img src="https://placehold.co/600x400"></a>
 					</div>
 				</div>
 				<!-- If we need pagination -->
