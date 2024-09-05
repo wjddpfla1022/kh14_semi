@@ -104,7 +104,6 @@ public class ItemController {
 	    model.addAttribute("reviewList", reviewList);
 	    model.addAttribute("itemNo", itemNo);
 //	    model.addAttribute("itemColorCnt", itemColorCnt);
-	    System.out.println(reviewList);
 	    //품절시 버튼 비활성화-장바구니
 	    model.addAttribute("colorList", itemDao.selectItemColors(itemNo));
 		model.addAttribute("attachNo", itemDao.findImage(itemNo));

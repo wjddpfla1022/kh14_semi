@@ -79,8 +79,8 @@
 					<c:forEach var= "itemDto" items= "${itemList}">
             			<a href="/item/detail?itemNo=${itemDto.itemNo}">
 	           				 <img src = "/item/image?itemNo=${itemDto.itemNo}" width="200px" height="260px">
-	           				 <h4>${itemDto.itemName}</h4>
-	            			<h4>${itemDto.itemPrice}원</h4>
+	           				 <h3>${itemDto.itemName}</h3>
+	            			<h3>${itemDto.itemSalePrice}원</h3>
             			</a>
         			</c:forEach>
         		</div>
