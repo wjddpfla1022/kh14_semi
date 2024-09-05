@@ -62,7 +62,7 @@ public class CartController {
 				    ItemDto itemDto = itemDao.selectOne(cartItemNo);
 				    String itemName = itemDto.getItemName();
 				    String itemColor = itemDto.getItemColor();
-				    int itemPrice = itemDto.getItemPrice();
+				    int itemPrice = itemDto.getItemSalePrice();
 				    int itemStock=itemDto.getItemCnt();
 				    //사이즈 추가
 				    String itemSize=itemDto.getItemSize();
