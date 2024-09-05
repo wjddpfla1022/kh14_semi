@@ -20,7 +20,7 @@ public class ItemPageVO {
 	}
 	//시작행, 종료행 계산 메소드
 	public int getBeginRow() {	//시작행
-		return this.page * this.size - (this.size-1);
+		return this.page * this.size - (this.size-1);  
 	}
 	public int getEndRow() {		//종료행
 		return this.page* this.size;
@@ -28,7 +28,7 @@ public class ItemPageVO {
 	
 	//네비게이터를 위한 메소드
 	public int getStartBlock() {
-		return (this.page-1) / this.blockSize * this.blockSize + 1;
+		return (this.page-1) / this.blockSize * this.blockSize + 1; //1pg = (2-1 ) / 10 * 10 +1
 	}
 	public boolean isFirst() {
 		return this.getStartBlock() <= 1;

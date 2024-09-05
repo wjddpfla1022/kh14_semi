@@ -83,6 +83,7 @@
 					<img src = "/item/image?itemNo=${item.itemNo}" width="200px" height="200px">
 					<div class="name">${item.itemName}(${item.itemColor})</div>
 					<div class="price"><span class="gray" style="text-decoration : line-through"> ${item.itemPrice}원 </span> ${item.itemSalePrice}원</div>
+
 				</a>
 			</c:forEach>
 		</div>

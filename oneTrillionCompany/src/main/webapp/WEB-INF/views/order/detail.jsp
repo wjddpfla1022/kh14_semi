@@ -67,19 +67,19 @@
          <table >
          	<thead>
          		<tr class="tr-table-top">
-	         		<th width="15%" class="th-table-top">상품이름</th>
+	<!--          		<th width="15%" class="th-table-top">상품이름</th>
 	         		<th width="10%" class="th-table-top">사이즈</th>
-         			<th width="10%" class="th-table-top">수량</th>
-         			<th width="10%" class="th-table-top">결제금액</th>
-         			<th width="25%" class="th-table-top">결제 시간</th>
-         			<th width="30%" class="th-table-top">배송원 참고사항</th>
+         			<th width="10%" class="th-table-top">수량</th> -->
+         			<th width="20%" class="th-table-top">결제금액</th>
+         			<th width="40%" class="th-table-top">결제 시간</th>
+         			<th width="20%" class="th-table-top">배송원 참고사항</th>
          		</tr>
          	</thead>
          	<tbody>
          		<tr class="tr-table-bottom center">
-	       			<td class="td-table-bottom">${orderDetailDto.orderDetailItemName}</td>
+<%-- 	       			<td class="td-table-bottom">${orderDetailDto.orderDetailItemName}</td>
 	       			<td class="td-table-bottom">${orderDetailDto.orderDetailCnt}</td>
-	       			<td class="td-table-bottom"></td>
+	       			<td class="td-table-bottom"></td> --%>
 	       			<td class="td-table-bottom">${ordersDto.orderPrice}</td>
 	       			<td class="td-table-bottom">
 	       				<fmt:formatDate value="${ordersDto.orderDate}" pattern="y년 MM월 dd일 E H시 mm분"/>

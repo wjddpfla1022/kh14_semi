@@ -261,13 +261,6 @@ session 수
 				</a>
 			</div>
 
-			<!-- 정보 확인용 공간 나중에 삭제 -->
-			<!-- <div>
-			session id = ${pageContext.session.id} , 
-			createdUser = ${sessionScope.createdUser} ,
-			createdLevel = ${sessionScope.createdLevel}
-		</div> -->
-
 			<!-- 
 			메뉴(Navbar) 
 			- (중요) 템플릿 페이지의 모든 경호는 전부 다 절대경로로 사용
@@ -286,8 +279,6 @@ session 수
 					<ul>
 						<li><a href="/item/list/cate?column=2&keyword=10">티셔츠</a>
 							<ul>
-								<li><a href="/item/list/cate?column=3&keyword=10">7부</a></li>
-								<li><a href="/item/list/cate?column=3&keyword=11">민소매</a></li>
 								<li><a href="/item/list/cate?column=3&keyword=12">긴팔</a></li>
 								<li><a href="/item/list/cate?column=3&keyword=13">반팔</a></li>
 								<li><a href="/item/list/cate?column=3&keyword=14">맨투맨</a></li>
@@ -298,11 +289,7 @@ session 수
 						<li><a href="/item/list/cate?column=2&keyword=11">셔츠</a>
 							<ul>
 								<li><a href="/item/list/cate?column=3&keyword=17">반팔 셔츠</a></li>
-								<li><a href="/item/list/cate?column=3&keyword=18">7부 셔츠</a></li>
 								<li><a href="/item/list/cate?column=3&keyword=19">긴팔 셔츠</a></li>
-								<li><a href="/item/list/cate?column=3&keyword=20">베이직/심플</a></li>
-								<li><a href="/item/list/cate?column=3&keyword=21">스트라이프</a></li>
-								<li><a href="/item/list/cate?column=3&keyword=22">체크</a></li>
 							</ul>
 						</li>
 					</ul>
@@ -344,19 +331,14 @@ session 수
 						<li><a href="/item/list/cate?column=2&keyword=50">스니커즈</a>
 						<li><a href="/item/list/cate?column=2&keyword=51">로퍼/슬립온</a>
 						<li><a href="/item/list/cate?column=2&keyword=52">구두</a>
-						<li><a href="/item/list/cate?column=2&keyword=53">워커/부츠</a>
 						<li><a href="/item/list/cate?column=2&keyword=54">샌들/슬리퍼</a>
-						<li><a href="/item/list/cate?column=2&keyword=55">깔창/기타</a>
 					</ul>
 				</li>
 				<li><a href="/item/list/cate?column=1&keyword=77" style="font-weight: bold;">아우터</a>
 					<ul>
 						<li><a href="/item/list/cate?column=2&keyword=70">가디건</a>
-						<li><a href="/item/list/cate?column=2&keyword=71">블루종</a>
 						<li><a href="/item/list/cate?column=2&keyword=72">집업</a>
-						<li><a href="/item/list/cate?column=2&keyword=73">바람막이</a>
 						<li><a href="/item/list/cate?column=2&keyword=74">블레이저</a>
-						<li><a href="/item/list/cate?column=2&keyword=75">청재킷</a>
 					</ul>
 				</li>
 				<!-- 구분선 -->
@@ -364,26 +346,25 @@ session 수
         			<button class="btn btn-open-modal btn-positive"><i class="fa-solid fa-magnifying-glass"></i></button></li>
 				
 				<!-- 구분선 -->
+
 			</ul>
-			
-		
-        	
+		      	
 				
-			<div class="row">
-				<p class="hide" style="color: white;">로그인 아이디 : ${sessionScope.createdUser}</p>
-				<p class="hide" style="color: white;">회원 등급 : ${sessionScope.createdLevel}</p>
-			</div>
+<!-- 			<div class="row"> -->
+<%-- 				<p class="hide" style="color: white;">로그인 아이디 : ${sessionScope.createdUser}</p> --%>
+<%-- 				<p class="hide" style="color: white;">회원 등급 : ${sessionScope.createdLevel}</p> --%>
+<!-- 			</div> -->
+
 	</div>
 	 <div class="modal">
             <div class="modal-body">
                 <div class="row right" style="margin-top : 5px;"><button class="btn btn-negative btn-close-modal"><i class="fa-solid fa-xmark"></i></button></div>
             	<h4 style="margin-bottom: 10px;">상품명 검색</h4>
-	<form action="/item/list"  method="get">
-                <input type="hidden" name="column" value="item_name">
-                <input type="text" name="keyword" class="field">
-                <button type="submit" class="btn btn-positive"><i class="fa-solid fa-magnifying-glass"></i></button>
-	</form>
-                
+				<form action="/item/list"  method="get">
+	                <input type="hidden" name="column" value="item_name">
+	                <input type="text" name="keyword" class="field">
+	                <button type="submit" class="btn btn-positive"><i class="fa-solid fa-magnifying-glass"></i></button>
+				</form>                
             </div>
         </div>
     <script>
