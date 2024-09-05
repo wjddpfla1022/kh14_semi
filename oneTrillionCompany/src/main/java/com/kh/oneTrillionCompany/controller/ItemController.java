@@ -48,7 +48,6 @@ public class ItemController {
 		int count = itemDao.countByPaging(itemPageVO);
 		itemPageVO.setCount(count);
 		model.addAttribute("itemPageVO", itemPageVO);
-		System.out.println(itemPageVO);
 		return "/WEB-INF/views/item/list2.jsp";
 	}
 	
