@@ -47,6 +47,12 @@
    a > h4{
        margin: 0.3em;
    }
+   .name{
+	font-size:12px
+}
+.price{
+	font-size:14px
+}
 </style>
 
   <div class="container w-1200 my-50">
@@ -71,12 +77,12 @@
 	<!-- 검색창 -->
 	<div class="container w-1000">
 
-		<div class="row image-align" id="images">
-			<c:forEach var= "itemDto" items= "${itemList}">
-				<a href="/item/detail?itemNo=${itemDto.itemNo}">
-					<img src = "/item/image?itemNo=${itemDto.itemNo}" width="200px" height="200px">
-					<h4>${itemDto.itemName}</h4>
-					<h4>${itemDto.itemPrice}원</h4>
+		<div class="row image-align left" id="images">
+			<c:forEach var= "item" items= "${itemList}">
+				<a href="/item/detail?itemNo=${item.itemNo}">
+					<img src = "/item/image?itemNo=${item.itemNo}" width="200px" height="200px">
+					<div class="name">${item.itemName}(${item.itemColor})</div>
+					<div class="price"><span class="gray" style="text-decoration : line-through"> ${item.itemPrice}원 </span> ${item.itemSalePrice}원</div>
 				</a>
 			</c:forEach>
 		</div>
