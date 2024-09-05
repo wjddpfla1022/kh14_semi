@@ -177,6 +177,7 @@ session 수
 					<li class="right-menu"><a href="/member/login" style="font-weight:bolder;">로그인</a></li>
 					<li><a style="font-weight: bold;" href="/member/join" style="font-weight:bolder;">회원가입</a></li>
 					<li><a style="font-weight: bold;" href="/qna/list">1:1문의</a></li>
+					<li><a style="font-weight: bold;" href="/review/list">상품후기</a></li>
 					<!-- <li><a style="font-weight: bold;" href="#">커뮤니티</a> -->
 						<ul>
 							<li><a href="#">항목1</a></li>
@@ -328,7 +329,7 @@ session 수
 					</ul>
 				</li>
 				<!-- 구분선 -->
-				<li class="right-menu">
+				<li class="right-menu right" s>
         			<button class="btn btn-open-modal btn-positive"><i class="fa-solid fa-magnifying-glass"></i></button></li>
 				
 				<!-- 구분선 -->

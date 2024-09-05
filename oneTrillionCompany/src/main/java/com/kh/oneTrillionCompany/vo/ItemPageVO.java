@@ -9,7 +9,7 @@ public class ItemPageVO {
 	private String column;	//검색 항목
 	private String keyword;	//검색 키워드
 	private int page=1;	//페이지 번호
-	private int size=16;	//1페이지의 크기
+	private int size=20;	//1페이지의 크기
 	private int count;	//총 데이터 개수
 	private int blockSize=10;		//한 블럭 구역의 크기
 	private String sorting;
