@@ -298,24 +298,10 @@ session 수
 				<li><a href="/item/list/cate?column=1&keyword=33" style="font-weight: bold;">하의</a>
 					<ul>
 						<li><a href="/item/list/cate?column=2&keyword=30">슬랙스</a>
-							<ul>
-								<li><a href="/item/list/cate?column=3&keyword=30">스트레이트핏</a></li>
-								<li><a href="/item/list/cate?column=3&keyword=31">테이퍼드핏</a></li>
-								<li><a href="/item/list/cate?column=3&keyword=32">와이드핏</a></li>
-							</ul>
 						</li>
 						<li><a href="/item/list/cate?column=2&keyword=31">데님</a>
-							<ul>
-								<li><a href="/item/list/cate?column=3&keyword=35">스트레이트핏</a></li>
-								<li><a href="/item/list/cate?column=3&keyword=36">테이퍼드핏</a></li>
-								<li><a href="/item/list/cate?column=3&keyword=37">와이드핏</a></li>
-							</ul>
 						</li>
 						<li><a href="/item/list/cate?column=2&keyword=32">트레이닝</a>
-							<ul>
-								<li><a href="/item/list/cate?column=3&keyword=38">트레이닝</a></li>
-								<li><a href="/item/list/cate?column=3&keyword=39">조거팬츠</a></li>
-							</ul>
 						</li>
 						<li><a href="/item/list/cate?column=2&keyword=33">반바지</a>
 							<ul>

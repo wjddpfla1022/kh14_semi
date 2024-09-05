@@ -187,7 +187,7 @@ body {
 					<c:forEach var="item" items="${swiperList}">
 						<div class="swiper-slide">
 							<a href="/item/detail?itemNo=${item.itemNo}"><img
-								src="/item/image?itemNo=${item.itemNo}" style="width:200px; height:245px;"></a>
+								src="/item/image?itemNo=${item.itemNo}" style="width:200px; height:240px;"></a>
 							<div class="row center">${item.itemName}</div>
 							<div class="row center">${item.itemSalePrice}원</div>
 						</div>
@@ -214,7 +214,7 @@ body {
 		<div class="row image-align w-5">
 			<c:forEach var="item" items="${mainList}">
 				<a href="/item/detail?itemNo=${item.itemNo}">
-					<img src="/item/image?itemNo=${item.itemNo}" style="width:200px; height:245px;">
+					<img src="/item/image?itemNo=${item.itemNo}" style="width:200px; height:240px;">
 					<div class="name">${item.itemName}(${item.itemColor})</div>
 					<div class="price"><span class="gray" style="text-decoration : line-through"> ${item.itemPrice}원 </span> ${item.itemSalePrice}원</div>
 				</a>
@@ -229,7 +229,7 @@ body {
 		<div class="row image-align">
 			<c:forEach var="item" items="${topList}">
 				<a href="/item/detail?itemNo=${item.itemNo}">
-					<img src="/item/image?itemNo=${item.itemNo}" style="width:200px; height:245px;">
+					<img src="/item/image?itemNo=${item.itemNo}" style="width:200px; height:240px;">
 					<div class="name">${item.itemName}(${item.itemColor})</div>
 					<div class="price"><span class="gray" style="text-decoration : line-through"> ${item.itemPrice}원 </span> ${item.itemSalePrice}원</div>
 				</a>
@@ -244,7 +244,7 @@ body {
 		<div class="row image-align">
 			<c:forEach var="item" items="${bottomList}">
 				<a href="/item/detail?itemNo=${item.itemNo}">
-					<img src="/item/image?itemNo=${item.itemNo}" style="width:200px; height:245px;">
+					<img src="/item/image?itemNo=${item.itemNo}" style="width:200px; height:240px;">
 					<div class="name">${item.itemName}(${item.itemColor})</div>
 					<div class="price"><span class="gray" style="text-decoration : line-through"> ${item.itemPrice}원 </span> ${item.itemSalePrice}원</div>
 				</a>
@@ -258,7 +258,7 @@ body {
 		<div class="row image-align">
 			<c:forEach var="item" items="${shoesList}">
 				<a href="/item/detail?itemNo=${item.itemNo}">
-					<img src="/item/image?itemNo=${item.itemNo}" style="width:200px; height:245px;">
+					<img src="/item/image?itemNo=${item.itemNo}" style="width:200px; height:240px;">
 					<div class="name">${item.itemName}(${item.itemColor})</div>
 					<div class="price"><span class="gray" style="text-decoration : line-through"> ${item.itemPrice}원 </span> ${item.itemSalePrice}원</div>
 				</a>
@@ -273,7 +273,7 @@ body {
 		<div class="row image-align">
 			<c:forEach var="item" items="${outerList}">
 				<a href="/item/detail?itemNo=${item.itemNo}"><img
-					src="/item/image?itemNo=${item.itemNo}" style="width:200px; height:245px;">
+					src="/item/image?itemNo=${item.itemNo}" style="width:200px; height:240px;">
 					<div class="name">${item.itemName}(${item.itemColor})</div>
 					<div class="price"><span class="gray" style="text-decoration : line-through"> ${item.itemPrice}원 </span> ${item.itemSalePrice}원</div>
 				</a>

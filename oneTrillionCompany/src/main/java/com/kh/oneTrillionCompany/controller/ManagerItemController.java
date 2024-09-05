@@ -106,7 +106,7 @@ public class ManagerItemController {
 	}
 	
 	//여러개 삭제
-		@RequestMapping("/deleteAll")
+		@PostMapping("/deleteAll")
 		public String deleteAll(@RequestParam(value="itemNo") List<Integer> list) {
 			for (int itemNo:list) {
 				try {
