@@ -338,8 +338,8 @@ td {
 								<td>${cart.itemColor} / ${cart.itemSize}</td>
 								<td><input type="text"
 									name="cartList[${status.index}].cartItemPrice"
-									value="<fmt:formatNumber value="${cart.itemSalePrice}" pattern="#,###"/>원" class="field cartItemPriceInput" readonly><span
-									class="hidden">${cart.itemSalePrice}</span> <span
+									value="<fmt:formatNumber value="${cart.item}" pattern="#,###"/>원" class="field cartItemPriceInput" readonly><span
+									class="hidden">${cart.item}</span> <span
 									class="hidden itemCnt-data">${cart.itemStock}</span></td>
 								<!-- 재고값을 el로 받아 제이쿼리에 적용 -->
 								<td><span> <input type="text"
@@ -395,7 +395,7 @@ td {
 						<input type="hidden" name="buyer"
 							value="${sessionScope.createdUser}">
 						<input type="hidden" name="cartItemPrice"
-							value="${cart.itemSalePrice}" readonly>
+							value="${cart.item}" readonly>
 						<input type="hidden" name="cartNo" value="${cart.cartNo}">
 					</c:forEach>
 					<button type="submit" class="btn float-left btn-positive">전체 주문하기</button>
