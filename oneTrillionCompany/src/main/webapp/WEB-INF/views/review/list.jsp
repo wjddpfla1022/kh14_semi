@@ -200,7 +200,7 @@
                     <c:if test="${param.column == 'review_content'}">selected</c:if>>리뷰 내용</option>
             </select>
             <input class="field" type="text" name="keyword" value="${param.keyword}">
-            <button class="btn btn-neutral" type="submit">
+            <button class="btn btn-positive" type="submit">
                 <i class="fa-solid fa-magnifying-glass"></i> 검색
             </button>
         </div>
