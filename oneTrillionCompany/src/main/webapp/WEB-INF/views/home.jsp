@@ -71,6 +71,12 @@ body {
 	right: 10px;
 	cursor: pointer;
 }
+.name{
+	font-size:12px
+}
+.price{
+	font-size:14px
+}
 </style>
 
 <script type="text/javascript">
@@ -215,8 +221,8 @@ body {
 			<c:forEach var="item" items="${mainList}">
 				<a href="/item/detail?itemNo=${item.itemNo}">
 					<img src="/item/image?itemNo=${item.itemNo}" style="width:200px; height:245px;">
-					<h6>${item.itemName}(${item.itemColor})</h6>
-					<h5><span class="gray" style="text-decoration : line-through"> ${item.itemPrice} </span> ${item.itemSalePrice}</h5>
+					<div class="name">${item.itemName}(${item.itemColor})</div>
+					<div class="price"><span class="gray" style="text-decoration : line-through"> ${item.itemPrice} </span> ${item.itemSalePrice}</div>
 				</a>
 			</c:forEach>
 		</div>
@@ -230,8 +236,8 @@ body {
 			<c:forEach var="item" items="${topList}">
 				<a href="/item/detail?itemNo=${item.itemNo}">
 					<img src="/item/image?itemNo=${item.itemNo}" style="width:200px; height:245px;">
-					<h6>${item.itemName}(${item.itemColor})</h6>
-					<h5><span class="gray" style="text-decoration : line-through"> ${item.itemPrice} </span> ${item.itemSalePrice}</h5>
+					<div class="name">${item.itemName}(${item.itemColor})</div>
+					<div class="price"><span class="gray" style="text-decoration : line-through"> ${item.itemPrice} </span> ${item.itemSalePrice}</div>
 				</a>
 			</c:forEach> 
 		</div>
@@ -245,8 +251,8 @@ body {
 			<c:forEach var="item" items="${bottomList}">
 				<a href="/item/detail?itemNo=${item.itemNo}">
 					<img src="/item/image?itemNo=${item.itemNo}" style="width:200px; height:245px;">
-					<h6>${item.itemName}(${item.itemColor})</h6>
-					<h6><span class="gray" style="text-decoration : line-through"> ${item.itemPrice} </span> ${item.itemSalePrice}</h6>
+					<div class="name">${item.itemName}(${item.itemColor})</div>
+					<div class="price"><span class="gray" style="text-decoration : line-through"> ${item.itemPrice} </span> ${item.itemSalePrice}</div>
 				</a>
 			</c:forEach> 
 		</div>
@@ -259,8 +265,8 @@ body {
 			<c:forEach var="item" items="${shoesList}">
 				<a href="/item/detail?itemNo=${item.itemNo}">
 					<img src="/item/image?itemNo=${item.itemNo}" style="width:200px; height:245px;">
-					<h6>${item.itemName}(${item.itemColor})</h6>
-					<h5><span class="gray" style="text-decoration : line-through"> ${item.itemPrice} </span> ${item.itemSalePrice}</h5>
+					<div class="name">${item.itemName}(${item.itemColor})</div>
+					<div class="price"><span class="gray" style="text-decoration : line-through"> ${item.itemPrice} </span> ${item.itemSalePrice}</div>
 				</a>
 			</c:forEach> 
 		</div>
@@ -274,8 +280,8 @@ body {
 			<c:forEach var="item" items="${outerList}">
 				<a href="/item/detail?itemNo=${item.itemNo}"><img
 					src="/item/image?itemNo=${item.itemNo}" style="width:200px; height:245px;">
-					<h6>${item.itemName}(${item.itemColor})</h6>
-					<h5><span class="gray" style="text-decoration : line-through"> ${item.itemPrice} </span> ${item.itemSalePrice}</h5>
+					<div class="name">${item.itemName}(${item.itemColor})</div>
+					<div class="price"><span class="gray" style="text-decoration : line-through"> ${item.itemPrice} </span> ${item.itemSalePrice}</div>
 				</a>
 			</c:forEach> 
 		</div>
