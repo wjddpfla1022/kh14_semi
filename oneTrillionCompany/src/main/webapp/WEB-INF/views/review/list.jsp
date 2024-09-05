@@ -155,7 +155,7 @@
                 <table class="table table-top mt-30">
                     <thead>
                         <tr class="tr-table-top">
-                            <td width=10%>상품번호</td>
+                            <td width=10%>상품이름</td>
                             <td width=60%>리뷰내용</td>
                             <td width=10%>아이디</td>
                             <td width=10%>별점</td>
@@ -173,7 +173,7 @@
                             <c:otherwise>
                                 <c:forEach var="reviewDto" items="${list}">
                                     <tr class="tr-table-bottom">
-                                        <td class="td-table-bottom">${orderDetailDto.orderDetailItemName}</td>
+                                        <td class="td-table-bottom">${reviewDto.reviewItemName}</td>
                                         <td class="td-table-bottom">
     									<a href="detail?reviewNo=${reviewDto.reviewNo}" class="table-title text-ellipsis">${reviewDto.reviewContent}</a>
 										</td>

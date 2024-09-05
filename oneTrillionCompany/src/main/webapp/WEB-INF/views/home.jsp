@@ -142,13 +142,12 @@ body {
         <img src="http://via.placeholder.com/250.png" width="100%">
       </div>
       <div class="row center">
-        <b style="box-shadow: 0 0 1px 0;">ONE 공지</b><b style="box-shadow: 0 0 1px 0">ONE 공지</b><br>
-        <b style="box-shadow: 0 0 1px 0">ONE 공지</b><b style="box-shadow: 0 0 1px 0">ONE 공지</b>
+        
       </div><hr>
       <div class="row">
         <span style="font-weight:bolder; font-size: 12px">무통장 안내</span><br><br>
-        <span style="font-weight:bolder; font-size: 12px">국민은행 <b style="font-size: 11px; color: #999;">000000-00-000000</b></span><br>
-        <span style="font-weight:bolder; font-size: 12px">예금주 <b style="font-size: 11px; color: #999;">주식회사 패션홀릭</b></span><br><br>
+        <span style="font-weight:bolder; font-size: 12px">정현은행 <b style="font-size: 11px; color: #999;">1111-111-111111</b></span><br>
+        <span style="font-weight:bolder; font-size: 12px">예금주 <b style="font-size: 11px; color: #999;">일조 컴퍼니</b></span><br><br>
         <span class="field field-underline" style="font-size: 11px; color: #999;">* 입금 시 입금자명과 금액을</span><br>
         <span class="field field-underline" style="font-size: 11px; color: #999;">꼭 확인해주세요.</span><br>
         <span style="font-size: 11px; color: #999;">무통장 입금 자동확인까지</span><br>
@@ -158,7 +157,7 @@ body {
         <span>고객센터</span>
       </div>
       <div class="row">
-        <span style="font-weight: bolder;">010-1234-5678</span>
+        <span style="font-weight: bolder;">8282-8282</span>
       </div>
       <div class="row">
         <span style="font-size: 11px">월요일 - 금요일 09:30 - 18:30</span><br>
@@ -167,7 +166,7 @@ body {
     </div>
   </div>
 
-	<div class="container w-600 my-50">
+	<div class="container w-600 my-50" s>
 		<div class="row center">
 			<h1 class="mt-30 mb-50">이달의 상품</h1>
 		</div>
