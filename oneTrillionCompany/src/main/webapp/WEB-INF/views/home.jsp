@@ -176,7 +176,7 @@ body {
 
 	<div class="container w-600 my-50">
 		<div class="row center">
-			<h1 class="mt-30 mb-50">이달의 상품</h1>
+			<h1 class="mt-30 mb-50">이달의 신상품</h1>
 		</div>
 		<div class="row center">
 			<!-- Slider main container -->

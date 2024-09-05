@@ -170,7 +170,6 @@ public class ManagerItemController {
 		ItemInfoDto originDto = infoDao.selectOne(infoDto.getInfoItemNo());
 		if(originDto == null) throw new TargetNotFoundException("존재하지 않는 글");
 		infoDao.update(infoDto);
-		System.out.println(infoItemNo);
 		return "redirect:read?itemNo="+ infoItemNo;
 	}
 	
