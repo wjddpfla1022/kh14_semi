@@ -395,7 +395,7 @@ td {
 						<input type="hidden" name="buyer"
 							value="${sessionScope.createdUser}">
 						<input type="hidden" name="cartItemPrice"
-							value="${cart.itemPrice}" readonly>
+							value="${cart.itemSalePrice}" readonly>
 						<input type="hidden" name="cartNo" value="${cart.cartNo}">
 					</c:forEach>
 					<button type="submit" class="btn float-left btn-positive">전체 주문하기</button>
