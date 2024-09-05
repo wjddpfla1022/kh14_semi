@@ -129,8 +129,9 @@
 
 							if (selectedValue === '직접 입력하기') {
 								// '직접 입력하기'가 선택된 경우, 인풋 박스를 보여줌
+								$("#memoSelect").removeAttr("name");
 								memoContainer
-										.replaceWith('<input type="text" name="custom_memo" class="memo field w-100" style="border-top:1px solid #636e72" placeholder="직접 입력하세요">');
+										.replaceWith('<input type="text" name="orderMemo" class="memo field w-100" style="border-top:1px solid #636e72" placeholder="직접 입력하세요">');
 							} else if (selectedValue !== 'noSelect') {
 								// 그 외의 경우, 선택된 텍스트를 보여줌
 								memoContainer
@@ -201,7 +202,7 @@
 								<div>배송메모</div>
 								<div>
 									<div class="container request-detail">
-										<select class="field w-100" name="orderMemo">
+										<select class="field w-100" name="orderMemo" id="memoSelect">
 											<option value="선택 안 함">선택 안 함</option>
 											<option value="직접 입력하기">직접 입력하기</option>
 											<option value="부재시 문앞에 두고 가주세요">부재시 문앞에 두고 가주세요</option>
