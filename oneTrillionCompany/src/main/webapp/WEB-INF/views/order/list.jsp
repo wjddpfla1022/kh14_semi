@@ -67,22 +67,24 @@
          <table style="width:100%">
          	<thead>
          		<tr class="tr-table-top">
-         			<th width=20%; class="th-table-top">상품</th>
+         			<th width=10%; class="th-table-top">결제상세번호</th>
+         			<th width=15%; class="th-table-top">상품</th>
          			<th width=10%; class="th-table-top">수량</th>
          			<th width=20%; class="th-table-top">결제금액</th>
-         			<th width=25%; class="th-table-top">상태</th>
+         			<th width=15%; class="th-table-top">상태</th>
          			<th width=25%; class="th-table-top">상세</th>
          		</tr>
          	</thead>
          	<tbody>
          		<c:forEach var="orderDetailDto" items="${detailList}">
 	        		<tr class="tr-table-bottom center">
+	        			<td class="td-table-bottom">${orderDetailDto.orderDetailNo}</td>
 	        			<td class="td-table-bottom">${orderDetailDto.orderDetailItemName}</td>
 	        			<td class="td-table-bottom">${orderDetailDto.orderDetailCnt}</td>
 	        			<td class="td-table-bottom">${orderDetailDto.orderDetailPrice*orderDetailDto.orderDetailCnt}</td>
 	        			<td class="td-table-bottom">${orderDetailDto.orderDetailStatus}</td>
 	        			<td class="td-table-bottom">
-	        				<a href="/order/detail?orderNo=${orderDetailDto.orderDetailOrderNo}" class="link">결제상세</a>
+	        				<a href="/order/detail?orderNo=${orderDetailDto.orderDetailOrderNo}" class="link">결제내역</a>
 	        				<a href="/review/write?orderDetailNo=${orderDetailDto.orderDetailNo}" class="link">리뷰작성</a>
 	        				<a href="/refund/insert?refundOrderDetailNo=${orderDetailDto.orderDetailNo}" class="link">환불신청</a>
 	        			</td>	        			
