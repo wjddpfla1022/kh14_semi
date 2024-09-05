@@ -404,8 +404,6 @@
 						<option value="">선택하세요</option>
 						<option value="black">블랙</option>
 						<option value="white">화이트</option>
-						<option value="blue">블루</option>
-						<option value="brown">브라운</option>
 					</select>
 				</div>
 
