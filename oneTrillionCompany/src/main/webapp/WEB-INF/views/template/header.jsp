@@ -329,7 +329,7 @@ session 수
 					</ul>
 				</li>
 				<!-- 구분선 -->
-				<li class="right-menu right" s>
+				<li class="right-menu right">
         			<button class="btn btn-open-modal btn-positive"><i class="fa-solid fa-magnifying-glass"></i></button></li>
 				
 				<!-- 구분선 -->
