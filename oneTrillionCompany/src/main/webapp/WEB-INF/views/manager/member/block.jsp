@@ -18,9 +18,18 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     
     <script type="text/javascript">
+    
    $(function(){
+	   
 	  $(".member_block").click(function(e){
 		  e.preventDefault();
+		  
+		  var noText = $("textarea[name=blockMemo]").val().trim();
+		  	if(noText ==0) {
+		  		window.alert("차단 사유를 입력해주세요.");
+		  		return;
+		  	}
+			  
 		  var block = window.confirm("차단하시겠습니까?");
 		  if(block) {
 			  $("#blockForm").submit();
