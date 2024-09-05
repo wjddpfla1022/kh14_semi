@@ -261,13 +261,6 @@ session 수
 				</a>
 			</div>
 
-			<!-- 정보 확인용 공간 나중에 삭제 -->
-			<!-- <div>
-			session id = ${pageContext.session.id} , 
-			createdUser = ${sessionScope.createdUser} ,
-			createdLevel = ${sessionScope.createdLevel}
-		</div> -->
-
 			<!-- 
 			메뉴(Navbar) 
 			- (중요) 템플릿 페이지의 모든 경호는 전부 다 절대경로로 사용
@@ -353,12 +346,15 @@ session 수
         			<button class="btn btn-open-modal btn-positive"><i class="fa-solid fa-magnifying-glass"></i></button></li>
 				
 				<!-- 구분선 -->
-			</ul>        	
+
+			</ul>
+		      	
 				
 <!-- 			<div class="row"> -->
 <%-- 				<p class="hide" style="color: white;">로그인 아이디 : ${sessionScope.createdUser}</p> --%>
 <%-- 				<p class="hide" style="color: white;">회원 등급 : ${sessionScope.createdLevel}</p> --%>
 <!-- 			</div> -->
+
 	</div>
 	 <div class="modal">
             <div class="modal-body">
