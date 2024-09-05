@@ -22,6 +22,14 @@
 	$(function(){
 		$(".member_clear").click(function(e){
 			e.preventDefault();
+			
+			  var noText = $("textarea[name=blockMemo]").val().trim();
+			  	if(noText ==0) {
+			  		window.alert("해제 사유를 입력해주세요.");
+			  		return;
+			  	}
+			  	
+			  	
 			var clear = window.confirm("차단을 해제 하시겠습니까?");
             if (clear) {
                 // 확인을 클릭한 경우 폼 제출

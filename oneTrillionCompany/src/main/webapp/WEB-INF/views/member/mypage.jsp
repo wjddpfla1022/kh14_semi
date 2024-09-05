@@ -196,7 +196,7 @@
 	</form>
 
 		<%--  관리자가 아닐 경우에만 차단이력을 출력 --%> 
-		<c:choose>
+<%-- 		<c:choose>
 			<c:when test="${memberDto.memberRank != '관리자'}">
 				<hr>
 					<div class = "row center">
@@ -232,7 +232,7 @@
 							</c:choose>
 						</div>
 			</c:when>
-		</c:choose>
+		</c:choose> --%>
 </div>
 		
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
