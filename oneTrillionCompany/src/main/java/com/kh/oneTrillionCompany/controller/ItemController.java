@@ -37,10 +37,10 @@ public class ItemController {
 				@RequestParam (required = false) String sorting,Model model) {
 		
 		String keyword=itemPageVO.getKeyword();
-		if(keyword!=null) {
-			keyword = keyword.replaceAll(" ", "");
-			itemPageVO.setKeyword(keyword);
-		}
+//		if(keyword!=null) {
+//			keyword = keyword.replaceAll(" ", "");
+//			itemPageVO.setKeyword(keyword);
+//		}
 		if(sorting==null)
 			model.addAttribute("itemList",itemDao.selectListByPaging(itemPageVO));
 		else
@@ -48,7 +48,7 @@ public class ItemController {
 		int count = itemDao.countByPaging(itemPageVO);
 		itemPageVO.setCount(count);
 		model.addAttribute("itemPageVO", itemPageVO);
-		
+		System.out.println(itemPageVO);
 		return "/WEB-INF/views/item/list2.jsp";
 	}
 	
@@ -57,10 +57,10 @@ public class ItemController {
 			@RequestParam(required = false) String sorting) {
 		String keyword=itemPageVO.getKeyword();
 		itemPageVO.setSorting(sorting);
-		if(keyword!=null) {
-			keyword = keyword.replaceAll(" ", "");
-			itemPageVO.setKeyword(keyword);
-		}
+//		if(keyword!=null) {
+//			keyword = keyword.replaceAll(" ", "");
+//			itemPageVO.setKeyword(keyword);
+//		}
 		if(sorting==null)
 			model.addAttribute("itemList", itemDao.selectListByCatePaging(itemPageVO));
 		else
