@@ -463,12 +463,21 @@
 					<i class="fa-regular fa-circle-exclamation"></i>배송비<b>무료 </b>
 				</p>
 			</div>
-
 			<div class="row">
-
-				<!-- 장바구니버튼 -->
-				<button type="button" class="btn w-100 btn-add-cart"
-					style="color: white; background-color: black;">장바구니</button>
+			<%-- 비회원은 상품이 장바구니에 담기지 않도록 설정 --%>
+			<c:choose>
+					<c:when test="${sessionScope.createdLevel == '관리자'}"></c:when>
+					<c:when test="${sessionScope.createdUser != null}">
+						<div class="row right">
+							<button type="button" class="btn w-100 btn-add-cart" style="color: white; background-color: black;">장바구니</button>
+						</div>
+					</c:when>
+					<c:otherwise>
+						<div class="row right">
+							<a title="로그인 후 이용하실 수 있습니다"  class="btn w-100" style="color: white; background-color: black;">장바구니</a>
+						</div>
+					</c:otherwise>
+				</c:choose>
 			</div>
 		</div>
 
