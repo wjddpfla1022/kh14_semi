@@ -346,7 +346,7 @@ public class ItemDao {
 			                                    + "item_discount_rate, item_color "        
 			                                + "from item "
 			                                + "where instr(" + pageVO.getColumn() + ", ?) > 0 "
-			                                + "order by item_price asc"
+			                                + "order by item_sale_price asc"
 			                            + ")TMP"
 			                    + ") where rn between ? and ?";
 			        Object[] data = {
@@ -366,7 +366,7 @@ public class ItemDao {
 			                + "            item_cate1, item_cate2, item_cate3, "
 			                + "            item_discount_rate, item_color "
 			                + "        FROM item "
-			                + "        ORDER BY item_price ASC"
+			                + "        ORDER BY item_sale_price ASC"
 			                + "    ) TMP"
 			                + ") WHERE rn BETWEEN ? AND ?";
 			        Object[] data = {pageVO.getBeginRow(), pageVO.getEndRow()};
@@ -384,7 +384,7 @@ public class ItemDao {
 			                                    + "item_discount_rate, item_color "        
 			                                + "from item "
 			                                + "where instr(" + pageVO.getColumn() + ", ?) > 0 "
-			                                + "order by item_price desc"
+			                                + "order by item_sale_price desc"
 			                            + ")TMP"
 			                    + ") where rn between ? and ?";
 			        Object[] data = {
@@ -404,7 +404,7 @@ public class ItemDao {
 			                + "            item_cate1, item_cate2, item_cate3, "
 			                + "            item_discount_rate, item_color "
 			                + "        FROM item "
-			                + "        ORDER BY item_price desc"
+			                + "        ORDER BY item_sale_price desc"
 			                + "    ) TMP"
 			                + ") WHERE rn BETWEEN ? AND ?";
 			        Object[] data = {pageVO.getBeginRow(), pageVO.getEndRow()};
