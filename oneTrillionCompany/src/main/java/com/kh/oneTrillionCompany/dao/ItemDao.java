@@ -118,7 +118,7 @@ public class ItemDao {
 			               + "select rownum as rn, TMP.* from ("
 			               + "select * from item where instr(" + column + ", ?) > 0 "
 			               		+ "AND item_main = 2"
-			               + "order by item_price asc"
+			               + "order by item_sale_price asc"
 			               + ") TMP "
 			               + ") where rn between ? and ?";
 				
@@ -132,7 +132,7 @@ public class ItemDao {
 			               + "select rownum as rn, TMP.* from ("
 			               + "select * from item where instr(" + column + ", ?) > 0 "
 			               		+ "AND item_main = 2"
-			               + "order by item_price desc"
+			               + "order by item_sale_price desc"
 			               + ") TMP "
 			               + ") where rn between ? and ?";
 				
