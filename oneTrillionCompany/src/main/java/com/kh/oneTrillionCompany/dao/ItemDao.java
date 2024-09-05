@@ -314,7 +314,7 @@ public class ItemDao {
 			                                    + "item_discount_rate, item_color, item_main "        
 			                                + "from item "
 			                                + "where instr(" + pageVO.getColumn() + ", ?) > 0 "
-			                                		+ "AND item_main = 2 "
+//			                                		+ "AND item_main = 2 "
 			                                + "order by item_discount_rate desc"
 			                            + ")TMP"
 			                    + ") where rn between ? and ?";
@@ -334,7 +334,8 @@ public class ItemDao {
 			                + "            item_date, item_cnt, item_size, "
 			                + "            item_cate1, item_cate2, item_cate3, "
 			                + "            item_discount_rate, item_color, item_main "
-			                + "        FROM item where item_main = 2 "
+			                + "        FROM item "
+//			                + "where item_main = 2 "
 			                + "        ORDER BY item_discount_rate desc"
 			                + "    ) TMP"
 			                + ") WHERE rn BETWEEN ? AND ?";
