@@ -464,20 +464,20 @@ public class ItemDao {
 	public int countByPaging(ItemPageVO pageVO) {
 	    String sql;
 	    if (pageVO.isSearch()) {
-	        sql = "select count(*) from item where instr(" + pageVO.getColumn() + ", ?) > 0";
+	        sql = "select count(*) from item where instr(" + pageVO.getColumn() + ", ?) > 0 and item_main = 2";
 	        return jdbcTemplate.queryForObject(sql, Integer.class, pageVO.getKeyword());
 	    } else {
-	        sql = "select count(*) from item";
+	        sql = "select count(*) from item where item_main = 2";
 	        return jdbcTemplate.queryForObject(sql, Integer.class);
 	    }
 	}
 	public int countByPagingCate(ItemPageVO itemPageVO) {
 	    String sql;
 	    if (itemPageVO.isSearch()) {
-	        sql = "select count(*) from item where instr(item_cate" + itemPageVO.getColumn() + ", ?) > 0";
+	        sql = "select count(*) from item where instr(item_cate" + itemPageVO.getColumn() + ", ?) > 0 and item_main = 2";
 	        return jdbcTemplate.queryForObject(sql, Integer.class, itemPageVO.getKeyword());
 	    } else {
-	        sql = "select count(*) from item";
+	        sql = "select count(*) from item where item_main = 2";
 	        return jdbcTemplate.queryForObject(sql, Integer.class);
 	    }
 	}
