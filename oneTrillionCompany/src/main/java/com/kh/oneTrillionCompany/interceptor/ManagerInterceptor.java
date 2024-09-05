@@ -5,6 +5,8 @@ import java.io.IOException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.HandlerInterceptor;
 
+import com.kh.oneTrillionCompany.exception.TargetNotFoundException;
+
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -25,7 +27,7 @@ public class ManagerInterceptor implements HandlerInterceptor {
 			return true;
 		}
 		else {
-			response.sendError(403);
+			response.sendRedirect("/member/login");
 			return false;
 		}
 	}

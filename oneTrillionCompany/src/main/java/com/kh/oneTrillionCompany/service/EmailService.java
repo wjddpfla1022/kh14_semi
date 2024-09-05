@@ -2,6 +2,7 @@ package com.kh.oneTrillionCompany.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -16,6 +17,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.kh.oneTrillionCompany.dao.CertDao;
 import com.kh.oneTrillionCompany.dao.MemberDao;
 import com.kh.oneTrillionCompany.dto.CertDto;
+import com.kh.oneTrillionCompany.dto.OrderDetailDto;
+import com.kh.oneTrillionCompany.dto.OrdersDto;
 
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
@@ -62,7 +65,60 @@ public class EmailService {
 		certDao.insert(certDto);
 		return true;
 	}
+	//결제내역 메일 발송 기능
+	public void sendPaymentDetails(String memberId, String memberEmail, List<OrderDetailDto> orderDetailList, List<OrdersDto> orderList) throws IOException, MessagingException {
+	    // 이메일 템플릿 불러와서 정보 설정 후 발송
+	    ClassPathResource resource = new ClassPathResource("templates/payment-details.html");
+	    File target = resource.getFile();
+	    Document document = Jsoup.parse(target);
 
+	    // 회원 아이디 설정
+	    Element memberIdWrapper = document.getElementById("member-id");
+	    memberIdWrapper.text(memberId);
+
+	    // 주문 내역을 HTML 테이블에 추가
+	    Element orderDetailsWrapper = document.getElementById("order-details");
+	    double totalPrice = 0.0;
+	    for (OrderDetailDto order : orderDetailList) {
+	        Element row = document.createElement("tr");
+
+	        Element itemName = document.createElement("td");
+	        itemName.text(order.getOrderDetailItemName());
+	        row.appendChild(itemName);
+
+	        Element itemPrice = document.createElement("td");
+	        itemPrice.text(String.valueOf(order.getOrderDetailPrice()));
+	        row.appendChild(itemPrice);
+
+	        Element itemCount = document.createElement("td");
+	        itemCount.text(String.valueOf(order.getOrderDetailCnt()));
+	        row.appendChild(itemCount);
+
+	        double itemTotalPrice = order.getOrderDetailPrice() * order.getOrderDetailCnt();
+	        Element totalPriceElem = document.createElement("td");
+	        totalPriceElem.text(String.valueOf(itemTotalPrice));
+	        row.appendChild(totalPriceElem);
+
+	        // 주문 내역 테이블에 추가
+	        orderDetailsWrapper.appendChild(row);
+
+	        totalPrice += itemTotalPrice;
+	    }
+
+	    // 총 결제 금액 설정
+	    Element totalPriceWrapper = document.getElementById("total-price");
+	    totalPriceWrapper.text(String.valueOf(totalPrice));
+
+	    // 메세지 생성
+	    MimeMessage message = sender.createMimeMessage();
+	    MimeMessageHelper helper = new MimeMessageHelper(message, false, "UTF-8");
+	    helper.setTo(memberEmail);
+	    helper.setSubject("[일조쇼핑몰] 결제 내역 안내");
+	    helper.setText(document.toString(), true);
+
+	    // 전송
+	    sender.send(message);
+	}
 
 	//비밀번호 재설정 메일 발송 기능
 	public void sendResetPw(String memberId, String memberEmail) throws IOException, MessagingException {
