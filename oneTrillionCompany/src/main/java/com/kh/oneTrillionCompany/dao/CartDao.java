@@ -114,7 +114,7 @@ public class CartDao {
 	}
 	//장바구니 총 금액
 	public Integer sumCartTotalPrice(String memberId) {
-		String sql = "select sum(cart_cnt*item_price) from "
+		String sql = "select sum(cart_cnt*item_sale_price) from "
 				+ "cart join item on CART_ITEM_NO = item_no "
 				+ "where CART_BUYER = ?";
 		Object[] data = {memberId};
