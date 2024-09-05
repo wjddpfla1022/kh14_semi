@@ -79,6 +79,12 @@
             		<option value="white">화이트</option>
             	</select>
             </div>
+            <div class="row">
+            	<select name="itemMain" class="field w-33">
+            		<option value="1">메인x</option>
+            		<option value="2">메인상품</option>
+            	</select>
+            </div>
         <div class="right">
         <button type="submit" class="btn btn-positive">등록</button>
     </div>

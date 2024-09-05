@@ -33,14 +33,14 @@ public class ItemDao {
 		String sql="insert into item( "
 				+ "item_no, item_name, "
 				+ "item_price, item_sale_price, item_date,"
-				+ "item_cnt, item_size, item_cate1, item_cate2, item_cate3, item_discount_rate, item_color"
-				+ ") values(?, ?, ?, ?, sysdate, ?, ?, ?, ?, ?, ?, ?)";
+				+ "item_cnt, item_size, item_cate1, item_cate2, item_cate3, item_discount_rate, item_color, item_main"
+				+ ") values(?, ?, ?, ?, sysdate, ?, ?, ?, ?, ?, ?, ?, ?)";
 		Object[] data= {itemDto.getItemNo(),
 						itemDto.getItemName(), itemDto.getItemPrice(), 
 						itemDto.getItemSalePrice(), 
 						itemDto.getItemCnt(), itemDto.getItemSize(), 
 						itemDto.getItemCate1(), itemDto.getItemCate2(), 
-						itemDto.getItemCate3(), 0, itemDto.getItemColor()
+						itemDto.getItemCate3(), 0, itemDto.getItemColor(), itemDto.getItemMain()
 						};
 		jdbcTemplate.update(sql, data);
 	}
@@ -60,20 +60,49 @@ public class ItemDao {
 		Object[] data= {keyword};
 		return jdbcTemplate.query(sql, itemMapper, data);
 	}
-	
-//	//상품 카테고리별 리스트 조회
-//	public List<ItemDto> selectListByCate(String column, String keyword){
-//		String sql = "select * from item where item_cate"+ column +"  = ?"; //column은 1, 2, 3으로만 지정
-//		Object[] data = {keyword};
-//		return jdbcTemplate.query(sql, itemMapper, data);
-//	}
-	
+	//스와이퍼 아이템 가격순 n개
+	public List<ItemDto> selectListSwiper(int size){
+		String sql="select * from item where rownum<=? order by item_price Desc";
+		Object[] data= {size};
+		return jdbcTemplate.query(sql, itemMapper, data);
+	}
+	//전체 판매량 상위 n개
+	public List<ItemDto> selectListMain(int size){
+		String sql="select * from item where rownum<=? order by item_discount_rate Desc";
+		Object[] data= {size};
+		return jdbcTemplate.query(sql, itemMapper, data);
+	}
+	//상의 판매량 상위 n개
+	public List<ItemDto> selectListTop(int size){
+		String sql="select * from item where rownum <=? and item_cate1=11 order by item_discount_rate desc";
+		Object[] data = {size};
+		return jdbcTemplate.query(sql, itemMapper, data);
+	}
+	//하의 판매량 상위 n개
+	public List<ItemDto> selectListBottom(int size){
+		String sql="select * from item where rownum <=? and item_cate1=33 order by item_discount_rate desc";
+		Object[] data = {size};
+		return jdbcTemplate.query(sql, itemMapper, data);
+	}
+	//신발 판매량 상위 n개
+	public List<ItemDto> selectListShoes(int size){
+		String sql="select * from item where rownum <=? and item_cate1=55 order by item_discount_rate desc";
+		Object[] data = {size};
+		return jdbcTemplate.query(sql, itemMapper, data);
+	}
+	//아우터 판매량 상위 n개
+	public List<ItemDto> selectListOuter(int size){
+		String sql="select * from item where rownum <=? and item_cate1=77 order by item_discount_rate desc";
+		Object[] data = {size};
+		return jdbcTemplate.query(sql, itemMapper, data);
+	}
 	//상품 카테고리별 리스트 조회판매량순(sales) 가격비싼순(priceDesc) 가격싼순(priceAsc) 최신등록순(latest)
 		public List<ItemDto> selectListByCatePaging(ItemPageVO pageVO){
 			String column = "item_cate" + pageVO.getColumn();
 			String sql = "select * from ("
 		               + "select rownum as rn, TMP.* from ("
 		               + "select * from item where instr(" + column + ", ?) > 0 "
+		               		+ "AND item_main = 2"
 		               + "order by item_no asc"
 		               + ") TMP "
 		               + ") where rn between ? and ?";
@@ -88,6 +117,7 @@ public class ItemDao {
 				String sql = "select * from ("
 			               + "select rownum as rn, TMP.* from ("
 			               + "select * from item where instr(" + column + ", ?) > 0 "
+			               		+ "AND item_main = 2"
 			               + "order by item_price asc"
 			               + ") TMP "
 			               + ") where rn between ? and ?";
@@ -101,6 +131,7 @@ public class ItemDao {
 				String sql = "select * from ("
 			               + "select rownum as rn, TMP.* from ("
 			               + "select * from item where instr(" + column + ", ?) > 0 "
+			               		+ "AND item_main = 2"
 			               + "order by item_price desc"
 			               + ") TMP "
 			               + ") where rn between ? and ?";
@@ -114,6 +145,7 @@ public class ItemDao {
 				String sql = "select * from ("
 			               + "select rownum as rn, TMP.* from ("
 			               + "select * from item where instr(" + column + ", ?) > 0 "
+			               		+ "AND item_main = 2"
 			               + "order by item_discount_rate desc"
 			               + ") TMP "
 			               + ") where rn between ? and ?";
@@ -127,6 +159,7 @@ public class ItemDao {
 				String sql = "select * from ("
 			               + "select rownum as rn, TMP.* from ("
 			               + "select * from item where instr(" + column + ", ?) > 0 "
+			               		+ "AND item_main = 2"
 			               + "order by item_no asc"
 			               + ") TMP "
 			               + ") where rn between ? and ?";
@@ -197,7 +230,7 @@ public class ItemDao {
 	                                    + "item_no, item_name, item_price, item_sale_price, "
 	                                    + "item_date, item_cnt, item_size, "
 	                                    + "item_cate1, item_cate2, item_cate3, "
-	                                    + "item_discount_rate, item_color "        
+	                                    + "item_discount_rate, item_color, item_main "        
 	                                + "from item "
 	                                + "where instr(" + pageVO.getColumn() + ", ?) > 0 "
 	                                + "order by item_no asc"
@@ -218,7 +251,7 @@ public class ItemDao {
 	                + "            item_no, item_name, item_price, item_sale_price, "
 	                + "            item_date, item_cnt, item_size, "
 	                + "            item_cate1, item_cate2, item_cate3, "
-	                + "            item_discount_rate, item_color "
+	                + "            item_discount_rate, item_color, item_main "
 	                + "        FROM item "
 	                + "        ORDER BY item_no ASC"
 	                + "    ) TMP"
@@ -237,9 +270,10 @@ public class ItemDao {
 	                                    + "item_no, item_name, item_price, item_sale_price, "
 	                                    + "item_date, item_cnt, item_size, "
 	                                    + "item_cate1, item_cate2, item_cate3, "
-	                                    + "item_discount_rate, item_color "        
+	                                    + "item_discount_rate, item_color, item_main "        
 	                                + "from item "
 	                                + "where instr(" + pageVO.getColumn() + ", ?) > 0 "
+	                                		+ "AND item_main = 2 "
 	                                + "order by item_no asc"
 	                            + ")TMP"
 	                    + ") where rn between ? and ?";
@@ -258,8 +292,8 @@ public class ItemDao {
 	                + "            item_no, item_name, item_price, item_sale_price, "
 	                + "            item_date, item_cnt, item_size, "
 	                + "            item_cate1, item_cate2, item_cate3, "
-	                + "            item_discount_rate, item_color "
-	                + "        FROM item "
+	                + "            item_discount_rate, item_color, item_main "
+	                + "        FROM item where item_main = 2 "
 	                + "        ORDER BY item_no ASC"
 	                + "    ) TMP"
 	                + ") WHERE rn BETWEEN ? AND ?";
@@ -277,9 +311,10 @@ public class ItemDao {
 			                                    + "item_no, item_name, item_price, item_sale_price, "
 			                                    + "item_date, item_cnt, item_size, "
 			                                    + "item_cate1, item_cate2, item_cate3, "
-			                                    + "item_discount_rate, item_color "        
+			                                    + "item_discount_rate, item_color, item_main "        
 			                                + "from item "
 			                                + "where instr(" + pageVO.getColumn() + ", ?) > 0 "
+			                                		+ "AND item_main = 2 "
 			                                + "order by item_discount_rate desc"
 			                            + ")TMP"
 			                    + ") where rn between ? and ?";
@@ -298,8 +333,8 @@ public class ItemDao {
 			                + "            item_no, item_name, item_price, item_sale_price, "
 			                + "            item_date, item_cnt, item_size, "
 			                + "            item_cate1, item_cate2, item_cate3, "
-			                + "            item_discount_rate, item_color "
-			                + "        FROM item "
+			                + "            item_discount_rate, item_color, item_main "
+			                + "        FROM item where item_main = 2 "
 			                + "        ORDER BY item_discount_rate desc"
 			                + "    ) TMP"
 			                + ") WHERE rn BETWEEN ? AND ?";
@@ -315,9 +350,10 @@ public class ItemDao {
 			                                    + "item_no, item_name, item_price, item_sale_price, "
 			                                    + "item_date, item_cnt, item_size, "
 			                                    + "item_cate1, item_cate2, item_cate3, "
-			                                    + "item_discount_rate, item_color "        
+			                                    + "item_discount_rate, item_color, item_main "        
 			                                + "from item "
 			                                + "where instr(" + pageVO.getColumn() + ", ?) > 0 "
+			                                		+ "AND item_main = 2 "
 			                                + "order by item_price asc"
 			                            + ")TMP"
 			                    + ") where rn between ? and ?";
@@ -336,8 +372,8 @@ public class ItemDao {
 			                + "            item_no, item_name, item_price, item_sale_price, "
 			                + "            item_date, item_cnt, item_size, "
 			                + "            item_cate1, item_cate2, item_cate3, "
-			                + "            item_discount_rate, item_color "
-			                + "        FROM item "
+			                + "            item_discount_rate, item_color, item_main "
+			                + "        FROM item where item_main = 2 "
 			                + "        ORDER BY item_price ASC"
 			                + "    ) TMP"
 			                + ") WHERE rn BETWEEN ? AND ?";
@@ -353,9 +389,10 @@ public class ItemDao {
 			                                    + "item_no, item_name, item_price, item_sale_price, "
 			                                    + "item_date, item_cnt, item_size, "
 			                                    + "item_cate1, item_cate2, item_cate3, "
-			                                    + "item_discount_rate, item_color "        
+			                                    + "item_discount_rate, item_color, item_main "        
 			                                + "from item "
 			                                + "where instr(" + pageVO.getColumn() + ", ?) > 0 "
+			                                		+ "AND item_main = 2 "
 			                                + "order by item_price desc"
 			                            + ")TMP"
 			                    + ") where rn between ? and ?";
@@ -374,8 +411,8 @@ public class ItemDao {
 			                + "            item_no, item_name, item_price, item_sale_price, "
 			                + "            item_date, item_cnt, item_size, "
 			                + "            item_cate1, item_cate2, item_cate3, "
-			                + "            item_discount_rate, item_color "
-			                + "        FROM item "
+			                + "            item_discount_rate, item_color, item_main "
+			                + "        FROM item where item_main = 2 "
 			                + "        ORDER BY item_price desc"
 			                + "    ) TMP"
 			                + ") WHERE rn BETWEEN ? AND ?";
@@ -391,9 +428,10 @@ public class ItemDao {
 			                                    + "item_no, item_name, item_price, item_sale_price, "
 			                                    + "item_date, item_cnt, item_size, "
 			                                    + "item_cate1, item_cate2, item_cate3, "
-			                                    + "item_discount_rate, item_color "        
+			                                    + "item_discount_rate, item_color, item_main "        
 			                                + "from item "
 			                                + "where instr(" + pageVO.getColumn() + ", ?) > 0 "
+			                                		+ "AND item_main = 2 "
 			                                + "order by item_no asc"
 			                            + ")TMP"
 			                    + ") where rn between ? and ?";
@@ -412,8 +450,8 @@ public class ItemDao {
 			                + "            item_no, item_name, item_price, item_sale_price, "
 			                + "            item_date, item_cnt, item_size, "
 			                + "            item_cate1, item_cate2, item_cate3, "
-			                + "            item_discount_rate, item_color "
-			                + "        FROM item "
+			                + "            item_discount_rate, item_color, item_main "
+			                + "        FROM item where item_main = 2 "
 			                + "        ORDER BY item_no ASC"
 			                + "    ) TMP"
 			                + ") WHERE rn BETWEEN ? AND ?";
