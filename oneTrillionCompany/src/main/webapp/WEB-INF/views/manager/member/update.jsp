@@ -30,7 +30,7 @@
 		</div>
 		<div class="row">
 			<label>닉네임 <i class="fa-solid fa-asterisk red"></i></label>
-			<input value="${memberDto.memberNickname}" name="memberNickname"  type="text" class="field w-100">
+			<input value="${memberDto.memberNickname}" name="memberNickname"  type="text" class="field w-100" required>
 		</div>
 		<div class="row">
 			<label>등급</label>
