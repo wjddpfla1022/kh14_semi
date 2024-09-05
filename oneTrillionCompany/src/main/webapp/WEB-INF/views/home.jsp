@@ -139,12 +139,12 @@ body {
         <i class="fa-solid fa-angle-right fa-2x"></i>
       </label>
       <div class="row mt-50">
-        <img src="http://via.placeholder.com/250.png" width="100%">
+        <img src="https://media.discordapp.net/attachments/1258609558134325249/1280691908317806715/-_-001.png?ex=66d9a989&is=66d85809&hm=cdea3b4f08fa683ab6fd2778527807af0bec9fea78c83fe410e6199998a6cf68&=&format=webp&quality=lossless&width=659&height=659" width="100%">
       </div>
       <div class="row center">
         
       </div><hr>
-      <div class="row">
+      <div class="row ps-10">
         <span style="font-weight:bolder; font-size: 12px">무통장 안내</span><br><br>
         <span style="font-weight:bolder; font-size: 12px">정현은행 <b style="font-size: 11px; color: #999;">1111-111-111111</b></span><br>
         <span style="font-weight:bolder; font-size: 12px">예금주 <b style="font-size: 11px; color: #999;">일조 컴퍼니</b></span><br><br>
@@ -153,20 +153,20 @@ body {
         <span style="font-size: 11px; color: #999;">무통장 입금 자동확인까지</span><br>
         <span style="font-size: 11px; color: #999;">30분 정도 소요 됩니다.</span><br>
       </div><br><br><hr>
-      <div class="row">
+      <div class="row ps-10">
         <span>고객센터</span>
       </div>
-      <div class="row">
+      <div class="row ps-10">
         <span style="font-weight: bolder;">8282-8282</span>
       </div>
-      <div class="row">
+      <div class="row ps-10">
         <span style="font-size: 11px">월요일 - 금요일 09:30 - 18:30</span><br>
         <span style="font-size: 11px">점심시간 11:30 - 12:30</span>
       </div> 
     </div>
   </div>
 
-	<div class="container w-600 my-50" s>
+	<div class="container w-600 my-50">
 		<div class="row center">
 			<h1 class="mt-30 mb-50">이달의 상품</h1>
 		</div>
