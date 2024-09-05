@@ -69,13 +69,13 @@ font-size:12px
 		
 	<div class="row center">
 		<!-- 검색창 -->
-			 <div class="container w-1000">
+			 <div class="container w-1200">
         <div class="row center">
 		</div>
 <%-- 		<h3>데이터 개수 : ${itemList.size()}</h3> --%>
 
 	<!-- 검색창 -->
-	<div class="container w-1000">
+	<div class="container w-1200">
 		<c:choose>
     		<c:when test="${empty itemList || itemList.size() == 0}">
 				<h3>해당 카테고리에 상품이 존재하지 않습니다.</h3>

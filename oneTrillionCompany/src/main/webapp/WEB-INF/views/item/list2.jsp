@@ -54,7 +54,7 @@
 	font-size:14px
 }
 </style>
-
+<body>	
   <div class="container w-1200 my-50">
 	<div class="row center">
 <!-- 		<h1>상품 목록 페이지</h1>나중에 삭제 할곳  -->
@@ -66,16 +66,16 @@
 		</div>
 	</div>
 </div>
-		
+	
 	<div class="row center">
 		<!-- 검색창 -->
-			 <div class="container w-1000">
+			 <div class="container w-1200">
         <div class="row center">
 		</div>
 <%-- 		<h3>데이터 개수 : ${itemList.size()}</h3> --%>
-
+</div>
 	<!-- 검색창 -->
-	<div class="container w-1000">
+	<div class="container w-1200">
 
 		<div class="row image-align left" id="images">
 			<c:forEach var= "item" items= "${itemList}">
@@ -91,6 +91,7 @@
 			<jsp:include page= "/WEB-INF/views/template/itemNavigator.jsp"/>
 		</div>
 	</div>
+</div>
 </body>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
