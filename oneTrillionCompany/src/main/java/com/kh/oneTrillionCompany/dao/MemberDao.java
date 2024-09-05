@@ -46,12 +46,12 @@ public class MemberDao {
 				+ " member_post, member_address1, member_address2, "
 				+ "member_height, member_weight, member_contact"
 				+ ") "
-				+ "values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+				+ "values(?, ?, ?, ?, ?, ?, 100000, ?, ?, ?, ?, ?, ?)";
 		Object[] data = {
 				memberDto.getMemberId(), memberDto.getMemberPw(),
 				memberDto.getMemberName(), memberDto.getMemberNickname(),
 				memberDto.getMemberBirth(), memberDto.getMemberEmail(), 
-				memberDto.getMemberPoint(), memberDto.getMemberPost(), 
+				 memberDto.getMemberPost(), 
 				memberDto.getMemberAddress1(), memberDto.getMemberAddress2(),
 				memberDto.getMemberHeight(), memberDto.getMemberWeight(), 
 				memberDto.getMemberContact()
