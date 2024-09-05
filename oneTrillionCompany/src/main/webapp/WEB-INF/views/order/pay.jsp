@@ -74,12 +74,12 @@
 .container-grid {
 	margin-left: 30px;
 	display: grid;
- 	grid-template-columns: 550px 580px;
-  	grid-template-rows: 400px 500px;  
+	grid-template-columns: 550px 580px;
+	grid-template-rows: 400px 500px;
 	row-gap: 10px;
 	column-gap: 20px;
 	width: 100%;
-	height:1500px;
+	height: 1500px;
 }
 
 .container2 {
@@ -102,7 +102,7 @@
 	row-gap: 10px;
 	column-gap: 20px;
 	width: 100%;
-	height:100%;
+	height: 100%;
 }
 
 .title4 {
@@ -113,6 +113,41 @@
 
 .itme2 {
 	
+}
+
+#screen-wrapper-paying {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 1);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+#screen-wrapper-paying .spinner {
+  border: 8px solid #f3f3f3;
+  border-top: 8px solid #3498db;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+#screen-wrapper-paying .loading-text {
+  margin-top: 20px;
+  font-size: 18px;
+  color: #333;
+  text-align: center;
 }
 </style>
 <!-- jquery cdn -->
@@ -153,15 +188,19 @@
 
 <script type="text/javascript">
 	$(function() {
+		$('#screen-wrapper-paying').hide();
 		$('.item1').hide();
 		$('.item2').show();
+		$('form').on('submit', function() {
+		    $('#screen-wrapper-paying').show();
+		  });
 	});
 </script>
 
 
 </head>
 <body>
-	<div class="orderpage w-600 my-10 mx-30 float-box" style="height:100%">
+	<div class="orderpage w-600 my-10 mx-30 float-box" style="height: 100%">
 		<div class="ordersHeader row w-100">
 			<div class="logo flex-left mx-10">
 				<a href="/"><img src="https://ifh.cc/g/SbA93J.png"
@@ -341,6 +380,10 @@
 				</div>
 			</div>
 		</form>
+	</div>
+	<div id="screen-wrapper-paying">
+		<div class="spinner"></div>
+		<div class="loading-text">결제 중입니다. 잠시만 기다려주세요...</div>
 	</div>
 </body>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

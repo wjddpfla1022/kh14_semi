@@ -42,6 +42,7 @@ public class OrderController {
 	@Autowired
 	private ItemDao itemDao;
 	
+	
 	@GetMapping("/pay")
 	public String pay(Model model,HttpSession session) {
 		//세션 아이디 검사 및 보내기 
@@ -110,6 +111,8 @@ public class OrderController {
 	        list.add(order);
 	    }
 	    payService.pay(list,orderNo, reward, session,orderMemo);
+	    
+	    
 	    connectionOCDao.deleteAll(memberId);
 		return "redirect:payFinish?orderNo="+orderNo;
 	}

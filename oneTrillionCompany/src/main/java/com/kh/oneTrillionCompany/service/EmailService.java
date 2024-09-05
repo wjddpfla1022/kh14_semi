@@ -15,10 +15,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.kh.oneTrillionCompany.dao.CertDao;
+import com.kh.oneTrillionCompany.dao.ItemDao;
 import com.kh.oneTrillionCompany.dao.MemberDao;
 import com.kh.oneTrillionCompany.dto.CertDto;
-import com.kh.oneTrillionCompany.dto.OrderDetailDto;
-import com.kh.oneTrillionCompany.dto.OrdersDto;
+import com.kh.oneTrillionCompany.vo.OrderVO;
 
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
@@ -36,6 +36,10 @@ public class EmailService {
 	
 	@Autowired
 	private MemberDao memberDao;
+	
+	@Autowired
+	private ItemDao itemDao;
+	
 	//회원가입시 임시 이메일 인증 코드 발송
 	public boolean sendCert(String email, int size) throws MessagingException, IOException {
 		String value=randomService.generateNumber(size);
@@ -66,7 +70,7 @@ public class EmailService {
 		return true;
 	}
 	//결제내역 메일 발송 기능
-	public void sendPaymentDetails(String memberId, String memberEmail, List<OrderDetailDto> orderDetailList, List<OrdersDto> orderList) throws IOException, MessagingException {
+	public void sendPaymentDetails(String memberId, String memberEmail, List<OrderVO> list) throws IOException, MessagingException {
 	    // 이메일 템플릿 불러와서 정보 설정 후 발송
 	    ClassPathResource resource = new ClassPathResource("templates/payment-details.html");
 	    File target = resource.getFile();
@@ -78,23 +82,23 @@ public class EmailService {
 
 	    // 주문 내역을 HTML 테이블에 추가
 	    Element orderDetailsWrapper = document.getElementById("order-details");
-	    double totalPrice = 0.0;
-	    for (OrderDetailDto order : orderDetailList) {
+	    int totalPrice = 0;
+	    for (OrderVO order : list) {
 	        Element row = document.createElement("tr");
-
 	        Element itemName = document.createElement("td");
-	        itemName.text(order.getOrderDetailItemName());
+	        String orderItemName=itemDao.selectOne(order.getItemNo()).getItemName();
+	        itemName.text(orderItemName);
 	        row.appendChild(itemName);
 
 	        Element itemPrice = document.createElement("td");
-	        itemPrice.text(String.valueOf(order.getOrderDetailPrice()));
+	        itemPrice.text(String.valueOf(order.getItemPrice()));
 	        row.appendChild(itemPrice);
 
 	        Element itemCount = document.createElement("td");
-	        itemCount.text(String.valueOf(order.getOrderDetailCnt()));
+	        itemCount.text(String.valueOf(order.getCnt()));
 	        row.appendChild(itemCount);
 
-	        double itemTotalPrice = order.getOrderDetailPrice() * order.getOrderDetailCnt();
+	        int itemTotalPrice = order.getItemPrice() * order.getCnt();
 	        Element totalPriceElem = document.createElement("td");
 	        totalPriceElem.text(String.valueOf(itemTotalPrice));
 	        row.appendChild(totalPriceElem);

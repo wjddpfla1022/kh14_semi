@@ -32,7 +32,8 @@ public class PayService {
 	private ItemDao itemDao;
 	@Autowired
 	private CartDao cartDao;
-	
+	@Autowired
+	private EmailService emailService;
 
 	public void pay(List<OrderVO> list,  int orderNo, int reward,
 
@@ -80,6 +81,9 @@ public class PayService {
 		memberDao.chargePoint(memberId, reward);
 		//주문서 메모 추가
 		ordersDao.updateMemo(orderMemo, orderNo);
+		//주문서 이메일 발송
+		String memberEmail = memberDao.selectOne(memberId).getMemberEmail();
+		emailService.sendPaymentDetails(memberId, memberEmail, list);
 		orderDetailDao.payCompleteStatus(detailNoList);
 	}
 }
