@@ -32,7 +32,9 @@
             
 					<%-- 이전 버튼은 첫번째 구간이 아닐 때(pageVO 참고) 일때 나온다  --%>
 				<c:if test="${pageVO.hasPrev()}">
-					<a href="list?column=${pageVO.column}&keyword=${pageVO.keyword}&page=${pageVO.getPrevBlock()}" ></a>
+					<a href="list?column=${pageVO.column}&keyword=${pageVO.keyword}&page=${pageVO.getPrevBlock()}" >
+						<i class="fa-solid fa-chevron-left"></i>
+					</a>
 				</c:if>
 				
 				<%-- startBlock 부터 finishBlock과 lastBlock 중 작은값까지 반복문으로 링크 출력 --%>

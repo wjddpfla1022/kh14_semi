@@ -34,11 +34,15 @@
 			<c:if test="${itemPageVO.hasPrev()}">
 				<c:when test="${itemPageVO.hasSorting()}">
 					<a
-						href="cate?column=${itemPageVO.column}&keyword=${itemPageVO.keyword}&page=${itemPageVO.getPrevBlock()}&sorting=${itemPageVO.sorting}">Prev</a>
+						href="cate?column=${itemPageVO.column}&keyword=${itemPageVO.keyword}&page=${itemPageVO.getPrevBlock()}&sorting=${itemPageVO.sorting}">
+						<i class="fa-solid fa-chevron-left"></i>
+					</a>
 				</c:when>
 				<c:otherwise>
 					<a
-						href="cate?column=${itemPageVO.column}&keyword=${itemPageVO.keyword}&page=${itemPageVO.getPrevBlock()}">Prev</a>
+						href="cate?column=${itemPageVO.column}&keyword=${itemPageVO.keyword}&page=${itemPageVO.getPrevBlock()}">
+						<i class="fa-solid fa-chevron-left"></i>
+					</a>
 				</c:otherwise>
 			</c:if>
 			<%-- count = ${itemPageVO.getCount()} --%>
