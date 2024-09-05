@@ -60,14 +60,42 @@ public class ItemDao {
 		Object[] data= {keyword};
 		return jdbcTemplate.query(sql, itemMapper, data);
 	}
-	
-//	//상품 카테고리별 리스트 조회
-//	public List<ItemDto> selectListByCate(String column, String keyword){
-//		String sql = "select * from item where item_cate"+ column +"  = ?"; //column은 1, 2, 3으로만 지정
-//		Object[] data = {keyword};
-//		return jdbcTemplate.query(sql, itemMapper, data);
-//	}
-	
+	//스와이퍼 아이템 가격순 n개
+	public List<ItemDto> selectListSwiper(int size){
+		String sql="select * from item where rownum<=? order by item_price Desc";
+		Object[] data= {size};
+		return jdbcTemplate.query(sql, itemMapper, data);
+	}
+	//전체 판매량 상위 n개
+	public List<ItemDto> selectListMain(int size){
+		String sql="select * from item where rownum<=? order by item_discount_rate Desc";
+		Object[] data= {size};
+		return jdbcTemplate.query(sql, itemMapper, data);
+	}
+	//상의 판매량 상위 n개
+	public List<ItemDto> selectListTop(int size){
+		String sql="select * from item where rownum <=? and item_cate1=11 order by item_discount_rate desc";
+		Object[] data = {size};
+		return jdbcTemplate.query(sql, itemMapper, data);
+	}
+	//하의 판매량 상위 n개
+	public List<ItemDto> selectListBottom(int size){
+		String sql="select * from item where rownum <=? and item_cate1=33 order by item_discount_rate desc";
+		Object[] data = {size};
+		return jdbcTemplate.query(sql, itemMapper, data);
+	}
+	//신발 판매량 상위 n개
+	public List<ItemDto> selectListShoes(int size){
+		String sql="select * from item where rownum <=? and item_cate1=55 order by item_discount_rate desc";
+		Object[] data = {size};
+		return jdbcTemplate.query(sql, itemMapper, data);
+	}
+	//아우터 판매량 상위 n개
+	public List<ItemDto> selectListOuter(int size){
+		String sql="select * from item where rownum <=? and item_cate1=77 order by item_discount_rate desc";
+		Object[] data = {size};
+		return jdbcTemplate.query(sql, itemMapper, data);
+	}
 	//상품 카테고리별 리스트 조회판매량순(sales) 가격비싼순(priceDesc) 가격싼순(priceAsc) 최신등록순(latest)
 		public List<ItemDto> selectListByCatePaging(ItemPageVO pageVO){
 			String column = "item_cate" + pageVO.getColumn();
