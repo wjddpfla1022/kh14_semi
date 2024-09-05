@@ -106,7 +106,6 @@ public class CartController {
 	            @RequestParam("cartNo") List<Integer> cartNoList,
 	            HttpSession session
 	    ) {
-		System.out.println(cartNoList);
 		String memberId=(String) session.getAttribute("createdUser");
 		List<ConnectionOCDto> connectionList = connectionOCDao.selectListBySession(memberId);
 		//이전 결제정보 제거

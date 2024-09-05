@@ -62,7 +62,7 @@ public class ItemDao {
 	}
 	//스와이퍼 아이템 가격순 n개
 	public List<ItemDto> selectListSwiper(int size){
-		String sql="select * from item where rownum<=? order by item_price Desc";
+		String sql="select * from (select * from item where item_main = 2 order by item_no desc) where rownum <=?";
 		Object[] data= {size};
 		return jdbcTemplate.query(sql, itemMapper, data);
 	}

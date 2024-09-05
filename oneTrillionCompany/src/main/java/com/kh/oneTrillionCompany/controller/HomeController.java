@@ -19,7 +19,6 @@ public class HomeController {
 	public String home(Model model) {
 		List<ItemDto> swiperList=itemDao.selectListSwiper(7);
 		List<ItemDto> mainList=itemDao.selectListMain(9);
-		System.out.println(mainList);
 		List<ItemDto> topList=itemDao.selectListTop(9);
 		List<ItemDto> bottomList=itemDao.selectListBottom(9);
 		List<ItemDto> shoesList=itemDao.selectListShoes(9);

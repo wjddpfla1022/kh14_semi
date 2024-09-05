@@ -212,8 +212,9 @@ $(function(){
 	        data: {
 	            certEmail : certEmail,
 	            certNumber : certNumber,
-	        },
+	        },3
 	        success:function(response) {
+	        console.log(response);
 	            if(response == true) {//인증 성공 - 화면을 제거 + 인증버튼 제거
 	                $(".cert-wrapper").remove();
 	                //(선택) 이메일 잠금처리 및 보내기 버튼 삭제

@@ -126,7 +126,6 @@ public class OrderController {
 			@RequestParam int orderNo) {
 		String memberId=(String) session.getAttribute("createdUser");
 		OrdersDto ordersDto = ordersDao.selectOne(orderNo);
-		System.out.println(ordersDto);
 		model.addAttribute("ordersDto",ordersDto);
 		List<OrderDetailDto> list=orderDetailDao.selectListByOrderDetail(memberId, orderNo);
 		List<OrdersDto> orderList=ordersDao.selectListByOrder(memberId);
