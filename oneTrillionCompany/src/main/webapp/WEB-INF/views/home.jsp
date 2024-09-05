@@ -37,7 +37,7 @@
 	color: black;
 }
 
-a>h4 {
+a>h5 {
 	margin: 0.3em;
 }
 
@@ -181,8 +181,9 @@ body {
 					<c:forEach var="item" items="${swiperList}">
 						<div class="swiper-slide">
 							<a href="/item/detail?itemNo=${item.itemNo}"><img
-								src="/item/image?itemNo=${item.itemNo}"></a>
+								src="/item/image?itemNo=${item.itemNo}" style="width:200px; height:245px;"></a>
 							<div class="row center">${item.itemName}</div>
+							<div class="row center">${item.itemSalePrice}</div>
 						</div>
 					</c:forEach>
 				</div>
@@ -204,10 +205,13 @@ body {
 		<div class="row center">
 			<h2>Best Item</h2>
 		</div>
-		<div class="row image-align">
+		<div class="row image-align w-5">
 			<c:forEach var="item" items="${mainList}">
-				<a href="/item/detail?itemNo=${item.itemNo}"><img
-					src="/item/image?itemNo=${item.itemNo}"><h4>${item.itemName}</h4></a>
+				<a href="/item/detail?itemNo=${item.itemNo}">
+					<img src="/item/image?itemNo=${item.itemNo}" style="width:200px; height:245px;">
+					<h5>${item.itemName}</h5>
+					<h5>${item.itemSalePrice}</h5>
+				</a>
 			</c:forEach>
 		</div>
 	</div>
@@ -218,31 +222,40 @@ body {
 		</div>
 		<div class="row image-align">
 			<c:forEach var="item" items="${topList}">
-				<a href="/item/detail?itemNo=${item.itemNo}"><img
-					src="/item/image?itemNo=${item.itemNo}"><h4>${item.itemName}</h4></a>
+				<a href="/item/detail?itemNo=${item.itemNo}">
+					<img src="/item/image?itemNo=${item.itemNo}" style="width:200px; height:245px;">
+					<h5>${item.itemName}</h5>
+					<h5>${item.itemSalePrice}</h5>
+				</a>
 			</c:forEach> 
 		</div>
 	</div>
 	<div class="container w-700">
 		<div class="row" style="height: 120px;"></div>
 		<div class="row center">
-			<h2>상의 Best</h2>
+			<h2>하의 Best</h2>
 		</div>
 		<div class="row image-align">
 			<c:forEach var="item" items="${bottomList}">
-				<a href="/item/detail?itemNo=${item.itemNo}"><img
-					src="/item/image?itemNo=${item.itemNo}"><h4>${item.itemName}</h4></a>
+				<a href="/item/detail?itemNo=${item.itemNo}">
+					<img src="/item/image?itemNo=${item.itemNo}" style="width:200px; height:245px;">
+					<h5>${item.itemName}</h5>
+					<h5>${item.itemSalePrice}</h5>
+				</a>
 			</c:forEach> 
 		</div>
 	<div class="container w-700">
 		<div class="row" style="height: 120px;"></div>
 		<div class="row center">
-			<h2>상의 Best</h2>
+			<h2>슈즈 Best</h2>
 		</div>
 		<div class="row image-align">
 			<c:forEach var="item" items="${shoesList}">
-				<a href="/item/detail?itemNo=${item.itemNo}"><img
-					src="/item/image?itemNo=${item.itemNo}"><h4>${item.itemName}</h4></a>
+				<a href="/item/detail?itemNo=${item.itemNo}">
+					<img src="/item/image?itemNo=${item.itemNo}" style="width:200px; height:245px;">
+					<h5>${item.itemName}</h5>
+					<h5>${item.itemSalePrice}</h5>
+				</a>
 			</c:forEach> 
 		</div>
 	</div>
@@ -254,7 +267,10 @@ body {
 		<div class="row image-align">
 			<c:forEach var="item" items="${outerList}">
 				<a href="/item/detail?itemNo=${item.itemNo}"><img
-					src="/item/image?itemNo=${item.itemNo}" style="width:180px; height:220px;"><h4>${item.itemName}</h4></a>
+					src="/item/image?itemNo=${item.itemNo}" style="width:200px; height:245px;">
+					<h5>${item.itemName}</h5>
+					<h5>${item.itemSalePrice}</h5>
+				</a>
 			</c:forEach> 
 		</div>
 	</div>
