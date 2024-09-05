@@ -68,31 +68,31 @@ public class ItemDao {
 	}
 	//전체 판매량 상위 n개
 	public List<ItemDto> selectListMain(int size){
-		String sql="select * from item where rownum<=? order by item_discount_rate Desc";
+		String sql="select * from (select * from item order by item_discount_rate desc) where rownum <=?";
 		Object[] data= {size};
 		return jdbcTemplate.query(sql, itemMapper, data);
 	}
 	//상의 판매량 상위 n개
 	public List<ItemDto> selectListTop(int size){
-		String sql="select * from item where rownum <=? and item_cate1=11 order by item_discount_rate desc";
+		String sql="select * from (select * from item where item_cate1=11 order by item_discount_rate desc) where rownum <=?";
 		Object[] data = {size};
 		return jdbcTemplate.query(sql, itemMapper, data);
 	}
 	//하의 판매량 상위 n개
 	public List<ItemDto> selectListBottom(int size){
-		String sql="select * from item where rownum <=? and item_cate1=33 order by item_discount_rate desc";
+		String sql="select * from (select * from item where item_cate1=33 order by item_discount_rate desc) where rownum <=?";
 		Object[] data = {size};
 		return jdbcTemplate.query(sql, itemMapper, data);
 	}
 	//신발 판매량 상위 n개
 	public List<ItemDto> selectListShoes(int size){
-		String sql="select * from item where rownum <=? and item_cate1=55 order by item_discount_rate desc";
+		String sql="select * from (select * from item where item_cate1=55 order by item_discount_rate desc) where rownum <=?";
 		Object[] data = {size};
 		return jdbcTemplate.query(sql, itemMapper, data);
 	}
 	//아우터 판매량 상위 n개
 	public List<ItemDto> selectListOuter(int size){
-		String sql="select * from item where rownum <=? and item_cate1=77 order by item_discount_rate desc";
+		String sql="select * from (select * from item where item_cate1=77 order by item_discount_rate desc) where rownum <=?";
 		Object[] data = {size};
 		return jdbcTemplate.query(sql, itemMapper, data);
 	}
