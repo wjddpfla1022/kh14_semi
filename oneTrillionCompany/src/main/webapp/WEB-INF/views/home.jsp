@@ -286,6 +286,10 @@ body {
 			</c:forEach> 
 		</div>
 	</div>
+	<div class="container w-700" style="height:300px">
+		<div class="flex-box">
+		</div>
+	</div>
 	</div>
 	
 </body>
