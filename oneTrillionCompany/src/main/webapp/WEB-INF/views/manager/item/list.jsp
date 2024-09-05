@@ -299,7 +299,7 @@
 									</c:choose>
 									<td class="td-table-bottom"><a
 										href="/manager/item/info/read?itemNo=${itemDto.itemNo}"
-										class="link">${itemDto.itemName}</a></td>
+										class="link">${itemDto.itemName} / ${itemDto.itemMain}</a></td>
 									<td class="td-table-bottom">${itemDto.itemPrice}</td>
 									<td class="td-table-bottom">${itemDto.itemSalePrice}</td>
 									<td class="td-table-bottom">${itemDto.itemDate}</td>
