@@ -430,13 +430,13 @@ td {
 						</td>
 						<td>
 							<div class="row">
-								<strong> <span class="order-summary""> 무료배송 </span>
+								<strong> <span class="order-summary"> 무료배송 </span>
 								</strong>
 							</div>
 						</td>
 						<td>
 							<div class="row">
-								<strong> <span class="cart-total-price order-summary"" style="font-weight:bold;">
+								<strong> <span class="cart-total-price order-summary" style="font-weight:bold;">
 										<fmt:formatNumber value="${cartTotalPrice}" pattern="#,###"/>원</span>
 								</strong>
 							</div>

@@ -249,7 +249,7 @@
 							<div class="title row">결제상세</div>
 							<hr>
 							<div class="flex-box column-2 w-100" style="font-size: 18px">
-								<div class="row">포인트 결제</div>
+								<div class="row">보유 포인트</div>
 								<div class="row right green flex-right">
 									${memberDto.memberPoint} <i class="fa-solid fa-coins"></i>
 								</div>
