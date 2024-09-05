@@ -74,9 +74,13 @@
             	<select name="itemColor" class="field w-33" >
             		<option value="">선택없음</option>
             		<option value="black">블랙</option>
-            		<option value="blue">블루</option>
-            		<option value="brown">브라운</option>
             		<option value="white">화이트</option>
+            	</select>
+            </div>
+            <div class="row">
+            	<select name="itemMain" class="field w-33">
+            		<option value="1">메인x</option>
+            		<option value="2">메인상품</option>
             	</select>
             </div>
         <div class="right">
@@ -103,24 +107,17 @@
                 { value: "50", text: "스니커즈" },
                 { value: "51", text: "로퍼/슬립온" },
                 { value: "52", text: "구두" },
-                { value: "53", text: "워커/부츠" },
-                { value: "54", text: "샌들/슬리퍼" },
-                { value: "55", text: "깔창/기타" }
+                { value: "54", text: "샌들/슬리퍼" }
             ],
             77: [
                 { value: "70", text: "가디건" },
-                { value: "71", text: "블루종" },
                 { value: "72", text: "집업" },
-                { value: "73", text: "바람막이" },
-                { value: "74", text: "블레이저" },
-                { value: "75", text: "청재킷" }
+                { value: "74", text: "블레이저" }
             ]
         };
 
         var cate3Options = {
             10: [
-                { value: "10", text: "7부" },
-                { value: "11", text: "민소매" },
                 { value: "12", text: "긴팔" },
                 { value: "13", text: "반팔" },
                 { value: "14", text: "맨투맨" },
@@ -129,25 +126,7 @@
             ],
             11: [
                 { value: "17", text: "반팔셔츠" },
-                { value: "18", text: "7부 셔츠" },
-                { value: "19", text: "긴팔셔츠" },
-                { value: "20", text: "베이직/심플" },
-                { value: "21", text: "스트라이프" },
-                { value: "22", text: "체크" }
-            ],
-            30: [
-                { value: "30", text: "스트레이트핏" },
-                { value: "31", text: "테이퍼드핏" },
-                { value: "32", text: "와이드핏" }
-            ],
-            31: [
-                { value: "35", text: "스트레이트핏" },
-                { value: "36", text: "테이퍼드핏" },
-                { value: "37", text: "와이드핏" }
-            ],
-            32: [
-                { value: "38", text: "트레이닝" },
-                { value: "39", text: "조거" }
+                { value: "19", text: "긴팔셔츠" }
             ],
             33: [
                 { value: "33", text: "일반 반바지" },

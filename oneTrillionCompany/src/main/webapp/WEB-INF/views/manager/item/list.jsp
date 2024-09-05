@@ -40,13 +40,13 @@
 		<form action="list" method="get" autocomplete="off">
 			<select class="field-column" name="column" id="column-select"
 				onchange="toggleInputField()">
+				<option value="item_name"
+					<c:if test="${param.column=='item_name'}">selected</c:if>>상품명</option>
 				<option value="item_no"
 					<c:if test="${param.column=='item_no'}">selected</c:if>>상품
 					번호</option>
 				<option value="item_cate1"
 					<c:if test="${param.column=='item_cate1'}">selected</c:if>>카테고리</option>
-				<option value="item_name"
-					<c:if test="${param.column=='item_name'}">selected</c:if>>상품명</option>
 			</select>
 
 			<!-- 상품 번호와 상품명을 위한 텍스트 입력 필드 -->
@@ -299,7 +299,7 @@
 									</c:choose>
 									<td class="td-table-bottom"><a
 										href="/manager/item/info/read?itemNo=${itemDto.itemNo}"
-										class="link">${itemDto.itemName}</a></td>
+										class="link">${itemDto.itemName} / ${itemDto.itemMain}</a></td>
 									<td class="td-table-bottom">${itemDto.itemPrice}</td>
 									<td class="td-table-bottom">${itemDto.itemSalePrice}</td>
 									<td class="td-table-bottom">${itemDto.itemDate}</td>

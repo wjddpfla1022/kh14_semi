@@ -128,6 +128,18 @@ public class QnaDao {
 			return jdbcTemplate.queryForObject(sql, int.class);
 		}
 	}
+	
+//	public int pageCountByMemberId(PageVO pageVO) {
+//		if(pageVO.isSearch()) {//검색카운트
+//			String sql = "select count(*) from qna where instr("+pageVO.getColumn()+", ?) > 0 and qna_writer = ?";
+//			Object[] data = {pageVO.getKeyword(), };
+//			return jdbcTemplate.queryForObject(sql, int.class, data);
+//		}
+//		else {//목록 카운트
+//			String sql = "select count(*) from qna";
+//			return jdbcTemplate.queryForObject(sql, int.class);
+//		}
+//	}
 
 	//댓글 수 최신화
 	public boolean updateQnaReply(int qnaNo) {

@@ -57,7 +57,7 @@
 
   <div class="container w-1200 my-50">
 	<div class="row center">
-		<h1>상품 목록 페이지</h1><!-- 나중에 삭제 할곳  -->
+<!-- 		<h1>상품 목록 페이지</h1>나중에 삭제 할곳  -->
 		<div class="row right px-30">
 			<div class="btn btn-neutral link"><a href="/item/list?sorting=sales" class="link">판매량순</a></div>
 			<div class="btn btn-neutral link"><a href="/item/list?sorting=priceDesc" class="link">높은가격순</a></div>
@@ -80,9 +80,10 @@
 		<div class="row image-align left" id="images">
 			<c:forEach var= "item" items= "${itemList}">
 				<a href="/item/detail?itemNo=${item.itemNo}">
-					<img src = "/item/image?itemNo=${item.itemNo}" width="200px" height="200px">
+					<img src = "/item/image?itemNo=${item.itemNo}" width="200px" height="240px">
 					<div class="name">${item.itemName}(${item.itemColor})</div>
 					<div class="price"><span class="gray" style="text-decoration : line-through"> ${item.itemPrice}원 </span> ${item.itemSalePrice}원</div>
+
 				</a>
 			</c:forEach>
 		</div>
