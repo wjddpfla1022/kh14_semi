@@ -212,7 +212,7 @@ $(function(){
 	        data: {
 	            certEmail : certEmail,
 	            certNumber : certNumber,
-	        },3
+	        },
 	        success:function(response) {
 	        console.log(response);
 	            if(response == true) {//인증 성공 - 화면을 제거 + 인증버튼 제거
