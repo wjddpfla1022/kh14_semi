@@ -272,7 +272,7 @@ $(function(){
     //부가기능
     $(".field-show").change(function(){
         var checked = $(this).prop("checked");
-        $("[name=memberPw] , #password-check")
+        $("[name=memberPw],[name=memberPw2] , #password-check")
                     .attr("type", checked ? "text" : "password");
     });
     $(".fa-eye").click(function(){
@@ -388,7 +388,7 @@ $(function(){
                     </div>
                     <div class="row left">
                         <label class="title">비밀번호 확인 <i class="fa-solid fa-asterisk red"></i></label>
-                        <input class="field w-100  pwInput2" type="password" placeholder="비밀번호 재입력">
+                        <input class="field w-100  pwInput2"  name="memberPw2" type="password" placeholder="비밀번호 재입력">
                         <div class="success-feedback">비밀번호가 일치합니다</div>
                         <div class="fail-feedback">비밀번호가 일치하지 않습니다</div>
                     </div>
