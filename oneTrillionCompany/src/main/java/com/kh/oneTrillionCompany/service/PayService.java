@@ -12,6 +12,7 @@ import com.kh.oneTrillionCompany.dao.ItemDao;
 import com.kh.oneTrillionCompany.dao.MemberDao;
 import com.kh.oneTrillionCompany.dao.OrderDetailDao;
 import com.kh.oneTrillionCompany.dao.OrdersDao;
+import com.kh.oneTrillionCompany.dto.MemberDto;
 import com.kh.oneTrillionCompany.dto.OrderDetailDto;
 import com.kh.oneTrillionCompany.dto.OrdersDto;
 import com.kh.oneTrillionCompany.exception.TargetNotFoundException;
@@ -82,8 +83,10 @@ public class PayService {
 		//주문서 메모 추가
 		ordersDao.updateMemo(orderMemo, orderNo);
 		//주문서 이메일 발송
-		String memberEmail = memberDao.selectOne(memberId).getMemberEmail();
-		emailService.sendPaymentDetails(memberId, memberEmail, list);
+		MemberDto memberDto =memberDao.selectOne(memberId);
+		String memberEmail = memberDto.getMemberEmail();
+		String memberNickname=memberDto.getMemberNickname();
+		emailService.sendPaymentDetails(memberNickname, memberEmail, list);
 		orderDetailDao.payCompleteStatus(detailNoList);
 	}
 }
