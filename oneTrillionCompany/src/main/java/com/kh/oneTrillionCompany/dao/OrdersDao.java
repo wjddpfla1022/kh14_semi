@@ -26,7 +26,6 @@ public class OrdersDao {
 		String sql="select * from orders where order_no=?";
 		Object[] data = {ordersNo};
 		List<OrdersDto> list = jdbcTemplate.query(sql, ordersMapper, data);
-		System.out.println(list.get(0));
 		return list.isEmpty()?null:list.get(0);
 	}
 	//주문서 한개 검색(멤버 아이디로)

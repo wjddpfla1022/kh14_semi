@@ -119,7 +119,6 @@ public class ReviewDao {
     public int findImage(int reviewNo) {
         String sql = "select attach_no from review_image where review_no=?";
         Object[]data = {reviewNo};
-        System.out.println("reviewNo : "+reviewNo +"attachNo : "+jdbcTemplate.queryForObject(sql, int.class, data));
         return jdbcTemplate.queryForObject(sql, int.class, data);
     }
 	

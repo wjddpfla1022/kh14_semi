@@ -71,8 +71,8 @@ public class PayService {
 //				cartDao.updateCartCnt(buyer,cartNo,orderDetailCnt);//list.get(i).getCnt()
 //			}
 //			else {
-//				System.out.println("장바구니 수량 : "+cartDao.selectCnt(cartNo));
-//				System.out.println("결제 수량 : "+orderDetailCnt);
+//				("장바구니 수량 : "+cartDao.selectCnt(cartNo));
+//				("결제 수량 : "+orderDetailCnt);
 //				throw new TargetNotFoundException("장바구니 수량을 확인해주세요");
 //			}
 			//판매량 기록
