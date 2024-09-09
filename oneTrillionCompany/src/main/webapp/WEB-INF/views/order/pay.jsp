@@ -15,6 +15,9 @@
 <link rel="stylesheet" type="text/css"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 <style>
+body{
+	overflow-x:hidden;
+}
 .orderpage {
 	position: relative;
 	display: block;
@@ -24,6 +27,7 @@
 	background-color: #f3f5f7;
 	margin-left: auto !important;
 	margin-right: auto !important;
+	
 }
 
 .flex-right {
@@ -80,6 +84,7 @@
 	column-gap: 20px;
 	width: 100%;
 	height: 1500px;
+	
 }
 
 .container2 {
