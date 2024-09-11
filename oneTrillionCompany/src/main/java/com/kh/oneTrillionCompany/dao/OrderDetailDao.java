@@ -47,7 +47,6 @@ public class OrderDetailDao {
 		public void insertByCartVOList(List<CartVO> list,int orderNo) {
 			for(int i=0; i<list.size(); i++) {
 			CartVO cartVO=list.get(i);
-			System.out.println(cartVO);
 			String sql="insert into order_detail("
 					+ "order_detail_no,order_detail_order_no,order_detail_item_no,"
 					+ "order_detail_price, order_detail_cnt, "

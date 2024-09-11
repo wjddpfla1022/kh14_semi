@@ -216,7 +216,6 @@ public class ItemDao {
 		Object[] data= {cnt,itemNo, cnt};
 		boolean isEnough=jdbcTemplate.update(sql, data)>0;
 		if(!isEnough) {
-			System.out.println("재고부족!");
 			throw new TargetNotFoundException("재고가 부족합니다");
 		}
 		return isEnough;

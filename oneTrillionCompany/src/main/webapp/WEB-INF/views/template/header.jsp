@@ -14,7 +14,7 @@
 <script
 	src="https://cdn.jsdelivr.net/npm/lightpick@1.6.2/lightpick.min.js"></script>
 <!-- 내가 만든 스타일 시트를 불러오는 코드 -->
-<link rel="stylesheet" type="text/css" href="/css/commons.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/commons.css">
 <!-- <link rel="stylesheet" type="text/css" href="/css/test.css"> -->
 <!-- font awesome-->
 <link rel="stylesheet" type="text/css"
@@ -129,7 +129,7 @@ session 수
         }
 
     </style>
-<link rel="stylesheet" type="text/css" href="/js/checkbox.js">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/js/checkbox.js">
 <!-- jquery cdn -->
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js">
