@@ -14,7 +14,7 @@
 <script
 	src="https://cdn.jsdelivr.net/npm/lightpick@1.6.2/lightpick.min.js"></script>
 <!-- 내가 만든 스타일 시트를 불러오는 코드 -->
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/commons.css">
+<link rel="stylesheet" type="text/css" href="/css/commons.css">
 <!-- <link rel="stylesheet" type="text/css" href="/css/test.css"> -->
 <!-- font awesome-->
 <link rel="stylesheet" type="text/css"
@@ -173,7 +173,7 @@ session 수
 				<ul class="menu top-menu">
 					<!-- 구분선 -->
 				<!--	<li><a style="font-weight: bold;" href="#">고객센터</a></li> -->
-					<li><a style="font-weight: bold;" href="localhost:8080" id="favorite"><i class="fa-solid fa-bookmark"></i>즐겨찾기</a></li>
+					<li><a style="font-weight: bold;" href="${pageContext.request.contextPath}/" id="favorite"><i class="fa-solid fa-bookmark"></i>즐겨찾기</a></li>
 					<li class="right-menu"><a href="/member/login" style="font-weight:bolder;">로그인</a></li>
 					<li><a style="font-weight: bold;" href="${pageContext.request.contextPath}/member/join" style="font-weight:bolder;">회원가입</a></li>
 					<li><a style="font-weight: bold;" href="${pageContext.request.contextPath}/qna/list">1:1문의</a></li>
@@ -195,7 +195,7 @@ session 수
 					<ul class="menu top-menu">
 						<!-- 구분선 -->
 	
-						<li><a href="localhost:8080" id="favorite">즐겨찾기</a></li>
+						<li><a href="${pageContext.request.contextPath}/" id="favorite">즐겨찾기</a></li>
 						<li class="right-menu"><a style="font-weight: bold;" href="${pageContext.request.contextPath}/member/logout">로그아웃</a></li>
 						<li><a style="font-weight: bold;" href="${pageContext.request.contextPath}/order/list">주문 / 배송조회</a></li>
 						<li><a style="font-weight: bold;" href="${pageContext.request.contextPath}/qna/list">1:1문의</a></li>
@@ -217,7 +217,7 @@ session 수
 				<div class="row">
 					<ul class="menu top-menu">
 						<!-- 구분선 -->
-						<li><a style="font-weight: bold;" href="localhost:8080" id="favorite">즐겨찾기</a></li>
+						<li><a style="font-weight: bold;" href="${pageContext.request.contextPath}/" id="favorite">즐겨찾기</a></li>
 						<li class="right-menu"><a style="font-weight: bold;" href="${pageContext.request.contextPath}/member/logout">로그아웃</a></li>
 						<li><a style="font-weight: bold;" href="#">주문 / 배송조회</a></li>
 						<li><a style="font-weight: bold;" href="${pageContext.request.contextPath}/qna/list">1:1문의</a></li>
@@ -240,7 +240,7 @@ session 수
 				<div class="row">
 					<ul class="menu top-menu">
 						<!-- 구분선 -->
-						<li><a style="font-weight: bold;" href="localhost:8080" id="favorite">즐겨찾기</a></li>
+						<li><a style="font-weight: bold;" href="${pageContext.request.contextPath}/" id="favorite">즐겨찾기</a></li>
 						<li class="right-menu"><a href="${pageContext.request.contextPath}/member/logout">로그아웃</a></li>
 					<!--<li><a style="font-weight: bold;" href="#">주문 / 배송조회</a></li>  -->	
 						<li><a style="font-weight: bold;" href="${pageContext.request.contextPath}/review/list">상품후기</a></li>
