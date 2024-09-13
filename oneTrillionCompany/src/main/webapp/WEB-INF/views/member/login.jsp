@@ -51,7 +51,7 @@
 		
 		<div class="row">
 			<button type="submit" class="btn btn-positive btn-submit">로그인</button>
-			<a href="/member/join" class="btn btn-neutral">회원가입</a>
+			<a href="${pageContext.request.contextPath}/member/join" class="btn btn-neutral">회원가입</a>
 		</div>
 		<div class="row">
 			<a href="findPw" class="link link-animation">비밀번호 찾기</a>

@@ -38,14 +38,14 @@
             $.ajax({
               processData: false, /*파일업로드에 꼭 필요한 설정*/
               contentType: false, /*파일업로드에 꼭 필요한 설정*/
-              url:"/rest/itemInfo/upload",
+              url:"${pageContext.request.contextPath}/rest/itemInfo/upload",
               method:"post",
               data: form,
               success:function(response){
                 // response에는 파일번호가 있어야 한다.
                 console.log(response);
                 // 태그를 만들 때는 선택자에 온전한 태그를 넣는다.
-                var imgSrc = "/attach/download?attachNo=" + response; // response에 파일 번호가 포함되어야 합니다.
+                var imgSrc = "${pageContext.request.contextPath}/attach/download?attachNo=" + response; // response에 파일 번호가 포함되어야 합니다.
                 var imgTag = $("<img>").addClass("info-attach").attr("src", imgSrc);
                 $("[name=infoContent]").summernote("insertNode", imgTag[0]);
               },

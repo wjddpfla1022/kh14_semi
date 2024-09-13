@@ -138,7 +138,7 @@ td {
 					var cartNoValue = $(this).closest('tr').find(
 							".cartCnt-data").text();
 					$.ajax({
-						url : "/rest/cart/delete",
+						url : "${pageContext.request.contextPath}/rest/cart/delete",
 						method : 'post',
 						data : {
 							cartNo : cartNoValue
@@ -166,7 +166,7 @@ td {
 				return; // 선택하지 않은 경우
 			}
 			$.ajax({
-				url : "/rest/cart/checkDelete",
+				url : "${pageContext.request.contextPath}/rest/cart/checkDelete",
 				method : 'post',
 				data : {
 					cartNo : cartNoList,
@@ -190,7 +190,7 @@ td {
 					var cartNoValue = $(this).closest('tr').find(
 							".cartCnt-data").text();
 					$.ajax({
-						url : "/rest/cart/deleteAll",
+						url : "${pageContext.request.contextPath}/rest/cart/deleteAll",
 						method : 'post',
 
 						success : function(response) {
@@ -230,7 +230,7 @@ td {
 			//수량 서버에 업데이트-ajax통신
 			var cartNo = row.find(".cartCnt-data").text(); // 현재 행의 cartNo 값
 			$.ajax({
-				url : "/rest/cart/cartCntUpdate",
+				url : "${pageContext.request.contextPath}/rest/cart/cartCntUpdate",
 				method : 'post',
 				data : {
 					cartNo : cartNo,
@@ -247,7 +247,7 @@ td {
 		//-상품 총구매금액 - ajax통신
 		function updatecartTotalPrice() {
 			$.ajax({
-				url : "/rest/cart/cartTotalPriceUpdate",
+				url : "${pageContext.request.contextPath}/rest/cart/cartTotalPriceUpdate",
 				method : 'post',
 				success : function(response) {
 					$(".cart-total-price").text(response);
@@ -331,7 +331,7 @@ td {
 								<td>
 									<!-- itemNo 제이쿼리에서 쓰기 --> <span class="hidden">${cart.cartItemNo}</span>
 									<a href="#"><img class="shoppingmal" style="margin-top:4px;'"
-										src="/item/image?itemNo=${cart.cartItemNo}" width="80px"></a>
+										src="${pageContext.request.contextPath}/item/image?itemNo=${cart.cartItemNo}" width="80px"></a>
 									<!-- 임시 이미지 -->
 								</td>
 								<td>${cart.itemName}</td>

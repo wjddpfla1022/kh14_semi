@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
-<script src="/js/checkbox.js"></script>
+<script src="${pageContext.request.contextPath}/js/checkbox.js"></script>
 
 <style>
 	.th-table-top{
@@ -113,7 +113,7 @@
 						<button type="button" class="btn btn-negative confirm-link">체크된 항목 삭제</button>
 					</div>
 					<div class="float-left">
-						<a href="/manager/item/insert" class="btn btn-positive" style="margin-right: 1em;">상품 추가</a>
+						<a href="${pageContext.request.contextPath}/manager/item/insert" class="btn btn-positive" style="margin-right: 1em;">상품 추가</a>
 					</div>
 				</div>
 			</c:if>
@@ -150,7 +150,7 @@
 											name="itemNo" value="${itemDto.itemNo}"></td>
 									</c:if>
 									<td class="td-table-bottom">${itemDto.itemNo}</td>
-									<td class="td-table-bottom"><img src="/item/image?itemNo=${itemDto.itemNo}"
+									<td class="td-table-bottom"><img src="${pageContext.request.contextPath}/item/image?itemNo=${itemDto.itemNo}"
 										width="30px" height="30px"></td>
 									<c:choose>
 										<c:when test="${itemDto.itemCate1 == '11'}">
@@ -305,7 +305,7 @@
 										</c:otherwise>
 									</c:choose>
 									<td class="td-table-bottom"><a
-										href="/manager/item/info/read?itemNo=${itemDto.itemNo}"
+										href="${pageContext.request.contextPath}/manager/item/info/read?itemNo=${itemDto.itemNo}"
 										class="link">${itemDto.itemName} / ${itemDto.itemMain}</a></td>
 									<td class="td-table-bottom">${itemDto.itemPrice}</td>
 									<td class="td-table-bottom">${itemDto.itemSalePrice}</td>

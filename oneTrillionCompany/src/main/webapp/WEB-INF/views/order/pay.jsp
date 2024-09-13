@@ -208,7 +208,7 @@ body{
 	<div class="orderpage w-600 my-10 mx-30 float-box" style="height: 100%">
 		<div class="ordersHeader row w-100">
 			<div class="logo flex-left mx-10">
-				<a href="/"><img src="https://ifh.cc/g/SbA93J.png"
+				<a href="${pageContext.request.contextPath}/"><img src="https://ifh.cc/g/SbA93J.png"
 					style="width: 10%;"></a>
 			</div>
 			<div class="center float-center title">주문/결제</div>
