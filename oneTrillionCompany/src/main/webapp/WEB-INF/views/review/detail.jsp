@@ -99,7 +99,7 @@
 		    		<c:when test="${sessionScope.createdLevel != '관리자' || sessionScope.createdUser == null}">
 					    <div class="flex-box image-location">
 				           	<div class="center">
-				                <img src="/review/image?reviewNo=${reviewDto.reviewNo}" width="400" height="400">
+				                <img src="${pageContext.request.contextPath}/review/image?reviewNo=${reviewDto.reviewNo}" width="400" height="400">
 				            </div>
 		
 						        <div class="row center">
@@ -138,7 +138,7 @@
 		    	<c:when test="${sessionScope.createdLevel == '관리자' }">
 					    <div class="flex-box image-location">
 				           	<div class="center">
-				                <img src="/review/image?reviewNo=${reviewDto.reviewNo}" width="400" height="400">
+				                <img src="${pageContext.request.contextPath}/review/image?reviewNo=${reviewDto.reviewNo}" width="400" height="400">
 				            </div>
 		
 						        <div class="row center">
@@ -170,14 +170,14 @@
 					<div class= " flex-box button-list ">
 					
 				          <div class="row left">
-								<a href="/review/list"  class="btn btn-positive btn-list ">
+								<a href="${pageContext.request.contextPath}/review/list"  class="btn btn-positive btn-list ">
 									<i class="fa-solid fa-list"></i> 목록
 								</a>
 							</div>				
 								
 						<div class="row right">
 				            <c:if test="${sessionScope.createdLevel == '관리자'}">
-									<a href="/manager/member/detail?memberId=${reviewDto.reviewWriter}"  class="btn btn-positive  btn-list">
+									<a href="${pageContext.request.contextPath}/manager/member/detail?memberId=${reviewDto.reviewWriter}"  class="btn btn-positive  btn-list">
 										<i class="fa-solid fa-user"></i> 회원정보
 									</a>
 				            </c:if>	

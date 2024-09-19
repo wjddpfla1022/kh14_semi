@@ -186,7 +186,7 @@
 	</div>
 
 	<!-- 개인정보 변경 버튼 -->
-	<form action="/member/leaveFinish" method ="post" Id="checkForm">
+	<form action="${pageContext.request.contextPath}/member/leaveFinish" method ="post" Id="checkForm">
 		<div class="flex-box flex-core mt-20 mb-30">
 			<a href="point" class = "btn btn-positive" style="margin-right:5px;">포인트 충전하기</a>
 			<a href="password" class = "btn btn-positive" style="margin-right:5px;">비밀번호 변경</a>

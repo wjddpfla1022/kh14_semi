@@ -14,7 +14,7 @@
 <script
 	src="https://cdn.jsdelivr.net/npm/lightpick@1.6.2/lightpick.min.js"></script>
 <!-- 내가 만든 스타일 시트를 불러오는 코드 -->
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/commons.css">
+<link rel="stylesheet" type="text/css" href="/css/commons.css">
 <!-- <link rel="stylesheet" type="text/css" href="/css/test.css"> -->
 <!-- font awesome-->
 <link rel="stylesheet" type="text/css"
@@ -173,16 +173,16 @@ session 수
 				<ul class="menu top-menu">
 					<!-- 구분선 -->
 				<!--	<li><a style="font-weight: bold;" href="#">고객센터</a></li> -->
-					<li><a style="font-weight: bold;" href="localhost:8080" id="favorite"><i class="fa-solid fa-bookmark"></i>즐겨찾기</a></li>
+					<li><a style="font-weight: bold;" href="${pageContext.request.contextPath}/" id="favorite"><i class="fa-solid fa-bookmark"></i>즐겨찾기</a></li>
 					<li class="right-menu"><a href="/member/login" style="font-weight:bolder;">로그인</a></li>
-					<li><a style="font-weight: bold;" href="/member/join" style="font-weight:bolder;">회원가입</a></li>
-					<li><a style="font-weight: bold;" href="/qna/list">1:1문의</a></li>
-					<li><a style="font-weight: bold;" href="/review/list">상품후기</a></li>
+					<li><a style="font-weight: bold;" href="${pageContext.request.contextPath}/member/join" style="font-weight:bolder;">회원가입</a></li>
+					<li><a style="font-weight: bold;" href="${pageContext.request.contextPath}/qna/list">1:1문의</a></li>
+					<li><a style="font-weight: bold;" href="${pageContext.request.contextPath}/review/list">상품후기</a></li>
 					<!-- <li><a style="font-weight: bold;" href="#">커뮤니티</a> -->
 						<ul>
 							<li><a href="#">항목1</a></li>
 						</ul></li>
-					<li><a href="/member/login"><i class="fa-solid fa-cart-shopping"></i></a>
+					<li><a href="${pageContext.request.contextPath}/member/login"><i class="fa-solid fa-cart-shopping"></i></a>
 						<!-- 장바구니 --></li>
 				</ul>
 			</div>
@@ -195,19 +195,19 @@ session 수
 					<ul class="menu top-menu">
 						<!-- 구분선 -->
 	
-						<li><a href="localhost:8080" id="favorite">즐겨찾기</a></li>
-						<li class="right-menu"><a style="font-weight: bold;" href="/member/logout">로그아웃</a></li>
-						<li><a style="font-weight: bold;" href="/order/list">주문 / 배송조회</a></li>
-						<li><a style="font-weight: bold;" href="/qna/list">1:1문의</a></li>
-						<li><a style="font-weight: bold;" href="/review/list">상품후기</a></li>
+						<li><a href="${pageContext.request.contextPath}/" id="favorite">즐겨찾기</a></li>
+						<li class="right-menu"><a style="font-weight: bold;" href="${pageContext.request.contextPath}/member/logout">로그아웃</a></li>
+						<li><a style="font-weight: bold;" href="${pageContext.request.contextPath}/order/list">주문 / 배송조회</a></li>
+						<li><a style="font-weight: bold;" href="${pageContext.request.contextPath}/qna/list">1:1문의</a></li>
+						<li><a style="font-weight: bold;" href="${pageContext.request.contextPath}/review/list">상품후기</a></li>
 
 								<!-- 마이페이지 -->
 							<li>
-								<a href="/member/mypage"><i class="fa-solid fa-user"></i></a>
+								<a href="${pageContext.request.contextPath}/member/mypage"><i class="fa-solid fa-user"></i></a>
 							</li>
 							<!-- 장바구니 -->
 							<li>
-								<a href="/cart/list"><i class="fa-solid fa-cart-shopping"></i></a>
+								<a href="${pageContext.request.contextPath}/cart/list"><i class="fa-solid fa-cart-shopping"></i></a>
 							</li>
 							<!-- 장바구니 -->
 					</ul>
@@ -217,18 +217,18 @@ session 수
 				<div class="row">
 					<ul class="menu top-menu">
 						<!-- 구분선 -->
-						<li><a style="font-weight: bold;" href="localhost:8080" id="favorite">즐겨찾기</a></li>
-						<li class="right-menu"><a style="font-weight: bold;" href="/member/logout">로그아웃</a></li>
+						<li><a style="font-weight: bold;" href="${pageContext.request.contextPath}/" id="favorite">즐겨찾기</a></li>
+						<li class="right-menu"><a style="font-weight: bold;" href="${pageContext.request.contextPath}/member/logout">로그아웃</a></li>
 						<li><a style="font-weight: bold;" href="#">주문 / 배송조회</a></li>
-						<li><a style="font-weight: bold;" href="/qna/list">1:1문의</a></li>
-						<li><a style="font-weight: bold;" href="/review/list">상품후기</a></li>
+						<li><a style="font-weight: bold;" href="${pageContext.request.contextPath}/qna/list">1:1문의</a></li>
+						<li><a style="font-weight: bold;" href="${pageContext.request.contextPath}/review/list">상품후기</a></li>
 							<!-- 마이페이지 -->
 							<li>
-								<a href="/member/mypage"><i class="fa-solid fa-user"></i></a>
+								<a href="${pageContext.request.contextPath}/member/mypage"><i class="fa-solid fa-user"></i></a>
 							</li>
 							<!-- 장바구니 -->
 							<li>
-								<a href="/cart/list"><i class="fa-solid fa-cart-shopping"></i></a>
+								<a href="${pageContext.request.contextPath}/cart/list"><i class="fa-solid fa-cart-shopping"></i></a>
 							</li>
 					</ul>
 				</div>
@@ -240,16 +240,16 @@ session 수
 				<div class="row">
 					<ul class="menu top-menu">
 						<!-- 구분선 -->
-						<li><a style="font-weight: bold;" href="localhost:8080" id="favorite">즐겨찾기</a></li>
-						<li class="right-menu"><a href="/member/logout">로그아웃</a></li>
+						<li><a style="font-weight: bold;" href="${pageContext.request.contextPath}/" id="favorite">즐겨찾기</a></li>
+						<li class="right-menu"><a href="${pageContext.request.contextPath}/member/logout">로그아웃</a></li>
 					<!--<li><a style="font-weight: bold;" href="#">주문 / 배송조회</a></li>  -->	
-						<li><a style="font-weight: bold;" href="/review/list">상품후기</a></li>
-						<li><a href="/member/mypage"><i class="fa-solid fa-user"></i></a></li>
+						<li><a style="font-weight: bold;" href="${pageContext.request.contextPath}/review/list">상품후기</a></li>
+						<li><a href="${pageContext.request.contextPath}/member/mypage"><i class="fa-solid fa-user"></i></a></li>
 						<li><a style="font-weight: bold;" href="#">관리자 메뉴</a>
 								<ul>
-									<li><a href="/manager/member/list">회원 검색</a></li>
-									<li><a href="/qna/list">1:1문의</a></li>	
-									<li><a href="/manager/item/list">상품 조회</a></li>
+									<li><a href="${pageContext.request.contextPath}/manager/member/list">회원 검색</a></li>
+									<li><a href="${pageContext.request.contextPath}/qna/list">1:1문의</a></li>	
+									<li><a href="${pageContext.request.contextPath}/manager/item/list">상품 조회</a></li>
 								</ul>
 						</li>
 					</ul>
@@ -258,7 +258,7 @@ session 수
 			
 					<!-- 구분선 -->
 			<div class="row center">
-				<a href="/"> <img src='https://ifh.cc/g/SbA93J.png' width="300px" height="100px">
+				<a href="${pageContext.request.contextPath}/"> <img src='https://ifh.cc/g/SbA93J.png' width="300px" height="100px">
 				</a>
 			</div>
 
@@ -274,58 +274,58 @@ session 수
 		
 			<ul class="menu">
 				<!-- 구분선 -->
-				<li class="flex-core all-menu" style="font-weight: bold;"><a href="/item/list"><i class="fa-solid fa-bars"></i> 
+				<li class="flex-core all-menu" style="font-weight: bold;"><a href="${pageContext.request.contextPath}/item/list"><i class="fa-solid fa-bars"></i> 
 					&nbsp;전체상품</a></li>
-				<li><a href="/item/list/cate?column=1&keyword=11" style="font-weight: bold;">상의</a>
+				<li><a href="${pageContext.request.contextPath}/item/list/cate?column=1&keyword=11" style="font-weight: bold;">상의</a>
 					<ul>
-						<li><a href="/item/list/cate?column=2&keyword=10">티셔츠</a>
+						<li><a href="${pageContext.request.contextPath}/item/list/cate?column=2&keyword=10">티셔츠</a>
 							<ul>
-								<li><a href="/item/list/cate?column=3&keyword=12">긴팔</a></li>
-								<li><a href="/item/list/cate?column=3&keyword=13">반팔</a></li>
-								<li><a href="/item/list/cate?column=3&keyword=14">맨투맨</a></li>
-								<li><a href="/item/list/cate?column=3&keyword=15">후드</a></li>
-								<li><a href="/item/list/cate?column=3&keyword=16">니트/스웨터</a></li>
+								<li><a href="${pageContext.request.contextPath}/item/list/cate?column=3&keyword=12">긴팔</a></li>
+								<li><a href="${pageContext.request.contextPath}/item/list/cate?column=3&keyword=13">반팔</a></li>
+								<li><a href="${pageContext.request.contextPath}/item/list/cate?column=3&keyword=14">맨투맨</a></li>
+								<li><a href="${pageContext.request.contextPath}/item/list/cate?column=3&keyword=15">후드</a></li>
+								<li><a href="${pageContext.request.contextPath}/item/list/cate?column=3&keyword=16">니트/스웨터</a></li>
 							</ul>
 						</li>
-						<li><a href="/item/list/cate?column=2&keyword=11">셔츠</a>
+						<li><a href="${pageContext.request.contextPath}/item/list/cate?column=2&keyword=11">셔츠</a>
 							<ul>
-								<li><a href="/item/list/cate?column=3&keyword=17">반팔 셔츠</a></li>
-								<li><a href="/item/list/cate?column=3&keyword=19">긴팔 셔츠</a></li>
-							</ul>
-						</li>
-					</ul>
-				</li>
-				<!-- 구분선 -->
-				<li><a href="/item/list/cate?column=1&keyword=33" style="font-weight: bold;">하의</a>
-					<ul>
-						<li><a href="/item/list/cate?column=2&keyword=30">슬랙스</a>
-						</li>
-						<li><a href="/item/list/cate?column=2&keyword=31">데님</a>
-						</li>
-						<li><a href="/item/list/cate?column=2&keyword=32">트레이닝</a>
-						</li>
-						<li><a href="/item/list/cate?column=2&keyword=33">반바지</a>
-							<ul>
-								<li><a href="/item/list/cate?column=3&keyword=33">일반 반바지</a></li>
-								<li><a href="/item/list/cate?column=3&keyword=34">데님 반바지</a></li>
+								<li><a href="${pageContext.request.contextPath}/item/list/cate?column=3&keyword=17">반팔 셔츠</a></li>
+								<li><a href="${pageContext.request.contextPath}/item/list/cate?column=3&keyword=19">긴팔 셔츠</a></li>
 							</ul>
 						</li>
 					</ul>
 				</li>
 				<!-- 구분선 -->
-				<li><a href="/item/list/cate?column=1&keyword=55" style="font-weight: bold;">슈즈</a>
+				<li><a href="${pageContext.request.contextPath}/item/list/cate?column=1&keyword=33" style="font-weight: bold;">하의</a>
 					<ul>
-						<li><a href="/item/list/cate?column=2&keyword=50">스니커즈</a>
-						<li><a href="/item/list/cate?column=2&keyword=51">로퍼/슬립온</a>
-						<li><a href="/item/list/cate?column=2&keyword=52">구두</a>
-						<li><a href="/item/list/cate?column=2&keyword=54">샌들/슬리퍼</a>
+						<li><a href="${pageContext.request.contextPath}/item/list/cate?column=2&keyword=30">슬랙스</a>
+						</li>
+						<li><a href="${pageContext.request.contextPath}/item/list/cate?column=2&keyword=31">데님</a>
+						</li>
+						<li><a href="${pageContext.request.contextPath}/item/list/cate?column=2&keyword=32">트레이닝</a>
+						</li>
+						<li><a href="${pageContext.request.contextPath}/item/list/cate?column=2&keyword=33">반바지</a>
+							<ul>
+								<li><a href="${pageContext.request.contextPath}/item/list/cate?column=3&keyword=33">일반 반바지</a></li>
+								<li><a href="${pageContext.request.contextPath}/item/list/cate?column=3&keyword=34">데님 반바지</a></li>
+							</ul>
+						</li>
 					</ul>
 				</li>
-				<li><a href="/item/list/cate?column=1&keyword=77" style="font-weight: bold;">아우터</a>
+				<!-- 구분선 -->
+				<li><a href="${pageContext.request.contextPath}/item/list/cate?column=1&keyword=55" style="font-weight: bold;">슈즈</a>
 					<ul>
-						<li><a href="/item/list/cate?column=2&keyword=70">가디건</a>
-						<li><a href="/item/list/cate?column=2&keyword=72">집업</a>
-						<li><a href="/item/list/cate?column=2&keyword=74">블레이저</a>
+						<li><a href="${pageContext.request.contextPath}/item/list/cate?column=2&keyword=50">스니커즈</a>
+						<li><a href="${pageContext.request.contextPath}/item/list/cate?column=2&keyword=51">로퍼/슬립온</a>
+						<li><a href="${pageContext.request.contextPath}/item/list/cate?column=2&keyword=52">구두</a>
+						<li><a href="${pageContext.request.contextPath}/item/list/cate?column=2&keyword=54">샌들/슬리퍼</a>
+					</ul>
+				</li>
+				<li><a href="${pageContext.request.contextPath}/item/list/cate?column=1&keyword=77" style="font-weight: bold;">아우터</a>
+					<ul>
+						<li><a href="${pageContext.request.contextPath}/item/list/cate?column=2&keyword=70">가디건</a>
+						<li><a href="${pageContext.request.contextPath}/item/list/cate?column=2&keyword=72">집업</a>
+						<li><a href="${pageContext.request.contextPath}/item/list/cate?column=2&keyword=74">블레이저</a>
 					</ul>
 				</li>
 				<!-- 구분선 -->
@@ -347,7 +347,7 @@ session 수
             <div class="modal-body">
                 <div class="row right" style="margin-top : 5px;"><button class="btn btn-negative btn-close-modal"><i class="fa-solid fa-xmark"></i></button></div>
             	<h4 style="margin-bottom: 10px;">상품명 검색</h4>
-				<form action="/item/list"  method="get">
+				<form action="${pageContext.request.contextPath}/item/list"  method="get">
 	                <input type="hidden" name="column" value="item_name">
 	                <input type="text" name="keyword" class="field">
 	                <button type="submit" class="btn btn-positive"><i class="fa-solid fa-magnifying-glass"></i></button>

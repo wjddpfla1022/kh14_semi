@@ -63,7 +63,7 @@
             </div>
             <div class="row right">
                 <button type="submit" class="btn btn-positive btn-regi">수정</button>
-                <a href="/qna/detail?qnaNo=${qnaDto.qnaNo}" class="btn">취소</a>
+                <a href="${pageContext.request.contextPath}/qna/detail?qnaNo=${qnaDto.qnaNo}" class="btn">취소</a>
             </div>
         </div>
     </form>

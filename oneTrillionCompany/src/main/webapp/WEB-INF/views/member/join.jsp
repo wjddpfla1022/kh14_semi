@@ -2,9 +2,9 @@
     pageEncoding="UTF-8"%>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <!-- 멀티페이지js -->
-<script src="/js/multipage.js"></script>
+<script src="${pageContext.request.contextPath}/js/multipage.js"></script>
 <!-- 다음 지도 cdn -->
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="${pageContext.request.contextPath}//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <style>
 	.field{
 		margin-bottom:1em;
@@ -53,7 +53,7 @@ $(function(){
         if(isValid) {
             //비동기 통신으로 중복 검사 수행
             $.ajax({
-                url:"/rest/member/checkId",
+                url:"${pageContext.request.contextPath}/rest/member/checkId",
                 method:"post",
                 data:{ memberId : memberId },
                 success: function(response) {
@@ -113,7 +113,7 @@ $(function(){
         //step 2 : 닉네임 중복 검사(형식이 올바른 경우)
         if(status.memberNicknameValid) {//닉네임이 형식에 맞는 경우
             $.ajax({
-                url:"/rest/member/checkNickname",
+                url:"${pageContext.request.contextPath}/rest/member/checkNickname",
                 method:"post",
                 data: { memberNickname : memberNickname },
                 success: function(response) {
@@ -156,7 +156,7 @@ $(function(){
         //step 3 - 서버로 이메일 발송을 요청(ajax)
         // - 통신 시작과 종료 시점을 찾아 버튼을 비활성화 처리
         $.ajax({
-            url:"/rest/cert/send",
+            url:"${pageContext.request.contextPath}/rest/cert/send",
             method:"post",
             data:{ certEmail : email },
             beforeSend: function(){
@@ -207,7 +207,7 @@ $(function(){
 	
 	    //서버에 검사를 요청
 	    $.ajax({
-	        url:"/rest/cert/check",
+	        url:"${pageContext.request.contextPath}/rest/cert/check",
 	        method:"post",
 	        data: {
 	            certEmail : certEmail,

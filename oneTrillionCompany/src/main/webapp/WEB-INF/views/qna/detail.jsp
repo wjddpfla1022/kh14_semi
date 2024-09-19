@@ -64,8 +64,8 @@
 			<div class="reply-content">댓글 내용</div>
 			<div class="reply-info">
 				<span class="time">yyyy-MM-dd HH:mm:ss</span>
-				<a href="/rest/reply/update" class="link link-animation reply-update-btn">수정</a>
-				<a href="/rest/reply/delete" class="link link-animation reply-delete-btn">삭제</a>
+				<a href="${pageContext.request.contextPath}/rest/reply/update" class="link link-animation reply-update-btn">수정</a>
+				<a href="${pageContext.request.contextPath}/rest/reply/delete" class="link link-animation reply-delete-btn">삭제</a>
 			</div>
 		</div>
 	</div>
@@ -102,7 +102,7 @@
 			if(content.length == 0) return;
 			//비동기 통신
 			$.ajax({
-				url: "/rest/reply/write",
+				url: "${pageContext.request.contextPath}/rest/reply/write",
 				method: "post",
 				data: {
 					replyContent: content,
@@ -121,7 +121,7 @@
 
 			//댓글 목록 불러오기
 			$.ajax({
-				url:"/rest/reply/list",
+				url:"${pageContext.request.contextPath}/rest/reply/list",
 				method:"post",
 				data:{ replyOrigin : qnaNo },
 				success: function(response) {
@@ -204,7 +204,7 @@
 			}
 			//서버로 댓글 수정을 위한 정보 전달
 			$.ajax({
-				url: "/rest/reply/update",
+				url: "${pageContext.request.contextPath}/rest/reply/update",
 				method: "post",
 				data:{
 					replyNo : replyNo,
@@ -227,7 +227,7 @@
 			
 			var replyNo = $(this).attr("data-reply-no");
 			$.ajax({
-				url: "/rest/reply/delete",
+				url: "${pageContext.request.contextPath}/rest/reply/delete",
 				method: "post",
 				data: {
 					replyNo : replyNo
@@ -297,7 +297,7 @@
 			</table>
 			<!-- 수정/삭제 버튼  -->
 			<div class= " flex-box ">
-				<a href="/qna/list"  class="btn btn-list btn-positive">
+				<a href="${pageContext.request.contextPath}/qna/list"  class="btn btn-list btn-positive">
 					<i class="fa-solid fa-list"></i> 목록
 				</a>
 		        <div>

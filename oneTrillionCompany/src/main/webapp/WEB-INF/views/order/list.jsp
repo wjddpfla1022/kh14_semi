@@ -84,9 +84,9 @@
 	        			<td class="td-table-bottom">${orderDetailDto.orderDetailPrice*orderDetailDto.orderDetailCnt}</td>
 	        			<td class="td-table-bottom">${orderDetailDto.orderDetailStatus}</td>
 	        			<td class="td-table-bottom">
-	        				<a href="/order/detail?orderNo=${orderDetailDto.orderDetailOrderNo}" class="link">결제내역</a>
-	        				<a href="/review/write?orderDetailNo=${orderDetailDto.orderDetailNo}" class="link">리뷰작성</a>
-	        				<a href="/refund/insert?refundOrderDetailNo=${orderDetailDto.orderDetailNo}" class="link">환불신청</a>
+	        				<a href="${pageContext.request.contextPath}/order/detail?orderNo=${orderDetailDto.orderDetailOrderNo}" class="link">결제내역</a>
+	        				<a href="${pageContext.request.contextPath}/review/write?orderDetailNo=${orderDetailDto.orderDetailNo}" class="link">리뷰작성</a>
+	        				<a href="${pageContext.request.contextPath}/refund/insert?refundOrderDetailNo=${orderDetailDto.orderDetailNo}" class="link">환불신청</a>
 	        			</td>	        			
          		</c:forEach>
          	</tbody>

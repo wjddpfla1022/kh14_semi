@@ -59,7 +59,7 @@
 		</div>
 		<div class="row right">
 			<button type="button" class="btn btn-positive btn-refund">등록</button>
-			<a href="/order/list" class="btn btn-neutral">취소</a>
+			<a href="${pageContext.request.contextPath}/order/list" class="btn btn-neutral">취소</a>
 		</div>
 	</div>
 </form>

@@ -126,7 +126,7 @@
 <!--jquery cdn-->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script
-	src="/js/score.js"></script>
+	src="${pageContext.request.contextPath}/js/score.js"></script>
 <script type="text/javascript">
     $(function() {
         $(".score").score({
@@ -245,7 +245,7 @@
 			var attachNoValue = $(".attachNo-data").text();
 
 			$.ajax({
-				url : "/rest/cart/insertCart",
+				url : "${pageContext.request.contextPath}/rest/cart/insertCart",
 				method : 'post',
 				data : {
 					itemName : itemNameValue,
@@ -272,7 +272,7 @@
 
 		// 모달에서 "장바구니로 이동" 버튼 클릭 시 장바구니 페이지로 이동
 		$('.btn-cart').click(function() {
-			window.location.href = "/cart/list"; // 장바구니 페이지 URL
+			window.location.href = "${pageContext.request.contextPath}/cart/list"; // 장바구니 페이지 URL
 		});
 	});
 </script>
@@ -320,7 +320,7 @@
 		<div class="left">
 			<div id="bigImage">
 				<div id="container">
-					<img class="shoppingmal" src="/item/image?itemNo=${itemDto.itemNo}"
+					<img class="shoppingmal" src="${pageContext.request.contextPath}/item/image?itemNo=${itemDto.itemNo}"
 						width="100%">
 					<!-- attachNo값 가져오기* -->
 					<span class="attachNo-data hidden">${attachNo}</span>
