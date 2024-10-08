@@ -52,6 +52,9 @@
 	}
 </style>
 
+
+
+
 <div class="container w-1000 my-30">
 
 	<div class="row center">
@@ -61,9 +64,6 @@
 
 	<%-- 비회원일 때와 회원일 때 다르게 보이도록 처리  --%>
 	<c:choose>
-		<c:when test="${sessionScope.createdLevel == '관리자'}">
-			
-		</c:when>
 		<c:when test="${sessionScope.createdUser != null}">
 			<div class="row right">
 				<a href="write" class="btn btn-positive" style="text-decoration: none">문의 등록</a>
@@ -75,11 +75,10 @@
 			</div>
 		</c:otherwise>
 	</c:choose>
-	
 
 	<%-- 비회원일 경우 로그인 후 이용 메시지를 출력  --%>
 	<c:if test="${sessionScope.createdUser == null}">
-		<table class="table table-top mt-30">
+		<table class="table table-top">
 			<thead>
 				<tr class="tr-table-top">
 					<th width="10%" class="th-table-top">번호</th>
@@ -107,7 +106,7 @@
 		</c:when>
 		
 		<c:otherwise>
-			<table class="table table-top mt-30">
+			<table class="table table-top">
 				<thead>
 					<tr class="tr-table-top">
 						<th width=10% class="th-table-top">번호</th>
@@ -151,8 +150,21 @@
 					                                [${qnaDto.qnaReply}]
 					                            </c:if>
 			                            </td>
-											<td class="td-table-bottom">${qnaDto.qnaWriter}</td>
-											<td class="td-table-bottom">${qnaDto.qnaTime}</td>
+											<td class="td-table-bottom">
+												<c:choose>
+													<c:when test="${fn:length(qnaDto.qnaWriter) > 3}">
+														<%-- 작성자의 아이디를 3글자 추출 후 표시 --%>
+														<c:out value="${fn:substring(qnaDto.qnaWriter, 0, 3)}" />
+														<%-- 이후 아이디를 * 처리 --%>
+														<c:out value="***" />
+													</c:when>
+													<c:otherwise>
+														<%-- 아이디의 길이가 3글자 이하인 경우를 처리 --%>
+														<c:out value="${qnaDto.qnaWriter}" />
+													</c:otherwise>
+												</c:choose>
+											</td>
+										<td class="td-table-bottom">${qnaDto.qnaTime}</td>
 									</tr>
 								</c:when>
 							</c:choose>
@@ -166,7 +178,7 @@
 	<%-- 관리자 아이디로 접속 시 문의 리스트를 전부 보여지게 구현  --%>
 	<c:choose>
 		<c:when test="${sessionScope.createdLevel == '관리자'}">
-			<table class="table table-top mt-30">
+			<table class="table table-top">
 				<thead>
 					<tr class="tr-table-top">
 						<th width=10% class="th-table-top">번호</th>
@@ -204,20 +216,21 @@
 			</table>
 		</c:when>
 	</c:choose>
+
 </div>
 
 
 <!-- 검색창 -->
 <form action="list" method="get" autocomplete="off">
 	<div class="row center">
-		<select name="column" class="field">
+		<select name="column" class="field-column">
 			<option value="qna_title"
 				<c:if test="${param.column == 'qna_title'}">selected</c:if>>제목</option>
 			<option value="qna_writer"
 				<c:if test="${param.column == 'qna_writer'}">selected</c:if>>작성자</option>
 		</select> <input type="text" name="keyword" placeholder="검색어"
 			value="${param.keyword}" class="field">
-		<button type="submit" class="btn btn-positive">
+		<button type="submit" class="btn btn-neutral">
 			<i class="fa-solid fa-magnifying-glass"></i> 검색
 		</button>
 	</div>
