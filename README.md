@@ -11,5 +11,7 @@ MEMBER는 일반 회원으로 서비스를 이용하기 위해 회원가입이 �
 - Backend : Java, Spring Boot
 - DB : Oracle
 - IDE : Spring
-- ERD
-![ERD 이미지](https://ibb.co/DVkLC6r)  
+- ERD <br></br>
+  <a href="https://ibb.co/DVkLC6r"><img src="https://i.ibb.co/7YVbWTk/Hd2uo-F3-MBQqd7-JTC4.png" alt="Hd2uo-F3-MBQqd7-JTC4" border="0"></a> <br></br>
+- 유스케이스 다이어그램 <br></br>
+<a href="https://ibb.co/kHZVzjB"><img src="https://i.ibb.co/LkKDBmR/image.webp" alt="image" border="0"></a>
