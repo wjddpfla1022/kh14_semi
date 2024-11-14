@@ -1,4 +1,5 @@
 # ONE THRILLOIN SHOPPING MALL🛍  
+김민석, 노정현, 이은수, 이재욱, 정예림, 채수진   
 
 사이트 : 
 
