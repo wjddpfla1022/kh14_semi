@@ -12,3 +12,4 @@ MEMBER는 일반 회원으로 서비스를 이용하기 위해 회원가입이 �
 - DB : Oracle
 - IDE : Spring
 - ERD
+![ERD 이미지](./Hd2uoF3MBQqd7JTC4.png)  
